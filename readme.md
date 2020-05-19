@@ -7208,6 +7208,8 @@ shell
     * 永续合约API 简介
     * 做市商项目
   * 更新日志
+    * 1.0.4 2020年5月21日 【增加合约信息变动ws推送接口】
+    * 1.0.3 2020年5月7日 【增加查询用户账户和持仓信息】
     * 1.0.2 2020年4月9日 【增加免鉴权的资金费率WS推送接口；增加免鉴权的强平订单WS推送接口】
     * 1.0.1 2020年3月20日
   * 合约交易接入说明
@@ -7250,6 +7252,7 @@ shell
   * 合约资产接口
     * 获取用户账户信息
     * 获取用户持仓信息
+    * 查询用户账户和持仓信息
     * 查询母账户下所有子账户资产信息
     * 查询单个子账户资产信息
     * 查询单个子账户持仓信息
@@ -7330,6 +7333,26 @@ protection)（做市商项目不支持点卡抵扣、VIP、交易量相关活动
   2. 提供其他交易平台 maker 交易量截图证明（比如30天内成交量，或者 VIP 等级等）；
 
 # 更新日志
+
+## 1.0.4 2020年5月21日 【增加合约信息变动ws推送接口】
+
+### 1、增加合约信息变动ws推送接口
+
+  * 接口名称：增加合约信息变动ws推送接口
+
+  * 接口类型：公开接口
+
+  * 订阅主题：public.$contract_code.contract_info
+
+## 1.0.3 2020年5月7日 【增加查询用户账户和持仓信息】
+
+### 1、增加查询用户账户和持仓信息
+
+  * 接口名称：查询用户账户和持仓信息
+
+  * 接口类型： 私有接口
+
+  * 接口URL： /swap-api/v1/swap_account_position_info
 
 ## 1.0.2 2020年4月9日 【增加免鉴权的资金费率WS推送接口；增加免鉴权的强平订单WS推送接口】
 
@@ -9506,6 +9529,96 @@ direction | true | string | "buy":买 "sell":卖 |
 last_price | true | decimal | 最新价 |  
 </list> |  |  |  |  
 ts | true | long | 响应生成时间点，单位：毫秒 |  
+  
+## 查询用户账户和持仓信息
+
+  * post `swap-api/v1/swap_account_position_info`
+
+### 请求参数
+
+参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
+---|---|---|---|---  
+contract_code | true | string | 品种代码 | 支持大小写,"BTC-USD",...  
+  
+> Response:
+    
+    
+    {
+        "status": "ok",
+        "ts": 1560147583367,
+        "data": [{
+            "symbol": "BTC",
+            "contract_code": "BTC-USD",
+            "margin_balance": 0,
+            "margin_position": 0,
+            "margin_frozen": 0,
+            "margin_available": 0,
+            "profit_real": 0,
+            "profit_unreal": 0,
+            "risk_rate": None,
+            "withdraw_available": 0,
+            "liquidation_price": None,
+            "lever_rate": 20,
+            "adjust_factor": 0.13,
+            "margin_static": 1,
+            "positions": [{
+                "symbol": "BTC",
+                "contract_code": "BTC-USD",
+                "volume": 1,
+                "available": 0,
+                "frozen": 0.3,
+                "cost_open": 422.78,
+                "cost_hold": 422.78,
+                "profit_unreal": 0.00007096,
+                "profit_rate": 0.07,
+                "profit": 0.97,
+                "position_margin": 3.4,
+                "lever_rate": 20,
+                "direction": "buy",
+                "last_price": 7900.17
+            }]
+        }]
+    }
+    
+
+### 返回参数
+
+参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
+---|---|---|---|---  
+status | true | string | 请求处理结果 | "ok" , "error"  
+ts | number | long | 响应生成时间点，单位：毫秒 |  
+<data> | true | object array |  |  
+symbol | true | string | 品种代码 | "BTC","ETH"...  
+contract_code | true | string | 合约代码 | "BTC-USD" ...  
+margin_balance | true | decimal | 账户权益 |  
+margin_static | true | decimal | 静态权益 |  
+margin_position | true | decimal | 持仓保证金（当前持有仓位所占用的保证金） |  
+margin_frozen | true | decimal | 冻结保证金 |  
+margin_available | true | decimal | 可用保证金 |  
+profit_real | true | decimal | 已实现盈亏 |  
+profit_unreal | true | decimal | 未实现盈亏 |  
+risk_rate | true | decimal | 保证金率 |  
+liquidation_price | true | decimal | 预估强平价 |  
+withdraw_available | true | decimal | 可划转数量 |  
+lever_rate | true | decimal | 杠杠倍数 |  
+adjust_factor | true | decimal | 调整系数 |  
+<positions> | true | object array |  |  
+symbol | true | string | 品种代码 | "BTC","ETH"...  
+contract_code | true | string | 合约代码 | "BTC-USD" ...  
+volume | true | decimal | 持仓量 |  
+available | true | decimal | 可平仓数量 |  
+frozen | true | decimal | 冻结数量 |  
+cost_open | true | decimal | 开仓均价 |  
+cost_hold | true | decimal | 持仓均价 |  
+profit_unreal | true | decimal | 未实现盈亏 |  
+profit_rate | true | decimal | 收益率 |  
+profit | true | decimal | 收益 |  
+position_margin | true | decimal | 持仓保证金 |  
+lever_rate | true | int | 杠杠倍数 |  
+direction | true | string | "buy":买 "sell":卖 |  
+last_price | true | decimal | 最新价 |  
+</positions> |  |  |  |  
+</data> |  |  |  |  
   
 ## 查询母账户下所有子账户资产信息
 
