@@ -8886,7 +8886,7 @@ estimated_clawback | true | decimal | 预估分摊比例 |
 ---|---|---|---|---  
 contract_code | true | string | 合约代码 | 支持大小写，例如 "BTC-USD" ...  
 page_index | false | int | 页码，不填默认第1页 | 1  
-page_size | false | int | 不填默认20，不得多于50 | 20  
+page_size | false | int | 不填默认100，不得多于100 | 100  
   
 > Response:
     
