@@ -8445,7 +8445,7 @@ ts | true | long | 响应生成时间点，单位：毫秒 |
 
 参数名称 | 参数类型 | 必填 | 描述  
 ---|---|---|---  
-contract_code | string | true | 仅支持大写, "BTC-USD" ...  
+contract_code | string | true | 支持大小写, "BTC-USD" ...  
 type | string | true | (150档数据) step0, step1, step2, step3, step4,
 step5（合并深度1-5）；step0时，不合并深度, (20档数据) step6, step7, step8, step9, step10,
 step11（合并深度7-11）；step6时，不合并深度  
@@ -8700,7 +8700,7 @@ bid | true | object | 买盘,[price(挂单价), vol(此价格挂单张数)], 按
 
 参数名称 | 是否必须 | 类型 | 描述 | 默认值 | 取值范围  
 ---|---|---|---|---|---  
-contract_code | true | string | 合约代码,仅支持大写 | "BTC-USD" ... |  
+contract_code | true | string | 合约代码,支持大小写 | "BTC-USD" ... |  
   
 > Tick说明：
     
@@ -8770,7 +8770,7 @@ ts | true | long | 订单成交时间 |  |
 
 参数名称 | 是否必须 | 数据类型 | 描述 | 默认值 | 取值范围  
 ---|---|---|---|---|---  
-contract_code | true | string | 合约代码,仅支持大写 | "BTC-USD" ... |  
+contract_code | true | string | 合约代码,支持大小写 | "BTC-USD" ... |  
 size | true | int | 获取交易记录的数量 | 1 | [1, 2000]  
   
 > data说明：
@@ -9493,7 +9493,7 @@ ts | long | long | 响应生成时间点，单位：毫秒 |
 
 参数名称 | 是否必须 | 类型 | 描述 | 默认值 | 取值范围  
 ---|---|---|---|---|---  
-contract_code | false | string | 合约代码 |  | 仅支持大写，"BTC-USD"... ,如果缺省，默认返回所有合约  
+contract_code | false | string | 合约代码 |  | 支持大小写，"BTC-USD"... ,如果缺省，默认返回所有合约  
   
 > Response:
     
@@ -10520,7 +10520,7 @@ ts | true | long | 响应生成时间点，单位：毫秒 |
 
 参数名称 | 是否必须 | 类型 | 描述  
 ---|---|---|---  
-contract_code | true | string | 合约代码,仅支持大写，"BTC-USD"  
+contract_code | true | string | 合约代码,支持大小写，"BTC-USD"  
   
 > Response:(多笔订单返回结果(成功订单ID,失败订单ID))
     
@@ -11624,7 +11624,7 @@ user-id | long | ⽤户 id
 ---|---|---  
 id | string | 选填;Client 请求唯一 ID  
 sub | string | 必填；订阅主题名称，market.$contract_code.kline.$period";
-contrac_code仅支持大写，比如:BTC-USD, period仅支持小写：1min, 5min, 15min, 30min,
+contrac_code支持大小写，比如:BTC-USD, period仅支持小写：1min, 5min, 15min, 30min,
 1hour,4hour,1day, 1mon  
   
 ### 正确订阅请求参数的例子：
@@ -11708,7 +11708,7 @@ amount | true | decimal | 成交量(币), 即 sum(每一笔成交量(张)*单张
 
 参数名称 | 是否必须 | 类型 | 描述 | 默认值 | 取值范围  
 ---|---|---|---|---|---  
-contract_code | true | string | 合约代码 |  | 仅支持大写，"BTC-USD"  
+contract_code | true | string | 合约代码 |  | 支持大小写，"BTC-USD"  
 period | false | string | K线周期 |  | 1min, 5min, 15min, 30min,
 60min,4hour,1day,1week, 1mon  
 from | true | long | 开始时间 |  |  
@@ -11822,7 +11822,7 @@ sub | string | 必填；订阅主题名称，market.$contract_code.depth.$step"
 
 参数名称 | 是否必须 | 类型 | 描述 | 默认值 | 取值范围  
 ---|---|---|---|---|---  
-contract_code | true | string | 合约代码 |  | 仅支持大写，"BTC-USD" ...  
+contract_code | true | string | 合约代码 |  | 支持大小写，"BTC-USD" ...  
 type | true | string | Depth 类型 |  | (150档数据) step0, step1, step2, step3,
 step4, step5（合并深度1-5）,step0时，不合并深度;(20档数据) step6, step7, step8, step9, step10,
 step11（合并深度7-11）；step6时，不合并深度  
