@@ -8260,6 +8260,12 @@ available. '}类似错误，说明此时可平仓量不足，您平仓时需查�
 
   * GET `swap-api/v1/swap_contract_info`
 
+    
+    
+    curl "https://api.hbdm.com/swap-api/v1/swap_contract_info?contract_code=BTC-USD"
+    
+    
+
 ### 请求参数
 
 参数名称 | 参数类型 | 必填 | 描述  
@@ -8357,6 +8363,12 @@ ts | true | long | 时间戳，单位：毫秒 |
 
   * GET `swap-api/v1/swap_price_limit`
 
+    
+    
+    curl "https://api.hbdm.com/swap-api/v1/swap_price_limit?contract_code=BTC-USD"
+    
+    
+
 ### 请求参数
 
 参数名称 | 参数类型 | 必填 | 描述  
@@ -8399,6 +8411,12 @@ ts | true | long | 响应生成时间点，单位：毫秒 |
 
   * GET `swap-api/v1/swap_open_interest`
 
+    
+    
+    curl "https://api.hbdm.com/swap-api/v1/swap_open_interest?contract_code=BTC-USD"
+    
+    
+
 ### 请求参数
 
 参数名称 | 参数类型 | 必填 | 描述  
@@ -8440,6 +8458,12 @@ ts | true | long | 响应生成时间点，单位：毫秒 |
 ### 示例
 
   * GET `/swap-ex/market/depth`
+
+    
+    
+    curl "https://api.hbdm.com/swap-ex/market/depth?contract_code=BTC-USD&type=step0"
+    
+    
 
 ### 请求参数
 
@@ -8527,6 +8551,12 @@ step5、step11 | 0.1
 ### 示例
 
   * GET `/swap-ex/market/history/kline`
+
+    
+    
+    curl "https://api.hbdm.com/swap-ex/market/history/kline?contract_code=BTC-USD&period=1day&from=1587052800&to=1591286400"
+    
+    
 
 ### 请求参数
 
@@ -8621,6 +8651,12 @@ amount | true | decimal | 成交量(币), 即 sum(每一笔成交量(张)*单张
 
   * GET `/swap-ex/market/detail/merged`
 
+    
+    
+    curl "https://api.hbdm.com/swap-ex/market/detail/merged?contract_code=BTC-USD"
+    
+    
+
 ### 请求参数
 
 参数名称 | 是否必须 | 类型 | 描述 | 默认值 | 取值范围  
@@ -8696,6 +8732,12 @@ bid | true | object | 买盘,[price(挂单价), vol(此价格挂单张数)], 按
 
   * GET `/swap-ex/market/trade`
 
+    
+    
+    curl "https://api.hbdm.com/swap-ex/market/trade?contract_code=BTC-USD"
+    
+    
+
 ### 请求参数
 
 参数名称 | 是否必须 | 类型 | 描述 | 默认值 | 取值范围  
@@ -8765,6 +8807,12 @@ ts | true | long | 订单成交时间 |  |
 ### 示例
 
   * GET `/swap-ex/market/history/trade`
+
+    
+    
+    curl "https://api.hbdm.com/swap-ex/market/history/trade?contract_code=BTC-USD&size=100"
+    
+    
 
 ### 请求参数：
 
@@ -8841,6 +8889,12 @@ ts | true | long | 最新成交时间 |
 
   * GET `swap-api/v1/swap_risk_info`
 
+    
+    
+    curl "https://api.hbdm.com/swap-api/v1/swap_risk_info?contract_code=BTC-USD"
+    
+    
+
 ### 请求参数
 
 参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
@@ -8879,6 +8933,12 @@ estimated_clawback | true | decimal | 预估分摊比例 |
 ## 查询合约风险准备金余额历史数据
 
   * GET `swap-api/v1/swap_insurance_fund`
+
+    
+    
+    curl "https://api.hbdm.com/swap-api/v1/swap_insurance_fund?contract_code=BTC-USD"
+    
+    
 
 ### 请求参数
 
@@ -8932,6 +8992,12 @@ total_size | true | int | 总条数 |
 ## 查询平台阶梯调整系数
 
   * GET `swap-api/v1/swap_adjustfactor`
+
+    
+    
+    curl "https://api.hbdm.com/swap-api/v1/swap_adjustfactor?contract_code=BTC-USD"
+    
+    
 
 ### 请求参数
 
@@ -9000,6 +9066,12 @@ adjust_factor | true | decimal | 调整系数 |
 
   * GET `swap-api/v1/swap_his_open_interest`
 
+    
+    
+    curl "https://api.hbdm.com/swap-api/v1/swap_his_open_interest?contract_code=BTC-USD&period=60min&amount_type=1"
+    
+    
+
 ### 请求参数
 
 参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
@@ -9056,6 +9128,12 @@ tick字段：数组内的数据按照时间倒序排列； data字段：字典�
 
   * GET `swap-api/v1/swap_elite_account_ratio`
 
+    
+    
+    curl "https://api.hbdm.com/swap-api/v1/swap_elite_account_ratio?contract_code=BTC-USD&period=5min"
+    
+    
+
 ### 请求参数
 
 参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
@@ -9108,6 +9186,12 @@ ts | true | long | 生成时间 |
 
   * GET `swap-api/v1/swap_elite_position_ratio`
 
+    
+    
+    curl "https://api.hbdm.com/swap-api/v1/swap_elite_position_ratio?contract_code=BTC-USD&period=1day"
+    
+    
+
 ### 请求参数
 
 参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
@@ -9157,6 +9241,12 @@ ts | true | long | 生成时间 |
 ## 查询系统状态
 
   * GET `swap-api/v1/swap_api_state`
+
+    
+    
+    curl "https://api.hbdm.com/swap-api/v1/swap_api_state?contract_code=BTC-USD"
+    
+    
 
 ### 请求参数
 
@@ -9220,6 +9310,12 @@ sub_transfer_master | true | int | 子账户划转到母账户的权限："1"表
 
   * GET `swap-api/v1/swap_funding_rate`
 
+    
+    
+    curl "https://api.hbdm.com/swap-api/v1/swap_funding_rate?contract_code=BTC-USD"
+    
+    
+
 ### 请求参数
 
 参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
@@ -9263,6 +9359,12 @@ next_funding_time | true | string | 下一期资金费率时间 |
 ## 获取合约的历史资金费率
 
   * GET `swap-api/v1/swap_historical_funding_rate`
+
+    
+    
+    curl "https://api.hbdm.com/swap-api/v1/swap_historical_funding_rate?contract_code=BTC-USD"
+    
+    
 
 ### 请求参数
 
@@ -9346,6 +9448,12 @@ total_size | true | int | 总条数 |
 ## 获取强平订单
 
   * GET `swap-api/v1/swap_liquidation_orders`
+
+    
+    
+    curl "https://api.hbdm.com/swap-api/v1/swap_liquidation_orders?contract_code=BTC-USD&trade_type=0&create_date=90"
+    
+    
 
 ### 请求参数
 
