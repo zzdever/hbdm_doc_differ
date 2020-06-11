@@ -7822,14 +7822,14 @@ shell
     * 取消订阅资产变动数据（unsub）
     * 持仓变动更新数据（sub）
     * 取消订阅持仓变动数据（unsub）
+    * 订阅合约订单撮合数据（sub）
+    * 取消订阅合约订单撮合数据（unsub）
     * 订阅强平订单数据(免鉴权)（sub）
     * 取消订阅强平订单(免鉴权)（unsub）
     * 订阅资金费率推送(免鉴权)（sub）
     * 取消订阅资金费率(免鉴权)（unsub）
     * 订阅合约信息变动(免鉴权)（sub）
     * 取消订阅合约信息变动(免鉴权)（unsub）
-    * 订阅合约订单撮合数据（sub）
-    * 取消订阅合约订单撮合数据（unsub）
 
   * [创建 API Key ](https://www.hbg.com/zh-cn/apikey/)
 
@@ -11638,7 +11638,7 @@ order_price_type | true | string | 订单报价类型 | 订单报价类型 "limi
 "post_only":只做maker单,post only下单只受用户持仓数量限制  
 direction | true | string | 买卖方向 | "buy":买 "sell":卖  
 offset | true | string | 开平方向 | "open":开 "close":平  
-lever_rate | true | int | 杠杆倍数 | 1\5\10\20  
+lever_rate | true | int | 杠杆倍数 |  
 order_id | true | long | 订单ID |  
 order_id_str | true | string | 订单ID，字符串类型 |  
 client_order_id | true | long | 客户订单ID |  
@@ -11761,7 +11761,7 @@ status | true | string | 请求处理结果 | "ok" , "error"
 <dict> (属性名称: data) |  |  |  |  
 symbol | true | string | 品种代码 |  
 contract_code | true | string | 合约代码 | "BTC-USD" ...  
-lever_rate | true | int | 杠杆倍数 | 1\5\10\20  
+lever_rate | true | int | 杠杆倍数 |  
 direction | true | string | 买卖方向 | "buy":买 "sell":卖  
 offset | true | string | 开平方向 | "open":开 "close":平  
 volume | true | decimal | 委托数量 |  
@@ -11877,7 +11877,7 @@ order_price_type | true | string | 订单报价类型 "limit":限价 "opponent":
 order_type | true | int | 订单类型，1:报单 、 2:撤单 、 3:强平、4:交割 |  
 direction | true | string | "buy":买 "sell":卖 |  
 offset | true | string | "open":开 "close":平 |  
-lever_rate | true | int | 杠杆倍数 | 1\5\10\20  
+lever_rate | true | int | 杠杆倍数 |  
 order_id | true | long | 订单ID |  
 order_id_str | true | string | 订单ID，字符串类型 |  
 client_order_id | true | long | 客户订单ID |  
@@ -11970,7 +11970,7 @@ order_id | true | long | 订单ID |
 order_id_str | true | string | 订单ID，字符串类型 |  
 symbol | true | string | 品种代码 |  
 contract_code | true | string | 合约代码 | "BTC-USD" ...  
-lever_rate | true | int | 杠杆倍数 | 1\5\10\20  
+lever_rate | true | int | 杠杆倍数 |  
 direction | true | string | 买卖方向 | "buy":买 "sell":卖  
 offset | true | string | 开平方向 | "open":开 "close":平  
 volume | true | int | 委托数量 |  
@@ -12394,7 +12394,7 @@ volume | true | decimal | 委托数量 |
 order_type | true | int | 订单类型：1、报单 2、撤单 |  
 direction | true | string | 订单方向 [买(buy),卖(sell)] |  
 offset | true | string | 开平标志 [开(open),平(close)] |  
-lever_rate | true | int | 杠杆倍数 1\5\10\20 |  
+lever_rate | true | int | 杠杆倍数 |  
 order_id | true | long | 计划委托单订单ID |  
 order_id_str | true | string | 字符串类型的订单ID |  
 order_source | true | string | 来源 |  
@@ -12523,7 +12523,7 @@ volume | true | decimal | 委托数量 |
 order_type | true | int | 订单类型：1、报单 2、撤单 |  
 direction | true | string | 订单方向 [买(buy),卖(sell)] |  
 offset | true | string | 开平标志 [开(open),平(close)] |  
-lever_rate | true | int | 杠杆倍数 1\5\10\20 |  
+lever_rate | true | int | 杠杆倍数 |  
 order_id | true | long | 计划委托单订单ID |  
 order_id_str | true | string | 字符串类型的订单ID |  
 relation_order_id | true | string | 该字段为关联限价单的关联字段，是t_trigger_order
@@ -13292,15 +13292,27 @@ step11（合并深度7-11）；step6时，不合并深度；step12（表示合�
 #### 备注
 
   * 用户选择“合并深度”时，一定报价精度内的市场挂单将予以合并显示。合并深度仅改变显示方式，不改变实际成交价格。
+
   * step1至step5是进行了深度合并后的150档深度数据，step7至step11是进行了深度合并后的20档深度数据，对应精度如下：
 
-Depth 类型 | 精度  
----|---  
-step1、step7 | 0.00001  
-step2、step8 | 0.0001  
-step3、step9 | 0.001  
-step4、step10 | 0.01  
-step5、step11 | 0.1  
+档位 | Depth 类型 | 精度  
+---|---|---  
+150档 | step0 | 不合并  
+150档 | step1 | 0.00001  
+150档 | step2 | 0.0001  
+150档 | step3 | 0.001  
+150档 | step4 | 0.01  
+150档 | step5 | 0.1  
+150档 | step14 | 1  
+150档 | step15 | 10  
+20档 | step6 | 不合并  
+20档 | step7 | 0.00001  
+20档 | step8 | 0.0001  
+20档 | step9 | 0.001  
+20档 | step10 | 0.01  
+20档 | step11 | 0.1  
+20档 | step12 | 1  
+20档 | step13 | 10  
   
 ### 返回参数
 
@@ -14251,7 +14263,7 @@ contract_code支持大小写，比如BTC-USD
   
 #### 备注：
 
-  * 推送接口新增定期推送逻辑：每 5 秒进行一次定期推送，由定期推送触发的数据中 event 参数值为“snapshot”，表示由系统定期推送触发。 如果 5 秒内已经触发过推送，则跳过该次定期推送。
+  * 推送接口新增定期推送逻辑：每 5 秒进行一次定期推送，由定期推送触发的数据中 event 参数值为“snapshot”，表示由系统定期推送触发。 如果5秒内某合约资产已触发过推送，则该合约资产跳过此次推送。
 
 > 当资产有更新时，返回的参数示例如下:
     
@@ -14395,7 +14407,7 @@ topic | string | 必填；订阅主题名称，必填 (positions.$contract_code)
   
 #### 备注：
 
-  * 推送接口新增定期推送逻辑：每 5 秒进行一次定期推送，由定期推送触发的数据中 event 参数值为“snapshot”，表示由系统定期推送触发。 如果 5 秒内已经触发过推送，则跳过该次定期推送。
+  * 推送接口新增定期推送逻辑：每 5 秒进行一次定期推送，由定期推送触发的数据中 event 参数值为“snapshot”，表示由系统定期推送触发。 如果5秒内某仓位已触发过推送，则该仓位跳过此次推送。
 
 > 当持仓有更新时，返回的参数示例如下:
     
@@ -14499,6 +14511,131 @@ positions.contract_code1 | positions.* | 允许
 positions.contract_code1 | positions.contract_code1 | 允许  
 positions.contract_code1 | positions.contract_code2 | 不允许  
 positions.* | positions.contract_code1 | 不允许  
+  
+## 订阅合约订单撮合数据（sub）
+
+成功建立和 WebSocket API 的连接之后，向 Server 发送如下格式的数据来订阅数据:
+
+`{`
+
+`"op": "sub",`
+
+`"cid": "40sG903yz80oDFWr",`
+
+`"topic": "matchOrders.$contract_code"`
+
+`}`
+
+### 请求参数
+
+参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
+---|---|---|---|---  
+op | true | string | 订阅固定值为sub |  
+cid | false | string | Client 请求唯一 ID |  
+topic | true | string | 订阅主题名称，(matchOrders.$contract_code)
+订阅某个品种下的合约变动信息；$contract_code为品种代码（BTC-USD、ETH-USD），如果值为 * 时代表订阅所有品种;
+contract_code支持大小写; |  
+  
+### 返回的参数为：
+
+    
+    
+    {
+        "op": "notify",             // 操作名称
+        "topic": "matchOrders.btc-usd",     // 主题
+        "ts": 1489474082831,    
+        "uid": "11434749",         //账户id
+        "symbol": "BTC",         //品种
+        "contract_code": "BTC-USD",     //合约代码
+        "status": 1    //订单状态(3未成交 4部分成交 5部分成交已撤单 6全部成交 7已撤单)
+        "order_id": 106837,     //订单ID       
+        "order_id_str": "106837",     //订单ID ,字符串类型
+        "order_type": "1",    //订单类型  1:报单 、 2:撤单 、 3:强平、4:交割
+        "trade_volume": 1,    //订单已成交数量
+        "volume": 100,    //订单总委托数量
+        "trade":[{
+            "id": "1232-213123-1231", //成交唯一ID
+            "trade_id":112,     //撮合结果id
+            "trade_volume":1,    //成交量
+            "trade_price":123.4555,     //撮合价格
+            "trade_turnover":34.123,     //成交金额 
+            "created_at": 1490759594752    //成交时间
+            "role": "maker"
+          }]
+    }
+    
+    
+
+### 返回参数
+
+**参数名称** | **是否必须** | **类型** | **描述** | **取值范围**  
+---|---|---|---|---  
+op | true | string | 操作名称，推送固定值为 notify; |  
+topic | true | string | 推送的主题 |  
+ts | true | long | 服务端应答时间戳 |  
+uid | true | string | 账户id |  
+symbol | true | string | 品种代码 |  
+contract_code | true | string | 合约代码 | "BTC-USD" ...  
+status | true | int | 订单状态(3未成交 4部分成交 5部分成交已撤单 6全部成交 7已撤单) |  
+order_id | true | long | 订单ID，在系统存储的字段为user_order_id |  
+order_id_str | true | string | 订单ID ,字符串类型 |  
+order_type | true | string | 订单类型 | 1:报单 、 2:撤单 、 3:强平、4:交割  
+trade_volume | true | decimal | 订单已成交数量 |  
+volume | true | decimal | 订单总委托数量 |  
+<trade> | true | object array |  |  
+id | true | string | 成交唯一ID |  
+trade_id | true | long | 撮合结果id |  
+trade_price | true | decimal | 撮合价格 |  
+trade_volume | true | decimal | 成交量 |  
+trade_turnover | true | decimal | 成交金额 |  
+created_at | true | long | 创建时间 |  
+role | true | string | taker或maker |  
+</trade> |  |  |  |  
+  
+## 取消订阅合约订单撮合数据（unsub）
+
+成功建⽴和 WebSocket API 的连接之后，向 Server 发送如下格式的数据来取消订阅数据:
+
+### 取消订阅请求数据格式
+
+`{`
+
+`"op": "unsub",`
+
+`"topic": "matchOrders.$contract_code",`
+
+`"cid": "id generated by client",`
+
+`}`
+
+> 正确的取消订阅请求:
+    
+    
+    {                                    
+      "op": "unsub",                     
+      "topic": "matchOrders.BTC-USD",   
+      "cid": "40sG903yz80oDFWr"          
+    }                                    
+    
+
+### 取消订阅请求数据格式说明
+
+字段名称 | 类型 | 说明  
+---|---|---  
+op | string | 必填;操作名称，订阅固定值为 unsub;  
+cid | string | 选填;Client 请求唯一 ID  
+topic | string | 必填;必填；必填；订阅主题名称，必填 (matchOrders.$contract_code)
+订阅、取消订阅某个合约代码下的资产变更信息，当 $contract_code值为 * 时代表订阅所有合约代码;  
+  
+### 订阅与取消订阅规则说明
+
+订阅(sub) | 取消订阅(unsub) | 规则  
+---|---|---  
+matchOrders.* | matchOrders.* | 允许  
+matchOrders.contract_code1 | matchOrders.* | 允许  
+matchOrders.contract_code1 | matchOrders.contract_code1 | 允许  
+matchOrders.contract_code1 | matchOrders.contract_code2 | 不允许  
+matchOrders.* | matchOrders.contract_code1 | 不允许  
   
 ## 订阅强平订单数据(免鉴权)（sub）
 
@@ -14868,131 +15005,6 @@ public.contract_code1.contract_info | public.contract_code1.contract_info | 允�
 public.contract_code1.contract_info | public.contract_code2.contract_info |
 不允许  
 public.*.contract_info | public.contract_code1.contract_info | 不允许  
-  
-## 订阅合约订单撮合数据（sub）
-
-成功建立和 WebSocket API 的连接之后，向 Server 发送如下格式的数据来订阅数据:
-
-`{`
-
-`"op": "sub",`
-
-`"cid": "40sG903yz80oDFWr",`
-
-`"topic": "matchOrders.$contract_code"`
-
-`}`
-
-### 请求参数
-
-参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
----|---|---|---|---  
-op | true | string | 订阅固定值为sub |  
-cid | false | string | Client 请求唯一 ID |  
-topic | true | string | 订阅主题名称，必填 (public.$contract_code.contract_info)
-订阅某个品种下的合约变动信息；$contract_code为品种代码（BTC-USD、ETH-USD），如果值为 * 时代表订阅所有品种;
-contract_code支持大小写; |  
-  
-### 返回的参数为：
-
-    
-    
-    {
-        "op": "notify",             // 操作名称
-        "topic": "matchOrders.btc-usd",     // 主题
-        "ts": 1489474082831,    
-        "uid": "11434749",         //uid
-        "symbol": "BTC",         //品种
-        "contract_code": "BTC-USD",     //合约代码
-        "status": 1    //订单状态(3未成交 4部分成交 5部分成交已撤单 6全部成交 7已撤单)
-        "order_id": 106837,     //订单ID       
-        "order_id_str": "106837",     //订单ID ,字符串类型
-        "order_type": "1",    //订单类型  1:报单 、 2:撤单 、 3:强平、4:交割
-        "trade_volume": 1,    //订单已成交数量
-        "volume": 100,    //订单总委托数量
-        "trade":[{
-            "id": "1232-213123-1231", //成交唯一ID
-            "trade_id":112,     //撮合结果id
-            "trade_volume":1,    //成交量
-            "trade_price":123.4555,     //撮合价格
-            "trade_turnover":34.123,     //成交金额 
-            "created_at": 1490759594752    //成交时间
-            "role": "maker"
-          }]
-    }
-    
-    
-
-### 返回参数
-
-**参数名称** | **是否必须** | **类型** | **描述** | **取值范围**  
----|---|---|---|---  
-op | true | string | 操作名称，推送固定值为 notify; |  
-topic | true | string | 推送的主题 |  
-ts | true | long | 服务端应答时间戳 |  
-uid | true | string | 用户uid |  
-symbol | true | string | 品种代码 |  
-contract_code | true | string | 合约代码 | "BTC-USD" ...  
-status | true | int | 订单状态(3未成交 4部分成交 5部分成交已撤单 6全部成交 7已撤单) |  
-order_id | true | long | 订单ID，在系统存储的字段为user_order_id |  
-order_id_str | true | string | 订单ID ,字符串类型 |  
-order_type | true | string | 订单类型 | 1:报单 、 2:撤单 、 3:强平、4:交割  
-trade_volume | true | decimal | !!订单已成交数量!! |  
-volume | true | decimal | !!订单总委托数量!! |  
-<trade> | true | object array |  |  
-id | true | string | 成交唯一ID |  
-trade_id | true | long | 撮合结果id |  
-trade_price | true | decimal | 撮合价格 |  
-trade_volume | true | decimal | 成交量 |  
-trade_turnover | true | decimal | 成交金额 |  
-created_at | true | long | 创建时间 |  
-role | true | string | taker或maker |  
-</trade> |  |  |  |  
-  
-## 取消订阅合约订单撮合数据（unsub）
-
-成功建⽴和 WebSocket API 的连接之后，向 Server 发送如下格式的数据来取消订阅数据:
-
-### 取消订阅请求数据格式
-
-`{`
-
-`"op": "unsub",`
-
-`"topic": "matchOrders.$contract_code",`
-
-`"cid": "id generated by client",`
-
-`}`
-
-> 正确的取消订阅请求:
-    
-    
-    {                                    
-      "op": "unsub",                     
-      "topic": "matchOrders.BTC-USD",   
-      "cid": "40sG903yz80oDFWr"          
-    }                                    
-    
-
-### 取消订阅请求数据格式说明
-
-字段名称 | 类型 | 说明  
----|---|---  
-op | string | 必填;操作名称，订阅固定值为 unsub;  
-cid | string | 选填;Client 请求唯一 ID  
-topic | string | 必填;必填；必填；订阅主题名称，必填 (matchOrders.$contract_code)
-订阅、取消订阅某个合约代码下的资产变更信息，当 $contract_code值为 * 时代表订阅所有合约代码;  
-  
-### 订阅与取消订阅规则说明
-
-订阅(sub) | 取消订阅(unsub) | 规则  
----|---|---  
-matchOrders.* | matchOrders.* | 允许  
-matchOrders.contract_code1 | matchOrders.* | 允许  
-matchOrders.contract_code1 | matchOrders.contract_code1 | 允许  
-matchOrders.contract_code1 | matchOrders.contract_code2 | 不允许  
-matchOrders.* | matchOrders.contract_code1 | 不允许  
   
 shell
 
