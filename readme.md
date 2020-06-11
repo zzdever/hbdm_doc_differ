@@ -5305,8 +5305,8 @@ contracts trading |
 读取 | 市场行情接口 | market.$symbol.detail | sub | 订阅 Market detail 数据 | 否  
 读取 | 市场行情接口 | market.$symbol.trade.detail | req | 请求 Trade detail 数据 | 否  
 读取 | 市场行情接口 | market.$symbol.trade.detail | sub | 订阅 Trade Detail 数据 | 否  
-交易 | 交易接口 | orders.$symbol | sub | 订阅订单成交数据 | 是  
-交易 | 交易接口 | matchOrders.$symbol | sub | 订阅撮合订单成交数据 | 是  
+读取 | 交易接口 | orders.$symbol | sub | 订阅订单成交数据 | 是  
+读取 | 交易接口 | matchOrders.$symbol | sub | 订阅撮合订单成交数据 | 是  
 读取 | 资产接口 | accounts.$symbol | sub | 订阅某个品种下的资产变动信息 | 是  
 读取 | 资产接口 | positions.$symbol | sub | 订阅某个品种下的持仓变动信息 | 是  
 读取 | 交易接口 | liquidationOrders.$symbol | sub | 订阅某个品种下的强平订单信息 | 是  
@@ -5862,16 +5862,8 @@ step13（step7至step13是进行了深度合并后的深度），使用step6时�
 
   * step1至step5,step12,step13是进行了深度合并后的150档深度数据，step7至step11, step14, step15是进行了深度合并后的20档深度数据，对应精度如下：
 
-Depth 类型 | 精度  
----|---  
-step1、step7 | 0.00001  
-step2、step8 | 0.0001  
-step3、step9 | 0.001  
-step4、step10 | 0.01  
-step5、step11 | 0.1  
-step12、step14 | 1  
-step13、step15 | 10  
-  
+  * Depth类型字段对应精度如下： | 档位 | Depth 类型 | 精度 | |----|----|----| |150档 |step0 | 不合并 | |150档 |step1|0.00001| |150档 |step2|0.0001| |150档 |step3|0.001| |150档 |step4|0.01| |150档 |step5|0.1| |150档 |step14|1| |150档 |step15|10| |20档 |step6 | 不合并 | |20档 |step7|0.00001| |20档 |step8|0.0001| |20档 |step9|0.001| |20档 |step10|0.01| |20档 |step11|0.1| |20档 |step12|1| |20档 |step13|10|
+
 ### 返回参数
 
 参数名称 | 是否必须 | 数据类型 | 描述 | 取值范围  
@@ -6249,9 +6241,7 @@ ch | true | string | 数据所属的 channel，格式： market.$symbol.bbo |
 
 3、由于客户端网络等原因导致接收数据失败，服务端会丢弃旧的队列数据；
 
-4、可以按照合约周期订阅，也可以按照合约代码订阅，行情系统在进行数据计算时，需要更新对应类型的数据；
-
-5、version（版本号），撮合id，全局唯一。
+4、version（版本号），撮合id，全局唯一。
 
 ### Response：
 
@@ -7160,7 +7150,7 @@ $symbol值为 * 时代表订阅所有品种; symbol支持大小写，比如BTC
 ---|---|---  
 op | string | 必填;操作名称，推送固定值为 notify;  
 topic | string | 必填;推送的主题  
-uid | string | 账户ID  
+uid | string | 账户UID  
 ts | long | 响应生成时间点，单位：毫秒  
 event | string | 资产变化通知相关事件说明，比如订单创建开仓(order.open)
 、订单成交(order.match)（除开强平和结算交割）、结算交割(settlement)、订单强平成交(order.liquidation)（对钆和接管仓位）、订单撤销(order.cancel)
@@ -7184,7 +7174,7 @@ adjust_factor | decimal | 调整系数
 ### 备注
 
 \- 每 5 秒进行一次定期推送，由定期推送触发的数据中 event 参数值为“snapshot”，表示由系统定期推送触发。如果 5
-秒内已经触发过推送，则跳过该次定期推送。
+秒内已经触发过推送，则该品种跳过该次定期推送。
 
 ## 取消订阅资产变动数据（unsub）
 
@@ -7331,7 +7321,7 @@ last_price | decimal | 最新成交价
 ### 备注
 
 \- 每 5 秒进行一次定期推送，由定期推送触发的数据中 event 参数值为“snapshot”，表示由系统定期推送触发。如果 5
-秒内已经触发过推送，则跳过该次定期推送。
+秒内已经触发过推送，则该品种跳过该次定期推送。
 
 ## 取消订阅持仓变动更新数据（unsub）
 
@@ -7710,7 +7700,7 @@ shell
     * 永续合约API简介
     * 做市商项目
   * 更新日志
-    * 1.0.5 2020年6月12日 【新增计划委托订单】
+    * 1.0.5 2020年6月12日 【新增计划委托下单等多个接口;新增溢价指数K线的restful以及ws接口;新增预测资金费率K线等restful及ws接口;新增撮合订单推送接口；新增基差数据restful及ws接口；新增仓位与账户定期推送5秒推送1次；新增多个接口返回字段，更多请看详情】
     * 1.0.4 2020年5月27日 【增加合约信息变动ws推送接口】
     * 1.0.3 2020年5月7日 【增加查询用户账户和持仓信息】
     * 1.0.2 2020年4月9日 【增加免鉴权的资金费率WS推送接口；增加免鉴权的强平订单WS推送接口】
@@ -7856,7 +7846,8 @@ protection)（做市商项目不支持点卡抵扣、VIP、交易量相关活动
 
 # 更新日志
 
-## 1.0.5 2020年6月12日 【新增计划委托订单】
+## 1.0.5 2020年6月12日
+【新增计划委托下单等多个接口;新增溢价指数K线的restful以及ws接口;新增预测资金费率K线等restful及ws接口;新增撮合订单推送接口；新增基差数据restful及ws接口；新增仓位与账户定期推送5秒推送1次；新增多个接口返回字段，更多请看详情】
 
 ### 1、新增溢价指数K线的restful接口。
 
@@ -11657,6 +11648,7 @@ order_source | true | string | 订单来源 | （1:system、2:web、3:api、4:m
 5:risk、6:settlement）  
 liquidation_type | true | string | 强平类型 | 0:非强平类型，1：多空轧差， 2:部分接管，3：全部接管  
 canceled_at | true | long | 撤单时间 |  
+fee_asset | true | string | 手续费币种 |  
 </dict> |  |  |  |  
 ts | true | long | 时间戳 |  
   
@@ -14178,7 +14170,7 @@ fee_asset | string | 手续费币种
 trade_turnover | decimal | 成交金额  
 created_at | long | 成交创建时间  
 role | string | taker或maker  
-|  |  
+</list> |  |  
   
 ## 取消订阅订单成交数据（unsub）
 
@@ -14321,7 +14313,7 @@ liquidation_price | decimal | 预估爆仓价
 withdraw_available | decimal | 可划转数量  
 lever_rate | int | 杠杆倍数  
 adjust_factor | decimal | 调整系数  
-<\list> |  |  
+</list> |  |  
   
 ## 取消订阅资产变动数据（unsub）
 
@@ -14464,7 +14456,7 @@ position_margin | decimal | 持仓保证金
 lever_rate | int | 杠杆倍数  
 direction | string | 仓位方向 "buy":买 "sell":卖  
 last_price | decimal | 最新价  
-<\list> |  |  
+</list> |  |  
   
 ## 取消订阅持仓变动数据（unsub）
 
@@ -14941,7 +14933,7 @@ topic | true | string | 推送的主题 |
 ts | true | long | 响应生成时间点，单位：毫秒 |  
 event | true | string | 通知相关事件说明 |
 订阅成功返回的初始合约信息（init），合约信息字段变化触发（update），系统定期推送触发（snapshot）  
-| true | object array |  |  
+<data> | true | object array |  |  
 symbol | true | string | 品种代码 | "BTC","ETH"...  
 contract_code | true | string | 合约代码 | "BTC-USD" ...  
 contract_size | true | decimal | 合约面值，即1张合约对应多少美元 | 10, 100...  
@@ -14950,7 +14942,7 @@ settlement_date | true | string | 合约下次结算时间 | 时间戳，如"149
 create_date | true | string | 合约上市日期 | 如"20180706"  
 contract_status | true | int | 合约状态 | 合约状态:
 0:已下市、1:上市、2:待上市、3:停牌，4:待开盘、5:结算中、6:交割中、7:结算完成、8:交割完成  
-|  |  |  |  
+</data> |  |  |  |  
   
 ### 说明：
 
