@@ -7808,6 +7808,7 @@ shell
     * 订阅 Market Detail 数据
     * 请求 Trade Detail 数据
     * 订阅 Trade Detail 数据
+  * WebSocket指数与基差数据接口
     * 订阅溢价指数K线数据
     * 请求溢价指数K线数据
     * 订阅预测资金费率K线数据
@@ -13638,6 +13639,8 @@ direction | true | string | 买卖方向 |
       }
     
     
+
+# WebSocket指数与基差数据接口
 
 ## 订阅溢价指数K线数据
 
