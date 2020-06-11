@@ -7700,7 +7700,7 @@ shell
     * 永续合约API简介
     * 做市商项目
   * 更新日志
-    * 1.0.5 2020年6月12日 【新增计划委托下单等多个接口;新增溢价指数K线的restful以及ws接口;新增预测资金费率K线等restful及ws接口;新增撮合订单推送接口；新增基差数据restful及ws接口；新增仓位与账户定期推送5秒推送1次；新增多个接口返回字段，更多请看详情】
+    * 1.0.5 升级日期待定【暂不可用】 【新增计划委托下单等多个接口;新增溢价指数K线的restful以及ws接口;新增预测资金费率K线等restful及ws接口;新增撮合订单推送接口；新增基差数据restful及ws接口；新增仓位与账户定期推送5秒推送1次；新增多个接口返回字段，更多请看详情】
     * 1.0.4 2020年5月27日 【增加合约信息变动ws推送接口】
     * 1.0.3 2020年5月7日 【增加查询用户账户和持仓信息】
     * 1.0.2 2020年4月9日 【增加免鉴权的资金费率WS推送接口；增加免鉴权的强平订单WS推送接口】
@@ -7742,9 +7742,9 @@ shell
     * 获取合约的资金费率
     * 获取合约的历史资金费率
     * 获取强平订单
-    * 获取合约的溢价指数K线
+    * 获取合约的溢价指数K线 (暂不可用)
     * 获取实时预测资金费率的K线数据
-    * 获取基差数据
+    * 获取基差数据 (暂不可用)
   * 合约资产接口
     * 获取用户账户信息
     * 获取用户持仓信息
@@ -7771,11 +7771,11 @@ shell
     * 获取合约历史委托
     * 获取历史成交记录
     * 闪电平仓下单
-    * 合约计划委托下单
-    * 合约计划委托撤单
-    * 合约计划委托全部撤单
-    * 获取计划委托当前委托
-    * 获取计划委托历史委托
+    * 合约计划委托下单 (暂不可用)
+    * 合约计划委托撤单(暂不可用)
+    * 合约计划委托全部撤单(暂不可用)
+    * 获取计划委托当前委托(暂不可用)
+    * 获取计划委托历史委托(暂不可用)
   * 永续合约划转接口
     * 现货-永续合约账户间进行资金的划转
     * 响应码列表
@@ -7798,13 +7798,13 @@ shell
     * 订阅 Market Detail 数据
     * 请求 Trade Detail 数据
     * 订阅 Trade Detail 数据
-  * WebSocket指数与基差数据接口
-    * 订阅溢价指数K线数据
-    * 请求溢价指数K线数据
-    * 订阅预测资金费率K线数据
-    * 请求预测资金费率K线数据
-    * 订阅基差数据
-    * 请求基差数据
+  * WebSocket指数与基差数据接口(暂不可用)
+    * 订阅溢价指数K线数据(暂不可用)
+    * 请求溢价指数K线数据(暂不可用)
+    * 订阅预测资金费率K线数据(暂不可用)
+    * 请求预测资金费率K线数据(暂不可用)
+    * 订阅基差数据 (暂不可用)
+    * 请求基差数据(暂不可用)
   * WebSocket订单和用户数据接口
     * 订阅订单成交数据（sub）
     * 取消订阅订单成交数据（unsub）
@@ -7812,8 +7812,8 @@ shell
     * 取消订阅资产变动数据（unsub）
     * 持仓变动更新数据（sub）
     * 取消订阅持仓变动数据（unsub）
-    * 订阅合约订单撮合数据（sub）
-    * 取消订阅合约订单撮合数据（unsub）
+    * 订阅合约订单撮合数据（sub）(暂不可用)
+    * 取消订阅合约订单撮合数据（unsub）(暂不可用)
     * 订阅强平订单数据(免鉴权)（sub）
     * 取消订阅强平订单(免鉴权)（unsub）
     * 订阅资金费率推送(免鉴权)（sub）
@@ -7846,7 +7846,7 @@ protection)（做市商项目不支持点卡抵扣、VIP、交易量相关活动
 
 # 更新日志
 
-## 1.0.5 2020年6月12日
+## 1.0.5 升级日期待定【暂不可用】
 【新增计划委托下单等多个接口;新增溢价指数K线的restful以及ws接口;新增预测资金费率K线等restful及ws接口;新增撮合订单推送接口；新增基差数据restful及ws接口；新增仓位与账户定期推送5秒推送1次；新增多个接口返回字段，更多请看详情】
 
 ### 1、新增溢价指数K线的restful接口。
@@ -10225,7 +10225,7 @@ total_size | true | int | 总条数 |
 </dict> |  |  |  |  
 ts | true | long | 时间戳 |  
   
-## 获取合约的溢价指数K线
+## 获取合约的溢价指数K线 (暂不可用)
 
   * GET `/index/market/history/swap_premium_index_kline`
 
@@ -10345,7 +10345,7 @@ amount | true | string | 成交量(币), 数值为0 |  |
 status | true | string | 请求处理结果 | "ok" , "error" |  
 ts | true | number | 响应生成时间点，单位：毫秒 |  |  
   
-## 获取基差数据
+## 获取基差数据 (暂不可用)
 
   * GET `/index/market/history/swap_basis`
 
@@ -12132,7 +12132,7 @@ client_order_id | false | long | 用户自己的订单id |
     
     
 
-## 合约计划委托下单
+## 合约计划委托下单 (暂不可用)
 
   * POST `swap-api/v1/swap_trigger_order`
 
@@ -12192,7 +12192,7 @@ order_id_str | true | string | 字符串类型的订单ID |
     
     
 
-## 合约计划委托撤单
+## 合约计划委托撤单(暂不可用)
 
   * POST `swap-api/v1/swap_trigger_cancel`
 
@@ -12250,7 +12250,7 @@ ts | true | long | 响应生成时间点，单位：毫秒 |
     
     
 
-## 合约计划委托全部撤单
+## 合约计划委托全部撤单(暂不可用)
 
   * POST `swap-api/v1/swap_trigger_cancelall`
 
@@ -12307,7 +12307,7 @@ ts | true | long | 响应生成时间点，单位：毫秒 |
     
     
 
-## 获取计划委托当前委托
+## 获取计划委托当前委托(暂不可用)
 
   * POST `swap-api/v1/swap_trigger_openorders`
 
@@ -12414,7 +12414,7 @@ ts | true | long | 响应生成时间点，单位：毫秒 |
     
     
 
-## 获取计划委托历史委托
+## 获取计划委托历史委托(暂不可用)
 
   * POST `swap-api/v1/swap_trigger_hisorders`
 
@@ -12720,10 +12720,10 @@ Please modify it.
 否  
 读取 | 市场行情接口 | market.$contract_code.premium_index.$period | req | 请求溢价指数K线数据 |
 否  
-读取 | 市场行情接口 | market.$contract_code.premium_index.$period | sub | 订阅预测资金费率K线数据
-| 否  
-读取 | 市场行情接口 | market.$contract_code.premium_index.$period | req | 请求预测资金费率K线数据
-| 否  
+读取 | 市场行情接口 | market.$contract_code.estimated_rate.$period | sub |
+订阅预测资金费率K线数据 | 否  
+读取 | 市场行情接口 | market.$contract_code.estimated_rate.$period | req |
+请求预测资金费率K线数据 | 否  
 读取 | 市场行情接口 | market.$contract_code.basis.$period.$basis_price_type | sub |
 订阅基差数据 | 否  
 读取 | 市场行情接口 | market.$contract_code.basis.$period.$basis_price_type | req |
@@ -13649,9 +13649,9 @@ direction | true | string | 买卖方向 |
     
     
 
-# WebSocket指数与基差数据接口
+# WebSocket指数与基差数据接口(暂不可用)
 
-## 订阅溢价指数K线数据
+## 订阅溢价指数K线数据(暂不可用)
 
 ### 成功建立和 WebSocket API 的连接之后，向 Server发送如下格式的数据来订阅数据：
 
@@ -13710,7 +13710,7 @@ ts | true | number | 响应生成时间点，单位：毫秒 |  |
     
     
 
-## 请求溢价指数K线数据
+## 请求溢价指数K线数据(暂不可用)
 
 ### 成功建立和 WebSocket API 的连接之后，向 Server 发送如下格式的数据来请求数据：
 
@@ -13789,7 +13789,7 @@ amount | true | string | 成交量(币), 数值为0 |  |
     
     
 
-## 订阅预测资金费率K线数据
+## 订阅预测资金费率K线数据(暂不可用)
 
 ### 成功建立和 WebSocket API 的连接之后，向 Server发送如下格式的数据来订阅数据：
 
@@ -13848,7 +13848,7 @@ ts | true | number | 响应生成时间点，单位：毫秒 |  |
     
     
 
-## 请求预测资金费率K线数据
+## 请求预测资金费率K线数据(暂不可用)
 
 ### 成功建立和 WebSocket API 的连接之后，向 Server 发送如下格式的数据来请求数据：
 
@@ -13927,7 +13927,7 @@ amount | true | string | 成交量(币), 数值为0 |  |
     
     
 
-## 订阅基差数据
+## 订阅基差数据 (暂不可用)
 
 ### 成功建立和 WebSocket API 的连接之后，向 Server发送如下格式的数据来订阅数据：
 
@@ -13982,7 +13982,7 @@ ts | number | 响应生成时间点，单位：毫秒 |  |
     
     
 
-## 请求基差数据
+## 请求基差数据(暂不可用)
 
 ### 成功建立和 WebSocket API 的连接之后，向 Server 发送如下格式的数据来请求数据：
 
@@ -14503,7 +14503,7 @@ positions.contract_code1 | positions.contract_code1 | 允许
 positions.contract_code1 | positions.contract_code2 | 不允许  
 positions.* | positions.contract_code1 | 不允许  
   
-## 订阅合约订单撮合数据（sub）
+## 订阅合约订单撮合数据（sub）(暂不可用)
 
 成功建立和 WebSocket API 的连接之后，向 Server 发送如下格式的数据来订阅数据:
 
@@ -14583,7 +14583,7 @@ created_at | true | long | 创建时间 |
 role | true | string | taker或maker |  
 </trade> |  |  |  |  
   
-## 取消订阅合约订单撮合数据（unsub）
+## 取消订阅合约订单撮合数据（unsub）(暂不可用)
 
 成功建⽴和 WebSocket API 的连接之后，向 Server 发送如下格式的数据来取消订阅数据:
 
