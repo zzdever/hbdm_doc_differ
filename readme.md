@@ -7864,7 +7864,7 @@ protection)（做市商项目不支持点卡抵扣、VIP、交易量相关活动
 
   * 接口类型： 公开接口
 
-  * restful请求：GET请求 `swap-api/v1/swap_premium_index_kline`。
+  * restful请求：GET请求 `/index/market/history/swap_premium_index_kline`。
 
 ### 2、新增溢价指数K线的ws请求接口。
 
@@ -7888,7 +7888,7 @@ protection)（做市商项目不支持点卡抵扣、VIP、交易量相关活动
 
   * 接口类型： 公开接口
 
-  * restful请求：GET请求 `swap-api/v1/swap_estimated_rate_kline`。
+  * restful请求：GET请求 `/index/market/history/swap_estimated_rate_kline`。
 
 ### 5、新增预测资金费率K线的ws请求接口。
 
@@ -8039,6 +8039,8 @@ protection)（做市商项目不支持点卡抵扣、VIP、交易量相关活动
 ### 21、新增订单撮合数据 WS 推送
 
   * 接口名称：订阅订单撮合数据接口
+
+  * 接口类型：私有接口
 
   * 接口方法：matchOrders.$contract_code
 
@@ -8210,9 +8212,10 @@ IOC下单），lightning_fok（闪电平仓-FOK下单），lightning(闪电平�
 读取 | 市场行情接口 | swap-api/v1/swap_api_state | GET | 查询系统状态 | 否  
 读取 | 市场行情接口 | swap-api/v1/swap_funding_rate | GET | 获取合约的资金费率 | 否  
 读取 | 市场行情接口 | swap-api/v1/swap_historical_funding_rate | GET | 获取合约的历史资金费率 | 否  
-读取 | 市场行情接口 | swap-api/v1/swap_premium_index_kline | GET | 获取溢价指数K线 | 否  
-读取 | 市场行情接口 | swap-api/v1/swap_estimated_rate_kline | GET | 获取实时预测资金费率的K线数据 |
-否  
+读取 | 市场行情接口 | /index/market/history/swap_premium_index_kline | GET | 获取溢价指数K线
+| 否  
+读取 | 市场行情接口 | /index/market/history/swap_estimated_rate_kline | GET |
+获取实时预测资金费率的K线数据 | 否  
 读取 | 市场行情接口 | /index/market/history/swap_basis | GET | 获取基差数据 | 否  
 读取 | 市场行情接口 | /heartbeat | GET | 查询系统是否可用 | 否  
 读取 | 账户接口 | swap-api/v1/swap_account_info | POST | 获取用户账户信息 | 是  
@@ -10233,11 +10236,11 @@ ts | true | long | 时间戳 |
   
 ## 获取合约的溢价指数K线
 
-  * GET `swap-api/v1/swap_premium_index_kline`
+  * GET `/index/market/history/swap_premium_index_kline`
 
     
     
-    curl "https://api.hbdm.com/swap-api/v1/swap_premium_index_kline?contract_code=BTC-USD&period=1min&size=1"
+    curl "https://api.hbdm.com/index/market/history/swap_premium_index_kline?contract_code=BTC-USD&period=1min&size=1"
     
     
 
@@ -10293,11 +10296,11 @@ ts | true | number | 响应生成时间点，单位：毫秒 |  |
   
 ## 获取实时预测资金费率的K线数据
 
-  * GET `swap-api/v1/swap_estimated_rate_kline`
+  * GET `/index/market/history/swap_estimated_rate_kline`
 
     
     
-    curl "https://api.hbdm.com/swap-api/v1/swap_estimated_rate_kline?contract_code=BTC-USD&period=1min&size=1"
+    curl "https://api.hbdm.com/index/market/history/swap_estimated_rate_kline?contract_code=BTC-USD&period=1min&size=1"
     
     
 
@@ -10367,7 +10370,7 @@ ts | true | number | 响应生成时间点，单位：毫秒 |  |
 ---|---|---|---|---|---  
 contract_code | true | string | 合约代码 |  | 如"BTC-USD"  
 period | true | string | 周期 |  | 1min,5min, 15min, 30min,
-60min,4hour,1day,1mon  
+60min,4hour,1day,1week,1mon  
 basis_price_type | false | string | 基差价格类型，表示在周期内计算基差使用的价格类型 | 不填，默认使用开盘价 |
 开盘价：open，收盘价：close，最高价：high，最低价：low，平均价=（最高价+最低价）/2：average  
 size | true | integer | 基差获取数量 |  | [1,2000]  
@@ -13935,8 +13938,8 @@ amount | true | string | 成交量(币), 数值为0 |  |
 **参数名称** | **是否必须** | **类型** | **描述** | **默认值** | **取值范围**  
 ---|---|---|---|---|---  
 contract_code | true | string | 合约名称 |  | 如"BTC-USD"  
-period | true | string | 周期 |  | 1min, 5min, 15min, 30min, 60min,4hour,1day,
-1mon  
+period | true | string | 周期 |  | 1min, 5min, 15min, 30min,
+60min,4hour,1day,1week, 1mon  
 basis_price_type | false | string | 基差价格类型，表示在周期内计算基差使用的价格类型 | 不填，默认为使用开盘价 |
 开盘价：open，收盘价：close，最高价：high，最低价：low，平均价=（最高价+最低价）/2：average  
   
