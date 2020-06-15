@@ -2797,11 +2797,17 @@ id | true | long | 唯一标识 |
 contract_price | true | string | 合约基准价，与基差价格类型匹配 |  
 index_price | true | string | 指数基准价，与基差价格类型匹配 |  
 basis | true | string | 基差=合约基准价 - 指数基准价 |  
-basis_rate | string | decimal | 基差率=基差/指数基准价 |  
+basis_rate | true | string | 基差率=基差/指数基准价 |  
 <\list> | true | object | 基差数据 |  
 ts | true | long | 生成时间 |  
   
-  * 说明： 一次最多2000条数据；
+  * 说明：
+
+一次最多2000条数据；
+
+  * 备注：
+
+次季度的基差数据在2020/6/15 14:00:00后才开始生成。
 
   * 返回示例：
 
@@ -6669,6 +6675,8 @@ period | true | string | 周期 |  | 1min, 5min, 15min, 30min, 60min,4hour,1day,
 basis_price_type | false | string | 基差价格类型，表示在周期内计算基差使用的价格类型 | 不填，默认为使用开盘价 |
 开盘价：open，收盘价：close，最高价：high，最低价：low，平均价=（最高价+最低价）/2：average  
   
+  * 备注：次季度的基差数据在2020/6/15 14:00:00后才开始生成
+
   * 之后每当基差有更新时，client 会收到数据，例子
 
     
