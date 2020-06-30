@@ -170,7 +170,7 @@ shell
 做市商项目不支持点卡抵扣、VIP、交易量相关活动以及任何形式的返佣活动。
 
 欢迎有优秀 maker 策略交易量大的用户参与长期合约做市商项目。如果您的火币交割合约账户中有折合大于 5 BTC 资产，或火币永续合约账户中有折合大于 3
-BTC 资产，请提供以下信息到 dm_m[[email protected]](/cdn-cgi/l/email-
+BTC 资产，请提供以下信息到 [[email protected]](/cdn-cgi/l/email-
 protection)（做市商项目不支持点卡抵扣、VIP、交易量相关活动以及任何形式的返佣活动）:
 
   1. 提供火币UID （需不存在返佣关系的 UID）；
