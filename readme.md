@@ -2157,11 +2157,17 @@ step11（step7至step11是进行了深度合并后的深度），使用step6时�
 
 参数名称 | 是否必须 | 数据类型 | 描述 | 取值范围  
 ---|---|---|---|---  
-ch | true | string | 数据所属的 channel，格式： market.period |  
+ch | true | string | 数据所属的 channel，格式：market.$contract_code.depth.type |  
 status | true | string | 请求处理结果 | "ok" , "error"  
-asks | true | object | 卖盘,[price(挂单价), vol(此价格挂单张数)], 按price升序 |  
-bids | true | object | 买盘,[price(挂单价), vol(此价格挂单张数)], 按price降序 |  
-mrid | true | string | 订单ID |  
+<tick> | true | object |  |  
+asks | true | array | 卖盘,[price(挂单价), vol(此价格挂单张数)], 按price升序 |  
+bids | true | array | 买盘,[price(挂单价), vol(此价格挂单张数)], 按price降序 |  
+ch | true | string | 数据所属的 channel，格式： market.period |  
+id | true | long | 消息id |  
+mrid | true | long | 订单ID |  
+ts | true | long | 消息生成时间，单位：毫秒. |  
+version | true | long | 版本 |  
+</tick> |  |  |  |  
 ts | true | long | 响应生成时间点，单位：毫秒 |  
   
 ### 备注
@@ -2496,10 +2502,20 @@ size | true | int | 获取交易记录的数量 | 1 | [1, 2000]
 
 参数名称 | 是否必须 | 数据类型 | 描述 | 取值范围  
 ---|---|---|---|---  
-ch | true | string | 数据所属的 channel，格式： market.\$symbol.trade.detail |  
-data | true | object | Trade 数据 |  
+ch | true | string | 数据所属的 channel，格式： market.$contract_code.trade.detail |  
+<data> | true | object array |  |  
+<data> | true | object array |  |  
+amount | true | decimal | 成交量(张)，买卖双边成交量之和 |  
+direction | true | string | 主动成交方向 |  
+id | true | long | 成交id |  
+price | true | decimal | 成交价格 |  
+ts | true | long | 成交时间 |  
+</data> |  |  |  |  
+id | true | long | 消息id |  
+ts | true | long | 最新成交时间 |  
+</data> |  |  |  |  
 status | true | string |  | "ok"，"error"  
-ts | true | int | 响应生成时间点，单位：毫秒 |  
+ts | true | long | 响应生成时间点，单位：毫秒 |  
   
 ## 查询合约风险准备金余额和预估分摊比例
 
@@ -2695,7 +2711,7 @@ amount_type | true | int | 计价单位 | 1:张，2:币
         "amount_type": 1,
         "ts": 1585551600000,
         "volume": "241915.0000000000000000"
-       }
+       },
        {
         "amount_type": 1,
         "ts": 1585382400000,
@@ -2930,21 +2946,21 @@ size | true | int | K线获取数量 | 150 | [1,2000]
   
 ### 返回参数：
 
-**参数名称** | **是否必须** | **类型** | **描述** | **默认值** | **取值范围**  
----|---|---|---|---|---  
-ch | true | string | 数据所属的 channel |  | 格式： market.period  
-<data> | true | object | 指数KLine 数据 |  |  
-| id | true | decimal | K线ID |  
-| vol | true | decimal | 成交量张数,值为0 |  
-| count | true | decimal | 成交笔数，值为0 |  
-| open | true | decimal | 开盘指数价 |  
-| close | true | decimal | 收盘指数价,当K线为最晚的一根时，是最新成交价 |  
-| low | true | decimal | 最低指数价 |  
-| high | true | decimal | 最高指数价 |  
-| amount | true | decimal | 成交量(币), 即 sum(每一笔成交量(张)*单张合约面值/该笔成交价)，值为0 |  
-</data> | true | object |  |  |  
-status | true | string | 请求处理结果 |  | "ok" , "error"  
-ts | true | long | 响应生成时间点 |  | 单位：毫秒  
+**参数名称** | **是否必须** | **类型** | **描述** | **取值范围**  
+---|---|---|---|---  
+ch | true | string | 数据所属的 channel | 格式： marke  
+<data> | true | object | 指数KLine 数据 |  
+id | true | decimal | K线ID |  
+vol | true | decimal | 成交量张数,值为0 |  
+count | true | decimal | 成交笔数，值为0 |  
+open | true | decimal | 开盘指数价 |  
+close | true | decimal | 收盘指数价,当K线为最晚的一根时，是最 |  
+low | true | decimal | 最低指数价 |  
+high | true | decimal | 最高指数价 |  
+amount | true | decimal | 成交量(币), 即 sum(每一笔成交量(张)* |  
+</data> | true | object |  |  
+status | true | string | 请求处理结果 | "ok" , "error  
+ts | true | long | 响应生成时间点 | 单位：毫秒  
   
   * 返回示例：
 
@@ -3265,6 +3281,15 @@ risk_rate | true | decimal | 保证金率 |
 
   * POST `api/v1/contract_sub_account_info`
 
+> Request:
+    
+    
+    {
+        "symbol":"BTC",
+        "sub_uid":123
+    }
+    
+
 ### 请求参数*
 
 参数名称 | 是否必须 | 类型 | 描述 | 默认值 | 取值范围  
@@ -3331,6 +3356,15 @@ margin_static | true | decimal | 静态权益 |
 
   * POST `api/v1/contract_sub_position_info`
 
+> Request:
+    
+    
+    {
+        "symbol":"BTC",
+        "sub_uid":123
+    }
+    
+
 ### 请求参数
 
 参数名称 | 是否必须 | 类型 | 描述 | 默认值 | 取值范围  
@@ -3395,6 +3429,18 @@ last_price | true | decimal | 最新价 |
 ## 查询用户财务记录
 
   * POST `api/v1/contract_financial_record`
+
+> Request:
+    
+    
+    {
+        "create_date":7,
+        "page_index":1,
+        "symbol":"btc",
+        "type":"3,4",
+        "page_size":20
+    }
+    
 
 ### 请求参数
 
@@ -3465,6 +3511,15 @@ total_size | true | int | 总条数 |
 ## 查询用户当前的下单量限制
 
   * POST `api/v1/contract_order_limit`
+
+> Request:
+    
+    
+    {
+        "symbol":"btc",
+        "order_price_type":"limit"
+    }
+    
 
 ### 请求参数
 
@@ -3872,8 +3927,9 @@ page_size | false | int | 不填默认20，不得多于50 | 20
             "sub_uid":123123123,      
             "sub_account_name":"bolin",       
             "transfer_type":34,              
-            "amount":1,                  
-            },...                        
+            "amount":1                  
+            },
+            ...                        
           ],
           "total_page":15,          
           "current_page":3,         
@@ -4068,6 +4124,23 @@ available_level_rate | true | string | 实际可用杠杆倍数，多个以英�
 
   * POST `api/v1/contract_order`
 
+> Request:
+    
+    
+    {
+        "client_order_id":11223344556677,
+        "contract_code":"btc200925",
+        "contract_type":"quarter",
+        "direction":"BUY",
+        "lever_rate":75,
+        "offset":"OPEN",
+        "order_price_type":"post_only",
+        "price":9988,
+        "symbol":"btc",
+        "volume":1
+    }
+    
+
 ### 请求参数
 
 参数名 | 参数类型 | 必填 | 描述  
@@ -4118,7 +4191,7 @@ Post only(也叫maker only订单，只下maker单)每个周期合约的开仓/�
           "data": {
                 "order_id": 633766664829804544,
                 "order_id_str": "633766664829804544",
-                "client_order_id": 1234
+                "client_order_id": 11223344556677
               },
           "ts": 158797866555
         }
@@ -4129,9 +4202,11 @@ Post only(也叫maker only订单，只下maker单)每个周期合约的开仓/�
 参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
 ---|---|---|---|---  
 status | true | string | 请求处理结果 | "ok" , "error"  
+<data> |  |  |  |  
 order_id | true | bigint | 订单ID |  
 order_id_str | true | string | String类型订单ID |  
 client_order_id | true | int | 用户下单时填写的客户端订单ID，没填则不返回 |  
+</data> |  |  |  |  
 ts | true | long | 响应生成时间点，单位：毫秒 |  
   
 ### 备注
@@ -4141,9 +4216,40 @@ bigint的包解析。
 
 ## 合约批量下单
 
-### 示例
-
   * POST `api/v1/contract_batchorder`
+
+> Request:
+    
+    
+    {
+        "list":[
+            {
+                "clientOrderId":11223344556688,
+                "contract_code":"btc200925",
+                "contract_type":"quarter",
+                "direction":"BUY",
+                "leverRate":75,
+                "offset":"OPEN",
+                "order_price_type":"post_only",
+                "price":9988,
+                "symbol":"btc",
+                "volume":1
+            },
+            {
+                "clientOrderId":11223344556699,
+                "contract_code":"btc200925",
+                "contract_type":"quarter",
+                "direction":"BUY",
+                "leverRate":75,
+                "offset":"OPEN",
+                "order_price_type":"post_only",
+                "price":9988,
+                "symbol":"btc",
+                "volume":1
+            }
+        ]
+    }
+    
 
 ### 请求参数
 
@@ -4249,6 +4355,16 @@ bigint的包解析。
 
   * POST `api/v1/contract_cancel`
 
+> Request:
+    
+    
+    {
+        "client_order_id":"11223344556688,11223344556699",
+        "order_id":"634696656176029696,634693443368525824",
+        "symbol":"btc"
+    }
+    
+
 ### 请求参数
 
 参数名称 | 是否必须 | 类型 | 描述  
@@ -4299,6 +4415,7 @@ err_code | true | int | 错误码 |
 err_msg | true | string | 错误信息 |  
 </list> |  |  |  |  
 successes | true | string | 撤销成功的订单的order_id或client_order_id列表 |  
+</dict> |  |  |  |  
 ts | true | long | 响应生成时间点，单位：毫秒 |  
   
 ## 全部撤单
@@ -4306,6 +4423,16 @@ ts | true | long | 响应生成时间点，单位：毫秒 |
 ### 示例
 
   * POST `api/v1/contract_cancelall`
+
+> Request:
+    
+    
+    {
+        "symbol":"btc",
+        "contract_code":"btc200925",
+        "contract_type":"quarter"
+    }
+    
 
 ### 请求参数
 
@@ -4350,12 +4477,14 @@ contract_type | false | string | 合约类型
 参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
 ---|---|---|---|---  
 status | true | string | 请求处理结果 | "ok" , "error"  
+<dict>(KEY名称: data) |  |  |  |  
 <list>(属性名称: errors) |  |  |  |  
 order_id | true | string | 订单id |  
 err_code | true | int | 订单失败错误码 |  
 err_msg | true | string | 订单失败信息 |  
 </list> |  |  |  |  
 successes | true | string | 成功的订单 |  
+</dict> |  |  |  |  
 ts | true | long | 响应生成时间点，单位：毫秒 |  
   
 ## 获取合约订单信息
@@ -4365,6 +4494,16 @@ ts | true | long | 响应生成时间点，单位：毫秒 |
   * POST `api/v1/contract_order_info`
 
 ### 请求参数
+
+> Request:
+    
+    
+    {
+        "client_order_id":"11223344556688,11223344556699",
+        "order_id":"634696656176029696,634693443368525824",
+        "symbol":"btc"
+    }
+    
 
 参数名称 | 是否必须 | 类型 | 描述  
 ---|---|---|---  
@@ -4462,6 +4601,19 @@ ts | true | long | 时间戳 |
 ### 示例
 
   * POST `api/v1/contract_order_detail`
+
+> Request:
+    
+    
+    {
+        "created_at":1593765713010,
+        "order_id":727181510507044864,
+        "order_type":1,
+        "page_index":1,
+        "page_size":20,
+        "symbol":"BTC"
+    }
+    
 
 ### 请求参数
 
@@ -4706,6 +4858,23 @@ ts | true | long | 时间戳 |
 
   * POST `api/v1/contract_hisorders`
 
+> Request:
+    
+    
+    {
+        "symbol": "BTC",
+        "trade_type": 0,
+        "type": 1,
+        "status": "0,3,4,5",
+        "create_date": 1,
+        "page_index": 1,
+        "page_size": 20,
+        "contract_code": "BTC180914",
+        "order_type": "limit"
+    }
+    
+    
+
 ### 请求参数
 
 参数名称 | 是否必须 | 类型 | 描述 | 默认值 | 取值范围  
@@ -4726,23 +4895,6 @@ order_type | false | string | 订单类型 |  |
 ### 备注
 
 历史委托查询接口查询撤单信息，只能查询最近24小时内的撤单信息。
-
-> Request:
-    
-    
-    {
-        "symbol": "BTC",
-        "trade_type": 0,
-        "type": 1,
-        "status": "0,3,4,5",
-        "create_date": 1,
-        "page_index": 1,
-        "page_size": 20,
-        "contract_code": "BTC180914",
-        "order_type": "limit"
-    }
-    
-    
 
 > Response:
     
@@ -4833,6 +4985,19 @@ bigint的包解析。
 ### 实例
 
   * POST `api/v1/contract_matchresults`
+
+> Request:
+    
+    
+    {
+        "symbol":"btc",
+        "trade_type":0,
+        "create_date":20,
+        "contract_code":"btc200925",
+        "page_index":1,
+        "page_size":20
+    }
+    
 
 ### 请求参数
 
@@ -5004,6 +5169,24 @@ client_order_id | false | long | 用户自己的订单id |
 
   * optimal_5：最优5档、optimal_10：最优10档、optimal_20：最优20档下单order_price价格参数不用传，"limit":限价需要传价格。
 
+> Request:
+    
+    
+     {
+         "contract_code":"btc200925",
+         "contract_type":"quarter",
+         "direction":"BUY",
+         "lever_rate":5,
+         "offset":"OPEN",
+         "order_price":10000,
+         "order_price_type":"limit",
+         "symbol":"btc",
+         "trigger_price":10000,
+         "trigger_type":"ge",
+         "volume":1
+     }
+    
+
 ### 请求参数
 
 参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
@@ -5106,12 +5289,14 @@ order_id | String | true | 用户订单ID（多个订单ID中间以","分隔,一
 参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
 ---|---|---|---|---  
 status | true | string | 请求处理结果 | "ok" , "error"  
+<data> |  |  |  |  
 <list>(属性名称: errors) |  |  |  |  
 order_id | true | String | 订单id |  
 err_code | true | int | 订单失败错误码 |  
 err_msg | true | string | 订单失败信息 |  
 </list> |  |  |  |  
 successes | true | string | 成功的订单 |  
+</data> |  |  |  |  
 ts | true | long | 响应生成时间点，单位：毫秒 |  
   
 > 错误的返回：
@@ -5177,12 +5362,14 @@ contract_type | String | false | 合约类型 当周:"this_week", 次周:"next_w
 参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
 ---|---|---|---|---  
 status | true | string | 请求处理结果 | "ok" , "error"  
+<data> |  |  |  |  
 <list>(属性名称: errors) |  |  |  |  
 order_id | true | String | 订单id |  
 err_code | true | int | 订单失败错误码 |  
 err_msg | true | string | 订单失败信息 |  
 </list> |  |  |  |  
 successes | true | string | 成功的订单 |  
+</data> |  |  |  |  
 ts | true | long | 响应生成时间点，单位：毫秒 |  
   
 > 错误的返回：
@@ -5608,9 +5795,9 @@ api接口response中的header返回以下字段
 `{"pong": 18212558000}`
 
 注：WebSocket Client 和 WebSocket Server 建立连接之后，WebSocket Server 每隔
-`5s`（这个频率可能会变化） 会向 WebSocket Client 发起一次心跳，WebSocket Client 忽略心跳2次后，WebSocket
-Server 将会主动断开连接；WebSocket Client发送最近2次心跳message中的其中一个`ping`的值，WebSocket
-Server都会保持WebSocket连接。
+`5s`（这个频率可能会变化） 会向 WebSocket Client 发起一次心跳，WebSocket Client 忽略心跳 5
+次后，WebSocket Server 将会主动断开连接；WebSocket
+Client发送最近2次心跳message中的其中一个`ping`的值，WebSocket Server都会保持WebSocket连接。
 
 ## 订单推送心跳
 
@@ -5638,7 +5825,7 @@ Server都会保持WebSocket连接。
 
   * "pong"操作返回数据里面的"ts"的值为"ping"推送收到的"ts"值
 
-  * WebSocket Client 和 WebSocket Server 建⽴立连接之后，WebSocket Server 每隔 5s(这个频率可能会变化) 会向 WebSocket Client 发起⼀一次⼼心跳，WebSocket Client 忽略心跳 3 次后，WebSocket Server 将会主动断开连接。
+  * WebSocket Client 和 WebSocket Server 建⽴立连接之后，WebSocket Server 每隔 5s(这个频率可能会变化) 会向 WebSocket Client 发起⼀一次⼼心跳，WebSocket Client 忽略心跳 5 次后，WebSocket Server 将会主动断开连接。
 
   * 异常情况WebSocket Server 会返回错误信息，比如：
 
