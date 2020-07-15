@@ -1947,7 +1947,7 @@ ts | true | long | 响应生成时间点，单位：毫秒 |
 ---|---|---|---  
 symbol | string | false | 支持大小写，"BTC","ETH"...  
 contract_type | string | false | 合约类型 (当周:"this_week", 次周:"next_week",
-当季:"quarter",次季:"contract_type")  
+当季:"quarter",次季:"next_quarter")  
 contract_code | string | false | BTC180914  
   
 > Response:
