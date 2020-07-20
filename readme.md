@@ -12634,7 +12634,7 @@ page_size | false | int | 每页条数，不填默认20 | 20 | 不得多于50
 
 参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
 ---|---|---|---|---  
-status | true | string | 请求处理结果 |  
+status  | true  | string  | 请求处理结果  |  
 <dict>(属性名称: data) |  |  |  |  
 <list>(属性名称: orders) |  |  |  |  
 order_id | true | long | 订单ID |  
@@ -12648,7 +12648,10 @@ volume | true | int | 委托数量 |
 price | true | decimal | 委托价格 |  
 create_date | true | long | 创建时间 |  
 order_source | true | string | 订单来源 |  
-order_price_type | true | int | 订单报价类型 | 1：限价单，3：对手价，4：闪电平仓，5：计划委托，6：post_only  
+order_price_type | true | int | 订单报价类型 |
+1：限价单（limit），2：市价单（market），3：对手价（opponent），4：闪电平仓（lightning），5：计划委托（trigger），6：post_only
+，7：最优5档（optimal_5） ，8：最优10档（optimal_10） ，9：最优20档（optimal_20），10：FOK ，11：IOC
+，12：对手价_IOC（opponent_ioc），13：闪电平仓_IOC（lightning_ioc），14：最优5档_IOC（optimal_5_ioc），15：最优10档_IOC（optimal_10_ioc），16：最优20档_IOC（optimal_20_ioc），17：对手价_FOK（opponent_fok），18：闪电平仓_FOK（lightning_fok），19：最优5档_FOK（optimal_5_fok），40：最优10档_FOK（optimal_10_fok），41：最优20档_FOK（optimal_20_fok）。  
 margin_frozen | true | decimal | 冻结保证金 |  
 profit | true | decimal | 收益 |  
 trade_volume | true | decimal | 成交数量 |  
@@ -14299,10 +14302,10 @@ ch | true | string | 数据所属的 channel，格式： market.$contract_code.t
 ts | true | long | 发送时间 |  
 <list>(属性名称: tick) |  |  |  |  
 id | true | long | ID |  
-ts | true | long | 发送时间 |  
+ts | true | long | tick数据戳 |  
 <list>(属性名称: data) |  |  |  |  
 amount | true | decimal | 数量（张） |  
-ts | true | long | 发送时间 |  
+ts | true | long | 订单时间戳 |  
 id | true | long | tick id |  
 price | true | decimal | 价格 |  
 direction | true | string | 买卖方向 |  
