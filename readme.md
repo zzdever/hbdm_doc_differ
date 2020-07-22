@@ -4829,6 +4829,7 @@ page_size | false | int |  |  | 不填默认20，不得多于50
 ---|---|---|---|---  
 status | true | string | 请求处理结果 |  
 <list>(属性名称: data) |  |  |  |  
+<orders> |  |  |  |  
 symbol | true | string | 品种代码 |  
 contract_type | true | string | 合约类型 | 当周:"this_week", 次周:"next_week",
 当季:"quarter",次季:"next_quarter"  
@@ -4854,10 +4855,11 @@ profit | true | decimal | 收益 |
 status | true | int | 订单状态 | (3未成交 4部分成交 5部分成交已撤单 6全部成交 7已撤单)  
 order_source | true | string | 订单来源 |  
 fee_asset | true | string | 手续费币种 | （"BTC","ETH"...）  
-</list> |  |  |  |  
+</orders> |  |  |  |  
 total_page | true | int | 总页数 |  
 current_page | true | int | 当前页 |  
 total_size | true | int | 总条数 |  
+</list> |  |  |  |  
 ts | true | long | 时间戳 |  
   
 ## 获取合约历史委托
@@ -4980,10 +4982,10 @@ order_type | true | int | 订单类型 | 1:报单 、 2:撤单 、 3:强平、4:
 fee_asset | true | string | 手续费币种 | （"BTC","ETH"...）  
 liquidation_type | true | string | 强平类型 0:非强平类型，1：多空轧差， 2:部分接管，3：全部接管 |  
 </list> |  |  |  |  
-</object> |  |  |  |  
 total_page | true | int | 总页数 |  
 current_page | true | int | 当前页 |  
 total_size | true | int | 总条数 |  
+</object> |  |  |  |  
 ts | true | long | 时间戳 |  
   
 ### 备注
