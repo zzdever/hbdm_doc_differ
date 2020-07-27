@@ -13847,9 +13847,14 @@ user-id | long | ⽤户 id
 
 `}`
 
-> 正确订阅请求参数的例子： ```json
-
-{ "sub": "market.BTC-USD.kline.1min", "id": "id1" } ```
+> 正确订阅请求参数的例子：
+    
+    
+     {
+        "sub": "market.BTC-USD.kline.1min",
+        "id": "id1"
+     }
+    
 
 > 订阅成功返回数据的例子:
     
