@@ -13103,7 +13103,7 @@ order_id | true | string | 划转订单ID |
     
     {
         "sub_uid": "123123123",
-        "contract_code": "BTC_USD",
+        "contract_code": "BTC-USD",
         "amount": "123",
         "type": "master_to_sub"
     }
@@ -13113,7 +13113,7 @@ order_id | true | string | 划转订单ID |
 
 参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
 ---|---|---|---|---  
-contract_code | true | string | 品种代码 | 支持大小写,"BTC_USD",...  
+contract_code | true | string | 品种代码 | 支持大小写,"BTC-USD",...  
 transfer_type | false | string | 划转类型，不填查询全部类型,【查询多类型中间用，隔开】 | 34:转出到子账号合约账户
 35:从子账号合约账户转入  
 create_date | true | int | 日期 | 可随意输入正整数，如果参数超过90则默认查询90天的数据  
@@ -13156,7 +13156,7 @@ ts | true | long | 响应生成时间点，单位：毫秒 |
 id | true | long | 划转订单ID |  
 ts | true | long | 创建时间 |  
 symbol | true | string | 品种 | "BTC","ETH"...  
-contract_code | true | string | 品种代码 | "BTC_USD",...  
+contract_code | true | string | 品种代码 | "BTC-USD",...  
 sub_uid | true | string | 子账户UID |  
 sub_account_name | true | string | 子账户登录名 |  
 transfer_type | true | int | 划转类型 | 从子账号合约账户转入：35，转出到子账号合约账户:34  
@@ -14103,18 +14103,18 @@ page_size | false | int | 不填默认20，不得多于50 | 20 |
             "total_size": 2,                                
             "trades": [{
                 "contract_code": "BTC-USD",
-          "create_date": 1555553626736,
+                "create_date": 1555553626736,
                 "direction": "sell",
                 "match_id": 3635853382,
-          "id": "1232-213123-1231",
+                "id": "1232-213123-1231",
                 "offset": "close",
                 "offset_profitloss": 0.15646398812252696,
                 "order_id": 1118,
                 "order_id_str": "88",
                 "symbol": "BTC",
-          "order_source": "android",
+                "order_source": "android",
                 "trade_fee": -0.002897500905469032,
-          "fee_asset": "BTC", 
+                "fee_asset": "BTC", 
                 "trade_price": 5.522,
                 "trade_turnover": 80,
                 "role": "maker",
@@ -16574,7 +16574,7 @@ contrac_code支持大小写，比如:BTC-USD
     
        {
         "op": "notify",
-        "topic": "orders.btc",
+        "topic": "orders.btc-usd",
         "ts": 1590475967607,
         "uid": "123456",
         "symbol": "BTC",
@@ -17039,7 +17039,7 @@ contract_code支持大小写; |
         "uid": "11434749",         //账户id
         "symbol": "BTC",         //品种
         "contract_code": "BTC-USD",     //合约代码
-        "status": 1    //订单状态(3未成交 4部分成交 5部分成交已撤单 6全部成交 7已撤单)
+        "status": 1,   //订单状态(3未成交 4部分成交 5部分成交已撤单 6全部成交 7已撤单)
         "order_id": 106837,     //订单ID       
         "order_id_str": "106837",     //订单ID ,字符串类型
         "client_order_id":"111",  //客户端订单ID
@@ -17052,7 +17052,7 @@ contract_code支持大小写; |
             "trade_volume":1,    //成交量
             "trade_price":123.4555,     //撮合价格
             "trade_turnover":34.123,     //成交金额 
-            "created_at": 1490759594752    //成交时间
+            "created_at": 1490759594752,   //成交时间
             "role": "maker"
           }]
     }
