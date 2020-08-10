@@ -1540,7 +1540,7 @@ later.”,”ts”: }
 
   * [Java sdk](https://github.com/huobiapi/Futures-Java-demo/tree/master/hbdm-java-sdk)
 
-**Rust异步库**
+**异步库**
 
   * [ Rust ](https://github.com/hbdmapi/huobi_future_async)
 
