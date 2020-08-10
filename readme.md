@@ -987,7 +987,7 @@ API Key 包括以下两部分
 
   * 行情类的公开接口，比如：获取K线数据、获取聚合行情、市场行情、获取市场最近成交记录：
 
-（1） restful接口：同一个IP, 1秒最多200个请求
+（1） restful接口：同一个IP, 1秒最多800个请求
 
 （2） websocket：req请求，同一时刻最多请求50次；sub请求，无限制，服务器主动推送数据
 
@@ -9341,7 +9341,7 @@ api/v1/swap_order?AccessKeyId=e2xxxxxx-99xxxxxx-84xxxxxx-7xxxx&SignatureMethod=H
 
   * 行情类的公开接口，比如：获取K线数据、获取聚合行情、市场行情、获取市场最近成交记录：
 
-（1） restful接口：同一个IP, 1秒最多200个请求
+（1） restful接口：同一个IP, 1秒最多800个请求
 
 （2） websocket：req请求，同一时刻最多请求50次；sub请求，无限制，服务器主动推送数据
 
