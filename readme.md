@@ -175,7 +175,7 @@ shell
 
 欢迎有优秀 maker 策略交易量大的用户参与长期合约做市商项目。如果您的火币交割合约账户中有折合大于 5 BTC 资产，或火币永续合约账户中有折合大于 3
 BTC 资产，请提供以下信息到 [[email protected]](/cdn-cgi/l/email-
-protection)（做市商项目不支持点卡抵扣、VIP、交易量相关活动以及任何形式的返佣活动）:
+protection).com（做市商项目不支持点卡抵扣、VIP、交易量相关活动以及任何形式的返佣活动）:
 
   1. 提供火币UID （需不存在返佣关系的 UID）；
   2. 提供其他交易平台 maker 交易量截图证明（比如30天内成交量，或者 VIP 等级等）；
@@ -10443,7 +10443,7 @@ step13、step15 | 10
 contract_code | true | string | 合约代码 | 仅支持大写， "BTC-USD" ... |  
 period | true | string | K线类型 |  | 1min, 5min, 15min, 30min, 60min,4hour,1day,
 1mon  
-size | true | integer | 获取数量 | 150 | [1,2000]  
+size | false | integer | 获取数量 | 150 | [1,2000]  
 from | false | integer | 开始时间戳 10位 单位S |  |  
 to | false | integer | 结束时间戳 10位 单位S |  |  
   
