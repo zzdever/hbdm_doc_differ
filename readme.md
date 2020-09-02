@@ -12565,17 +12565,6 @@ order_id | true | string | 划转订单ID |
 
   * post `/swap-api/v1/swap_master_sub_transfer_record`
 
-> Request:
-    
-    
-    {
-        "sub_uid": "123123123",
-        "contract_code": "BTC-USD",
-        "amount": "123",
-        "type": "master_to_sub"
-    }
-    
-
 ### 请求参数
 
 参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
@@ -15601,10 +15590,10 @@ basis_price_type | false | string | 基差价格类型，表示在周期内计�
 ch | string | 数据所属的 channel，格式： market.period |  |  
 <tick> | object array |  |  |  
 id | long | 唯一标识 |  |  
-contract_price | decimal | 合约基准价，与基差价格类型匹配 |  |  
-index_price | decimal | 指数基准价，与基差价格类型匹配 |  |  
-basis | decimal | 基差=合约基准价 - 指数基准价 |  |  
-basis_rate | decimal | 基差率=基差/指数基准价 |  |  
+contract_price | String | 合约基准价，与基差价格类型匹配 |  |  
+index_price | String | 指数基准价，与基差价格类型匹配 |  |  
+basis | String | 基差=合约基准价 - 指数基准价 |  |  
+basis_rate | String | 基差率=基差/指数基准价 |  |  
 </tick> |  |  |  |  
 ts | number | 响应生成时间点，单位：毫秒 |  |  
   
@@ -15693,10 +15682,10 @@ wsid | true | long | wsid |
 ts | true | number | 响应生成时间点，单位：毫秒 |  
 <data> | object array |  |  |  
 id | long | 唯一标识 |  |  
-contract_price | decimal | 合约基准价，与基差价格类型匹配 |  |  
-index_price | decimal | 指数基准价，与基差价格类型匹配 |  |  
-basis | decimal | 基差=合约基准价 - 指数基准价 |  |  
-basis_rate | decimal | 基差率=基差/指数基准价 |  |  
+contract_price | String | 合约基准价，与基差价格类型匹配 |  |  
+index_price | String | 指数基准价，与基差价格类型匹配 |  |  
+basis | String | 基差=合约基准价 - 指数基准价 |  |  
+basis_rate | String | 基差率=基差/指数基准价 |  |  
 </data> |  |  |  |  
   
 # WebSocket订单和用户数据接口
