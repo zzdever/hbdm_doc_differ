@@ -44,6 +44,7 @@ shell
     * 撤单率限制
     * 获取当前系统状态
     * 查询系统是否可用
+    * 获取当前系统时间戳
     * 错误码详情
     * 常见错误FAQ
     * API 最佳实践
@@ -798,6 +799,7 @@ WebSocket私有订单成交推送接口(需要API KEY验签)
 读取 | 基础信息接口 | api/v1/contract_open_interest | GET | 获取当前可用合约总持仓量 | 否  
 读取 | 基础信息接口 | api/v1/contract_delivery_price | GET | 获取预估交割价 | 否  
 读取 | 基础信息接口 | https://api.hbdm.com/heartbeat/ | GET | 查询系统是否可用 | 否  
+读取 | 基础信息接口 | https://api.hbdm.com//api/v1/timestamp | GET | 获取当前系统时间戳 | 否  
 读取 | 基础信息接口 | api/v1/contract_api_state | GET | 查询系统状态 | 否  
 读取 | 市场行情接口 | /market/depth | GET | 获取行情深度数据 | 否  
 读取 | 市场行情接口 | /market/history/kline | GET | 获取K线数据 | 否  
@@ -1271,6 +1273,35 @@ Maintenance
       }
     
     
+
+## 获取当前系统时间戳
+
+get `https://api.hbdm.com/api/v1/timestamp`
+
+### 请求参数
+
+无
+
+> 返回数据
+    
+    
+    {
+        "status": "ok",
+        "ts": 1578124684692
+    }
+    
+    
+
+### 返回参数
+
+参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
+---|---|---|---|---  
+status | true | string | 请求处理结果 |  
+ts | true | long | 当前系统时间戳 |  
+  
+#### 备注
+
+  * 可以用于校对系统时间。
 
 ## 错误码详情
 
@@ -8665,6 +8696,7 @@ shell
     * 撤单率限制
     * 获取当前系统状态
     * 查询系统是否可用
+    * 获取当前系统时间戳
     * 错误码详情
     * 常见错误FAQ
     * API 最佳实践
@@ -9211,6 +9243,7 @@ IOC下单），lightning_fok（闪电平仓-FOK下单），lightning(闪电平�
 获取实时预测资金费率的K线数据 | 否  
 读取 | 市场行情接口 | /index/market/history/swap_basis | GET | 获取基差数据 | 否  
 读取 | 市场行情接口 | /heartbeat | GET | 查询系统是否可用 | 否  
+读取 | 市场行情接口 | /api/v1/timestamp | GET | 获取当前系统时间戳 | 否  
 读取 | 账户接口 | swap-api/v1/swap_account_info | POST | 获取用户账户信息 | 是  
 读取 | 账户接口 | swap-api/v1/swap_position_info | POST | 获取用户持仓信息 | 是  
 读取 | 账户接口 | swap-api/v1/swap_sub_account_list | POST | 查询母账户下所有子账户资产信息 | 是  
@@ -9667,6 +9700,35 @@ Maintenance
       }
     
     
+
+## 获取当前系统时间戳
+
+get `https://api.hbdm.com/api/v1/timestamp`
+
+### 请求参数
+
+无
+
+> 返回数据
+    
+    
+    {
+        "status": "ok",
+        "ts": 1578124684692
+    }
+    
+    
+
+### 返回参数
+
+参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
+---|---|---|---|---  
+status | true | string | 请求处理结果 |  
+ts | true | long | 当前系统时间戳 |  
+  
+#### 备注
+
+  * 可以用于校对系统时间。
 
 ## 错误码详情
 
