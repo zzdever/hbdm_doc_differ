@@ -1154,8 +1154,7 @@ dm.huobigroup.com/)进入页面进行订阅。当前订阅依赖Google服务，�
                         "group_id": null,
                         "page_id": "p0qjfl24znv5",
                         "group": false,
-                        "only_show_if_degraded": false
-                    }
+                        "only_show_if_degraded": false                }
                 ]
             }
         ],
@@ -2347,7 +2346,7 @@ ts | true | long | 响应生成时间点，单位：毫秒 |
 
 **参数名称** | **类型** | **描述** |  
 ---|---|---|---  
-id | int | 指数K线id,也就是K线时间戳，K线起始时间 |  
+id | int | K线id,也就是K线时间戳，K线起始时间 |  
 vol | decimal | 成交量张数 |  
 count | decimal | 成交笔数 |  
 open | decimal | 开盘价 |  
@@ -2428,7 +2427,7 @@ ts | true | long | 响应生成时间点，单位：毫秒 |
 
 **参数名称** | **类型** | **描述** |  
 ---|---|---|---  
-id | int | 指数K线id,也就是K线时间戳 |  
+id | int | K线id,也就是K线时间戳 |  
 vol | string | 成交量张数 |  
 count | decimal | 成交笔数 |  
 open | string | 开盘价 |  
@@ -3060,7 +3059,7 @@ size | true | int | K线获取数量 | 150 | [1,2000]
 ---|---|---|---|---  
 ch | true | string | 数据所属的 channel | 格式： market.period  
 <data> | true | object | 指数KLine 数据 |  
-id | true | decimal | K线ID |  
+id | true | decimal | 指数K线id,也就是K线时间戳，K线起始时间 |  
 vol | true | decimal | 成交量张数,值为0 |  
 count | true | decimal | 成交笔数，值为0 |  
 open | true | decimal | 开盘指数价 |  
@@ -6303,7 +6302,7 @@ period | true | string | K线周期 |  | 仅支持小写，1min, 5min, 15min, 30
 ch | true | string | 请求参数  
 ts | true | long | 响应生成时间点，单位：毫秒  
 <tick> |  |  |  
-id | true | long | ID,也是K线时间戳  
+id | true | long | K线id,也就是K线时间戳，K线起始时间  
 mrid | true | long | 订单ID  
 vol | true | decimal | 成交量张数  
 count | true | decimal | 成交笔数  
@@ -6416,7 +6415,7 @@ status | true | string | 状态
 id | true | string | 请求id  
 wsid | true | long | wsid  
 <data> |  |  |  
-id | true | long | ID  
+id | true | long | K线id,也就是K线时间戳，K线起始时间  
 vol | true | decimal | 成交量张数  
 count | true | decimal | 成交笔数  
 open | true | decimal | 开盘价  
@@ -7274,7 +7273,7 @@ tick | object array | tick返回，详情：推送tick参数 |  |
 
 **参数名称** | **类型** | **描述** |  
 ---|---|---|---  
-id | string | 指数K线id,也就是K线时间戳 |  
+id | string | 指数K线id,也就是K线时间戳，K线起始时间 |  
 vol | string | 成交量张数为0 |  
 count | decimal | 成交笔数为0 |  
 open | string | 开盘指数价 |  
@@ -7374,7 +7373,7 @@ tick | object array | tick返回，详情：推送tick参数 |  |
 
 **参数名称** | **类型** | **描述** |  
 ---|---|---|---  
-id | decimal | 指数K线id,也就是K线时间戳 |  
+id | decimal | 指数K线id,也就是K线时间戳，K线起始时间 |  
 vol | decimal | 成交量张数为0 |  
 count | decimal | 成交笔数为0 |  
 open | decimal | 开盘指数价 |  
