@@ -10708,7 +10708,7 @@ ch | true | string | 数据所属的 channel，格式： market.\$contract_code.
 status | true | string | 请求处理结果 | "ok" , "error"  
 ts | true | long | 响应生成时间点，单位：毫秒 |  
 <dict>(属性名称: tick) |  |  | 24小时成交量、开盘价和收盘价 |  
-id | true | long | ID |  
+id | true | long | K线ID,也就是K线时间戳 |  
 vol | true | string | 成交量张数 |  
 count | true | int | 成交笔数 |  
 open | true | string | 开盘价 |  
@@ -11560,7 +11560,7 @@ size | true | int | K线获取数量 | [1,2000] （最多2000）
 ---|---|---|---|---|---  
 ch | true | string | 数据所属的 channel，格式： market.period |  |  
 <data> | true | object array |  |  |  
-id | true | long | k线id |  |  
+id | true | long | 指数K线ID,也就是K线时间戳，K线起始时间 |  |  
 vol | true | string | 成交量(张)，数值为0 |  |  
 count | true | string | 成交笔数，数值为0 |  |  
 open | true | string | 开盘值（溢价指数） |  |  
@@ -14580,7 +14580,7 @@ period | true | String | K线周期 |  | 仅支持小写：1min, 5min, 15min, 30
 ch | true | string | 请求参数  
 ts | true | long | 响应生成时间点，单位：毫秒  
 <list>(属性名称: tick) |  |  |  
-id | true | long | ID,K线时间戳  
+id | true | long | K线id,也就是K线时间戳，K线起始时间  
 mrid | true | long | 订单ID  
 vol | true | decimal | 成交量张数  
 count | true | decimal | 成交笔数  
@@ -14691,7 +14691,7 @@ status | true | string | 状态
 id | true | string | 请求id  
 wsid | true | long | wsid  
 <list>(属性名称: data) |  |  |  
-id | true | long | ID  
+id | true | long | K线id,也就是K线时间戳，K线起始时间  
 vol | true | decimal | 成交量张数  
 count | true | decimal | 成交笔数  
 open | true | decimal | 开盘价  
@@ -15316,7 +15316,7 @@ period | true | string | K线类型 |  | 1min, 5min, 15min, 30min, 60min,4hour,1
 ---|---|---|---|---|---  
 ch | true | string | 数据所属的 channel，格式： market.period |  |  
 <tick> | true | object array |  |  |  
-id | true | long | k线id |  |  
+id | true | long | 指数K线id,也就是K线时间戳，K线起始时间 |  |  
 vol | true | string | 成交量(张)，数值为0 |  |  
 count | true | string | 成交笔数，数值为0 |  |  
 open | true | string | 开盘值（溢价指数） |  |  
@@ -15415,7 +15415,7 @@ id | true | string | 业务方id |  |
 wsid | true | long | wsid |  |  
 ts | true | number | 响应生成时间点，单位：毫秒 |  |  
 <data> | true | object array |  |  |  
-id | true | long | k线id |  |  
+id | true | long | 指数K线id,也就是K线时间戳，K线起始时间 |  |  
 vol | true | string | 成交量(张)，数值为0 |  |  
 count | true | string | 成交笔数，数值为0 |  |  
 open | true | string | 开盘值（溢价指数） |  |  
