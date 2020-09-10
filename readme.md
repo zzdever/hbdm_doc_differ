@@ -983,7 +983,7 @@ API Key 包括以下两部分
 
   * 公开行情接口和用户私有接口都有访问次数限制
 
-  * 普通用户，需要密钥的私有接口，每个UID 3秒最多48次请求(交易接口3秒最多24次请求，查询接口3秒最多24次请求) (该UID的所有币种和不同到期日的合约的所有私有接口共享该限制) [查看API接口类型列表(其中读取即查询,交易即交易)](https://huobiapi.github.io/docs/dm/v1/cn/#ab0b26742c)
+  * 普通用户，需要密钥的私有接口，每个UID 3秒最多48次请求(交易接口3秒最多24次请求，查询接口3秒最多24次请求) (该UID的所有币种和不同到期日的合约的所有私有接口共享该限制) [查看API接口类型列表(其中读取即查询,交易即交易)](https://docs.huobigroup.com/docs/dm/v1/cn/#ab0b26742c)
 
   * 其他非行情类的公开接口，比如获取指数信息，限价信息，交割结算、平台持仓信息等，所有用户都是每个IP3秒最多120次请求（所有该IP的非行情类的公开接口请求共享3秒120次的额度）
 
@@ -999,7 +999,7 @@ API Key 包括以下两部分
 
 注意: 订单推送WS的限频，跟用户RESTFUL私有接口的限频是分开的，相互不影响。
 
-  * 查询与交易API接口返回的header中会有限频信息。比如：查询订单信息接口(/api/v1/contract_order_info)，返回的header中的ratelimit-limit即查询接口的总限制频率次数，ratelimit-remaining即查询接口的剩余总限制频率次数。下单接口(/api/v1/contract_order)，返回的header中的ratelimit-limit即交易接口的总限制频率次数，ratelimit-remaining即交易接口的剩余总限制频率次数。[查看API接口类型列表(其中读取即查询,交易即交易)](https://huobiapi.github.io/docs/dm/v1/cn/#ab0b26742c)
+  * 查询与交易API接口返回的header中会有限频信息。比如：查询订单信息接口(/api/v1/contract_order_info)，返回的header中的ratelimit-limit即查询接口的总限制频率次数，ratelimit-remaining即查询接口的剩余总限制频率次数。下单接口(/api/v1/contract_order)，返回的header中的ratelimit-limit即交易接口的总限制频率次数，ratelimit-remaining即交易接口的剩余总限制频率次数。[查看API接口类型列表(其中读取即查询,交易即交易)](https://docs.huobigroup.com/docs/dm/v1/cn/#ab0b26742c)
 
 将在api接口response中的header返回以下字段：
 
@@ -1600,7 +1600,7 @@ later.”,”ts”: }
 ### Q3: 为什么WebSocket总是断开连接？
 
 由于网络环境不同，很容易导致websocket断开连接(websocket: close 1006 (abnormal
-closure))，目前最佳实践是建议您将服务器放置在AWS东京A区，并且使用api.hbdm.vn域名；同时需要做好断连重连操作；行情心跳与订单心跳均需要按照《Websocket心跳以及鉴权接口》的行情心跳与订单心跳回复不同格式的Pong消息：[这里](https://huobiapi.github.io/docs/coin_margined_swap/v1/cn/#472585d15d)。以上操作可以有效减少断连情况。
+closure))，目前最佳实践是建议您将服务器放置在AWS东京A区，并且使用api.hbdm.vn域名；同时需要做好断连重连操作；行情心跳与订单心跳均需要按照《Websocket心跳以及鉴权接口》的行情心跳与订单心跳回复不同格式的Pong消息：[这里](https://docs.huobigroup.com/docs/coin_margined_swap/v1/cn/#472585d15d)。以上操作可以有效减少断连情况。
 
 ### Q4: api.hbdm.com与api.hbdm.vn有什么区别？
 
@@ -1617,8 +1617,10 @@ colo相当于是 创建一个VPC节点，直接连了火币合约的内网，会
 ### Q6: 为什么签名认证总返回失败(403:Verification failure [校验失败]) ？
 
 永续签名过程和交割签名过程类似，除了参考以下注意事项外，请参照永续或者交割的demo代码来验证签名是否成功，demo代码验证通过后，再去核对您自己的签名代码。永续的demo代码在
-[这里 ](https://huobiapi.github.io/docs/coin_margined_swap/v1/cn/#2cff7db524)
-查看。交割的demo代码在[这里](https://huobiapi.github.io/docs/dm/v1/cn/#2cff7db524)查看。
+[ 这里 ](https://docs.huobigroup.com/docs/coin_margined_swap/v1/cn/#2cff7db524)
+查看。交割的demo代码在[ 这里](https://docs.huobigroup.com/docs/dm/v1/cn/#2cff7db524)
+查看。期权的demo代码在[ 这里](https://docs.huobigroup.com/docs/option/v1/cn/#2cff7db524)
+查看。
 
   1. 检查 API Key 是否有效，是否复制正确
 
@@ -4396,7 +4398,7 @@ Post only(也叫maker only订单，只下maker单)每个周期合约的开仓/�
 ---|---|---|---|---  
 status | true | string | 请求处理结果 | "ok" , "error"  
 <data> |  |  |  |  
-order_id | true | bigint | 订单ID |  
+order_id | true | long | 订单ID |  
 order_id_str | true | string | String类型订单ID |  
 client_order_id | true | int | 用户下单时填写的客户端订单ID，没填则不返回 |  
 </data> |  |  |  |  
@@ -4531,7 +4533,7 @@ err_msg | true | string | 错误信息 |
 </list> |  |  |  |  
 <list>(属性名称: success) |  |  |  |  
 index | true | int | 订单索引 |  
-order_id | true | bigint | 订单ID |  
+order_id | true | long | 订单ID |  
 order_id_str | true | string | 订单ID |  
 client_order_id | true | long | 用户下单时填写的客户端订单ID，没填则不返回 |  
 </list> |  |  |  |  
@@ -4744,7 +4746,7 @@ client_order_id，24小时有效，超过24小时的订单根据client_order_id�
       "trade_turnover": 0,
       "trade_volume": 0,
       "volume": 1,
-      "liquidation_type":1
+      "liquidation_type":"1"
      }],
      "status": "ok",
      "ts": 1585563190031
@@ -4814,7 +4816,7 @@ ts | true | long | 时间戳 |
 参数名称 | 是否必须 | 类型 | 描述  
 ---|---|---|---  
 symbol | true | string | 支持大小写,"BTC","ETH"...  
-order_id | true | bigint | 订单id  
+order_id | true | long | 订单id  
 created_at | false | long | 下单时间戳  
 order_type | false | int | 订单类型，1:报单 、 2:撤单 、 3:强平、4:交割  
 page_index | false | int | 第几页,不填第一页  
@@ -5028,7 +5030,7 @@ order_type | true | int | 订单类型，1:报单 、 2:撤单 、 3:强平、4:
 direction | true | string | "buy":买 "sell":卖 |  
 offset | true | string | "open":开 "close":平 |  
 lever_rate | true | int | 杠杆倍数 | 1\5\10\20  
-order_id | true | bigint | 订单ID |  
+order_id | true | long | 订单ID |  
 order_id_str | true | string | String订单ID |  
 client_order_id | true | long | 客户订单ID |  
 created_at | true | long | 订单创建时间 |  
@@ -5140,7 +5142,7 @@ order_type | false | string | 订单类型 |  |
 status  | true  | string | 请求处理结果  |  
 <object>(属性名称: data) |  |  |  |  
 <list>(属性名称: orders) |  |  |  |  
-order_id | true | bigint | 订单ID |  
+order_id | true | long | 订单ID |  
 order_id_str | true | string | String类型订单ID |  
 symbol | true | string | 品种代码 |  
 contract_type | true | string | 合约类型 | 当周:"this_week", 次周:"next_week",
@@ -5258,7 +5260,7 @@ id | true | string | 全局唯一的交易标识 |
 match_id | true | long | 撮合结果id,
 与订单ws推送orders.$symbol以及撮合订单ws推送matchOrders.$symbol推送结果中的trade_id是相同的，非唯一，可重复，注意：一个撮合结果代表一个taker单和N个maker单的成交记录的集合，如果一个taker单吃了N个maker单，那这N笔trade都是一样的撮合结果id
 |  
-order_id | true | bigint | 订单ID |  
+order_id | true | long | 订单ID |  
 order_id_str | true | string | String类型订单ID |  
 symbol | true | string | 品种代码 |  
 order_source | true | string | 订单来源 |  
@@ -5396,7 +5398,7 @@ contract_code | false | String | 合约代码 | BTC190903
 trigger_type | true | String | 触发类型： ge大于等于(触发价比最新价大)；le小于(触发价比最新价小) |  
 trigger_price | true | Decimal | 触发价，精度超过最小变动单位会报错 |  
 order_price | true | Decimal | 委托价，精度超过最小变动单位会报错 |  
-order_price_type | false |  | 委托类型： 不填默认为limit; 限价：limit
+order_price_type | false | string | 委托类型： 不填默认为limit; 限价：limit
 ，最优5档：optimal_5，最优10档：optimal_10，最优20档：optimal_20 |  
 volume | true | int | 委托数量(张) |  
 direction | true | String | buy:买 sell:卖 |  
@@ -5423,8 +5425,8 @@ lever_rate | true | int | 杠杆倍数[开仓若有10倍多单，就不能再下
 属性 | 数据类型 | 是否必填 | 说明  
 ---|---|---|---  
 status | string | true | 响应状态: ok,error  
-err-code | int | false | 错误码  
-err-msg | string | false | 错误信息  
+err_code | int | false | 错误码  
+err_msg | string | false | 错误信息  
 data | List | false | 返回数据-泛型，支持各种返回的数据格式类型  
 ts | long | true | 时间戳  
   
@@ -5931,7 +5933,7 @@ contracts trading |
 读取 | 资产接口 | accounts.$symbol | sub | 订阅某个品种下的资产变动信息 | 是  
 读取 | 资产接口 | positions.$symbol | sub | 订阅某个品种下的持仓变动信息 | 是  
 读取 | 交易接口 | trigger_order.$symbol | sub | 订阅计划委托订单更新 | 是  
-读取 | 交易接口 | liquidationOrders.$symbol | sub | 订阅某个品种下的强平订单信息 | 是  
+读取 | 交易接口 | public.$symbol.liquidation_orders | sub | 订阅某个品种下的强平订单信息 | 是  
   
 ## 合约订阅地址
 
@@ -7070,7 +7072,7 @@ rep | true | string | 数据所属的 channel，格式： market.$symbol.trade.d
 status | true | string | 返回状态 |  
 id | true | string | ID |  
 <data> |  |  |  |  
-id | true | string | ID |  
+id | true | long | ID |  
 price | true | string | 价格 |  
 amount | true | string | 成交量(张)，买卖双边成交量之和 |  
 direction | true | string | 主动成交方向 |  
@@ -7135,10 +7137,6 @@ id | false | string | 业务方自主生成的id |
 symbol | true | string | 交易对 |  | 支持大小写，
 交易对,"BTC_CW"表示BTC当周合约，"BTC_NW"表示BTC次周合约，"BTC_CQ"表示BTC当季合约, "BTC_NQ"表示次季度合约"  
   
-### 备注
-
-  * 仅能获取最近 300 个 Trade Detail 数据。
-
 > 之后每当 Trade Detail 有更新时，client 会收到数据，例子：
     
     
@@ -7266,7 +7264,7 @@ period | true | string | K线类型 |  | 仅支持小写,1min, 5min, 15min, 30mi
 **参数名称** | **类型** | **描述** | **默认值** | **取值范围**  
 ---|---|---|---|---  
 ch | string | 数据所属的 channel，格式： market.period |  |  
-ts | number | 响应生成时间点，单位：毫秒 |  |  
+ts | long | 响应生成时间点，单位：毫秒 |  |  
 tick | object array | tick返回，详情：推送tick参数 |  |  
   
 ### 推送tick参数
@@ -7366,7 +7364,7 @@ req | true | string | 数据所属的 channel，格式： market.basis |
 status | true | string | 请求处理结果 | "ok" , "error"  
 id | true | string | 业务方id |  
 wsid | true | long | wsid |  
-ts | true | number | 响应生成时间点，单位：毫秒 |  
+ts | true | long | 响应生成时间点，单位：毫秒 |  
 tick | object array | tick返回，详情：推送tick参数 |  |  
   
 ### 推送tick参数
@@ -7447,7 +7445,7 @@ basis_price_type | false | string | 基差价格类型，表示在周期内计�
 ---|---|---|---|---|---  
 ch | true | string | 数据所属的 channel，格式： market.period |  |  
 tick | true | object array | tick返回，详情：tick参数说明 |  |  
-ts | true | number | 响应生成时间点，单位：毫秒 |  |  
+ts | true | long | 响应生成时间点，单位：毫秒 |  |  
   
 #### tick参数说明
 
@@ -7548,7 +7546,7 @@ req | true | string | 数据所属的 channel，格式： market.period |  |
 status | true | string | 请求处理结果 | "ok" , "error" |  
 id | true | string | 业务方id |  |  
 wsid | true | long | wsid |  |  
-ts | true | number | 响应生成时间点，单位：毫秒 |  |  
+ts | true | long | 响应生成时间点，单位：毫秒 |  |  
 data | true | object array | data返回，详情：data参数描述 |  |  
   
 ### data参数描述
@@ -7642,7 +7640,8 @@ topic | string | 必填；订阅主题名称，orders.$symbol;symbol支持大小
             "trade_fee": 0.234,
             "trade_turnover": 34.123,
             "created_at": 1490759594752,
-            "role": "maker"
+            "role": "maker",
+            "fee_asset": "BTC"
         }]
     }
     
@@ -7830,7 +7829,7 @@ symbol | string | 品种ID
 contract_type | string | 合约类型  
 contract_code | string | 合约代码  
 status | int | 订单状态(1准备提交 2准备提交 3已提交 4部分成交 5部分成交已撤单 6全部成交 7已撤单)  
-order_id | bigint | 订单ID  
+order_id | long | 订单ID  
 order_id_str | string | 订单ID  
 client_order_id | long | 客户端订单ID  
 order_type | int | 订单类型 1:报单 、 2:撤单 、 3:强平、4:交割  
@@ -8301,11 +8300,11 @@ ts | long | 必填;响应生成时间点，单位：毫秒
 
 订阅(sub) | 取消订阅(unsub) | 规则  
 ---|---|---  
-public.*.liquidationOrders | public.*.liquidationOrders | 允许  
-public.$symbol.liquidationOrders | public.*.liquidationOrders | 允许  
-public.symbol1.liquidationOrders | public.symbol1.liquidationOrders | 允许  
-public.symbol1.liquidationOrders | public.symbol2.liquidationOrders | 不允许  
-public.*.liquidationOrders | public.symbol1.liquidationOrders | 不允许  
+public.*.liquidation_orders | public.*.liquidation_orders | 允许  
+public.$symbol.liquidation_orders | public.*.liquidation_orders | 允许  
+public.symbol1.liquidation_orders | public.symbol1.liquidation_orders | 允许  
+public.symbol1.liquidation_orders | public.symbol2.liquidation_orders | 不允许  
+public.*.liquidation_orders | public.symbol1.liquidation_orders | 不允许  
   
 ## 订阅合约信息变动(免鉴权)（sub）
 
@@ -8495,7 +8494,7 @@ topic | true | string | 订阅主题名称，必填 (trigger_order.$symbol)
     
     
     {
-         "op": "notify",           
+        "op": "notify",           
         "topic": "trigger_order.EOS",
         "ts": 1489474082831,
         "uid": "157959",
@@ -9192,7 +9191,7 @@ IOC下单），lightning_fok（闪电平仓-FOK下单），lightning(闪电平�
 
   * 接口名称：WS订阅订单成交推送
   * 接口类型：私有接口
-  * 接口URL：orders.$symbol
+  * 接口URL：orders.$contract_code
 
 ### 13、增加母子账户划转的API接口，母账户与每个子账户相互划转限频10次/分钟。
 
@@ -10011,7 +10010,7 @@ later.”,”ts”: }
 ### Q3: 为什么WebSocket总是断开连接？
 
 由于网络环境不同，很容易导致websocket断开连接(websocket: close 1006 (abnormal
-closure))，目前最佳实践是建议您将服务器放置在AWS东京A区，并且使用api.hbdm.vn域名；同时需要做好断连重连操作；行情心跳与订单心跳均需要按照《Websocket心跳以及鉴权接口》的行情心跳与订单心跳回复不同格式的Pong消息：[这里](https://huobiapi.github.io/docs/coin_margined_swap/v1/cn/#472585d15d)。以上操作可以有效减少断连情况。
+closure))，目前最佳实践是建议您将服务器放置在AWS东京A区，并且使用api.hbdm.vn域名；同时需要做好断连重连操作；行情心跳与订单心跳均需要按照《Websocket心跳以及鉴权接口》的行情心跳与订单心跳回复不同格式的Pong消息：[这里](https://docs.huobigroup.com/docs/coin_margined_swap/v1/cn/#472585d15d)。以上操作可以有效减少断连情况。
 
 ### Q4: api.hbdm.com与api.hbdm.vn有什么区别？
 
@@ -10028,8 +10027,10 @@ colo相当于是 创建一个VPC节点，直接连了火币合约的内网，会
 ### Q6: 为什么签名认证总返回失败(403:Verification failure [校验失败]) ？
 
 永续签名过程和交割签名过程类似，除了参考以下注意事项外，请参照永续或者交割的demo代码来验证签名是否成功，demo代码验证通过后，再去核对您自己的签名代码。永续的demo代码在
-[这里 ](https://huobiapi.github.io/docs/coin_margined_swap/v1/cn/#2cff7db524)
-查看。交割的demo代码在[这里](https://huobiapi.github.io/docs/dm/v1/cn/#2cff7db524)查看。
+[ 这里 ](https://docs.huobigroup.com/docs/coin_margined_swap/v1/cn/#2cff7db524)
+查看。交割的demo代码在[ 这里](https://docs.huobigroup.com/docs/dm/v1/cn/#2cff7db524)
+查看。期权的demo代码在[ 这里](https://docs.huobigroup.com/docs/option/v1/cn/#2cff7db524)
+查看。
 
   1. 检查 API Key 是否有效，是否复制正确
 
@@ -10789,11 +10790,15 @@ ch | true | string | 数据所属的 channel，格式： market.\$contract_code.
 status | true | string |  |  | "ok","error"  
 ts | true | long | 发送时间 |  |  
 <list>(属性名称: tick) |  |  | Trade数据 |  |  
+<data> |  |  |  |  |  
 id | true | long | ID |  |  
 price | true | string | 价格 |  |  
 amount | true | string | 数量（张） |  |  
 direction | true | string | 买卖方向 |  |  
 ts | true | long | 订单成交时间 |  |  
+</data> |  |  |  |  |  
+id | true | long | ID |  |  
+ts | true | long | 最新成交时间 |  |  
 </list> |  |  |  |  |  
   
 ## 批量获取最近的交易记录
@@ -11570,7 +11575,7 @@ high | true | string | 最高值（溢价指数） |  |
 amount | true | string | 成交量(币), 数值为0 |  |  
 </data> |  |  |  |  |  
 status | true | string | 请求处理结果 | "ok" , "error" |  
-ts | true | number | 响应生成时间点，单位：毫秒 |  |  
+ts | true | long | 响应生成时间点，单位：毫秒 |  |  
   
 ## 获取实时预测资金费率的K线数据
 
@@ -11630,7 +11635,7 @@ high | true | string | 最高值 （预测资金费率） |  |
 amount | true | string | 成交量(币), 数值为0 |  |  
 </data> |  |  |  |  |  
 status | true | string | 请求处理结果 | "ok" , "error" |  
-ts | true | number | 响应生成时间点，单位：毫秒 |  |  
+ts | true | long | 响应生成时间点，单位：毫秒 |  |  
   
 ## 获取基差数据
 
@@ -11896,7 +11901,7 @@ contract_code | true | string | 品种代码 | 支持大小写,"BTC-USD",...
 参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
 ---|---|---|---|---  
 status | true | string | 请求处理结果 | "ok" , "error"  
-ts | number | long | 响应生成时间点，单位：毫秒 |  
+ts | long | long | 响应生成时间点，单位：毫秒 |  
 <data> | true | object array |  |  
 symbol | true | string | 品种代码 | "BTC","ETH"...  
 contract_code | true | string | 合约代码 | "BTC-USD" ...  
@@ -13516,7 +13521,7 @@ status | true | string | 请求处理结果 |
 <dict>(属性名称: data) |  |  |  |  
 <list>(属性名称: trades) |  |  |  |  
 match_id | true | long | 撮合结果id,
-与订单ws推送orders.$symbol推送结果中的trade_id是相同的，非唯一，可重复，注意：一个撮合结果代表一个taker单和N个maker单的成交记录的集合，如果一个taker单吃了N个maker单，那这N笔trade都是一样的撮合结果id
+与订单ws推送orders.$contract_code推送结果中的trade_id是相同的，非唯一，可重复，注意：一个撮合结果代表一个taker单和N个maker单的成交记录的集合，如果一个taker单吃了N个maker单，那这N笔trade都是一样的撮合结果id
 |  
 id | true | string | 全局唯一的交易标识 |  
 order_id | true | long | 订单ID |  
@@ -14924,7 +14929,7 @@ bids | true | object | 买盘,[price(挂单价), vol(此价格挂单张数)], �
 ts | true | long | 系统检测orderbook时间点，单位：毫秒 |  
 version | true | long | 版本号 |  
 ch | true | string | 数据所属的 channel，格式：
-market.$symbol.depth.size_${size}.high_freq |  
+market.$contract_code.depth.size_${size}.high_freq |  
 event | true | string |
 事件类型；"update":更新，表示推送买卖各20档或150档不合并深度的增量数据；"snapshot":快照值，表示推送买卖各20档或150档不合并深度的全量数据
 |  
@@ -15077,15 +15082,15 @@ contract_code | true | string | 交易对 | 合约代码，支持大小写，比
 参数名称 | 是否必须 | 数据类型 | 描述 | 取值范围  
 ---|---|---|---|---  
 ch | true | string | 数据所属的 channel，格式： market.$contract_code.bbo |  
-ts | true | number | 响应生成时间点，单位：毫秒（指接口响应时间） |  
+ts | true | long | 响应生成时间点，单位：毫秒（指接口响应时间） |  
 <tick> | true | object |  |  
 ch | true | string | 数据所属的 channel，格式： market.$contract_code.bbo |  
 mrid | true | string | 订单ID |  
-id | true | number | tick ID |  
+id | true | long | tick ID |  
 ask | true | array | 卖一盘,[price(挂单价), vol(此价格挂单张数)] |  
 bid | true | array | 买一盘,[price(挂单价), vol(此价格挂单张数)] |  
-version | true | number | 版本号 |  
-ts | true | number | 响应生成时间点，单位：毫秒（指数据生成时间） |  
+version | true | string | 版本号 |  
+ts | true | long | 响应生成时间点，单位：毫秒（指数据生成时间） |  
 <\tick> |  |  |  |  
   
   * **说明** ：
@@ -15189,10 +15194,6 @@ ts | true | long | 发送时间 |
         }
     
     
-
-#### 备注
-
-仅能获取最近 300 个 Trade Detail 数据。
 
 ### 请求参数
 
@@ -15325,7 +15326,7 @@ low | true | string | 最低值（溢价指数） |  |
 high | true | string | 最高值 （溢价指数） |  |  
 amount | true | string | 成交量(币), 数值为0 |  |  
 </tick> |  |  |  |  |  
-ts | true | number | 响应生成时间点，单位：毫秒 |  |  
+ts | true | long | 响应生成时间点，单位：毫秒 |  |  
   
 ## 请求溢价指数K线数据
 
@@ -15413,7 +15414,7 @@ req | true | string | 数据所属的 channel，格式： market.period |  |
 status | true | string | 请求处理结果 | "ok" , "error" |  
 id | true | string | 业务方id |  |  
 wsid | true | long | wsid |  |  
-ts | true | number | 响应生成时间点，单位：毫秒 |  |  
+ts | true | long | 响应生成时间点，单位：毫秒 |  |  
 <data> | true | object array |  |  |  
 id | true | long | 指数K线id,也就是K线时间戳，K线起始时间 |  |  
 vol | true | string | 成交量(张)，数值为0 |  |  
@@ -15499,7 +15500,7 @@ low | true | string | 最低值 （预测资金费率） |  |
 high | true | string | 最高值 （预测资金费率） |  |  
 amount | true | string | 成交量(币), 数值为0 |  |  
 </tick> |  |  |  |  |  
-ts | true | number | 响应生成时间点，单位：毫秒 |  |  
+ts | true | long | 响应生成时间点，单位：毫秒 |  |  
   
 ## 请求预测资金费率K线数据
 
@@ -15588,7 +15589,7 @@ req | true | string | 数据所属的 channel，格式： market.period |  |
 status | true | string | 请求处理结果 | "ok" , "error" |  
 id | true | string | 业务方id |  |  
 wsid | true | long | wsid |  |  
-ts | true | number | 响应生成时间点，单位：毫秒 |  |  
+ts | true | long | 响应生成时间点，单位：毫秒 |  |  
 <data> | true | object array |  |  |  
 id | true | long | k线id |  |  
 vol | true | string | 成交量(张)，数值为0 |  |  
@@ -15672,7 +15673,7 @@ index_price | String | 指数基准价，与基差价格类型匹配 |  |
 basis | String | 基差=合约基准价 - 指数基准价 |  |  
 basis_rate | String | 基差率=基差/指数基准价 |  |  
 </tick> |  |  |  |  
-ts | number | 响应生成时间点，单位：毫秒 |  |  
+ts | long | 响应生成时间点，单位：毫秒 |  |  
   
 ## 请求基差数据
 
@@ -15756,7 +15757,7 @@ req | true | string | 数据所属的 channel，格式： market.basis |
 status | true | string | 请求处理结果 | "ok" , "error"  
 id | true | string | 业务方id |  
 wsid | true | long | wsid |  
-ts | true | number | 响应生成时间点，单位：毫秒 |  
+ts | true | long | 响应生成时间点，单位：毫秒 |  
 <data> | object array |  |  |  
 id | long | 唯一标识 |  |  
 contract_price | String | 合约基准价，与基差价格类型匹配 |  |  
@@ -15811,8 +15812,7 @@ contrac_code支持大小写，比如:BTC-USD
         "ts": 1590475967607,
         "uid": "123456",
         "symbol": "BTC",
-        "contract_type": "quarter",
-        "contract_code": "BTC200626",
+        "contract_code": "BTC-USD",
         "volume": 100,
         "price": 8886.52,
         "order_price_type": "post_only",
@@ -16490,13 +16490,13 @@ ts | long | 必填;响应生成时间点，单位：毫秒
 
 订阅(sub) | 取消订阅(unsub) | 规则  
 ---|---|---  
-public.*.liquidationOrders | public.*.liquidationOrders | 允许  
-public.$contract_code.liquidationOrders | public.*.liquidationOrders | 允许  
-public.contract_code1.liquidationOrders |
-public.contract_code1.liquidationOrders | 允许  
-public.contract_code1.liquidationOrders |
-public.contract_code2.liquidationOrders | 不允许  
-public.*.liquidationOrders | public.contract_code1.liquidationOrders | 不允许  
+public.*.liquidation_orders | public.*.liquidation_orders | 允许  
+public.$contract_code.liquidation_orders | public.*.liquidation_orders | 允许  
+public.contract_code1.liquidation_orders |
+public.contract_code1.liquidation_orders | 允许  
+public.contract_code1.liquidation_orders |
+public.contract_code2.liquidation_orders | 不允许  
+public.*.liquidation_orders | public.contract_code1.liquidation_orders | 不允许  
   
 ## 订阅资金费率推送(免鉴权)（sub）
 
