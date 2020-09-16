@@ -13573,7 +13573,7 @@ ts | true | long | 时间戳 |
 ---|---|---|---|---  
 contract_code | true | string | 合约代码 | 支持大小写,"BTC-USD" ...  
 volume | true | int | 委托数量（张） |  
-direction | true | String | “buy”:买，“sell”:卖 |  
+direction | true | string | “buy”:买，“sell”:卖 |  
 client_order_id | false | long | （API）客户自己填写和维护，必须保持唯一 |  
 order_price_type | false | string | 订单报价类型 |
 不填，默认为“闪电平仓”，"lightning"：闪电平仓，"lightning_fok"：闪电平仓-FOK,"lightning_ioc"：闪电平仓-
@@ -13626,15 +13626,15 @@ client_order_id | false | long | 用户自己的订单id |
 
 **参数名称** | **是否必须** | **类型** | **描述** | **取值范围**  
 ---|---|---|---|---  
-contract_code | true | String | 合约代码 | BTC-USD  
-trigger_type | true | String | 触发类型： ge大于等于(触发价比最新价大)；le小于(触发价比最新价小) |  
+contract_code | true | string | 合约代码 | BTC-USD  
+trigger_type | true | string | 触发类型： ge大于等于(触发价比最新价大)；le小于(触发价比最新价小) |  
 trigger_price | true | decimal | 触发价，精度超过最小变动单位会报错 |  
 order_price | false | decimal | 委托价，精度超过最小变动单位会报错 |  
 order_price_type | false | string | 委托类型： 不填默认为limit; 限价：limit
 ，最优5档：optimal_5，最优10档：optimal_10，最优20档：optimal_20 |  
 volume | true | decimal | 委托数量(张) |  
-direction | true | String | buy:买 sell:卖 |  
-offset | true | String | open:开 close:平 |  
+direction | true | string | buy:买 sell:卖 |  
+offset | true | string | open:开 close:平 |  
 lever_rate | false | int | 开仓必须填写，平仓可以不填。杠杆倍数[开仓若有10倍多单，就不能再下20倍多单] |  
   
 #### 备注：
@@ -13686,8 +13686,8 @@ order_id_str | true | string | 字符串类型的订单ID |
 
 **参数名称** | **是否必须** | **类型** | **描述** | **取值范围**  
 ---|---|---|---|---  
-contract_code | true | String | 合约代码 | BTC-USD  
-order_id | true | String | 用户订单ID（多个订单ID中间以","分隔,一次最多允许撤消10个订单 ） |  
+contract_code | true | string | 合约代码 | BTC-USD  
+order_id | true | string | 用户订单ID（多个订单ID中间以","分隔,一次最多允许撤消10个订单 ） |  
   
 > Response:
     
@@ -13744,7 +13744,7 @@ ts | true | long | 响应生成时间点，单位：毫秒 |
 
 **参数名称** | **是否必须** | **类型** | **描述** | **取值范围**  
 ---|---|---|---|---  
-contract_code | true | String | 合约代码 | BTC-USD  
+contract_code | true | string | 合约代码 | BTC-USD  
   
 > Response:
     
@@ -13801,7 +13801,7 @@ ts | true | long | 响应生成时间点，单位：毫秒 |
 
 **参数名称** | **是否必须** | **类型** | **描述** | **取值范围**  
 ---|---|---|---|---  
-contract_code | true | String | 合约代码 | BTC-USD  
+contract_code | true | string | 合约代码 | BTC-USD  
 page_index | false | int | 第几页，不填默认第一页 |  
 page_size | false | int | 不填默认20，不得多于50 |  
   
@@ -13911,7 +13911,7 @@ ts | true | long | 响应生成时间点，单位：毫秒 |
 contract_code | true | string | 合约代码 |  | BTC-USD  
 trade_type | true | int | 交易类型 |  | 0:全部,1:买入开多,2: 卖出开空,3: 买入平空,4:
 卖出平多；后台是根据该值转换为offset和direction，然后去查询的； 其他值无法查询出结果  
-status | true | String | 订单状态 |  |
+status | true | string | 订单状态 |  |
 多个以英文逗号隔开，计划委托单状态：0:全部（表示全部结束状态的订单）、4:已委托、5:委托失败、6:已撤单  
 create_date | true | int | 日期 |  | 可随意输入正整数，如果参数超过90则默认查询90天的数据  
 page_index | false | int | 页码，不填默认第1页 | 1 | 第几页，不填默认第一页  
@@ -14579,16 +14579,16 @@ user-id | long | ⽤户 id
 
 参数名称 | 是否必须 | 类型 | 描述 | 默认值  
 ---|---|---|---|---  
-sub | true | String |
+sub | true | string |
 需要订阅的主题，该接口固定为：market.$contract_code.kline.$period，详细参数见sub订阅参数说明 |  
-id | false | String | 选填;Client 请求唯一 ID |  
+id | false | string | 选填;Client 请求唯一 ID |  
   
 ### sub订阅参数说明
 
 参数名称 | 是否必须 | 类型 | 描述 | 默认值 | 取值范围  
 ---|---|---|---|---|---  
-contract_code | true | String | 合约代码 |  | 支持大小写，比如:BTC-USD  
-period | true | String | K线周期 |  | 仅支持小写：1min, 5min, 15min, 30min,
+contract_code | true | string | 合约代码 |  | 支持大小写，比如:BTC-USD  
+period | true | string | K线周期 |  | 仅支持小写：1min, 5min, 15min, 30min,
 1hour,4hour,1day, 1mon  
   
 ### 返回参数
@@ -14664,9 +14664,9 @@ amount | true | decimal | 成交量(币), 即 sum(每一笔成交量(张)*单张
 
 参数名称 | 是否必须 | 类型 | 描述 | 默认值  
 ---|---|---|---|---  
-req | true | String |
+req | true | string |
 需要订阅的主题，该接口固定为：market.$contract_code.kline.$period，详细参数见req请求参数说明 |  
-id | false | String | 选填;Client 请求唯一 ID |  
+id | false | string | 选填;Client 请求唯一 ID |  
 from | true | long | 开始时间 |  
 to | true | long | 结束时间 |  
   
@@ -14779,9 +14779,9 @@ amount | true | decimal | 成交量(币), 即 sum(每一笔成交量(张)*单张
 
 参数名称 | 是否必须 | 类型 | 描述 | 默认值  
 ---|---|---|---|---  
-sub | true | String |
+sub | true | string |
 需要订阅的主题，该接口固定为：market.$contract_code.depth.$type，详细参数见sub订阅参数说明 |  
-id | false | String | 选填;Client 请求唯一 ID |  
+id | false | string | 选填;Client 请求唯一 ID |  
   
 ### sub订阅参数说明
 
@@ -14888,10 +14888,10 @@ ch | true | string | 数据所属的 channel，格式： market.period |
 
 参数名称 | 是否必须 | 类型 | 描述 | 默认值  
 ---|---|---|---|---  
-sub | true | String |
+sub | true | string |
 需要订阅的主题，该接口固定为：market.$contract_code.depth.size_${size}.high_freq，详细参数见sub订阅参数说明
 |  
-id | false | String | 选填;Client 请求唯一 ID |  
+id | false | string | 选填;Client 请求唯一 ID |  
 data_type | false | string | Depth 类型 |
 不填默认为全量数据，"incremental"：增量数据，"snapshot"：全量数据  
   
@@ -14987,9 +14987,9 @@ event | true | string |
 
 参数名称 | 是否必须 | 类型 | 描述 | 默认值  
 ---|---|---|---|---  
-sub | true | String |
+sub | true | string |
 需要订阅的主题，该接口固定为：market.$contract_code.detail，详细参数见sub订阅参数说明 |  
-id | false | String | 选填;Client 请求唯一 ID |  
+id | false | string | 选填;Client 请求唯一 ID |  
   
 ### sub订阅参数说明
 
@@ -15062,9 +15062,9 @@ count | true | decimal | 成交笔数
 
 参数名称 | 是否必须 | 类型 | 描述 | 默认值  
 ---|---|---|---|---  
-sub | true | String | 需要订阅的主题，该接口固定为：market.$contract_code.bbo，详细参数见sub订阅参数说明
+sub | true | string | 需要订阅的主题，该接口固定为：market.$contract_code.bbo，详细参数见sub订阅参数说明
 |  
-id | false | String | 选填;Client 请求唯一 ID |  
+id | false | string | 选填;Client 请求唯一 ID |  
   
 ### sub请求参数说明
 
@@ -15141,9 +15141,9 @@ ts | true | long | 响应生成时间点，单位：毫秒（指数据生成时�
 
 参数名称 | 是否必须 | 类型 | 描述 | 默认值  
 ---|---|---|---|---  
-req | true | String |
+req | true | string |
 需要订阅的主题，该接口固定为：market.$contract_code.trade.detail，详细参数见req请求参数说明 |  
-id | false | String | 选填;Client 请求唯一 ID |  
+id | false | string | 选填;Client 请求唯一 ID |  
 size | false | int | 数据条数，最多50，不填默认50 | [1,50]  
   
 ### req请求参数说明
@@ -15212,9 +15212,9 @@ ts | true | long | 发送时间 |
 
 参数名称 | 是否必须 | 类型 | 描述 | 默认值  
 ---|---|---|---|---  
-sub | true | String |
+sub | true | string |
 需要订阅的主题，该接口固定为：market.$contract_code.trade.detail，详细参数见sub订阅参数说明 |  
-id | false | String | 选填;Client 请求唯一 ID |  
+id | false | string | 选填;Client 请求唯一 ID |  
   
 ### sub订阅参数说明
 
@@ -15291,9 +15291,9 @@ direction | true | string | 买卖方向 |
 
 参数名称 | 是否必须 | 类型 | 描述 | 默认值  
 ---|---|---|---|---  
-sub | true | String |
+sub | true | string |
 需要订阅的主题，该接口固定为：market.$contract_code.premium_index.$period，详细参数见sub订阅参数说明 |  
-id | false | String | 选填;Client 请求唯一 ID |  
+id | false | string | 选填;Client 请求唯一 ID |  
   
 ### sub订阅参数说明
 
@@ -15374,9 +15374,9 @@ ts | true | long | 响应生成时间点，单位：毫秒 |  |
 
 参数名称 | 是否必须 | 类型 | 描述 | 默认值  
 ---|---|---|---|---  
-req | true | String |
+req | true | string |
 需要订阅的主题，该接口固定为：market.$contract_code.premium_index.$period，详细参数见req请求参数说明 |  
-id | false | String | 选填;Client 请求唯一 ID |  
+id | false | string | 选填;Client 请求唯一 ID |  
 from | true | long | 开始时间（时间戳，单位秒） |  
 to | true | long | 结束时间 （时间戳，单位秒） |  
   
@@ -15465,9 +15465,9 @@ amount | true | string | 成交量(币), 数值为0 |  |
 
 参数名称 | 是否必须 | 类型 | 描述 | 默认值  
 ---|---|---|---|---  
-sub | true | String |
+sub | true | string |
 需要订阅的主题，该接口固定为：market.$contract_code.estimated_rate.$period，详细参数见sub订阅参数说明 |  
-id | false | String | 选填;Client 请求唯一 ID |  
+id | false | string | 选填;Client 请求唯一 ID |  
   
 ### sub订阅参数说明
 
@@ -15549,9 +15549,9 @@ ts | true | long | 响应生成时间点，单位：毫秒 |  |
 
 参数名称 | 是否必须 | 类型 | 描述 | 默认值  
 ---|---|---|---|---  
-req | true | String |
+req | true | string |
 需要订阅的主题，该接口固定为：market.$contract_code.estimated_rate.$period，详细参数见req请求参数说明 |  
-id | false | String | 选填;Client 请求唯一 ID |  
+id | false | string | 选填;Client 请求唯一 ID |  
 from | true | long | 开始时间（时间戳，单位秒） |  
 to | true | long | 结束时间 （时间戳，单位秒） |  
   
@@ -15640,10 +15640,10 @@ amount | true | string | 成交量(币), 数值为0 |  |
 
 参数名称 | 是否必须 | 类型 | 描述 | 默认值  
 ---|---|---|---|---  
-sub | true | String |
+sub | true | string |
 需要订阅的主题，该接口固定为：market.$contract_code.basis.$period.$basis_price_type，详细参数见sub订阅参数说明
 |  
-id | false | String | 选填;Client 请求唯一 ID |  
+id | false | string | 选填;Client 请求唯一 ID |  
   
 ### sub订阅参数说明
 
@@ -15681,10 +15681,10 @@ basis_price_type | false | string | 基差价格类型，表示在周期内计�
 ch | string | 数据所属的 channel，格式： market.period |  |  
 <tick> | object array |  |  |  
 id | long | 唯一标识 |  |  
-contract_price | String | 合约基准价，与基差价格类型匹配 |  |  
-index_price | String | 指数基准价，与基差价格类型匹配 |  |  
-basis | String | 基差=合约基准价 - 指数基准价 |  |  
-basis_rate | String | 基差率=基差/指数基准价 |  |  
+contract_price | string | 合约基准价，与基差价格类型匹配 |  |  
+index_price | string | 指数基准价，与基差价格类型匹配 |  |  
+basis | string | 基差=合约基准价 - 指数基准价 |  |  
+basis_rate | string | 基差率=基差/指数基准价 |  |  
 </tick> |  |  |  |  
 ts | long | 响应生成时间点，单位：毫秒 |  |  
   
@@ -15722,10 +15722,10 @@ ts | long | 响应生成时间点，单位：毫秒 |  |
 
 参数名称 | 是否必须 | 类型 | 描述 | 默认值  
 ---|---|---|---|---  
-req | true | String |
+req | true | string |
 需要订阅的主题，该接口固定为：market.$contract_code.basis.$period.$basis_price_type，详细参数见req请求参数说明
 |  
-id | false | String | 选填;Client 请求唯一 ID |  
+id | false | string | 选填;Client 请求唯一 ID |  
 from | true | long | 开始时间（时间戳，单位秒） |  
 to | true | long | 结束时间 （时间戳，单位秒） |  
   
@@ -15773,10 +15773,10 @@ wsid | true | long | wsid |
 ts | true | long | 响应生成时间点，单位：毫秒 |  
 <data> | object array |  |  |  
 id | long | 唯一标识 |  |  
-contract_price | String | 合约基准价，与基差价格类型匹配 |  |  
-index_price | String | 指数基准价，与基差价格类型匹配 |  |  
-basis | String | 基差=合约基准价 - 指数基准价 |  |  
-basis_rate | String | 基差率=基差/指数基准价 |  |  
+contract_price | string | 合约基准价，与基差价格类型匹配 |  |  
+index_price | string | 指数基准价，与基差价格类型匹配 |  |  
+basis | string | 基差=合约基准价 - 指数基准价 |  |  
+basis_rate | string | 基差率=基差/指数基准价 |  |  
 </data> |  |  |  |  
   
 # WebSocket订单和用户数据接口
