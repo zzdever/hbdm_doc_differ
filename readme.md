@@ -6292,8 +6292,9 @@ id | false | string | 业务方自主生成的id |
 参数名称 | 是否必须 | 类型 | 描述 | 默认值 | 取值范围  
 ---|---|---|---|---|---  
 symbol | true | string | 交易对 |  |
-支持大小写，如"BTC_CW"表示BTC当周合约，"BTC_NW"表示BTC次周合约，"BTC_CQ"表示BTC当季合约 ,
-"BTC_NQ"表示次季度合约"  
+支持大小写，如"BTC_CW"表示BTC当周合约，"BTC_NW"表示BTC次周合约，"BTC_CQ"表示BTC当季合约 , "BTC_NQ"表示次季度合约
+。支持使用contract_code来订阅
+例如："BTC200918"(当周)，"BTC200925"(次周)，"BTC201225"(季度)，"BTC210326"(次季度)。  
 period | true | string | K线周期 |  | 仅支持小写，1min, 5min, 15min, 30min,
 60min,4hour,1day,1week, 1mon  
   
@@ -6382,7 +6383,9 @@ to | true | long | 结束时间 |
 参数名称 | 是否必须 | 类型 | 描述 | 默认值 | 取值范围  
 ---|---|---|---|---|---  
 symbol | true | string | 交易对 |  |
-支持大小写，如"BTC_CW"表示BTC当周合约，"BTC_NW"表示BTC次周合约，"BTC_CQ"表示BTC当季合约, "BTC_NQ"表示次季度合约"  
+支持大小写，如"BTC_CW"表示BTC当周合约，"BTC_NW"表示BTC次周合约，"BTC_CQ"表示BTC当季合约,
+"BTC_NQ"表示次季度合约"。支持使用contract_code来订阅
+例如："BTC200918"(当周)，"BTC200925"(次周)，"BTC201225"(季度)，"BTC210326"(次季度)。  
 period | false | string | K线周期 |  | 仅支持小写，1min, 5min, 15min, 30min,
 60min,4hour,1day,1week, 1mon  
   
@@ -6497,7 +6500,8 @@ id | false | string | 业务方自主生成的id |
 ---|---|---|---|---|---  
 symbol | true | string | 交易对 |  |
 支持大小写，如"BTC_CW"表示BTC当周合约，"BTC_NW"表示BTC次周合约，"BTC_CQ"表示BTC当季合约,
-"BTC_NQ"表示次季度合约".  
+"BTC_NQ"表示次季度合约". 支持使用contract_code来订阅
+例如："BTC200918"(当周)，"BTC200925"(次周)，"BTC201225"(季度)，"BTC210326"(次季度)。  
 type | true | string | Depth 类型 |  | 获得150档深度数据，使用step0, step1, step2, step3,
 step4, step5, step14, step15
 （step1至step15是进行了深度合并后的深度），使用step0时，不合并深度获取150档数据;获得20档深度数据，使用 step6, step7,
@@ -6647,7 +6651,9 @@ data_type | false | string | Depth 类型 |
 参数名称 | 是否必须 | 类型 | 描述 | 默认值 | 取值范围  
 ---|---|---|---|---|---  
 symbol | true | string | 交易对 |  | 支持大小写，
-交易对,"BTC_CW"表示BTC当周合约，"BTC_NW"表示BTC次周合约，"BTC_CQ"表示BTC当季合约, "BTC_NQ"表示BTC次季度合约  
+交易对,"BTC_CW"表示BTC当周合约，"BTC_NW"表示BTC次周合约，"BTC_CQ"表示BTC当季合约,
+"BTC_NQ"表示BTC次季度合约。支持使用contract_code来订阅
+例如："BTC200918"(当周)，"BTC200925"(次周)，"BTC201225"(季度)，"BTC210326"(次季度)。  
 size | true | string |  |  | 档位数，20:表示20档不合并的深度，150:表示150档不合并的深度  
   
 ### 返回参数
@@ -6898,7 +6904,8 @@ id | false | string | 业务方自主生成的id |
 参数名称 | 是否必须 | 类型 | 描述 | 默认值 | 取值范围  
 ---|---|---|---|---|---  
 symbol | true | string | 交易对 |  |
-交易对（大小写不敏感，均支持）,如“BTC190412”表示BTC品种下，到期日为2019年04月12日的合约，"BTC_CW"表示BTC当周合约，"BTC_NW"表示BTC次周合约，"BTC_CQ"表示BTC当季合约，"BTC_NQ"表示BTC次季度合约  
+交易对（大小写不敏感，均支持）,如“BTC190412”表示BTC品种下，到期日为2019年04月12日的合约，"BTC_CW"表示BTC当周合约，"BTC_NW"表示BTC次周合约，"BTC_CQ"表示BTC当季合约，"BTC_NQ"表示BTC次季度合约。支持使用contract_code来订阅
+例如："BTC200918"(当周)，"BTC200925"(次周)，"BTC201225"(季度)，"BTC210326"(次季度)。  
   
 > Response：
     
@@ -6979,7 +6986,9 @@ id | false | string | 业务方自主生成的id |
 参数名称 | 是否必须 | 类型 | 描述 | 默认值 | 取值范围  
 ---|---|---|---|---|---  
 symbol | true | string | 交易对 |  | 支持大小写，
-交易对,"BTC_CW"表示BTC当周合约，"BTC_NW"表示BTC次周合约，"BTC_CQ"表示BTC当季合约, "BTC_NQ"表示次季度合约"  
+交易对,"BTC_CW"表示BTC当周合约，"BTC_NW"表示BTC次周合约，"BTC_CQ"表示BTC当季合约,
+"BTC_NQ"表示次季度合约。支持使用contract_code来订阅
+例如："BTC200918"(当周)，"BTC200925"(次周)，"BTC201225"(季度)，"BTC210326"(次季度)。  
   
 ### 返回参数
 
@@ -7060,7 +7069,9 @@ size | false | int | 数据条数，最多50条，不填默认50 | [1,50]
 参数名称 | 是否必须 | 类型 | 描述 | 默认值 | 取值范围  
 ---|---|---|---|---|---  
 symbol | true | string | 交易对 |  | 支持大小写，
-交易对,"BTC_CW"表示BTC当周合约，"BTC_NW"表示BTC次周合约，"BTC_CQ"表示BTC当季合约, "BTC_NQ"表示次季度合约"  
+交易对,"BTC_CW"表示BTC当周合约，"BTC_NW"表示BTC次周合约，"BTC_CQ"表示BTC当季合约,
+"BTC_NQ"表示次季度合约"。支持使用contract_code来订阅
+例如："BTC200918"(当周)，"BTC200925"(次周)，"BTC201225"(季度)，"BTC210326"(次季度)。  
   
 仅返回当前 Trade Detail
 
@@ -7135,7 +7146,9 @@ id | false | string | 业务方自主生成的id |
 参数名称 | 是否必须 | 类型 | 描述 | 默认值 | 取值范围  
 ---|---|---|---|---|---  
 symbol | true | string | 交易对 |  | 支持大小写，
-交易对,"BTC_CW"表示BTC当周合约，"BTC_NW"表示BTC次周合约，"BTC_CQ"表示BTC当季合约, "BTC_NQ"表示次季度合约"  
+交易对,"BTC_CW"表示BTC当周合约，"BTC_NW"表示BTC次周合约，"BTC_CQ"表示BTC当季合约,
+"BTC_NQ"表示次季度合约"，支持使用contract_code来订阅
+例如："BTC200918"(当周)，"BTC200925"(次周)，"BTC201225"(季度)，"BTC210326"(次季度)。  
   
 > 之后每当 Trade Detail 有更新时，client 会收到数据，例子：
     
