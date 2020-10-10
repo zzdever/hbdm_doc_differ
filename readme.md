@@ -154,7 +154,7 @@ shell
     * 取消订阅合约信息变动(免鉴权)（unsub）
     * 订阅计划委托订单更新
     * 取消订阅计划委托订单更新（unsub）
-  * WebSocket 系统状态更新接口
+  * WebSocket系统状态更新接口
     * 订阅系统状态更新
   * WebSocket附录
     * 操作类型（OP）说明
@@ -8742,7 +8742,7 @@ trigger_order.symbol1 | trigger_order.symbol1 | 允许
 trigger_order.symbol1 | trigger_order.symbol2 | 不允许  
 trigger_order.* | trigger_order.symbol1 | 不允许  
   
-# WebSocket 系统状态更新接口
+# WebSocket系统状态更新接口
 
   * 系统状态更新订阅WS地址：wss://api.hbdm.com/center-notification
 
@@ -8808,7 +8808,7 @@ op | true | string | 操作名称，推送固定值为 notify; |
 topic | true | string | 推送的主题 |  
 event | true | string | 通知相关事件说明 | 订阅成功返回的初始系统状态信息（init），系统状态变化触发（update）  
 ts | true | long | 服务端应答时间戳 |  
-<data> | true | array object |  |  
+<data> |  |  |  |  
 heartbeat | true | int | 系统状态 | 1是可用，0为不可用  
 estimated_recovery_time | true | long | 系统预估恢复时间，单位：毫秒 | 当系统状态为可用时，返回空值  
 </data> |  |  |  |  
