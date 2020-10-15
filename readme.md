@@ -6412,9 +6412,7 @@ ticket | string | type的值为ticket时必填；登陆时返回
 
   * 按照ASCII码的顺序对参数名进行排序(使⽤ UTF-8 编码，且进⾏了 URI 编码，十六进制字符必须 大写，如‘:’会被编码为'%3A'，空格被编码为'%20')。例如，下面是请求参数的原始顺序，进⾏过 编码后。
 
-`AccessKeyId=e2xxxxxx-99xxxxxx-84xxxxxx-
-7xxxx&SignatureMethod=HmacSHA256&SignatureVersion=2&Timestamp=2017-05-
-11T15%3A19%3A30`
+`AccessKeyId=e2xxxxxx-99xxxxxx-84xxxxxx-7xxxx&SignatureMethod=HmacSHA256&SignatureVersion=2&Timestamp=2017-05-11T15%3A19%3A30`
 
   * 按照以上顺序，将各参数使用字符’&’连接。 
 
@@ -15514,7 +15512,7 @@ mrid | true | string | 订单ID |
 id | true | long | tick ID |  
 ask | true | array | 卖一盘,[price(挂单价), vol(此价格挂单张数)] |  
 bid | true | array | 买一盘,[price(挂单价), vol(此价格挂单张数)] |  
-version | true | string | 版本号 |  
+version | true | long | 版本号 |  
 ts | true | long | 响应生成时间点，单位：毫秒（指数据生成时间） |  
 <\tick> |  |  |  |  
   
