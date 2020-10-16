@@ -10939,7 +10939,7 @@ step15、step13 | 10
 
 参数名称 | 是否必须 | 类型 | 描述 | 默认值 | 取值范围  
 ---|---|---|---|---|---  
-contract_code true | string | 合约代码 | 仅支持大写， "BTC-USD" ... |  |  
+contract_code | true | string | 合约代码 | 仅支持大写， "BTC-USD" ... |  
 period | true | string | K线类型 |  | 1min, 5min, 15min, 30min, 60min,4hour,1day,
 1mon  
 size | false | int | 获取数量 | 150 | [1,2000]  
