@@ -8,8 +8,8 @@
   * [v2](/docs/spot/v2/en/)
 
 [现货](/docs/spot/v1/en/) [交割合约](/docs/dm/v1/en/)
-[币本位永续合约](/docs/coin_margined_swap/v1/en/) [USDT永续合约](/docs/usdt_swap/v1/en/)
-[期权合约](/docs/option/v1/en/)
+[币本位永续合约](/docs/coin_margined_swap/v1/en/)
+[USDT本位永续合约](/docs/usdt_swap/v1/en/) [期权合约](/docs/option/v1/en/)
 
 [简体中文](/docs/spot/v1/cn/)
 
@@ -8996,8 +8996,8 @@ shell
   * [v2](/docs/spot/v2/en/)
 
 [现货](/docs/spot/v1/en/) [交割合约](/docs/dm/v1/en/)
-[币本位永续合约](/docs/coin_margined_swap/v1/en/) [USDT永续合约](/docs/usdt_swap/v1/en/)
-[期权合约](/docs/option/v1/en/)
+[币本位永续合约](/docs/coin_margined_swap/v1/en/)
+[USDT本位永续合约](/docs/usdt_swap/v1/en/) [期权合约](/docs/option/v1/en/)
 
 [简体中文](/docs/spot/v1/cn/)
 
