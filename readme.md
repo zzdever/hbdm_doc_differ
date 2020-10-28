@@ -14234,18 +14234,6 @@ created_at禁止传0。
     
     
 
-> 错误:
-    
-    
-        {
-         "status":"error",
-         "err_code":20029,
-         "err_msg": "invalid contract_code",
-         "ts": 1490759594752
-        }
-    
-    
-
 ### 返回数据
 
 参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
@@ -17860,7 +17848,7 @@ contract_code支持大小写; |
     
     {
         "op":"notify",
-        "topic":"public.*.funding_rate",
+        "topic":"public.BTC-USD.funding_rate",
         "ts":1603879631291,
         "data":[
             {
@@ -17987,7 +17975,7 @@ contract_code支持大小写; |
     
     {
         "op":"notify",
-        "topic":"public.*.contract_info",
+        "topic":"public.BTC-USD.contract_info",
         "ts":1603879734428,
         "event":"snapshot",
         "data":[
@@ -18118,7 +18106,7 @@ contract_code支持大小写; |
     
     {
         "op":"notify",
-        "topic":"trigger_order.*",
+        "topic":"trigger_order.theta-usd",
         "ts":1603880263724,
         "event":"order",
         "uid":"123456789",
