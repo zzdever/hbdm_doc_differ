@@ -11857,21 +11857,21 @@ page_size | false | int | 不填默认100，不得多于100 | 100
     
     
     {
-      "status": "ok",
-      "ts": 158797866555,
-      "data":   {
-         "symbol": "BTC",
-         "contract_code": "BTC-USD",
-         "tick": [
-            {
-              "insurance_fund": 3806.4615259197324414715719,
-              "ts": 158797866555
-             }
-          ],
-          "total_page": 1,
-          "current_page": 1,
-          "total_size": 1
-      }
+        "status": "ok",
+        "data": {
+            "total_page": 89,
+            "current_page": 1,
+            "total_size": 89,
+            "symbol": "BTC",
+            "contract_code": "BTC-USD",
+            "tick": [
+                {
+                    "insurance_fund": 593.770630435491805966,
+                    "ts": 1603785600000
+                }
+            ]
+        },
+        "ts": 1603865805070
     }
     
     
@@ -11914,33 +11914,39 @@ contract_code | false | string | 合约代码 | 支持大小写，"BTC-USD"... ,
     
     
     {
-      "status": "ok",
-      "data": [
-       {
-          "symbol": "BTC",
-          "contract_code": "BTC-USD",
-          "list": [
-           {
-              "lever_rate": 10,
-              "ladders": [
-               {
-                 "ladder": 1,
-                 "min_size": 0,
-                 "max_size": 100,
-                 "adjust_factor": 0.1
-               },
-               {
-                 "ladder": 2,
-                 "min_size": 101,
-                 "max_size": 500,
-                 "adjust_factor": 0.2
-               }
-               ]
-           }
-           ]
-       }
-       ],
-       "ts": 158797866555
+        "status": "ok",
+        "data": [
+            {
+                "symbol": "BTC",
+                "contract_code": "BTC-USD",
+                "list": [
+                    {
+                        "lever_rate": 125,
+                        "ladders": [
+                            {
+                                "ladder": 0,
+                                "min_size": 0,
+                                "max_size": 1999,
+                                "adjust_factor": 0.650000000000000000
+                            },
+                            {
+                                "ladder": 1,
+                                "min_size": 2000,
+                                "max_size": 9999,
+                                "adjust_factor": 0.800000000000000000
+                            },
+                            {
+                                "ladder": 2,
+                                "min_size": 10000,
+                                "max_size": null,
+                                "adjust_factor": 0.850000000000000000
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "ts": 1603865852805
     }
     
     
@@ -11991,20 +11997,19 @@ amount_type | true | int | 计价单位 | 1:张，2:币
     
     
     {
-      "status": "ok",
-      "data": 
-            {
-             "symbol": "BTC",
-             "contract_code": "BTC-USD",
-             "tick": [
+        "status": "ok",
+        "data": {
+            "symbol": "BTC",
+            "tick": [
                 {
-                 "volume": 1,
-                 "amount_type": 1,
-                 "ts": 1529387842137
+                    "volume": 2428660.0000000000000000,
+                    "amount_type": 1,
+                    "ts": 1603857600000
                 }
-              ]
-            },
-        "ts": 158797866555
+            ],
+            "contract_code": "BTC-USD"
+        },
+        "ts": 1603865983492
     }
     
     
@@ -12050,22 +12055,26 @@ period | true | string | 周期 | 5min, 15min, 30min, 60min,4hour,1day
     
     
     {
-      "status": "ok",
-      "data": [
-        {
-          "symbol": "BTC",
-          "contract_code": "BTC-USD",
-          "list": [
-            {
-             "buy_ratio": 0.2323,
-             "sell_ratio": 0.4645,
-             "locked_ratio": 0.4142,
-             "ts": 158797866555
-           }
-           ]
-        }
-     ],
-     "ts": 158797866555
+        "status": "ok",
+        "data": {
+            "list": [
+                {
+                    "buy_ratio": 0.4700,
+                    "sell_ratio": 0.5200,
+                    "locked_ratio": 0.0100,
+                    "ts": 1603857300000
+                },
+                {
+                    "buy_ratio": 0.4700,
+                    "sell_ratio": 0.5200,
+                    "locked_ratio": 0.0100,
+                    "ts": 1603857600000
+                }
+            ],
+            "symbol": "BTC",
+            "contract_code": "BTC-USD"
+        },
+        "ts": 1603866026216
     }
     
     
@@ -12108,21 +12117,24 @@ period | true | string | 周期 | 5min, 15min, 30min, 60min,4hour,1day
     
     
     {
-      "status": "ok",
-      "data": [
-        {
-          "symbol": "BTC",
-          "contract_code": "BTC-USD",
-          "list": [
-            {
-             "buy_ratio": 0.2323,
-             "sell_ratio": 0.4645,
-             "ts": 158797866555
-           }
-           ]
-        }
-     ],
-     "ts": 158797866555
+        "status": "ok",
+        "data": {
+            "list": [
+                {
+                    "buy_ratio": 0.5350,
+                    "sell_ratio": 0.4650,
+                    "ts": 1603857300000
+                },
+                {
+                    "buy_ratio": 0.5360,
+                    "sell_ratio": 0.4640,
+                    "ts": 1603857600000
+                }
+            ],
+            "symbol": "BTC",
+            "contract_code": "BTC-USD"
+        },
+        "ts": 1603866161191
     }
     
     
@@ -12163,22 +12175,23 @@ contract_code | false | string | 合约代码 | 支持大小写，"BTC-USD"... ,
     
     
     {
-      "status": "ok",
-      "data": [
-        {
-          "symbol": "BTC",
-          "contract_code": "BTC-USD",
-          "open": 1,
-          "close": 1,
-          "cancel": 1,
-          "transfer_in": 1,
-          "transfer_out": 1,
-          "master_transfer_sub": 1,
-          "sub_transfer_master": 1
-        }
-     ],
-     "ts": 158797866555
+        "status": "ok",
+        "data": [
+            {
+                "symbol": "BTC",
+                "contract_code": "BTC-USD",
+                "open": 1,
+                "close": 1,
+                "cancel": 1,
+                "transfer_in": 1,
+                "transfer_out": 1,
+                "master_transfer_sub": 1,
+                "sub_transfer_master": 1
+            }
+        ],
+        "ts": 1603866257273
     }
+    
     
 
 ### 返回参数
@@ -12238,14 +12251,14 @@ contract_code | true | string | 合约代码 | 支持大小写，"BTC-USD" ...
         "status": "ok",
         "data": {
             "estimated_rate": "0.000100000000000000",
-            "funding_rate": "-0.000041207721886464",
+            "funding_rate": "-0.000362360011416593",
             "contract_code": "BTC-USD",
             "symbol": "BTC",
             "fee_asset": "BTC",
-            "funding_time": "1586923200000",
-            "next_funding_time": "1586952000000"
+            "funding_time": "1603872000000",
+            "next_funding_time": "1603900800000"
         },
-        "ts": 1586913483642
+        "ts": 1603866304635
     }
     
 
@@ -12289,30 +12302,32 @@ page_size | false | int | 不填默认20，不得多于50 | 20
     {
         "status": "ok",
         "data": {
-            "total_page": 2,
+            "total_page": 326,
             "current_page": 1,
-            "total_size": 62,
-            "data": [{
-              "avg_premium_index": "-0.028710291990348889",
-                "funding_rate": "-0.000069120944848016",
-                "realized_rate": "-0.000069120944848016",
-                "funding_time": "1586894400000",
-                "contract_code": "BTC-USD",
-                "symbol": "BTC",
-                "fee_asset": "BTC"
-            }, {
-              "avg_premium_index": "-0.028710291990348889",
-                "funding_rate": "0.000100000000000000",
-                "realized_rate": "0.000100000000000000",
-                "funding_time": "1586865600000",
-                "contract_code": "BTC-USD",
-                "symbol": "BTC",
-                "fee_asset": "BTC"
-            }]
+            "total_size": 651,
+            "data": [
+                {
+                    "avg_premium_index": "-0.000862360011416593",
+                    "funding_rate": "0.000100000000000000",
+                    "realized_rate": "0.000099999999999999",
+                    "funding_time": "1603843200000",
+                    "contract_code": "BTC-USD",
+                    "symbol": "BTC",
+                    "fee_asset": "BTC"
+                },
+                {
+                    "avg_premium_index": "-0.000154014120451130",
+                    "funding_rate": "0.000100000000000000",
+                    "realized_rate": "0.000099999999999999",
+                    "funding_time": "1603814400000",
+                    "contract_code": "BTC-USD",
+                    "symbol": "BTC",
+                    "fee_asset": "BTC"
+                }
+            ]
         },
-        "ts": 1586913570441
+        "ts": 1603866438409
     }
-    
     
 
 ### 返回参数
@@ -12360,24 +12375,24 @@ page_size | false | int | 不填默认20，不得多于50 |  |
     
     
     {
-      "status": "ok",
-      "data":{
-        "orders":[
-          {
-            "symbol": "BTC",
-            "contract_code": "BTC-USD",     //合约代码
-            "direction": "buy",
-            "offset": "close",
-            "volume": 111,
-            "price": 1111,
-            "created_at": 1408076414000
-          }
-         ],
-        "total_page":15,
-        "current_page":3,
-        "total_size":3
+        "status": "ok",
+        "data": {
+            "orders": [
+                {
+                    "contract_code": "BTC-USD",
+                    "symbol": "BTC",
+                    "direction": "buy",
+                    "offset": "close",
+                    "volume": 93.000000000000000000,
+                    "price": 13860.500000000000000000,
+                    "created_at": 1603865955650
+                }
+            ],
+            "total_page": 4141,
+            "current_page": 1,
+            "total_size": 4141
         },
-      "ts": 1490759594752
+        "ts": 1603866516655
     }
     
     
@@ -12426,21 +12441,21 @@ size | true | int | K线获取数量 | [1,2000] （最多2000）
     
     
     {
-      "ch": "market.BTC-USD.premium_index.1min",
-      "data": [
-        {
-          "vol": "0",
-          "close": "-0.0015",
-          "count": "0",
-          "high": "-0.0015",
-          "id": 1529898780,
-          "low": "-0.0015",
-          "open": "-0.0015",
-          "amount": "0"
-         }
-       ],
-      "status": "ok",
-      "ts": 1529908345313
+        "ch": "market.BTC-USD.premium_index.5min",
+        "data": [
+            {
+                "amount": "0",
+                "close": "0.0001707736117204",
+                "count": "0",
+                "high": "0.0002577815537329",
+                "id": 1603866300,
+                "low": "0.0001098331534551",
+                "open": "0.0001464728626806",
+                "vol": "0"
+            }
+        ],
+        "status": "ok",
+        "ts": 1603866593134
     }
     
     
@@ -12486,23 +12501,22 @@ size | true | int | K线获取数量 | [1,2000] （最多2000）
     
     
     {
-      "ch": "market.BTC-USD.estimated_rate.1min",
-      "data": [
-        {
-          "vol": "0",
-          "close": "-0.000153",
-          "count": "0",
-          "high": "-0.000153",
-          "id": 1529898780,
-          "low": "-0.000153",
-          "open": "-0.000153",
-          "amount": "0"
-         }
-       ],
-      "status": "ok",
-      "ts": 1529908345313
+        "ch": "market.BTC-USD.estimated_rate.5min",
+        "data": [
+            {
+                "amount": "0",
+                "close": "0.0001",
+                "count": "0",
+                "high": "0.0001",
+                "id": 1603866600,
+                "low": "0.0001",
+                "open": "0.0001",
+                "vol": "0"
+            }
+        ],
+        "status": "ok",
+        "ts": 1603866642803
     }
-    
     
 
 ### 返回参数
@@ -12550,22 +12564,25 @@ size | true | int | 基差获取数量 |  | [1,2000]
     
     
     {
-      "ch": "market.BTC-USD.basis.1min.low",
-      "data": [{
-        "basis": 1098.8875,
-        "basis_rate": 0.1592333844724310754244333794007850184,
-        "contract_price": 8000,
-        "id": 1576586760,
-        "index_price": 6901.1125
-      }, {
-        "basis": 1100.305,
-        "basis_rate": 0.1594715418580096656446408138330752301,
-        "contract_price": 8000,
-        "id": 1576586820,
-        "index_price": 6899.695
-      }],
-      "status": "ok",
-      "ts": 1576586879618
+        "ch": "market.BTC-USD.basis.5min.open",
+        "data": [
+            {
+                "basis": "2.2525000000005093",
+                "basis_rate": "0.00016353574072709766",
+                "contract_price": "13776",
+                "id": 1603866300,
+                "index_price": "13773.7475"
+            },
+            {
+                "basis": "9.072500000000218",
+                "basis_rate": "0.0006591696787033861",
+                "contract_price": "13772.6",
+                "id": 1603866600,
+                "index_price": "13763.5275"
+            }
+        ],
+        "status": "ok",
+        "ts": 1603866710696
     }
     
     
@@ -12602,42 +12619,28 @@ contract_code | false | string | 支持大小写, "BTC-USD"... ,如果缺省，�
 > Response:
     
     
-        {
-          "status": "ok",
-          "data": [
+    {
+        "status": "ok",
+        "data": [
             {
-              "symbol": "BTC",
-              "contract_code": "BTC-USD",
-              "margin_balance": 1,
-              "margin_static": 0.5,
-              "margin_position": 0,
-              "margin_frozen": 3.33,
-              "margin_available": 0.34,
-              "profit_real": 3.45,
-              "profit_unreal": 7.45,
-              "withdraw_available":4.0989898,
-              "risk_rate": 100,
-              "liquidation_price": 100,
-              "adjust_factor": 0.1
-             },
-            {
-              "symbol": "ETH",
-              "contract_code": "ETH-USD",
-              "margin_balance": 1,
-              "margin_static": 0.5,
-              "margin_position": 0,
-              "margin_frozen": 3.33,
-              "margin_available": 0.34,
-              "profit_real": 3.45,
-              "profit_unreal": 7.45,
-              "withdraw_available":4.7389859,
-              "risk_rate": 100,
-              "liquidation_price": 100,
-              "adjust_factor": 0.1
-             }
-           ],
-          "ts":158797866555
-        }
+                "symbol": "THETA",
+                "margin_balance": 717.600960962561438668000000000000000000000000000000000000,
+                "margin_position": 15.483471394286599055,
+                "margin_frozen": 13.765413852951653365,
+                "margin_available": 688.352075715323186248,
+                "profit_real": 0,
+                "profit_unreal": -6.321988896485647800000000000000000000000000000000000000,
+                "risk_rate": 24.134301218550508200,
+                "withdraw_available": 688.352075715323186248000000000000000000000000000000000000,
+                "liquidation_price": 0.198584522842823398,
+                "lever_rate": 20,
+                "adjust_factor": 0.400000000000000000,
+                "margin_static": 723.922949859047086468,
+                "contract_code": "THETA-USD"
+            }
+        ],
+        "ts": 1603866747447
+    }
     
     
 
@@ -12679,28 +12682,28 @@ contract_code | false | string | 合约代码 |  | 支持大小写，"BTC-USD"..
 > Response:
     
     
-        {
-          "status": "ok",
-          "data": [
+    {
+        "status": "ok",
+        "data": [
             {
-              "symbol": "BTC",
-              "contract_code": "BTC-USD",
-              "volume": 1,
-              "available": 0,
-              "frozen": 0.3,
-              "cost_open": 422.78,
-              "cost_hold": 422.78,
-              "profit_unreal": 0.00007096,
-              "profit_rate": 0.07,
-              "profit": 0.97,
-              "position_margin": 3.4,
-              "lever_rate": 10,
-              "direction":"buy",
-              "last_price":7900.17
-             }
-            ],
-         "ts": 158797866555
-        }
+                "symbol": "THETA",
+                "contract_code": "THETA-USD",
+                "volume": 20.000000000000000000,
+                "available": 20.000000000000000000,
+                "frozen": 0,
+                "cost_open": 0.604834710743801652,
+                "cost_hold": 0.659310000000000000,
+                "profit_unreal": -10.525756239881099200000000000000000000000000000000000000,
+                "profit_rate": 1.015859675335792480,
+                "lever_rate": 20,
+                "position_margin": 15.693659761456371625,
+                "direction": "buy",
+                "profit": 16.795657677889033200000000000000000000000000000000000000,
+                "last_price": 0.6372
+            }
+        ],
+        "ts": 1603868312729
+    }
     
     
 
@@ -12750,39 +12753,43 @@ contract_code | true | string | 品种代码 | 支持大小写,"BTC-USD",...
     
     {
         "status": "ok",
-        "ts": 1560147583367,
-        "data": [{
-            "symbol": "BTC",
-            "contract_code": "BTC-USD",
-            "margin_balance": 0,
-            "margin_position": 0,
-            "margin_frozen": 0,
-            "margin_available": 0,
-            "profit_real": 0,
-            "profit_unreal": 0,
-            "risk_rate": null,
-            "withdraw_available": 0,
-            "liquidation_price": null,
-            "lever_rate": 20,
-            "adjust_factor": 0.13,
-            "margin_static": 1,
-            "positions": [{
-                "symbol": "BTC",
-                "contract_code": "BTC-USD",
-                "volume": 1,
-                "available": 0,
-                "frozen": 0.3,
-                "cost_open": 422.78,
-                "cost_hold": 422.78,
-                "profit_unreal": 0.00007096,
-                "profit_rate": 0.07,
-                "profit": 0.97,
-                "position_margin": 3.4,
+        "data": [
+            {
+                "symbol": "THETA",
+                "contract_code": "THETA-USD",
+                "margin_balance": 713.633454962959082868000000000000000000000000000000000000,
+                "margin_position": 15.681846694266716848,
+                "margin_frozen": 13.765413852951653365,
+                "margin_available": 684.186194415740712655,
+                "profit_real": 0,
+                "profit_unreal": -10.289494896088003600000000000000000000000000000000000000,
+                "risk_rate": 23.834290107178404617,
+                "withdraw_available": 684.186194415740712655000000000000000000000000000000000000,
+                "liquidation_price": 0.198584522842823398,
                 "lever_rate": 20,
-                "direction": "buy",
-                "last_price": 7900.17
-            }]
-        }]
+                "adjust_factor": 0.400000000000000000,
+                "margin_static": 723.922949859047086468,
+                "positions": [
+                    {
+                        "symbol": "THETA",
+                        "contract_code": "THETA-USD",
+                        "volume": 20.000000000000000000,
+                        "available": 20.000000000000000000,
+                        "frozen": 0,
+                        "cost_open": 0.604834710743801652,
+                        "cost_hold": 0.659310000000000000,
+                        "profit_unreal": -10.289494896088003600000000000000000000000000000000000000,
+                        "profit_rate": 1.030149581489096360,
+                        "lever_rate": 20,
+                        "position_margin": 15.681846694266716848,
+                        "direction": "buy",
+                        "profit": 17.031919021682128800000000000000000000000000000000000000,
+                        "last_price": 0.63768
+                    }
+                ]
+            }
+        ],
+        "ts": 1603868847514
     }
     
 
@@ -12838,50 +12845,24 @@ contract_code | false | string | 合约代码 |  | 支持大小写，"BTC-USD"..
 > Response:
     
     
-      {
-          "status": "ok",
-          "ts": 1499223904680,
-            "data": [
-              {
-                "sub_uid": 9910049,
+    {
+        "status": "ok",
+        "data": [
+            {
+                "sub_uid": 123456789,
                 "list": [
-                      {
-                      "symbol": "BTC",
-                      "contract_code": "BTC-USD",
-                      "margin_balance": 1,
-                      "liquidation_price": 100,
-                      "risk_rate": 100
-                    },
                     {
-                       "symbol": "ETH",
-                       "contract_code": "ETH-USD",
-                       "margin_balance": 1,
-                       "liquidation_price": 100,
-                       "risk_rate": 100
+                        "symbol": "THETA",
+                        "margin_balance": 100.000000000000000000,
+                        "liquidation_price": null,
+                        "risk_rate": 63.100000000000000024,
+                        "contract_code": "THETA-USD"
                     }
-                  ]
-              },
-              {
-                  "sub_uid": 9910048,
-                  "list": [
-                        {
-                       "symbol": "BTC",
-                       "contract_code": "BTC-USD",
-                       "margin_balance": 1,
-                       "liquidation_price": 100,
-                       "risk_rate": 100
-                    },
-                    {
-                       "symbol": "ETH",
-                       "contract_code": "ETH-USD",
-                       "margin_balance": 1,
-                       "liquidation_price": 100,
-                       "risk_rate": 100
-                    }
-                    ]
-              }
-            ]
-        }
+                ]
+            }
+        ],
+        "ts": 1603869590660
+    }
     
     
 
@@ -12920,28 +12901,28 @@ sub_uid | true | long | 子账户的UID |  |
 > Response:
     
     
-      {
+    {
         "status": "ok",
-        "data":  [ 
-           {
-              "symbol": "BTC",
-              "contract_code": "BTC-USD",
-              "margin_balance": 1,
-              "margin_position": 0,
-              "margin_frozen": 3.33,
-              "margin_available": 0.34,
-              "profit_real": 3.45,
-              "profit_unreal": 7.45,
-              "withdraw_available":4.0989898,
-              "risk_rate": 100,
-              "liquidation_price": 100,
-              "adjust_factor": 0.1,
-              "lever_rate":1,
-              "margin_static": 3
+        "data": [
+            {
+                "symbol": "THETA",
+                "margin_balance": 100.000000000000000000,
+                "margin_position": 0,
+                "margin_frozen": 1.574803149606299212,
+                "margin_available": 98.425196850393700788,
+                "profit_real": 0,
+                "profit_unreal": 0,
+                "risk_rate": 63.100000000000000024,
+                "withdraw_available": 98.425196850393700788000000000000000000,
+                "liquidation_price": null,
+                "lever_rate": 20,
+                "adjust_factor": 0.400000000000000000,
+                "margin_static": 100.000000000000000000,
+                "contract_code": "THETA-USD"
             }
-          ],
-        "ts":158797866555
-      }
+        ],
+        "ts": 1603869680106
+    }
     
     
 
@@ -12988,23 +12969,25 @@ sub_uid | true | long | 子账户的UID |  |
     
     {
         "status": "ok",
-        "ts": 158797866555,
-        "data": [{
-            "symbol": "BTC",
-            "contract_code": "BTC-USD",
-            "volume": 1,
-            "available": 0,
-            "frozen": 0.3,
-            "cost_open": 422.78,
-            "cost_hold": 422.78,
-            "profit_unreal": 0.00007096,
-            "profit_rate": 0.07,
-            "profit": 0.97,
-            "position_margin": 3.4,
-            "lever_rate": 10,
-            "direction": "buy",
-            "last_price": 6000
-        }]
+        "data": [
+            {
+                "symbol": "THETA",
+                "contract_code": "THETA-USD",
+                "volume": 2.000000000000000000,
+                "available": 2.000000000000000000,
+                "frozen": 0,
+                "cost_open": 0.629950000000000000,
+                "cost_hold": 0.629950000000000000,
+                "profit_unreal": -0.016622805714717100000000000000000000000000000000000000,
+                "profit_rate": -0.010471536459986040,
+                "lever_rate": 20,
+                "position_margin": 1.586596433331217871,
+                "direction": "sell",
+                "profit": -0.016622805714717100000000000000000000000000000000000000,
+                "last_price": 0.63028
+            }
+        ],
+        "ts": 1603869954515
     }
     
     
@@ -13057,20 +13040,30 @@ page_size | false | int | 不填默认20，不得多于50 |
     {
         "status": "ok",
         "data": {
-            "financial_record": [{
-                "id": 192838272,
-                "ts": 1408076414000,
-                "symbol": "BTC",
-                "contract_code": "BTC-USD",
-                "type": 1,
-                "amount": 1
-            }],
-            "total_page": 15,
-            "current_page": 3,
-            "total_size": 3
+            "total_page": 48,
+            "current_page": 1,
+            "total_size": 95,
+            "financial_record": [
+                {
+                    "id": 927489216,
+                    "symbol": "THETA",
+                    "type": 34,
+                    "amount": -100.000000000000000000,
+                    "ts": 1603869236526,
+                    "contract_code": "THETA-USD"
+                },
+                {
+                    "id": 927289649,
+                    "symbol": "THETA",
+                    "type": 30,
+                    "amount": 0.152433200573441931,
+                    "ts": 1603843216465,
+                    "contract_code": "THETA-USD"
+                }
+            ]
         },
-        "ts": 1490759594752
-    }                              
+        "ts": 1603870180849
+    }                             
     
     
 
@@ -13155,24 +13148,32 @@ start_time | end_time | from_id | size | direct | 查询结果
 > Response:
     
     
-      {                                  
-        "status": "ok",              
-        "data":{                         
-          "financial_record" : [         
-            {                            
-            "id": 192838272,             
-            "ts": 1408076414000,         
-            "symbol":"BTC",  
-            "contract_code": "BTC-USD",           
-            "type":1,              
-            "amount":1                  
-            }                          
-          ],                             
-            "remain_size":20,
-            "next_id":192838273
-          },
-        "ts": 1490759594752              
-      }                                  
+    {
+        "status": "ok",
+        "data": {
+            "financial_record": [
+                {
+                    "id": 925052245,
+                    "symbol": "THETA",
+                    "type": 6,
+                    "amount": -0.027536830510808205,
+                    "ts": 1603587183668,
+                    "contract_code": "THETA-USD"
+                },
+                {
+                    "id": 924941639,
+                    "symbol": "THETA",
+                    "type": 6,
+                    "amount": -0.027972027972027972,
+                    "ts": 1603575254448,
+                    "contract_code": "THETA-USD"
+                }
+            ],
+            "remain_size": 13,
+            "next_id": 924900331
+        },
+        "ts": 1603870386931
+    }                                 
     
 
 ### 返回参数
@@ -13228,50 +13229,40 @@ page_size | false | int | 页大小 | 不填默认20，不得多于50（超过�
     {
         "status": "ok",
         "data": {
-            "settlement_records":[
+            "total_page": 231,
+            "current_page": 1,
+            "total_size": 231,
+            "settlement_records": [
                 {
-                    "symbol": "BTC",
-                    "contract_code": "BTC-USD",
-                    "margin_balance_init": 10,
-                    "margin_balance": 2,
-                    "settlement_profit_real": 1.199,
-                    "settlement_time": 1590825600,
-                    "clawback": -0.001,
-                    "funding_fee": -0.001,
+                    "symbol": "THETA",
+                    "contract_code": "THETA-USD",
+                    "margin_balance_init": 716.910582018448810050,
+                    "margin_balance": 723.922949859047086468,
+                    "settlement_profit_real": 7.012367840598276418,
+                    "settlement_time": 1603843204027,
+                    "clawback": 0,
+                    "funding_fee": 0.152433200573441931,
                     "offset_profitloss": 0,
                     "fee": 0,
-                    "fee_asset": "BTC",
-                    "positions":[
+                    "fee_asset": "THETA",
+                    "positions": [
                         {
-                            "symbol": "BTC",
-                            "contract_code": "BTC-USD",
+                            "symbol": "THETA",
+                            "contract_code": "THETA-USD",
                             "direction": "buy",
-                            "volume": 2,
-                            "cost_open": 6500,
-                            "cost_hold_pre": 6500,
-                            "cost_hold": 7000,
-                            "settlement_profit_unreal": 2.4,
-                            "settlement_price": 7000,
+                            "volume": 20.000000000000000000,
+                            "cost_open": 0.604834710743801652,
+                            "cost_hold_pre": 0.644730000000000000,
+                            "cost_hold": 0.659310000000000000,
+                            "settlement_profit_unreal": 6.859934640024834487,
+                            "settlement_price": 0.659310000000000000,
                             "settlement_type": "settlement"
-                        },
-                        {
-                            "symbol": "BTC",
-                            "contract_code": "BTC-USD",
-                            "direction": "sell",
-                            "volume": 1,
-                            "cost_open": 6500,
-                            "cost_hold_pre": 6500,
-                            "cost_hold": 7000,
-                            "settlement_profit_unreal": -1.2,
-                            "settlement_price": 7000,
-                            "settlement_type": "settlement"
-                        }]
-                }],
-            "current_page": 1,
-            "total_page": 1,
-            "total_size": 5
+                        }
+                    ]
+                }
+            ]
         },
-        "ts": 1578124684692
+        "ts": 1603870588781
     }
     
     
@@ -13347,44 +13338,13 @@ ts | true | long | 响应生成时间点，单位：毫秒 |
         "status": "ok",
         "data": [
             {
-                "contract_code": "BTC-USD",
-                "available_level_rate": "1,5,10,20"
-            },
-            {
-                "contract_code": "BSV-USD",
-                "available_level_rate": "1,5,10,20"
-            },
-            {
-                "contract_code": "ETC-USD",
-                "available_level_rate": "1,5,10,20"
-            },
-            {
-                "contract_code": "BCH-USD",
-                "available_level_rate": "1,5,10,20"
-            },
-            {
-                "contract_code": "XRP-USD",
-                "available_level_rate": "1,5,10,20"
-            },
-            {
-                "contract_code": "ETH-USD",
-                "available_level_rate": "1,5,10,20"
-            },
-            {
-                "contract_code": "EOS-USD",
-                "available_level_rate": "1,5,10,20"
-            },
-            {
-                "contract_code": "LTC-USD",
-                "available_level_rate": "1,5,10,20"
-            },
-            {
-                "contract_code": "TRX-USD",
-                "available_level_rate": "1,5,10,20"
+                "contract_code": "THETA-USD",
+                "available_level_rate": "1,2,3,5,10,20,30,50,75"
             }
         ],
-        "ts": 1566899973811
+        "ts": 1603870691811
     }
+    
     
 
 ## 查询用户当前的下单量限制
@@ -13407,19 +13367,19 @@ FOK下单，"optimal_5_fok"：最优5档-FOK下单，"optimal_10_fok"：最优10
     
     
     {
-      "status": "ok",
-      "data":  {
-          "order_price_type": "limit",
-          "list":[
-          {
-              "symbol": "BTC",
-              "contract_code": "BTC-USD",
-              "open_limit": 3000.0,
-              "close_limit": 3000.0
-          }
-          ]
-       },
-     "ts": 158797866555
+        "status": "ok",
+        "data": {
+            "order_price_type": "limit",
+            "list": [
+                {
+                    "symbol": "THETA",
+                    "contract_code": "THETA-USD",
+                    "open_limit": 6000.000000000000000000,
+                    "close_limit": 12000.000000000000000000
+                }
+            ]
+        },
+        "ts": 1603870733069
     }
     
     
@@ -13459,19 +13419,19 @@ contract_code | false | string | 合约代码 | 支持大小写，"BTC-USD"... ,
     
     
     {
-      "status": "ok",
-      "data": [
-        {
-          "symbol": "BTC",
-          "contract_code": "BTC-USD",
-          "fee_asset": "BTC", 
-          "open_maker_fee": "-0.00025",
-          "open_taker_fee": "0.00075",
-          "close_maker_fee": "-0.00025",
-          "close_taker_fee": "0.00075"
-        }
-     ],
-     "ts": 158797866555
+        "status": "ok",
+        "data": [
+            {
+                "symbol": "THETA",
+                "contract_code": "THETA-USD",
+                "open_maker_fee": "0.0002",
+                "open_taker_fee": "0.0005",
+                "close_maker_fee": "0.0002",
+                "close_taker_fee": "0.0005",
+                "fee_asset": "THETA"
+            }
+        ],
+        "ts": 1603870760621
     }
     
     
@@ -13506,22 +13466,22 @@ contract_code | false | string | 合约代码 | 支持大小写，"BTC-USD"... ,
     
     
     {
-      "status": "ok",
-      "data": [
-        {
-          "symbol": "BTC",
-          "contract_code": "BTC-USD",
-          "transfer_in_max_each": 5000,
-          "transfer_in_min_each": 5000,
-          "transfer_out_max_each": 5000,
-          "transfer_out_min_each": 5000,
-          "transfer_in_max_daily": 5000,
-          "transfer_out_max_daily": 5000,
-          "net_transfer_in_max_daily": 5000,
-          "net_transfer_out_max_daily": 5000
-        }
-     ],
-     "ts": 158797866555
+        "status": "ok",
+        "data": [
+            {
+                "symbol": "THETA",
+                "contract_code": "THETA-USD",
+                "transfer_in_max_each": 301000000.000000000000000000,
+                "transfer_in_min_each": 4.000000000000000000,
+                "transfer_out_max_each": 30100000.000000000000000000,
+                "transfer_out_min_each": 0.000001000000000000,
+                "transfer_in_max_daily": 3010000000.000000000000000000,
+                "transfer_out_max_daily": 602000000.000000000000000000,
+                "net_transfer_in_max_daily": 1505000000.000000000000000000,
+                "net_transfer_out_max_daily": 301000000.000000000000000000
+            }
+        ],
+        "ts": 1603870908389
     }
     
     
@@ -13559,16 +13519,16 @@ contract_code | false | string | 合约代码 | 支持大小写，"BTC-USD"... ,
     
     
     {
-      "status": "ok",
-      "data": [
-        {
-          "symbol": "BTC",
-          "contract_code": "BTC-USD",
-          "buy_limit": 3000,
-          "sell_limit": 3000
-        }
-     ],
-     "ts": 158797866555
+        "status": "ok",
+        "data": [
+            {
+                "symbol": "THETA",
+                "contract_code": "THETA-USD",
+                "buy_limit": 60000.000000000000000000,
+                "sell_limit": 60000.000000000000000000
+            }
+        ],
+        "ts": 1603870983335
     }
     
     
@@ -13594,7 +13554,7 @@ sell_limit | true | decimal | 合约空仓持仓的最大值，单位为张 |
     
     
     {
-        "sub_uid": "123123123",
+        "sub_uid": "123456789",
         "contract_code": "BTC_USD",
         "amount": "123",
         "type": "master_to_sub"
@@ -13618,13 +13578,12 @@ type | true | string | 划转类型 | master_to_sub：母账户划转到子账�
     
     
     {
-     "data": {
-      "order_id": "695340410205380608"
-     },
-     "status": "ok",
-     "ts": 1585823672620
+        "status": "ok",
+        "data": {
+            "order_id": "771036657058648064"
+        },
+        "ts": 1603871064225
     }
-    
     
 
 ### 返回参数
@@ -13656,24 +13615,35 @@ page_size | false | int | 不填默认20，不得多于50 | 20
     
     
     {
-     "data": {
-      "current_page": 1,
-      "total_page": 1,
-      "total_size": 7,
-      "transfer_record": [{
-        "amount": 0.01,
-        "contract_code": "BTC-USD",
-        "id": 1660214269,
-        "sub_account_name": "feyondtest01",
-        "sub_uid": "1566233",
-        "symbol": "BTC",
-        "transfer_type": 35,
-        "ts": 1585823672602
-       }
-      ]
-     },
-     "status": "ok",
-     "ts": 1585823674006
+        "status": "ok",
+        "data": {
+            "total_page": 2,
+            "current_page": 1,
+            "total_size": 4,
+            "transfer_record": [
+                {
+                    "id": 927517392,
+                    "symbol": "THETA",
+                    "transfer_type": 35,
+                    "amount": 10.000000000000000000,
+                    "ts": 1603871064212,
+                    "sub_uid": "123456789",
+                    "sub_account_name": "tom",
+                    "contract_code": "THETA-USD"
+                },
+                {
+                    "id": 927489221,
+                    "symbol": "THETA",
+                    "transfer_type": 34,
+                    "amount": -100.000000000000000000,
+                    "ts": 1603869236524,
+                    "sub_uid": "123456789",
+                    "sub_account_name": "tom",
+                    "contract_code": "THETA-USD"
+                }
+            ]
+        },
+        "ts": 1603871223290
     }
     
 
@@ -13715,7 +13685,7 @@ total_size | true | int | 总条数 |
       "data":
       [{
           "is_disable": 1,   //是否被禁用
-          "order_price_types": “limit,post_only,FOK,IOC”,  // 触发禁用的订单价格类型
+          "order_price_types": "limit,post_only,FOK,IOC",  // 触发禁用的订单价格类型
           "disable_reason":"COR",  // 触发禁用的原因
           "disable_interval": 5,  // 禁用时间间隔
           "recovery_time": 1, // 计划恢复时间
@@ -13732,7 +13702,7 @@ total_size | true | int | 总条数 |
           "TDN":  //总禁用次数的指标（Total  Disable Number）
            {
                "disables_threshold": 3,  //总禁用次数的阈值
-               "disables": 3,  /总禁用次数的实际值
+               "disables": 3,  //总禁用次数的实际值
                "is_trigger": 1,  //用户是否触发该指标
                "is_active": 1   //该指标是否开启
           } 
@@ -13825,14 +13795,14 @@ FOK下单，"optimal_5_fok"：最优5档-FOK下单，"optimal_10_fok"：最优10
 > Response:
     
     
-        {
-          "status": "ok",
-          "data": {
-                "order_id": 88,
-                "order_id_str": "88"
-              },
-          "ts": 158797866555
-        }
+    {
+        "status": "ok",
+        "data": {
+            "order_id": 771038212360937472,
+            "order_id_str": "771038212360937472"
+        },
+        "ts": 1603871435025
+    }
     
     
 
@@ -13892,21 +13862,25 @@ FOK下单，"optimal_5_fok"：最优5档-FOK下单，"optimal_10_fok"：最优10
 > Response:
     
     
-      {
-     "data": {
-       "errors": [{
-       "err_code": 1037,
-       "err_msg": "倍数不符合要求",
-       "index": 2
-      }],
-      "success": [{
-       "index": 1,
-       "order_id": 695342621643776000,
-       "order_id_str": "695342621643776000"
-      }]
-     },
-     "status": "ok",
-     "ts": 1585824199847
+    {
+        "status": "ok",
+        "data": {
+            "errors": [
+                {
+                    "index": 2,
+                    "err_code": 1034,
+                    "err_msg": "Incorrect field of order price type."
+                }
+            ],
+            "success": [
+                {
+                    "order_id": 771038739454672896,
+                    "index": 1,
+                    "order_id_str": "771038739454672896"
+                }
+            ]
+        },
+        "ts": 1603871560695
     }
     
     
@@ -13957,14 +13931,16 @@ order_id和client_order_id都可以用来撤单，同时只可以设置其中一
     {
         "status": "ok",
         "data": {
-            "errors": [{
-                "order_id": "123456",
-                "err_code": 1071,
-                "err_msg": "Repeated withdraw."
-            }],
-            "successes": ""
+            "errors": [
+                {
+                    "order_id": "768503271974985728",
+                    "err_code": 1061,
+                    "err_msg": "This order doesnt exist."
+                }
+            ],
+            "successes": "771038212360937472"
         },
-        "ts": 1586777833717
+        "ts": 1603871877639
     }
     
 
@@ -14001,14 +13977,10 @@ contract_code | true | string | 合约代码,支持大小写，"BTC-USD"
     {
         "status": "ok",
         "data": {
-            "errors": [{
-                "order_id": "123456",
-                "err_code": 1071,
-                "err_msg": "Repeated withdraw."
-            }],
-            "successes": ""
+            "errors": [],
+            "successes": "769851022939828224,770281496367714304,771038739454672896"
         },
-        "ts": 1586777833717
+        "ts": 1603871951673
     }
     
     
@@ -14052,18 +14024,18 @@ lever_rate | true | int |
     正确：
     {
         "status": "ok",
-        "ts": 1547521135713,
         "data": {
-              "contract_code":"BTC-USD",
-              "lever_rate":10
-        }
+            "contract_code": "theta-usd",
+            "lever_rate": 10
+        },
+        "ts": 1603872234454
     }
     错误：
     {
         "status": "error",
-        "err_code": 2014,    
-        "err_msg": "无法切换",   
-        "ts": 1547519608126
+        "err_code": 1037,
+        "err_msg": "The leverage is invalid. Please contact the customer service.",
+        "ts": 1603872583224
     }
     
     
@@ -14107,34 +14079,36 @@ contract_code | true | string | 合约代码,支持大小写,"BTC-USD"
     
     
     {
-     "data": [{
-      "client_order_id": null,
-      "contract_code": "BTC-USD",
-      "created_at": 1585824063859,
-      "direction": "buy",
-      "fee": 0,
-      "fee_asset": "BTC",
-      "lever_rate": 10,
-      "margin_frozen": 0.0,
-      "offset": "open",
-      "order_id": 695342051289735168,
-      "order_id_str": "695342051289735168",
-      "order_price_type": "limit",
-      "order_source": "api",
-      "order_type": 1,
-      "price": 100,
-      "profit": 0,
-      "status": 7,
-      "symbol": "BTC",
-      "trade_avg_price": null,
-      "trade_turnover": 0,
-      "trade_volume": 0,
-      "volume": 1,
-      "liquidation_type": "1",
-      "canceled_at": 1585824063859
-     }],
-     "status": "ok",
-     "ts": 1585824542208
+        "status": "ok",
+        "data": [
+            {
+                "symbol": "THETA",
+                "contract_code": "THETA-USD",
+                "volume": 1,
+                "price": 0.60,
+                "order_price_type": "post_only",
+                "order_type": 1,
+                "direction": "buy",
+                "offset": "open",
+                "lever_rate": 20,
+                "order_id": 771043577949732864,
+                "client_order_id": null,
+                "created_at": 1603872714279,
+                "trade_volume": 0,
+                "trade_turnover": 0,
+                "fee": 0,
+                "trade_avg_price": null,
+                "margin_frozen": 0.833333333333333333,
+                "profit": 0,
+                "status": 3,
+                "order_source": "api",
+                "order_id_str": "771043577949732864",
+                "fee_asset": "THETA",
+                "liquidation_type": "0",
+                "canceled_at": 0
+            }
+        ],
+        "ts": 1603872729321
     }
     
     
@@ -14208,52 +14182,55 @@ created_at禁止传0。
 > Response:
     
     
-        {
-          "status": "ok",
-          "data":{
-            "symbol": "BTC",
-            "contract_code": "BTC-USD",
-            "volume": 111,
-            "price": 1111,
-            "order_price_type": "limit",
+    {
+        "status": "ok",
+        "data": {
+            "symbol": "THETA",
+            "contract_code": "THETA-USD",
+            "instrument_price": 0,
+            "final_interest": 0,
+            "adjust_value": 0,
+            "lever_rate": 20,
             "direction": "buy",
-            "offset": "open",
-            "lever_rate": 10,
-            "margin_frozen": 10,
-            "profit": 10,
-            "order_source": "web",
-            "created_at": 1408076414000,
-            "canceled_at": 1408076414000,
-            "instrument_price" : 10000,
-            "final_interest" : 0,
-            "adjust_value" : 0,
-            "order_id" : 1234,
-            "order_id_str" : "1234",
-            "client_order_id" : 1234,
-            "order_type" : "1",
-            "status" : "3",
-            "trade_avg_price" : 1111,
-            "trade_turnover" : 1111,
-            "trade_volume" : 111,
-            "trades":[
-              {
-                "trade_id":112,
-                "id": "1232-213123-1231",
-                "trade_volume":1,
-                "trade_price":123.4555,
-                "trade_fee":0.234,
-                "fee_asset": "BTC", 
-                "trade_turnover":34.123,
-                "role": "maker",
-                "created_at": 1490759594752
-              }
+            "offset": "close",
+            "volume": 10.000000000000000000,
+            "price": 0.660000000000000000,
+            "created_at": 1603727590740,
+            "canceled_at": 0,
+            "order_source": "android",
+            "order_price_type": "post_only",
+            "margin_frozen": 0,
+            "profit": 1.080395069022201400,
+            "trades": [
+                {
+                    "trade_id": 49637561388,
+                    "trade_price": 0.660000000000000000,
+                    "trade_volume": 10.000000000000000000,
+                    "trade_turnover": 100.000000000000000000,
+                    "trade_fee": -0.030303030303030303,
+                    "created_at": 1603728041854,
+                    "role": "maker",
+                    "fee_asset": "THETA",
+                    "id": "49637561388-770434885714452480-1"
+                }
             ],
-            "total_page":15,
-            "total_size":3,
-            "current_page":3
-            },
-          "ts": 1490759594752
-        }
+            "total_page": 1,
+            "current_page": 1,
+            "total_size": 1,
+            "liquidation_type": "0",
+            "fee_asset": "THETA",
+            "fee": -0.030303030303030303,
+            "order_id": 770434885714452480,
+            "order_id_str": "770434885714452480",
+            "client_order_id": null,
+            "order_type": "1",
+            "status": 6,
+            "trade_avg_price": 0.660000000000000000000000000000000000,
+            "trade_turnover": 100.000000000000000000,
+            "trade_volume": 10.000000000000000000
+        },
+        "ts": 1603872939505
+    }
     
     
 
@@ -14340,41 +14317,43 @@ page_size | false | int |  |  | 不填默认20，不得多于50
 > Response:
     
     
-        {
-          "status": "ok",
-          "data":{
-            "orders":[
-              {
-                 "symbol": "BTC",
-                 "contract_code": "BTC-USD",
-                 "volume": 111,
-                 "price": 1111,
-                 "order_price_type": "limit",
-                 "order_type": 1,
-                 "direction": "buy",
-                 "offset": "open",
-                 "lever_rate": 10,
-                 "order_id": 106837,
-                 "order_id_str": "88",
-                 "client_order_id": 10683,
-                 "order_source": "web",
-                 "created_at": 1408076414000,
-                 "trade_volume": 1,
-                 "trade_turnover": 1200,
-                 "fee": 0,
-                 "fee_asset": "BTC", 
-                 "trade_avg_price": 10,
-                 "margin_frozen": 10,
-                 "status": 1,
-                 "profit": 1.231
+    {
+        "status": "ok",
+        "data": {
+            "orders": [
+                {
+                    "symbol": "THETA",
+                    "contract_code": "THETA-USD",
+                    "volume": 1,
+                    "price": 0.60,
+                    "order_price_type": "post_only",
+                    "order_type": 1,
+                    "direction": "buy",
+                    "offset": "open",
+                    "lever_rate": 20,
+                    "order_id": 771043577949732864,
+                    "client_order_id": null,
+                    "created_at": 1603872714279,
+                    "trade_volume": 0,
+                    "trade_turnover": 0,
+                    "fee": 0,
+                    "trade_avg_price": null,
+                    "margin_frozen": 0.833333333333333333,
+                    "profit": 0,
+                    "status": 3,
+                    "order_source": "api",
+                    "order_id_str": "771043577949732864",
+                    "fee_asset": "THETA",
+                    "liquidation_type": null,
+                    "canceled_at": null
                 }
-               ],
-            "total_page":15,
-            "current_page":3,
-            "total_size":3
-           },
-          "ts": 1490759594752
-        }
+            ],
+            "total_page": 1,
+            "current_page": 1,
+            "total_size": 1
+        },
+        "ts": 1603873042150
+    }
     
     
 
@@ -14445,35 +14424,37 @@ page_size | false | int | 每页条数，不填默认20 | 20 | 不得多于50
     {
         "status": "ok",
         "data": {
-            "orders": [{
-                "order_id": 699204501151698944,
-                "contract_code": "BTC-USD",
-                "symbol": "BTC",
-                "lever_rate": 20,
-                "direction": "sell",
-                "offset": "open",
-                "volume": 1,
-                "price": 9999.1,
-                "create_date": 1586744943666,
-                "order_source": "api",
-                "order_price_type": 1,
-                "order_type": 1,
-                "margin_frozen": 0,
-                "profit": 0,
-                "trade_volume": 0,
-                "trade_turnover": 0,
-                "fee": 0,
-                "trade_avg_price": 0,
-                "status": 3,
-                "order_id_str": "699204501151698944",
-                "fee_asset": "BTC",
-                "liquidation_type": "0"
-            }],
-            "total_page": 1,
+            "orders": [
+                {
+                    "order_id": 771043577949732864,
+                    "contract_code": "THETA-USD",
+                    "symbol": "THETA",
+                    "lever_rate": 20,
+                    "direction": "buy",
+                    "offset": "open",
+                    "volume": 1.000000000000000000,
+                    "price": 0.600000000000000000,
+                    "create_date": 1603872714279,
+                    "order_source": "api",
+                    "order_price_type": 6,
+                    "order_type": 1,
+                    "margin_frozen": 0.833333333333333333,
+                    "profit": 0,
+                    "trade_volume": 0,
+                    "trade_turnover": 0,
+                    "fee": 0,
+                    "trade_avg_price": 0,
+                    "status": 3,
+                    "order_id_str": "771043577949732864",
+                    "fee_asset": "THETA",
+                    "liquidation_type": "0"
+                }
+            ],
+            "total_page": 39,
             "current_page": 1,
-            "total_size": 1
+            "total_size": 39
         },
-        "ts": 1586751989809
+        "ts": 1603873186640
     }
     
 
@@ -14582,41 +14563,41 @@ start_time | end_time | from_id | size | direct | 查询结果
 > Response:
     
     
-        {
-          "status": "ok",
-          "data":{
-            "orders":[
-              {
-                "query_id": 1231231231231,
-                "symbol": "BTC",
-                "contract_code": "BTC-USD",
-                "volume": 111,
-                "price": 1111,
-                "order_price_type": "1",
-                "direction": "buy",
-                "offset": "open",
-                "lever_rate": 10,
-                "order_id": 106837,
-                "order_id_str": "88",
-                "order_source": "web",
-                "create_date": 1408076414000,
-                "trade_volume": 1,
-                "trade_turnover": 1200,
-                "fee": 0,
-                "fee_asset": "BTC", 
-                "trade_avg_price": 10,
-                "margin_frozen": 10,
-                "profit": 10,
-                "status": 1,
-                "liquidation_type": "0",
-                "order_type": "limit"
-              }
-             ],
-            "remain_size":15,
-            "next_id":1231231231231
-            },
-          "ts": 1490759594752
-        }
+    {
+        "status": "ok",
+        "data": {
+            "orders": [
+                {
+                    "query_id": 49677309079,
+                    "order_id": 770434885714452480,
+                    "contract_code": "THETA-USD",
+                    "symbol": "THETA",
+                    "lever_rate": 20,
+                    "direction": "buy",
+                    "offset": "close",
+                    "volume": 10.000000000000000000,
+                    "price": 0.660000000000000000,
+                    "create_date": 1603727590740,
+                    "order_source": "android",
+                    "order_price_type": "post_only",
+                    "order_type": 1,
+                    "margin_frozen": 0,
+                    "profit": 1.080395069022201400,
+                    "trade_volume": 10.000000000000000000,
+                    "trade_turnover": 100.000000000000000000,
+                    "fee": -0.030303030303030303,
+                    "trade_avg_price": 0.66000,
+                    "status": 6,
+                    "order_id_str": "770434885714452480",
+                    "fee_asset": "THETA",
+                    "liquidation_type": "0"
+                }
+            ],
+            "remain_size": 29,
+            "next_id": 49615482779
+        },
+        "ts": 1603873477804
+    }
     
 
 ### 返回参数
@@ -14685,34 +14666,36 @@ page_size | false | int | 不填默认20，不得多于50 | 20 |
 > Response:
     
     
-    {                                               
-        "data": {                                      
-            "current_page": 1,                              
-            "total_page": 1,
-            "total_size": 2,                                
-            "trades": [{
-                "contract_code": "BTC-USD",
-                "create_date": 1555553626736,
-                "direction": "sell",
-                "match_id": 3635853382,
-                "id": "1232-213123-1231",
-                "offset": "close",
-                "offset_profitloss": 0.15646398812252696,
-                "order_id": 1118,
-                "order_id_str": "88",
-                "symbol": "BTC",
-                "order_source": "android",
-                "trade_fee": -0.002897500905469032,
-                "fee_asset": "BTC", 
-                "trade_price": 5.522,
-                "trade_turnover": 80,
-                "role": "maker",
-                "trade_volume": 8
-            }]                                        
-        },                                                
-        "status": "ok",                                   
-        "ts": 1555654870867                               
-    }                
+    {
+        "status": "ok",
+        "data": {
+            "trades": [
+                {
+                    "match_id": 49637561388,
+                    "order_id": 770434885714452480,
+                    "symbol": "THETA",
+                    "contract_code": "THETA-USD",
+                    "direction": "buy",
+                    "offset": "close",
+                    "trade_volume": 10.000000000000000000,
+                    "trade_price": 0.660000000000000000,
+                    "trade_turnover": 100.000000000000000000,
+                    "trade_fee": -0.030303030303030303,
+                    "offset_profitloss": 1.080395069022201400,
+                    "create_date": 1603728041854,
+                    "role": "Maker",
+                    "order_source": "android",
+                    "order_id_str": "770434885714452480",
+                    "id": "49637561388-770434885714452480-1",
+                    "fee_asset": "THETA"
+                }
+            ],
+            "total_page": 16,
+            "current_page": 1,
+            "total_size": 16
+        },
+        "ts": 1603873576705
+    }              
     
     
 
@@ -14810,53 +14793,33 @@ start_time | end_time | from_id | size | direct | 查询结果
     
     {
         "status": "ok",
-        "data":{
-            "trades":[
+        "data": {
+            "trades": [
                 {
-                    "id": "32586745130-662260778996572129-1",
-                    "query_id": 123123123123123,
-                    "match_id": 32586745130,
-                    "order_id": 662260778996572160,
-                    "order_id_str": "662260778996572160",
-                    "symbol": "BTC",
-                    "contract_code": "BTC-USD",
+                    "query_id": 501121693,
+                    "match_id": 49637561388,
+                    "order_id": 770434885714452480,
+                    "symbol": "THETA",
+                    "contract_code": "THETA-USD",
                     "direction": "buy",
-                    "offset": "open",
-                    "trade_volume": 1,
-                    "trade_price": 6500,
-                    "trade_turnover": 100,
-                    "create_date": 1577936874070,
-                    "offset_profitloss": 0,
-                    "trade_fee": 0.2323,
-                    "role": "Taker",
-                    "fee_asset": "BTC",
-                    "order_source": "web"
-                },
-                {
-                    "id": "32586745130-662260778996572160-1",
-                    "query_id": 123123123123123,
-                    "match_id": 32586745130,
-                    "order_id": 662260778996572160,
-                    "order_id_str": "662260778996572160",
-                    "symbol": "BTC",
-                    "contract_code": "BTC-USD",
-                    "direction": "buy",
-                    "offset": "open",
-                    "trade_volume": 1,
-                    "trade_price": 6500,
-                    "trade_turnover": 100,
-                    "create_date": 1577936874070,
-                    "offset_profitloss": 0,
-                    "trade_fee": 0.2323,
-                    "role": "Taker",
-                    "fee_asset": "BTC",
-                    "order_source": "web"
+                    "offset": "close",
+                    "trade_volume": 10.000000000000000000,
+                    "trade_price": 0.660000000000000000,
+                    "trade_turnover": 100.000000000000000000,
+                    "trade_fee": -0.030303030303030303,
+                    "offset_profitloss": 1.080395069022201400,
+                    "create_date": 1603728041854,
+                    "role": "Maker",
+                    "order_source": "android",
+                    "order_id_str": "770434885714452480",
+                    "id": "49637561388-770434885714452480-1",
+                    "fee_asset": "THETA"
                 }
             ],
-            "remain_size":20,
-            "next_id":123123123123123
+            "remain_size": 30,
+            "next_id": 501098364
         },
-        "ts": 1578124684692
+        "ts": 1603873728731
     }
     
     
@@ -14920,8 +14883,8 @@ IOC
     {
       "status": "ok",
       "data": {
-        "order_id": 986,
-        "order_id_str": "88",
+        "order_id": 770434885714452480,
+        "order_id_str": "770434885714452480",
         "client_order_id": 9086
       },
       "ts": 158797866555
@@ -14946,9 +14909,9 @@ client_order_id | false | long | 用户自己的订单id |
     
     {
         "status": "error",
-        "err_code": 20012,
-        "err_msg": "invalid contract_code",
-        "ts": 1490759594752
+        "err_code": 1048,
+        "err_msg": "Insufficient close amount available.",
+        "ts": 1603874031502
     }
     
     
@@ -14986,10 +14949,10 @@ lever_rate | false | int |
     {
         "status": "ok",
         "data": {
-            "order_id": 35,
-            "order_id_str": "35"
+            "order_id": 7002240,
+            "order_id_str": "7002240"
         },
-        "ts": 1547521135713
+        "ts": 1603874184554
     }
     
     
@@ -15010,9 +14973,9 @@ order_id_str | true | string | 字符串类型的订单ID |
     
     {
         "status": "error",
-        "err_code": 1014,
-        "err_msg": "合约不存在",
-        "ts": 1547519608126
+        "err_code": 1037,
+        "err_msg": "The leverage is invalid. Please contact the customer service.",
+        "ts": 1603874230776
     }
     
     
@@ -15032,18 +14995,18 @@ order_id | true | string | 用户订单ID（多个订单ID中间以","分隔,一
     
     
     {
-      "status": "ok",
-      "data": {
-        "errors":[
-          {
-            "order_id":"161251",
-            "err_code": 200415,
-            "err_msg": "invalid symbol"
-           }
-          ],
-        "successes":"161256,1344567"
-       },
-      "ts": 1490759594752
+        "status": "ok",
+        "data": {
+            "errors": [
+                {
+                    "order_id": "7002236",
+                    "err_code": 1061,
+                    "err_msg": "This order doesnt exist."
+                }
+            ],
+            "successes": "7002242"
+        },
+        "ts": 1603874307323
     }
     
     
@@ -15063,18 +15026,6 @@ successes | true | string | 成功的订单，多个订单号以“,”相连 |
 </data> |  |  |  |  
 ts | true | long | 响应生成时间点，单位：毫秒 |  
   
-> 错误示例：
-    
-    
-    {
-        "status": "error",
-        "err_code": 20012,
-        "err_msg": "invalid symbol",
-        "ts": 1490759594752
-    }
-    
-    
-
 ## 合约计划委托全部撤单
 
   * POST `swap-api/v1/swap_trigger_cancelall`
@@ -15089,18 +15040,12 @@ contract_code | true | string | 合约代码 | BTC-USD
     
     
     {
-      "status": "ok",
-      "data": {
-        "errors":[
-          {
-            "order_id":"161251",
-            "err_code": 200415,
-            "err_msg": "invalid symbol"
-           }
-          ],
-        "successes":"161256,1344567"
-       },
-      "ts": 1490759594752
+        "status": "ok",
+        "data": {
+            "errors": [],
+            "successes": "7002240,7002241"
+        },
+        "ts": 1603874352762
     }
     
     
@@ -15125,9 +15070,9 @@ ts | true | long | 响应生成时间点，单位：毫秒 |
     
     {
         "status": "error",
-        "err_code": 20012,
-        "err_msg": "invalid symbol",
-        "ts": 1490759594752
+        "err_code": 1051,
+        "err_msg": "No orders to cancel.",
+        "ts": 1603874380781
     }
     
     
@@ -15152,46 +15097,29 @@ page_size | false | int | 不填默认20，不得多于50 |
         "data": {
             "orders": [
                 {
-                    "symbol": "BTC",
-                    "contract_code": "BTC-USD",
+                    "symbol": "THETA",
+                    "contract_code": "THETA-USD",
                     "trigger_type": "ge",
-                    "volume": 4,
+                    "volume": 25.000000000000000000,
                     "order_type": 1,
                     "direction": "sell",
                     "offset": "open",
-                    "lever_rate": 1,
-                    "order_id": 23,
-                    "order_id_str": "161251",
-                    "order_source": "web",
-                    "trigger_price": 2,
-                    "order_price": 2,
-                    "created_at": 1547448030638,
-                    "order_price_type":"limit",
-                    "status":4
-                },
-                {
-                    "symbol": "BTC",
-                    "contract_code": "BTC-USD",
-                    "trigger_type": "ge",
-                    "volume": 4,
-                    "order_type": 1,
-                    "direction": "sell",
-                    "offset": "open",
-                    "lever_rate": 1,
-                    "order_id": 23,
-                    "order_id_str": "161251",
-                    "order_source": "web",
-                    "trigger_price": 2,
-                    "order_price": 2,
-                    "created_at": 1547448030638,
-                    "order_price_type":"limit",
-                    "status":4
-                }],
-            "total_page": 3,
+                    "lever_rate": 20,
+                    "order_id": 7002243,
+                    "order_id_str": "7002243",
+                    "order_source": "api",
+                    "trigger_price": 0.720000000000000000,
+                    "order_price": 0.720000000000000000,
+                    "created_at": 1603874414476,
+                    "order_price_type": "limit",
+                    "status": 2
+                }
+            ],
+            "total_page": 1,
             "current_page": 1,
-            "total_size": 22
+            "total_size": 1
         },
-        "ts": 1547520777695
+        "ts": 1603874421778
     }
     
     
@@ -15227,18 +15155,6 @@ status | true | int | 订单状态：1:准备提交、2:已提交、3:报单中�
 </data> |  |  |  |  
 ts | true | long | 响应生成时间点，单位：毫秒 |  
   
-> 错误示例：
-    
-    
-    {
-        "status": "error",
-        "err_code": 20012,
-        "err_msg": "invalid symbol",
-        "ts": 1490759594752
-    }
-    
-    
-
 ## 获取计划委托历史委托
 
   * POST `swap-api/v1/swap_trigger_hisorders`
@@ -15268,59 +15184,36 @@ page_size | false | int | 不填默认20，不得多于50 | 20 | 不填默认20�
         "data": {
             "orders": [
                 {
-                    "symbol": "EOS",
-                    "contract_code": "EOS-USD",
+                    "symbol": "THETA",
+                    "contract_code": "THETA-USD",
                     "trigger_type": "ge",
-                    "volume": 4,
+                    "volume": 25.000000000000000000,
                     "order_type": 1,
                     "direction": "sell",
                     "offset": "open",
-                    "lever_rate": 1,
-                    "order_id": 23,
-                    "order_id_str": "161251",
-                    "relation_order_id": "88",
-                    "order_price_type":"limit",
+                    "lever_rate": 20,
+                    "order_id": 7002242,
+                    "order_id_str": "7002242",
+                    "relation_order_id": "-1",
+                    "order_price_type": "limit",
                     "status": 6,
-                    "order_source": "web",
-                    "trigger_price": 2,
-                    "triggered_price":2.03,
-                    "order_price": 2,
-                    "created_at": 1547448030638,
-                    "triggered_at": 0,
+                    "order_source": "api",
+                    "trigger_price": 0.720000000000000000,
+                    "triggered_price": null,
+                    "order_price": 0.720000000000000000,
+                    "created_at": 1603874287699,
+                    "triggered_at": null,
                     "order_insert_at": 0,
-                    "canceled_at": 1547448845593,
+                    "canceled_at": 1603874307539,
                     "fail_code": null,
                     "fail_reason": null
-                },
-                {
-                    "symbol": "EOS",
-                    "contract_code": "EOS-USD",
-                    "trigger_type": "ge",
-                    "volume": 4,
-                    "order_type": 1,
-                    "direction": "sell",
-                    "offset": "open",
-                    "lever_rate": 1,
-                    "order_id": 22,
-                    "order_id_str": "161251",
-                    "relation_order_id": "-1",
-                    "order_price_type":"limit",
-                    "status": 5,
-                    "order_source": "web",
-                    "trigger_price": 2,
-                    "order_price": 2,
-                    "created_at": 1547433975948,
-                    "triggered_at": 0,
-                    "order_insert_at": 0,
-                    "canceled_at": 0,
-                    "fail_code": 1064,
-                    "fail_reason": "服务异常，请稍后再试"
-                }],
-            "total_page": 3,
+                }
+            ],
+            "total_page": 7,
             "current_page": 1,
-            "total_size": 22
+            "total_size": 7
         },
-        "ts": 1547520777695
+        "ts": 1603874865911
     }
     
     
@@ -15364,18 +15257,6 @@ fail_reason | true | string | 被触发时下order单失败原因 |
 </data> |  |  |  |  
 ts | true | long | 响应生成时间点，单位：毫秒 |  
   
-> 错误示例：
-    
-    
-    {
-        "status": "error",
-        "err_code": 20012,
-        "err_msg": "invalid symbol",
-        "ts": 1490759594752
-    }
-    
-    
-
 # 币本位永续合约划转接口
 
 ## 现货-币本位永续合约账户间进行资金的划转
@@ -15863,7 +15744,7 @@ user-id | long | ⽤户 id
       "ts": 1489474081631,
       "err-code": 0,
       "data": {
-        "user-id": 12345678
+        "user-id": 123456789
       }
     }
     
@@ -15954,21 +15835,21 @@ amount | true | decimal | 成交量(币), 即 sum(每一笔成交量(张)*单张
 > 之后每当 KLine 有更新时，client 会收到数据:
     
     
-       {
-        "ch": "market.BTC-USD.kline.1min",
-        "ts": 1489474082831,
-        "tick": {
-            "id": 1489464480,
-            "mrid": 268168237,
-            "vol": 100,
-            "count": 0,
-            "open": 7962.62,
-            "close": 7962.62,
-            "low": 7962.62,
-            "high": 7962.62,
-            "amount": 0.3
+    {
+        "ch":"market.BTC-USD.kline.1min",
+        "ts":1603875561883,
+        "tick":{
+            "id":1603875540,
+            "mrid":50996000395,
+            "open":13694.9,
+            "close":13693,
+            "high":13695,
+            "low":13693,
+            "amount":312.9728861001688758677955889119153928594,
+            "vol":42858,
+            "count":312
         }
-       }
+    }
     
     
 
@@ -16064,34 +15945,34 @@ amount | true | decimal | 成交量(币), 即 sum(每一笔成交量(张)*单张
 > 之后每当 KLine 有更新时，client 会收到数据：
     
     
-        {
-         "rep": "market.BTC-USD.kline.1min",
-         "status": "ok",
-         "id": "id4",
-         "wsid": 3925737956,
-         "data": [
-           {
-            "vol": 100,
-            "count": 27,
-            "id": 1494478080,
-            "open": 10050.00,
-            "close": 10058.00,
-            "low": 10050.00,
-            "high": 10058.00,
-            "amount": 175798.757708
-           },
-           {
-            "vol": 300,
-            "count": 28,
-            "id": 1494478140,
-            "open": 10058.00,
-            "close": 10060.00,
-            "low": 10056.00,
-            "high": 10065.00,
-            "amount": 158331.348600
-           }
-         ]
-        }
+    {
+        "id":"id4",
+        "rep":"market.BTC-USD.kline.60min",
+        "wsid":2039465711,
+        "status":"ok",
+        "data":[
+            {
+                "id":1603296000,
+                "open":12749.9,
+                "close":12845.6,
+                "low":12732.1,
+                "high":12934.8,
+                "amount":43196.9577789250315338541275592828832798052,
+                "vol":5547880,
+                "count":38975
+            },
+            {
+                "id":1603299600,
+                "open":12845.7,
+                "close":12789.1,
+                "low":12745.9,
+                "high":12873,
+                "amount":15726.1236463554636877306837818573368430868,
+                "vol":2014958,
+                "count":16302
+            }
+        ]
+    }
     
     
 
@@ -16179,26 +16060,37 @@ ch | true | string | 数据所属的 channel，格式： market.period |
 > 之后每当 depth 有更新时，client 会收到数据，例子：
     
     
-        {
-         "ch": "market.BTC-USD.depth.step0",
-         "ts": 1489474082831,
-         "tick":
-           { 
-            "mrid": 269073229,
-             "id": 1539843937,
-                "bids": [
-                 [9999.9101,1], 
-                 [9992.3089,2]
-                        ],
-                 "asks": [
-                  [10010.9800,10],
-                  [10011.3900,15]
-                         ],
-              "ts": 1539843937417,
-              "version": 1539843937,
-              "ch": "market.BTC-USD.depth.step0"
-            }
+    {
+        "ch":"market.BTC-USD.depth.step6",
+        "ts":1603875911358,
+        "tick":{
+            "mrid":50996800648,
+            "id":1603875911,
+            "bids":[
+                [
+                    13706.8,
+                    12670
+                ],
+                [
+                    13706.7,
+                    77
+                ]
+            ],
+            "asks":[
+                [
+                    13706.9,
+                    3297
+                ],
+                [
+                    13707,
+                    12
+                ]
+            ],
+            "ts":1603875911351,
+            "version":1603875911,
+            "ch":"market.BTC-USD.depth.step6"
         }
+    }
     
     
 
@@ -16247,25 +16139,37 @@ size | true | string | 档位数 |  | 20:表示20档不合并的深度，150:表
 > response：
     
     
-     {
-     "ch": "market.BTC-USD.depth.size_150.high_freq",
-     "ts": 1489474082831,
-     "tick":{
-              "mrid": 269073229,
-              "id": 1539843937,
-              "bids": [
-                          [9999.9101,1], 
-                          [9992.3089,2]
-               ],
-              "asks": [
-                           [10010.9800,10],
-                           [10011.3900,15]
-               ],
-             "ts": 1539843937417,
-             "version": 1539843937,
-             "ch": "market.BTC-USD.depth.size_150.high_freq",
-             "event":"update"
-      }
+    {
+        "ch":"market.BTC-USD.depth.size_20.high_freq",
+        "tick":{
+            "asks":[
+                [
+                    13698.2,
+                    25633
+                ],
+                [
+                    13698.3,
+                    52
+                ]
+            ],
+            "bids":[
+                [
+                    13698.1,
+                    35
+                ],
+                [
+                    13698,
+                    2
+                ]
+            ],
+            "ch":"market.BTC-USD.depth.size_20.high_freq",
+            "event":"snapshot",
+            "id":50997041503,
+            "mrid":50997041503,
+            "ts":1603875997119,
+            "version":315515215
+        },
+        "ts":1603875997120
     }
     
 
@@ -16342,21 +16246,21 @@ contract_code | true | string | 交易对 | 合约代码，支持大小写，比
 > 请求成功返回数据的例子：
     
     
-      {
-        "ch": "market.BTC-USD.detail",
-        "ts": 1539842340724,
-        "tick": {
-            "id": 1539842340,
-            "mrid": 268041138,
-            "open": 6740.47,
-            "close": 7800,
-            "high": 7800,
-            "low": 6726.13,
-            "amount": 477.1200312075244664773339914558562673572,
-            "vol": 32414,
-            "count": 1716
-          }
-      }
+    {
+        "ch":"market.BTC-USD.detail",
+        "ts":1603876084386,
+        "tick":{
+            "id":1603876080,
+            "mrid":50997295506,
+            "open":13616.9,
+            "close":13687.4,
+            "high":13873.5,
+            "low":13531.2,
+            "amount":417937.4329829694553863034758900558413900854,
+            "vol":56697298,
+            "count":488112
+        }
+    }
     
     
 
@@ -16417,19 +16321,25 @@ contract_code | true | string | 交易对 | 合约代码，支持大小写，比
 > **返回示例** :
     
     
-        {
-         "ch": "market.BTC-USD.bbo",
-         "ts": 1489474082831,
-         "tick":{
-            "ch": "market.BTC-USD.bbo",
-            "mrid": 269073229,
-            "id": 1539843937,
-              "bid": [9999.9101, 1],
-            "ask": [10010.9800, 10],
-            "ts": 1539843937417,
-            "version": 1539843937
-          }
+    {
+        "ch":"market.BTC-USD.bbo",
+        "ts":1603876157423,
+        "tick":{
+            "mrid":50997449846,
+            "id":1603876157,
+            "bid":[
+                13684.5,
+                10615
+            ],
+            "ask":[
+                13684.6,
+                3440
+            ],
+            "ts":1603876157421,
+            "version":50997449846,
+            "ch":"market.BTC-USD.bbo"
         }
+    }
     
 
 ### **返回参数说明** ：
@@ -16513,18 +16423,20 @@ ts | true | long | 发送时间 |
 > 请求成功返回数据的例子：
     
     
-      {
-     "data": [{
-      "amount": "2",
-      "ts": 1585831661886,
-      "id": 478879310000,
-      "price": "6681",
-      "direction": "sell"
-     }],
-     "id": "2a024656-74e0-11ea-a2ee-3af9d3dd9051",
-     "rep": "market.BTC-USD.trade.detail",
-     "status": "ok",
-     "ts": 1585831672148
+    {
+        "data":[
+            {
+                "amount":"2",
+                "ts":1603876250774,
+                "id":509977028010022,
+                "price":"13689.8",
+                "direction":"sell"
+            }
+        ],
+        "id":"id8",
+        "rep":"market.BTC-USD.trade.detail",
+        "status":"ok",
+        "ts":1603876266723
     }
     
 
@@ -16567,21 +16479,23 @@ contract_code | true | string | 交易对 | 合约代码，支持大小写，比
 > 之后每当 Trade Detail 有更新时，client 会收到数据，例子：
     
     
-      {
-            "ch": "market.BTC-USD.trade.detail",
-            "ts": 1539831709042,
-            "tick": {
-                "id": 265842227,
-                "ts": 1539831709001,
-                "data": [{
-                    "amount": 20,
-                    "ts": 1539831709001,
-                    "id": 2658422273,
-                    "price": 6742.25,
-                    "direction": "buy"
-                }]
+    {
+        "ch":"market.BTC-USD.trade.detail",
+        "ts":1603876416535,
+        "tick":{
+            "id":50998035853,
+            "ts":1603876416513,
+            "data":[
+                {
+                    "amount":4,
+                    "ts":1603876416513,
+                    "id":509980358530000,
+                    "price":13686,
+                    "direction":"sell"
+                }
+            ]
         }
-      }
+    }
     
     
 
@@ -16648,21 +16562,21 @@ period | true | string | K线类型 |  | 1min, 5min, 15min, 30min, 60min,4hour,1
 > 之后每当溢价指数有更新时，client 会收到数据，例子：
     
     
-     {
-      "ch": "market.BTC-USD.premium_index.1min",
-      "ts": 1489474082831,
-      "tick": 
-         {
-          "id": 1489464480,
-          "vol": "0",
-          "count": "0",
-          "open": "-0.0015",
-          "close": "-0.0015",
-          "low": "-0.0015",
-          "high": "-0.0015",
-          "amount": "0"
-         }
-     }
+    {
+        "ch":"market.BTC-USD.premium_index.1min",
+        "ts":1603876800359,
+        "tick":{
+            "id":1603876800,
+            "open":"-0.0002521241137087",
+            "close":"-0.0002521241137087",
+            "high":"-0.0002521241137087",
+            "low":"-0.0002521241137087",
+            "amount":"0",
+            "vol":"0",
+            "count":"0"
+        }
+    }
+    
     
     
 
@@ -16740,23 +16654,32 @@ period | true | string | K线类型 |  | 1min, 5min, 15min, 30min, 60min,4hour,1
     
     
     {
-     "rep": "market.BTC-USD.premium_index.1min",
-     "status": "ok",
-     "id": "id4",
-     "wsid": 1231323423,
-     "ts": 1579489028884,
-     "data": [
-       {
-        "vol": "0",
-        "count": "0",
-        "id": 1494478080,
-        "open": "-0.0015",
-        "close": "-0.0015",
-        "low": "-0.0015",
-        "high": "-0.0015",
-        "amount": "0"
-       }
-     ]
+        "id":"id4",
+        "rep":"market.BTC-USD.premium_index.60min",
+        "wsid":2973246992,
+        "status":"ok",
+        "data":[
+            {
+                "id":1603296000,
+                "open":"-0.000072347706607",
+                "close":"-0.0001900268622627",
+                "low":"-0.001524303608041",
+                "high":"0.0021789375596989",
+                "amount":"0",
+                "vol":"0",
+                "count":"0"
+            },
+            {
+                "id":1603299600,
+                "open":"-0.00003269469692",
+                "close":"0.0002145326529248",
+                "low":"-0.0011175492509934",
+                "high":"0.0005228164202677",
+                "amount":"0",
+                "vol":"0",
+                "count":"0"
+            }
+        ]
     }
     
     
@@ -16823,18 +16746,17 @@ period | true | string | K线类型 |  | 1min, 5min, 15min, 30min, 60min,4hour,1
     
     
     {
-     "ch": "market.BTC-USD.estimated_rate.1min",
-     "ts": 1489474082831,
-     "tick": 
-        {
-         "id": 1489464480,
-         "vol": "0",
-         "count": "0",
-         "open": "-0.000153",
-         "close": "-0.000153",
-         "low": "-0.000153",
-         "high": "-0.000153",
-         "amount": "0"
+        "ch":"market.BTC-USD.estimated_rate.1min",
+        "ts":1603877220317,
+        "tick":{
+            "id":1603877220,
+            "open":"0.0001",
+            "close":"0.0001",
+            "high":"0.0001",
+            "low":"0.0001",
+            "amount":"0",
+            "vol":"0",
+            "count":"0"
         }
     }
     
@@ -16915,24 +16837,34 @@ period | true | string | K线类型 |  | 1min, 5min, 15min, 30min, 60min,4hour,1
     
     
     {
-     "rep": "market.BTC-USD.estimated_rate.1min",
-     "status": "ok",
-     "id": "id4",
-     "wsid": 1231323423,
-     "ts": 1579489028884,
-     "data": [
-       {
-        "vol": "0",
-        "count": "0",
-        "id": 1494478080,
-        "open": "-0.000153",
-        "close": "-0.000153",
-        "low": "-0.000153",
-        "high": "-0.000153",
-        "amount": "0"
-       }
-     ]
+        "id":"id4",
+        "rep":"market.BTC-USD.estimated_rate.60min",
+        "wsid":126577326,
+        "status":"ok",
+        "data":[
+            {
+                "id":1603296000,
+                "open":"0.0001",
+                "close":"0.0001",
+                "low":"-0.0006454418466661",
+                "high":"0.0001",
+                "amount":"0",
+                "vol":"0",
+                "count":"0"
+            },
+            {
+                "id":1603299600,
+                "open":"0.0001",
+                "close":"0.0001",
+                "low":"0.0001",
+                "high":"0.0001",
+                "amount":"0",
+                "vol":"0",
+                "count":"0"
+            }
+        ]
     }
+    
     
     
 
@@ -17001,17 +16933,15 @@ basis_price_type | false | string | 基差价格类型，表示在周期内计�
     
     
     {
-     "ch": "market.BTC-USD.basis.1min.open",
-     "ts": 1489474082831,
-     "tick": [
-            {
-             "id": 12312321,
-             "contract_price": 0.4635,
-             "index_price": 0.4645,
-             "basis": 0.4142,
-             "basis_rate": 0.0024
-           }
-     ]
+        "ch":"market.BTC-USD.basis.1min.open",
+        "ts":1603877511008,
+        "tick":{
+            "id":1603877460,
+            "index_price":"13649.7075",
+            "contract_price":"13651.2",
+            "basis":"1.4925",
+            "basis_rate":"0.0001093430024049965905862817939505297"
+        }
     }
     
     
@@ -17087,19 +17017,27 @@ basis_price_type | false | string | 基差价格类型，表示在周期内计�
     
     
     {
-     "rep": "market.BTC-USD.basis.1min.open",
-     "status": "ok",
-     "id": "id4",
-     "wsid": 1231231231,
-     "data": [
+        "data":[
             {
-             "id": 12312321,
-             "contact_price": 0.4635,
-             "index_price": 0.4645,
-             "basis": 0.4142,
-             "basis_rate": 0.0024
-           }
-     ]
+                "basis":"1.4774999999990541",
+                "basis_rate":"0.0001158966923161712",
+                "contract_price":"12749.9",
+                "id":1603296000,
+                "index_price":"12748.4225"
+            },
+            {
+                "basis":"-0.42999999999847205",
+                "basis_rate":"-3.347311602782099405",
+                "contract_price":"12845.7",
+                "id":1603299600,
+                "index_price":"12846.13"
+            }
+        ],
+        "id":"id4",
+        "rep":"market.BTC-USD.basis.60min.open",
+        "status":"ok",
+        "ts":1603877618020,
+        "wsid":491167614
     }
     
     
@@ -17161,46 +17099,48 @@ contrac_code支持大小写，比如:BTC-USD
 > 成交详情通知数据格式说明
     
     
-       {
-        "op": "notify",
-        "topic": "orders.btc-usd",
-        "ts": 1590475967607,
-        "uid": "123456",
-        "symbol": "BTC",
-        "contract_code": "BTC-USD",
-        "volume": 100,
-        "price": 8886.52,
-        "order_price_type": "post_only",
-        "direction": "sell",
-        "offset": "close",
-        "status": 4,
-        "lever_rate": 10,
-        "order_id": 714853359739420672,
-        "order_id_str": "714853359739420672",
-        "client_order_id": 5743724782222835748,
-        "order_source": "api",
-        "order_type": 1,
-        "created_at": 1590475922295,
-        "trade_volume": 59,
-        "trade_turnover": 5900.000000000000000000,
-        "fee": 0.000086310501748711,
-        "trade_avg_price": 8886.52,
-        "margin_frozen": 0,
-        "profit": 0.001177466768802000,
-        "trade": [
+    {
+        "op":"notify",
+        "topic":"orders.theta-usd",
+        "ts":1603878749907,
+        "symbol":"THETA",
+        "contract_code":"THETA-USD",
+        "volume":1,
+        "price":0.63191,
+        "order_price_type":"opponent",
+        "direction":"sell",
+        "offset":"open",
+        "status":6,
+        "lever_rate":20,
+        "order_id":771068893090799616,
+        "order_id_str":"771068893090799616",
+        "client_order_id":null,
+        "order_source":"web",
+        "order_type":1,
+        "created_at":1603878749878,
+        "trade_volume":1,
+        "trade_turnover":10,
+        "fee":-0.00791251918785903,
+        "trade_avg_price":0.63191,
+        "margin_frozen":0,
+        "profit":0,
+        "trade":[
             {
-                "id": "69841610673-714853359739420672-1",
-                "trade_id": 69841610673,
-                "trade_volume": 1,
-                "trade_price": 8886.52,
-                "trade_fee": 0.000001462889860147,
-                "trade_turnover": 100.000000000000000000,
-                "created_at": 1590475967388,
-                "fee_asset": "BTC",
-                "role": "maker"
+                "trade_fee":-0.00791251918785903,
+                "fee_asset":"THETA",
+                "trade_id":49703426706,
+                "id":"49703426706-771068893090799616-1",
+                "trade_volume":1,
+                "trade_price":0.63191,
+                "trade_turnover":10,
+                "created_at":1603878749883,
+                "role":"taker"
             }
         ],
-        "liquidation_type": "0"
+        "canceled_at":0,
+        "fee_asset":"THETA",
+        "uid":"123456789",
+        "liquidation_type":"0"
     }
     
 
@@ -17341,27 +17281,29 @@ contract_code支持大小写，比如BTC-USD
     
     
     {
-     "op": "notify",
-     "topic": "accounts",
-     "uid": "123456",
-     "ts": 1585832015669,
-     "event": "init",
-     "data": [{
-      "symbol": "BTC",
-      "contract_code": "BTC-USD",
-      "margin_balance": 9.65300225033282,
-      "margin_static": 9.624326797617663,
-      "margin_position": 0.0357473851449755,
-      "margin_frozen": 0.01,
-      "margin_available": 9.607254865187846,
-      "profit_real": 0.001819856887332005,
-      "profit_unreal": 0.028675452715159,
-      "withdraw_available": 9.578579412472687,
-      "risk_rate": 210.93164485504528,
-      "liquidation_price": 174.14824361517893,
-      "lever_rate": 10,
-      "adjust_factor": 0.075
-     }]
+        "op":"notify",
+        "topic":"accounts.theta-usd",
+        "ts":1603878749908,
+        "event":"order.match",
+        "data":[
+            {
+                "symbol":"THETA",
+                "contract_code":"THETA-USD",
+                "margin_balance":621.187560151491928452,
+                "margin_static":621.879531780612432322,
+                "margin_position":15.822534453568772646,
+                "margin_frozen":0.833333333333333333,
+                "margin_available":604.531692364589822473,
+                "profit_real":-0.00791251918785903,
+                "profit_unreal":-0.69197162912050387,
+                "withdraw_available":604.531692364589822473,
+                "risk_rate":36.895418533520262923,
+                "liquidation_price":0.210454212150800748,
+                "lever_rate":20,
+                "adjust_factor":0.4
+            }
+        ],
+        "uid":"123456789"
     }
     
     
@@ -17480,27 +17422,29 @@ topic | string | 必填；订阅主题名称，必填 (positions.$contract_code)
     
     
     {
-     "op": "notify",
-     "topic": "positions",
-     "uid": "123456",
-     "ts": 1585831975715,
-     "event": "init",
-     "data": [{
-      "symbol": "BTC",
-      "contract_code": "BTC-USD",
-      "volume": 22.0,
-      "available": 22.0,
-      "frozen": 0.0,
-      "cost_open": 4797.075764608844,
-      "cost_hold": 6688.728896560855,
-      "profit_unreal": 0.037636531688646,
-      "profit_rate": 3.648780928625918,
-      "profit": 0.1673377373398984,
-      "position_margin": 0.02912749900701708,
-      "lever_rate": 10,
-      "direction": "buy",
-      "last_price": 7553
-     }]
+        "op":"notify",
+        "topic":"positions.theta-usd",
+        "ts":1603878749908,
+        "event":"order.match",
+        "data":[
+            {
+                "symbol":"THETA",
+                "contract_code":"THETA-USD",
+                "volume":1,
+                "available":1,
+                "frozen":0,
+                "cost_open":0.63191,
+                "cost_hold":0.63191,
+                "profit_unreal":-0.00250392214928847,
+                "profit_rate":-0.00316450689071376,
+                "profit":-0.00250392214928847,
+                "position_margin":0.791126722678438632,
+                "lever_rate":20,
+                "direction":"sell",
+                "last_price":0.63201
+            }
+        ],
+        "uid":"123456789"
     }
     
     
@@ -17619,39 +17563,41 @@ topic | true | string | 订阅主题名称，(matchOrders.$contract_code)
 订阅某个品种下的合约变动信息；$contract_code为品种代码（BTC-USD、ETH-USD），如果值为 * 时代表订阅所有品种;
 contract_code支持大小写; |  
   
-> 返回的参数为：
+> 返回的参数示例为：
     
     
     {
-        "op": "notify",             // 操作名称
-        "topic": "matchOrders.btc-usd",     // 主题
-        "ts": 1489474082831,    
-        "uid": "11434749",         //账户id
-        "symbol": "BTC",         //品种
-        "contract_code": "BTC-USD",     //合约代码
-        "status": 1,   //订单状态(3未成交 4部分成交 5部分成交已撤单 6全部成交 7已撤单)
-        "order_id": 106837,     //订单ID       
-        "order_id_str": "106837",     //订单ID ,字符串类型
-        "client_order_id":"111",  //客户端订单ID
-        "order_type": "1",    //订单类型  1:报单 、 2:撤单 、 3:强平、4:交割
-        "trade_volume": 1,    //订单已成交数量
-        "volume": 100,    //订单总委托数量
-        "trade":[{
-            "id": "1232-213123-1231", //成交唯一ID
-            "trade_id":112,     //撮合结果id
-            "trade_volume":1,    //成交量
-            "trade_price":123.4555,     //撮合价格
-            "trade_turnover":34.123,     //成交金额 
-            "created_at": 1490759594752,   //成交时间
-            "role": "maker"
-          }],
-        "direction": "buy",
-        "offset": "open",
-        "lever_rate": 10,
-        "price": 34.123,
-        "created_at": 1490759594752,
-        "order_source": "api",
-        "order_price_type": "limit"
+        "op":"notify",
+        "topic":"matchOrders.theta-usd",
+        "ts":1603878749900,
+        "symbol":"THETA",
+        "contract_code":"THETA-USD",
+        "status":6,
+        "order_id":771068893090799616,
+        "order_id_str":"771068893090799616",
+        "client_order_id":null,
+        "order_type":1,
+        "created_at":1603878749878,
+        "trade":[
+            {
+                "trade_id":49703426706,
+                "id":"49703426706-771068893090799616-1",
+                "trade_volume":1,
+                "trade_price":0.63191,
+                "trade_turnover":10,
+                "created_at":1603878749883,
+                "role":"taker"
+            }
+        ],
+        "uid":"123456789",
+        "volume":1,
+        "trade_volume":1,
+        "direction":"sell",
+        "offset":"open",
+        "lever_rate":20,
+        "price":0.63191,
+        "order_source":"web",
+        "order_price_type":"opponent"
     }
     
     
@@ -17782,17 +17728,17 @@ contract_code支持大小写; |
     
     {
         "op":"notify",
-        "topic":"public.BTC-USD.liquidation_orders",
-        "ts":1580815422403,
+        "topic":"public.ETH-USD.liquidation_orders",
+        "ts":1603879731301,
         "data":[
             {
-                "symbol":"BTC",
-                "contract_code":"BTC-USD",
-                "direction":"buy",
+                "symbol":"ETH",
+                "contract_code":"ETH-USD",
+                "direction":"sell",
                 "offset":"close",
-                "volume":7,
-                "price":4.236,
-                "created_at":1580815422296
+                "volume":465,
+                "price":390.79,
+                "created_at":1603879731275
             }
         ]
     }
@@ -17912,21 +17858,21 @@ contract_code支持大小写; |
 > 当资金费率有更新时，返回的参数示例如下
     
     
-    { 
-          "op": "notify",            
-          "topic": "public.BTC-USD.funding_rate",    
-          "ts": 1489474082831,   
-          "data": [
+    {
+        "op":"notify",
+        "topic":"public.*.funding_rate",
+        "ts":1603879631291,
+        "data":[
             {
-              "symbol": "BTC",
-              "contract_code": "BTC-USD",
-              "fee_asset": "BTC", 
-              "funding_time": "1490759594752",
-              "funding_rate": "-0.12000001",
-              "estimated_rate": "-0.12000001",
-              "settlement_time": "1490759594752"
+                "symbol":"BTC",
+                "contract_code":"BTC-USD",
+                "fee_asset":"BTC",
+                "funding_time":"1603879620000",
+                "funding_rate":"0.000100000000000000",
+                "estimated_rate":"0.000100000000000000",
+                "settlement_time":"1603900800000"
             }
-          ]
+        ]
     }
     
 
@@ -18040,19 +17986,21 @@ contract_code支持大小写; |
     
     
     {
-      "op": "notify",           
-        "topic": "public.BTC-USD.contract_info",
-        "ts": 1489474082831,
-        "event":"init",
-        "data": [{
-            "symbol": "BTC",
-            "contract_code": "BTC-USD",
-            "contract_size": 100,
-            "price_tick": 0.001,
-            "settlement_date": "1490759594752",
-            "create_date": "20200102",
-            "contract_status": 1
-        }]
+        "op":"notify",
+        "topic":"public.*.contract_info",
+        "ts":1603879734428,
+        "event":"snapshot",
+        "data":[
+            {
+                "symbol":"BTC",
+                "contract_code":"BTC-USD",
+                "contract_size":100,
+                "price_tick":0.1,
+                "settlement_date":"1603900800000",
+                "create_date":"20200325",
+                "contract_status":1
+            }
+        ]
     }
     
 
@@ -18169,37 +18117,38 @@ contract_code支持大小写; |
     
     
     {
-            "op": "notify",           
-        "topic": "trigger_order.EOS-USD",
-        "ts": 1489474082831,
-        "uid": "15712398",
-        "event": "order",
-        "data":  [{
-                    "symbol": "EOS",
-                    "contract_code": "EOS-USD",
-                    "trigger_type": "ge",
-                    "volume": 4,
-                    "order_type": 1,
-                    "direction": "sell",
-                    "offset": "open",
-                    "lever_rate": 1,
-                    "order_id": 23,
-                    "order_id_str": "161251",
-                    "relation_order_id": "88",
-                    "order_price_type": "limit",
-                    "status": 6,
-                    "order_source": "web",
-                    "trigger_price": 2,
-                    "triggered_price": 2.03,
-                    "order_price": 2,
-                    "created_at": 1547448030638,
-                    "triggered_at": 0,
-                    "order_insert_at": 0,
-                    "canceled_at": 1547448845593,
-                    "fail_code": null,
-                    "fail_reason": null
-                }
-            ]
+        "op":"notify",
+        "topic":"trigger_order.*",
+        "ts":1603880263724,
+        "event":"order",
+        "uid":"123456789",
+        "data":[
+            {
+                "symbol":"THETA",
+                "contract_code":"THETA-USD",
+                "trigger_type":"le",
+                "volume":20,
+                "order_type":1,
+                "direction":"buy",
+                "offset":"open",
+                "lever_rate":20,
+                "order_id":7002244,
+                "order_id_str":"7002244",
+                "relation_order_id":"-1",
+                "order_price_type":"limit",
+                "status":2,
+                "order_source":"web",
+                "trigger_price":0.59,
+                "triggered_price":null,
+                "order_price":0.59,
+                "created_at":1603880263721,
+                "triggered_at":0,
+                "order_insert_at":0,
+                "canceled_at":0,
+                "fail_code":null,
+                "fail_reason":null
+            }
+        ]
     }
     
 
