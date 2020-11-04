@@ -3573,7 +3573,7 @@ risk_rate | true | decimal | 保证金率 |
     
     {
         "symbol":"BTC",
-        "sub_uid":123
+        "sub_uid":123456789
     }
     
 
@@ -3649,7 +3649,7 @@ margin_static | true | decimal | 静态权益 |
     
     {
         "symbol":"BTC",
-        "sub_uid":123
+        "sub_uid":123456789
     }
     
 
@@ -8907,7 +8907,7 @@ topic | true | string | 订阅主题名称，必填 (trigger_order.$symbol)
         "topic":"trigger_order.ADA",
         "ts":1604390110568,
         "event":"order",
-        "uid":"144455922",
+        "uid":"123456789",
         "data":[
             {
                 "symbol":"ADA",
