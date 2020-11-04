@@ -1744,6 +1744,8 @@ ts | true | long | 当前系统时间戳 |
 
   * [易语言](https://github.com/huobiapi/Futures-Yi-demo)
 
+  * [Postman](https://github.com/hbdmapi/huobi_futures_Postman)
+
 **Websocket**
 
   * [Java](https://github.com/huobiapi/Futures-Java-demo/tree/master/WebSocket-JAVA-demo)
