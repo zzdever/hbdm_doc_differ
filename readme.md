@@ -17462,7 +17462,7 @@ contract_code | true | string | 合约代码 |
 direction | true | string | 仓位方向 | "buy":买 "sell":卖  
 offset | true | string | 开平方向 | "open":开 "close":平  
 volume | true | decimal | 数量（张） |  
-price | true | decimal | 价格 |  
+price | true | decimal | 破产价格 |  
 created_at | true | long | 订单创建时间 |  
 <\data> |  |  |  |  
   
