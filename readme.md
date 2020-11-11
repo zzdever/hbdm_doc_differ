@@ -14575,7 +14575,7 @@ ts | true | long | 时间戳 |
 参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
 ---|---|---|---|---  
 contract_code | true | string | 合约代码 | 支持大小写,"BTC-USD" ...  
-volume | true | int | 委托数量（张） |  
+volume | true | long | 委托数量（张） |  
 direction | true | string | “buy”:买，“sell”:卖 |  
 client_order_id | false | long | （API）客户自己填写和维护，必须保持唯一 |  
 order_price_type | false | string | 订单报价类型 |
@@ -14635,7 +14635,7 @@ trigger_price | true | decimal | 触发价，精度超过最小变动单位会�
 order_price | false | decimal | 委托价，精度超过最小变动单位会报错 |  
 order_price_type | false | string | 委托类型： 不填默认为limit; 限价：limit
 ，最优5档：optimal_5，最优10档：optimal_10，最优20档：optimal_20 |  
-volume | true | decimal | 委托数量(张) |  
+volume | true | long | 委托数量(张) |  
 direction | true | string | buy:买 sell:卖 |  
 offset | true | string | open:开 close:平 |  
 lever_rate | false | int |
