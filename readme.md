@@ -5885,7 +5885,7 @@ symbol | false | string | 品种代码 | 支持大小写,"BTC","ETH"...
 contract_type | false | string | 合约类型 |
 “this_week”:当周，“next_week”:次周，“quarter”:当季, "next_quarter":次季  
 contract_code | false | string | 合约代码 | BTC190903  
-volume | true | int | 委托数量（张） |  
+volume | true | long | 委托数量（张） |  
 direction | true | string | “buy”:买，“sell”:卖 |  
 client_order_id | false | long |
 （API）客户自己填写和维护，必须保持唯一,请注意必须小于等于9223372036854775807 |  
@@ -5977,7 +5977,7 @@ trigger_price | true | decimal | 触发价，精度超过最小变动单位会�
 order_price | true | decimal | 委托价，精度超过最小变动单位会报错 |  
 order_price_type | false | string | 委托类型： 不填默认为limit; 限价：limit
 ，最优5档：optimal_5，最优10档：optimal_10，最优20档：optimal_20 |  
-volume | true | int | 委托数量(张) |  
+volume | true | long | 委托数量(张) |  
 direction | true | string | buy:买 sell:卖 |  
 offset | true | string | open:开 close:平 |  
 lever_rate | true | int |
