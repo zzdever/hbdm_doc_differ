@@ -184,7 +184,7 @@ shell
 
 做市商项目不支持点卡抵扣、VIP、交易量相关活动以及任何形式的返佣活动。
 
-欢迎有优秀 maker 策略交易量大的用户参与长期合约做市商项目。如果您的火币交割合约账户中有折合大于 5 BTC
+欢迎有优秀 maker 策略交易量大的用户参与长期合约做市商项目。如果您的火币交割合约账户中有折合大于 3 BTC
 资产，或火币币本位永续合约账户中有折合大于 3 BTC 资产，或火币期权合约账户中有折合大于 3 BTC 资产，或火币USDT本位永续合约账户中有大于
 30000 USDT 资产，请提供以下信息到 [[email protected]](/cdn-cgi/l/email-
 protection)（做市商项目不支持点卡抵扣、VIP、交易量相关活动以及任何形式的返佣活动）:
@@ -2065,7 +2065,7 @@ contract_code | string | false | BTC180914
 参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
 ---|---|---|---|---  
 status | true | string | 请求处理结果 | "ok" , "error"  
-<list>(属性名称: data) |  |  |  |  
+<data> |  |  |  |  
 symbol | true | string | 品种代码 | "BTC","ETH"...  
 contract_code | true | string | 合约代码 | "BTC180914" ...  
 contract_type | true | string | 合约类型 | 当周:"this_week", 次周:"next_week",
@@ -2076,7 +2076,7 @@ delivery_date | true | string | 合约交割日期 | 如"20180720"
 create_date | true | string | 合约上市日期 | 如"20180706"  
 contract_status | true | int | 合约状态 | 合约状态:
 0:已下市、1:上市、2:待上市、3:停牌，4:暂停上市中、5:结算中、6:交割中、7:结算完成、8:交割完成、9:暂停上市  
-</list> |  |  |  |  
+</data> |  |  |  |  
 ts | true | long | 响应生成时间点，单位：毫秒 |  
   
 ## 获取合约指数信息
@@ -2117,11 +2117,11 @@ symbol | string | false | 支持大小写，"BTC","ETH"...
 参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
 ---|---|---|---|---  
 status | true | string | 请求处理结果 | "ok" , "error"  
-<list>(属性名称: data) |  |  |  |  
+<data> |  |  |  |  
 symbol | true | string | 指数代码 | "BTC","ETH"...  
 index_price | true | decimal | 指数价格 |  
 index_ts | true | long | 响应生成时间点，单位：毫秒 |  
-</list> |  |  |  |  
+</data> |  |  |  |  
 ts | true | long | 时间戳，单位：毫秒 |  
   
 ## 获取合约最高限价和最低限价
@@ -2172,14 +2172,14 @@ contract_code | string | false | BTC180914 ...
 参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
 ---|---|---|---|---  
 status | true | string | 请求处理结果 | "ok" ,"error"  
-<list>(属性名称: data) |  |  |  |  
+<data> |  |  |  |  
 symbol | true | string | 品种代码 | "BTC","ETH" ...  
 high_limit | true | decimal | 最高买价 |  
 low_limit | true | decimal | 最低卖价 |  
 contract_code | true | string | 合约代码 | 如"BTC180914" ...  
 contract_type | true | string | 合约类型 | 当周:"this_week", 次周:"next_week",
 当季:"quarter" ,次季:"next_quarter"  
-<list> |  |  |  |  
+<data> |  |  |  |  
 ts | true | long | 响应生成时间点，单位：毫秒 |  
   
 ## 获取当前可用合约总持仓量
@@ -2225,14 +2225,14 @@ contract_code | string | false | BTC180914
 参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
 ---|---|---|---|---  
 status | true | string | 请求处理结果 | "ok" , "error"  
-<list>(属性名称: data) |  |  |  |  
+<data> |  |  |  |  
 symbol | true | string | 品种代码 | "BTC", "ETH" ...  
 contract_type | true | string | 合约类型 | 当周:"this_week", 次周:"next_week",
 当季:"quarter",次季:"next_quarter"  
 volume | true | decimal | 持仓量(张) |  
 amount | true | decimal | 持仓量(币) |  
 contract_code | true | string | 合约代码 | 如"BTC180914" ...  
-</list> |  |  |  |  
+</data> |  |  |  |  
 ts | true | long | 响应生成时间点，单位：毫秒 |  
   
 ## 获取预估交割价
@@ -2269,9 +2269,9 @@ symbol | string | true | 支持大小写，"BTC","ETH"...
 参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
 ---|---|---|---|---  
 status | true | string | 请求处理结果 | "ok" , "error"  
-<list>(属性名称: data) |  |  |  |  
+<data> |  |  |  |  
 delivery_price | true | float | 预估交割价 |  
-</list> |  |  |  |  
+</data> |  |  |  |  
 ts | true | long | 响应生成时间点，单位：毫秒 |  
   
 ## 查询系统状态
@@ -2422,12 +2422,12 @@ step10, step11, step12, step13（step7至step13是进行了深度合并后的深
 
 参数名称 | 是否必须 | 数据类型 | 描述 | 取值范围  
 ---|---|---|---|---  
-ch | true | string | 数据所属的 channel，格式：market.$contract_code.depth.type |  
+ch | true | string | 数据所属的 channel，格式：market.$symbol.depth.$type |  
 status | true | string | 请求处理结果 | "ok" , "error"  
 <tick> | true | object |  |  
 asks | true | array | 卖盘,[price(挂单价), vol(此价格挂单张数)], 按price升序 |  
 bids | true | array | 买盘,[price(挂单价), vol(此价格挂单张数)], 按price降序 |  
-ch | true | string | 数据所属的 channel，格式： market.period |  
+ch | true | string | 数据所属的 channel，格式：market.$symbol.depth.$type |  
 id | true | long | 消息id |  
 mrid | true | long | 订单ID |  
 ts | true | long | 消息生成时间，单位：毫秒. |  
@@ -2536,7 +2536,7 @@ to | false | int | 结束时间戳 10位 单位S |  |
 
 参数名称 | 是否必须 | 数据类型 | 描述 | 取值范围  
 ---|---|---|---|---  
-ch | true | string | 数据所属的 channel，格式： market.period |  
+ch | true | string | 数据所属的 channel，格式：market.$symbol.kline.$period |  
 data | true | object | KLine 数据 |  
 status | true | string | 请求处理结果 | "ok" , "error"  
 ts | true | long | 响应生成时间点，单位：毫秒 |  
@@ -2569,10 +2569,10 @@ amount | decimal | 成交量(币) |
 
 参数名称 | 是否必须 | 类型 | 描述 | 默认值 | 取值范围  
 ---|---|---|---|---|---  
-symbol | true | string | 合约名称 |
+symbol | true | string | 合约名称 |  |
 支持大小写，如"BTC_CW"表示BTC当周合约，"BTC_NW"表示BTC次周合约，"BTC_CQ"表示BTC当季合约,
 "BTC_NQ"表示次季度合约"。支持使用合约code来订阅
-例如："BTC200918"(当周)，"BTC200925"(次周)，"BTC201225"(季度)，"BTC210326"(次季度)。 |  
+例如："BTC200918"(当周)，"BTC200925"(次周)，"BTC201225"(季度)，"BTC210326"(次季度)。  
   
 > tick说明:
     
@@ -2588,7 +2588,7 @@ symbol | true | string | 合约名称 |
           "amount": 成交量(币), 即 sum(每一笔成交量(张)*单张合约面值/该笔成交价)
           "bid": [买1价,买1量(张)],
           "ask": [卖1价,卖1量(张)]
-         }
+        }
     
 
 > Response:
@@ -2624,7 +2624,7 @@ symbol | true | string | 合约名称 |
 
 参数名称 | 是否必须 | 数据类型 | 描述 | 取值范围  
 ---|---|---|---|---  
-ch | true | string | 数据所属的 channel，格式： market.\$symbol.detail.merged |  
+ch | true | string | 数据所属的 channel，格式： market.$symbol.detail.merged |  
 status | true | string | 请求处理结果 | "ok" , "error"  
 tick | true | object | 24小时成交量、开盘价和收盘价 |  
 ts | true | long | 响应生成时间点，单位：毫秒 |  
@@ -2641,6 +2641,7 @@ close | string | 收盘价 |
 low | string | 最低价 |  
 high | string | 最高价 |  
 amount | string | 成交量(币) |  
+ts | long | 时间戳 |  
 ask | true | object | 卖盘,[price(挂单价), vol(此价格挂单张数)], 按price升序  
 bid | true | object | 买盘,[price(挂单价), vol(此价格挂单张数)], 按price降序  
   
@@ -2709,13 +2710,13 @@ symbol | true | string | 合约名称 |  |
 
 参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
 ---|---|---|---|---  
-ch | true | string | 数据所属的 channel，格式： market.$contract_code.trade.detail |  
+ch | true | string | 数据所属的 channel，格式： market.$symbol.trade.detail |  
 status | true | string |  | "ok","error"  
 <tick> | true | object |  |  
 id | true | long | 消息id |  
 ts | true | long | 最新成交时间 |  
 <data> | true | object array |  |  
-amount | true | decimal | 成交量(张)，买卖双边成交量之和 |  
+amount | true | string | 成交量(张)，买卖双边成交量之和 |  
 direction | true | string | 主动成交方向 |  
 id | true | long | 成交id |  
 price | true | string | 成交价 |  
@@ -2743,7 +2744,7 @@ symbol | true | string | 合约名称 |  |
 支持大小写，如"BTC_CW"表示BTC当周合约，"BTC_NW"表示BTC次周合约，"BTC_CQ"表示BTC当季合约,
 "BTC_NQ"表示次季度合约"。支持使用合约code来订阅
 例如："BTC200918"(当周)，"BTC200925"(次周)，"BTC201225"(季度)，"BTC210326"(次季度)。  
-size | true | int | 获取交易记录的数量 | 1 | [1, 2000]  
+size | true | int | 获取交易记录的数量 |  | [1, 2000]  
   
 > data说明：
     
@@ -2805,7 +2806,7 @@ size | true | int | 获取交易记录的数量 | 1 | [1, 2000]
 
 参数名称 | 是否必须 | 数据类型 | 描述 | 取值范围  
 ---|---|---|---|---  
-ch | true | string | 数据所属的 channel，格式： market.$contract_code.trade.detail |  
+ch | true | string | 数据所属的 channel，格式： market.$symbol.trade.detail |  
 <data> | true | object array |  |  
 <data> | true | object array |  |  
 amount | true | decimal | 成交量(张)，买卖双边成交量之和 |  
@@ -3047,13 +3048,13 @@ symbol | true | string | 品种代码 | "BTC","ETH"...
 contract_type | true | string | 合约类型 | 当周:"this_week", 次周:"next_week",
 当季:"quarter",次季:"next_quarter"  
 <tick> |  |  |  |  
-volume | true | decimal | 持仓量 |  
+volume | true | string | 持仓量 |  
 amount_type | true | int | 计价单位 | 1:张，2:币  
 ts | true | long | 统计时间 |  
 </tick> |  |  |  |  
 </data> |  |  |  |  
   
-  * 注意：
+### 注意：
 
 tick字段：数组内的数据按照时间倒序排列； data字段：字典类型。
 
@@ -3187,8 +3188,8 @@ ts | true | long | 生成时间 |
 symbol | true | string | 品种代码 |  | 支持大小写，"BTC","ETH"...  
 trade_type | true | int | 交易类型 |  | 0:全部,5: 卖出强平,6: 买入强平  
 create_date | true | int | 日期 |  | 7，90（7天或者90天）  
-page_index | false | int | 页码,不填默认第1页 |  |  
-page_size | false | int | 不填默认20，不得多于50 |  |  
+page_index | false | int | 页码,不填默认第1页 | 1 |  
+page_size | false | int | 不填默认20，不得多于50 | 20 | [1-50]  
   
 > Response:
     
@@ -3221,8 +3222,8 @@ page_size | false | int | 不填默认20，不得多于50 |  |
 参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
 ---|---|---|---|---  
 status | true | string | 请求处理结果 |  
-<object>(属性名称: data) |  |  |  |  
-<list>(属性名称: orders) |  |  |  |  
+<data> |  |  |  |  
+<orders> |  |  |  |  
 symbol | true | string | 品种代码 |  
 contract_code | true | string | 合约代码 | "BTC180914" ...  
 direction | true | string | "buy":买 "sell":卖 |  
@@ -3230,11 +3231,11 @@ offset | true | string | "open":开 "close":平 |
 volume | true | decimal | 强平数量 |  
 price | true | decimal | 破产价格 |  
 created_at | true | long | 强平时间 |  
-</list> |  |  |  |  
+</orders> |  |  |  |  
 total_page | true | int | 总页数 |  
 current_page | true | int | 当前页 |  
 total_size | true | int | 总条数 |  
-</object> |  |  |  |  
+</data> |  |  |  |  
 ts | true | long | 时间戳 |  
   
 ## 获取指数K线数据
@@ -9331,7 +9332,7 @@ shell
 
 做市商项目不支持点卡抵扣、VIP、交易量相关活动以及任何形式的返佣活动。
 
-欢迎有优秀 maker 策略交易量大的用户参与长期合约做市商项目。如果您的火币交割合约账户中有折合大于 5 BTC
+欢迎有优秀 maker 策略交易量大的用户参与长期合约做市商项目。如果您的火币交割合约账户中有折合大于 3 BTC
 资产，或火币币本位永续合约账户中有折合大于 3 BTC 资产，或火币期权合约账户中有折合大于 3 BTC 资产，或火币USDT本位永续合约账户中有大于
 30000 USDT 资产，请提供以下信息到 [[email protected]](/cdn-cgi/l/email-
 protection)（做市商项目不支持点卡抵扣、VIP、交易量相关活动以及任何形式的返佣活动）:
