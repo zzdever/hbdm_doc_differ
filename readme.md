@@ -4786,17 +4786,17 @@ FOK下单，"optimal_5_fok"：最优5档-FOK下单，"optimal_10_fok"：最优10
 ---|---|---|---|---  
 status | true | string | 请求处理结果 | "ok" , "error"  
 <data> |  |  |  |  
-<list>(属性名称: errors) |  |  |  |  
+<errors> |  |  |  |  
 index | true | int | 订单索引 |  
 err_code | true | int | 错误码 |  
 err_msg | true | string | 错误信息 |  
-</list> |  |  |  |  
-<list>(属性名称: success) |  |  |  |  
+</errors> |  |  |  |  
+<success> |  |  |  |  
 index | true | int | 订单索引 |  
 order_id | true | long | 订单ID |  
 order_id_str | true | string | 订单ID |  
 client_order_id | true | long | 用户下单时填写的客户端订单ID，没填则不返回 |  
-</list> |  |  |  |  
+</success> |  |  |  |  
 </data> |  |  |  |  
 ts | true | long | 响应生成时间点，单位：毫秒 |  
   
@@ -4859,14 +4859,14 @@ order_id和client_order_id都可以用来撤单，同时只可以设置其中一
 参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
 ---|---|---|---|---  
 status | true | string | 请求处理结果 | "ok" , "error"  
-<dict>(KEY名称: data) |  |  |  |  
-<list>(属性名称: errors) |  |  |  |  
+<data> |  |  |  |  
+<errors> |  |  |  |  
 order_id | true | string | 订单ID |  
 err_code | true | int | 错误码 |  
 err_msg | true | string | 错误信息 |  
-</list> |  |  |  |  
+</errors> |  |  |  |  
 successes | true | string | 撤销成功的订单的order_id或client_order_id列表 |  
-</dict> |  |  |  |  
+</data> |  |  |  |  
 ts | true | long | 响应生成时间点，单位：毫秒 |  
   
 ## 全部撤单
@@ -4917,14 +4917,14 @@ contract_type | false | string | 合约类型
 参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
 ---|---|---|---|---  
 status | true | string | 请求处理结果 | "ok" , "error"  
-<dict>(KEY名称: data) |  |  |  |  
-<list>(属性名称: errors) |  |  |  |  
+<data> |  |  |  |  
+<errors> |  |  |  |  
 order_id | true | string | 订单id |  
 err_code | true | int | 订单失败错误码 |  
 err_msg | true | string | 订单失败信息 |  
-</list> |  |  |  |  
+</errors> |  |  |  |  
 successes | true | string | 成功的订单 |  
-</dict> |  |  |  |  
+</data> |  |  |  |  
 ts | true | long | 响应生成时间点，单位：毫秒 |  
   
 ## 切换杠杆
@@ -5001,8 +5001,8 @@ ts | true | long | 时间戳 |
 
 参数名称 | 是否必须 | 类型 | 描述  
 ---|---|---|---  
-order_id | 请看备注 | string | 订单ID(多个订单ID中间以","分隔,一次最多允许查询50个订单)  
-client_order_id | 请看备注 | string | 客户订单ID(多个订单ID中间以","分隔,一次最多允许查询50个订单)  
+order_id | false | string | 订单ID(多个订单ID中间以","分隔,一次最多允许查询50个订单)  
+client_order_id | false | string | 客户订单ID(多个订单ID中间以","分隔,一次最多允许查询50个订单)  
 symbol | true | string | 支持大小写，"BTC","ETH"...  
   
 ### 备注：
@@ -5058,7 +5058,7 @@ symbol | true | string | 支持大小写，"BTC","ETH"...
 参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
 ---|---|---|---|---  
 status | true | string | 请求处理结果 | "ok" , "error"  
-<list>(属性名称: data) |  |  |  |  
+<data> |  |  |  |  
 symbol | true | string | 品种代码 |  
 contract_type | true | string | 合约类型 | 当周:"this_week", 次周:"next_week",
 当季:"quarter",次季:"next_quarter"  
@@ -5088,8 +5088,8 @@ order_type | true | int | 订单类型 | 1:报单 、 2:撤单 、 3:强平、4:
 order_source | true | string | 订单来源 |
 （system:系统、web:用户网页、api:用户API、m:用户M站、risk:风控系统、settlement:交割结算、ios：ios客户端、android：安卓客户端、windows：windows客户端、mac：mac客户端、trigger：计划委托触发）  
 fee_asset | true | string | 手续费币种 | （"BTC","ETH"...）  
-liquidation_type | true | string | 强平类型 0:非强平类型，1：多空轧差， 2:部分接管，3：全部接管 |  
-</list> |  |  |  |  
+liquidation_type | true | string | 强平类型 | 0:非强平类型，1：多空轧差， 2:部分接管，3：全部接管  
+</data> |  |  |  |  
 ts | true | long | 时间戳 |  
   
 ## 获取订单明细信息
@@ -5193,12 +5193,12 @@ created_at禁止传0。
 参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
 ---|---|---|---|---  
 status | true | string | 请求处理结果 | "ok" , "error"  
-<object> (属性名称: data) |  |  |  |  
+<data> |  |  |  |  
 symbol | true | string | 品种代码 |  
 contract_type | true | string | 合约类型 | 当周:"this_week", 次周:"next_week",
 当季:"quarter",次季:"next_quarter"  
 contract_code | true | string | 合约代码 | "BTC180914" ...  
-lever_rate | true | int | 杠杆倍数 | 1\5\10\20  
+lever_rate | true | int | 杠杆倍数 | 1,5,10,20  
 direction | true | string | 买卖方向 | "buy":买 "sell":卖  
 offset | true | string | 开平方向 | "open":开 "close":平  
 volume | true | decimal | 委托数量 |  
@@ -5218,7 +5218,7 @@ instrument_price | true | decimal | 爆仓单合约价格 |
 final_interest | true | decimal | 爆仓时合约权益 |  
 adjust_value | true | decimal | 爆仓时调整系数 |  
 fee_asset | true | string | 手续费币种 | （"BTC","ETH"...）  
-liquidation_type | true | string | 强平类型 0:非强平类型，1：多空轧差， 2:部分接管，3：全部接管 |  
+liquidation_type | true | string | 强平类型 | 0:非强平类型，1：多空轧差， 2:部分接管，3：全部接管  
 order_id | true | long | 订单ID |  
 order_id_str | true | string | String类型订单ID |  
 client_order_id | true | long | 客户订单ID |  
@@ -5229,7 +5229,7 @@ trade_avg_price | true | decimal | 成交均价 |
 status | true | int | 订单状态 | (1准备提交 2准备提交 3已提交 4部分成交 5部分成交已撤单 6全部成交 7已撤单
 11撤单中)  
 order_type | true | int | 订单类型 | 1:报单 、 2:撤单 、 3:强平、4:交割  
-<list> (属性名称: trades) |  |  |  |  
+<trades> |  |  |  |  
 id | true | string | 全局唯一的交易标识 |  
 trade_id | true | long |
 与api/v1/contract_matchresults返回结果中的match_id一样，是撮合结果id，
@@ -5241,8 +5241,8 @@ trade_turnover | true | decimal | 成交金额 |
 trade_fee | true | decimal | 成交手续费 |  
 role | true | string | taker或maker |  
 created_at | true | long | 创建时间 |  
-</list> |  |  |  |  
-</object > |  |  |  |  
+</trades> |  |  |  |  
+</data > |  |  |  |  
 ts | true | long | 时间戳 |  
   
 ## 获取合约当前未成交委托
@@ -5257,7 +5257,7 @@ ts | true | long | 时间戳 |
 ---|---|---|---|---|---  
 symbol | true | string | 品种代码 |  | 支持大小写, "BTC","ETH"...  
 page_index | false | int | 页码，不填默认第1页 | 1 |  
-page_size | false | int | 不填默认20，不得多于50 | 20 |  
+page_size | false | int | 不填默认20，不得多于50 | 20 | [1-50]  
   
 > Response:
     
@@ -5307,7 +5307,7 @@ page_size | false | int | 不填默认20，不得多于50 | 20 |
 参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
 ---|---|---|---|---  
 status | true | string | 请求处理结果 |  
-<list>(属性名称: data) |  |  |  |  
+<data> |  |  |  |  
 <orders> |  |  |  |  
 symbol | true | string | 品种代码 |  
 contract_type | true | string | 合约类型 | 当周:"this_week", 次周:"next_week",
@@ -5315,12 +5315,12 @@ contract_type | true | string | 合约类型 | 当周:"this_week", 次周:"next_
 contract_code | true | string | 合约代码 | "BTC180914" ...  
 volume | true | decimal | 委托数量 |  
 price | true | decimal | 委托价格 |  
-order_price_type | true | string | 订单报价类型 "limit":限价 "opponent":对手价
-"post_only":只做maker单,post only下单只受用户持仓数量限制 |  
-order_type | true | int | 订单类型，1:报单 、 2:撤单 、 3:强平、4:交割 |  
-direction | true | string | "buy":买 "sell":卖 |  
-offset | true | string | "open":开 "close":平 |  
-lever_rate | true | int | 杠杆倍数 | 1\5\10\20  
+order_price_type | true | string | 订单报价类型 | "limit":限价 "opponent":对手价
+"post_only":只做maker单,post only下单只受用户持仓数量限制  
+order_type | true | int | 订单类型 | 1:报单 、 2:撤单 、 3:强平、4:交割  
+direction | true | string | 买卖方向 | "buy":买 "sell":卖  
+offset | true | string | 开平方向 | "open":开 "close":平  
+lever_rate | true | int | 杠杆倍数 | 1,5,10,20  
 order_id | true | long | 订单ID |  
 order_id_str | true | string | String订单ID |  
 client_order_id | true | long | 客户订单ID |  
@@ -5331,14 +5331,14 @@ fee | true | decimal | 手续费 |
 trade_avg_price | true | decimal | 成交均价 |  
 margin_frozen | true | decimal | 冻结保证金 |  
 profit | true | decimal | 收益 |  
-status | true | int | 订单状态 | (3未成交 4部分成交 5部分成交已撤单 6全部成交 7已撤单)  
+status | true | int | 订单状态 | (3未成交， 4部分成交， 5部分成交已撤单， 6全部成交， 7已撤单)  
 order_source | true | string | 订单来源 |  
 fee_asset | true | string | 手续费币种 | （"BTC","ETH"...）  
 </orders> |  |  |  |  
 total_page | true | int | 总页数 |  
 current_page | true | int | 当前页 |  
 total_size | true | int | 总条数 |  
-</list> |  |  |  |  
+</data> |  |  |  |  
 ts | true | long | 时间戳 |  
   
 ## 获取合约历史委托
