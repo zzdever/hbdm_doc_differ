@@ -12924,7 +12924,7 @@ amount | true | decimal | 金额 |
 </financial_record> |  |  |  |  
 remain_size | true | int | 剩余数据条数（在时间范围内，因受到数据条数限制而未查询到的数据条数） |  
 next_id | true | long | 下一条数据的id（仅在查询结果超过数据条数限制时才有值） |  
-|  |  |  |  
+</data> |  |  |  |  
   
 #### 备注：
 
