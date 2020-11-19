@@ -10579,6 +10579,8 @@ ts | true | long | 当前系统时间戳 |
 
 ## 代码实例
 
+### REST
+
   * [Java](https://github.com/hbdmapi/java_demo)
 
   * [Python](https://github.com/hbdmapi/hbdm_Python)
@@ -10588,6 +10590,10 @@ ts | true | long | 当前系统时间戳 |
   * [C++](https://github.com/hbdmapi/huobi_swap_Cpp)
 
   * [Postman](https://github.com/hbdmapi/huobi_futures_Postman)
+
+### 合约SDK
+
+  * [Java SDK](https://github.com/hbdmapi/huobi_coin_swap_Java)
 
 ### 备注：币本位永续代码使用方式与交割合约类似，其他语言demo可以参考交割合约
 
