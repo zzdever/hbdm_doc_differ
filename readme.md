@@ -2626,7 +2626,7 @@ symbol | true | string | 合约名称 |  |
 ---|---|---|---|---  
 ch | true | string | 数据所属的 channel，格式： market.$symbol.detail.merged |  
 status | true | string | 请求处理结果 | "ok" , "error"  
-tick | true | object | 24小时成交量、开盘价和收盘价（从当今零点开始） |  
+tick | true | object | 24小时成交量、开盘价和收盘价（从当天零点开始） |  
 ts | true | long | 响应生成时间点，单位：毫秒 |  
   
 ### tick参数
@@ -11333,7 +11333,7 @@ contract_code | true | string | 合约代码 | 仅支持大写， "BTC-USD" ... 
 ch | true | string | 数据所属的 channel，格式： market.\$contract_code.detail.merged |  
 status | true | string | 请求处理结果 | "ok" , "error"  
 ts | true | long | 响应生成时间点，单位：毫秒 |  
-<dict>(属性名称: tick) |  |  | 24小时成交量、开盘价和收盘价 |  
+<tick> |  |  | 24小时成交量、开盘价和收盘价（从当天零点开始） |  
 id | true | long | K线ID,也就是K线时间戳 |  
 vol | true | string | 成交量张数 |  
 count | true | int | 成交笔数 |  
@@ -11345,7 +11345,7 @@ amount | true | string | 成交量(币), 即 sum(每一笔成交量(张)*单张�
 ask | true | object | 卖盘,[price(挂单价), vol(此价格挂单张数)], 按price升序 |  
 bid | true | object | 买盘,[price(挂单价), vol(此价格挂单张数)], 按price降序 |  
 ts | true | long | 时间戳 |  
-</dict> |  |  |  |  
+</tick> |  |  |  |  
   
 ## 获取市场最近成交记录
 
