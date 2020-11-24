@@ -3233,6 +3233,7 @@ page_size | false | int | 不填默认20，不得多于50 | 20 | [1-50]
                     "direction": "buy",
                     "offset": "close",
                     "volume": 100,
+                    "amount": 100,
                     "price": 14149.98,
                     "created_at": 1604299146147
                 }
@@ -3270,7 +3271,7 @@ ts | true | long | 时间戳 |
   
 ## 查询平台历史结算记录
 
-  * POST `/api/v1/contract_settlement_records`
+  * GET `/api/v1/contract_settlement_records`
 
 ### 请求参数
 
@@ -4428,6 +4429,9 @@ symbol | true | string | 品种代码 | 支持大小写,"BTC","ETH"...
 
 属性 | 数据类型 | 是否必填 | 说明  
 ---|---|---|---  
+status | true | string | 请求处理结果 "ok" , "error"  
+ts | long | long | 响应生成时间点，单位：毫秒  
+<data> | true | object array |  
 symbol | string | true | 合约品种  
 margin_balance | decimal | true | 账户权益  
 margin_position | decimal | true | 持仓保证金  
@@ -4459,6 +4463,7 @@ lever_rate | int | true | 杠杆倍数
 direction | string | true | "buy":买 "sell":卖  
 last_price | decimal | true | 最新价  
 </positions> |  |  |  
+</data> |  |  |  
   
 ## 母子账户划转
 
@@ -8776,6 +8781,7 @@ created_at | true | long | 订单创建时间 |
                 "direction":"buy",
                 "offset":"close",
                 "volume":7,
+                "amount":7,
                 "price":4.236,
                 "created_at":1580815422296
             }
