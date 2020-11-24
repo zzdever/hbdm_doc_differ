@@ -2388,7 +2388,7 @@ sub_transfer_master | true | int | 从子账号划转到母账号的权限："1"
 ---|---|---|---  
 symbol | string | true |
 支持大小写，如"BTC_CW"表示BTC当周合约，"BTC_NW"表示BTC次周合约，"BTC_CQ"表示BTC当季合约,
-"BTC_NQ"表示BTC次季合约。支持使用合约code来订阅
+"BTC_NQ"表示BTC次季合约。支持使用合约code来查询数据，
 例如："BTC200918"(当周)，"BTC200925"(次周)，"BTC201225"(季度)，"BTC210326"(次季度)。  
 type | string | true | 仅支持小写，获得150档深度数据，使用step0, step1, step2, step3, step4,
 step5, step14, step15（step1至step5,step14，step15
@@ -2497,7 +2497,7 @@ step15、step13 | 10
 ---|---|---|---|---|---  
 symbol | true | string | 合约名称 |  | 支持大小写，
 如"BTC_CW"表示BTC当周合约，"BTC_NW"表示BTC次周合约，"BTC_CQ"表示BTC当季合约,
-"BTC_NQ"表示次季度合约"。支持使用合约code来订阅
+"BTC_NQ"表示次季度合约"。支持使用合约code来查询数据，
 例如："BTC200918"(当周)，"BTC200925"(次周)，"BTC201225"(季度)，"BTC210326"(次季度)。  
 period | true | string | K线类型 |  | 1min, 5min, 15min, 30min, 60min,4hour,1day,
 1mon  
@@ -2600,7 +2600,7 @@ amount | decimal | 成交量(币) |
 ---|---|---|---|---|---  
 symbol | true | string | 合约名称 |  |
 支持大小写，如"BTC_CW"表示BTC当周合约，"BTC_NW"表示BTC次周合约，"BTC_CQ"表示BTC当季合约,
-"BTC_NQ"表示次季度合约"。支持使用合约code来订阅
+"BTC_NQ"表示次季度合约"。支持使用合约code来查询数据，
 例如："BTC200918"(当周)，"BTC200925"(次周)，"BTC201225"(季度)，"BTC210326"(次季度)。  
   
 > tick说明:
@@ -2691,7 +2691,7 @@ bid | true | object | 买盘,[price(挂单价), vol(此价格挂单张数)], 按
 ---|---|---|---|---|---  
 symbol | true | string | 合约名称 |  |
 支持大小写，如"BTC_CW"表示BTC当周合约，"BTC_NW"表示BTC次周合约，"BTC_CQ"表示BTC当季合约,
-"BTC_NQ"表示次季度合约"。支持使用合约code来订阅
+"BTC_NQ"表示次季度合约"。支持使用合约code来查询数据，
 例如："BTC200918"(当周)，"BTC200925"(次周)，"BTC201225"(季度)，"BTC210326"(次季度)。  
   
 > Tick说明：
@@ -2771,7 +2771,7 @@ ts | true | long | 发送时间 |
 ---|---|---|---|---|---  
 symbol | true | string | 合约名称 |  |
 支持大小写，如"BTC_CW"表示BTC当周合约，"BTC_NW"表示BTC次周合约，"BTC_CQ"表示BTC当季合约,
-"BTC_NQ"表示次季度合约"。支持使用合约code来订阅
+"BTC_NQ"表示次季度合约"。支持使用合约code来查询数据，
 例如："BTC200918"(当周)，"BTC200925"(次周)，"BTC201225"(季度)，"BTC210326"(次季度)。  
 size | true | int | 获取交易记录的数量 |  | [1, 2000]  
   
