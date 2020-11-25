@@ -3306,7 +3306,7 @@ page_size | false | int | 页长，不填默认20，不得多于50 |
                         },
                         {
                             "contract_code": "BTC201127",
-                            "settle_price": 18292.24,
+                            "settlement_price": 18292.24,
                             "settlement_type": "settlement"
                         },
                         {
