@@ -3301,7 +3301,7 @@ page_size | false | int | 页长，不填默认20，不得多于50 |
                     "list": [
                         {
                             "contract_code": "BTC201120",
-                            "settle_price": 18217.62,
+                            "settlement_price": 18217.62,
                             "settlement_type": "delivery"
                         },
                         {
@@ -3311,12 +3311,12 @@ page_size | false | int | 页长，不填默认20，不得多于50 |
                         },
                         {
                             "contract_code": "BTC201225",
-                            "settle_price": 18490.42,
+                            "settlement_price": 18490.42,
                             "settlement_type": "settlement"
                         },
                         {
                             "contract_code": "BTC210326",
-                            "settle_price": 18788.7,
+                            "settlement_price": 18788.7,
                             "settlement_type": "settlement"
                         }
                     ]
