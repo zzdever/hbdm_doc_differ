@@ -10007,24 +10007,25 @@ IOC下单），lightning_fok（闪电平仓-FOK下单），lightning(闪电平�
 读取 | 账户接口 | swap-api/v1/swap_fee | POST | 查询用户当前的手续费费率 | 是  
 读取 | 账户接口 | swap-api/v1/swap_transfer_limit | POST | 查询用户当前的划转限制 | 是  
 读取 | 账户接口 | swap-api/v1/swap_position_limit | POST | 用户持仓量限制的查询 | 是  
+交易 | 账户接口 | swap-api/v1/swap_master_sub_transfer | POST | 母子账户划转 | 是  
 交易 | 交易接口 | swap-api/v1/swap_order | POST | 合约下单 | 是  
 交易 | 交易接口 | swap-api/v1/swap_batchorder | POST | 合约批量下单 | 是  
 交易 | 交易接口 | swap-api/v1/swap_cancel | POST | 撤销订单 | 是  
 交易 | 交易接口 | swap-api/v1/swap_cancelall | POST | 全部撤单 | 是  
 交易 | 交易接口 | swap-api/v1/swap_switch_lever_rate | POST | 切换杠杆 | 是  
-交易 | 交易接口 | swap-api/v1/swap_order_info | POST | 获取合约订单信息 | 是  
-交易 | 交易接口 | swap-api/v1/swap_order_detail | POST | 获取订单明细信息 | 是  
-交易 | 交易接口 | swap-api/v1/swap_openorders | POST | 获取合约当前未成交委托 | 是  
-交易 | 交易接口 | swap-api/v1/swap_hisorders | POST | 获取合约历史委托 | 是  
-交易 | 交易接口 | swap-api/v1/swap_hisorders_exact | POST | 组合查询合约历史委托 | 是  
-交易 | 交易接口 | swap-api/v1/swap_matchresults | POST | 获取历史成交记录 | 是  
-交易 | 交易接口 | swap-api/v1/swap_matchresults_exact | POST | 组合查询合约历史成交记录 | 是  
+读取 | 交易接口 | swap-api/v1/swap_order_info | POST | 获取合约订单信息 | 是  
+读取 | 交易接口 | swap-api/v1/swap_order_detail | POST | 获取订单明细信息 | 是  
+读取 | 交易接口 | swap-api/v1/swap_openorders | POST | 获取合约当前未成交委托 | 是  
+读取 | 交易接口 | swap-api/v1/swap_hisorders | POST | 获取合约历史委托 | 是  
+读取 | 交易接口 | swap-api/v1/swap_hisorders_exact | POST | 组合查询合约历史委托 | 是  
+读取 | 交易接口 | swap-api/v1/swap_matchresults | POST | 获取历史成交记录 | 是  
+读取 | 交易接口 | swap-api/v1/swap_matchresults_exact | POST | 组合查询合约历史成交记录 | 是  
 交易 | 交易接口 | swap-api/v1/swap_lightning_close_position | POST | 闪电平仓下单 | 是  
 交易 | 交易接口 | swap-api/v1/swap_trigger_order | POST | 合约计划委托下单 | 是  
 交易 | 交易接口 | swap-api/v1/swap_trigger_cancel | POST | 合约计划委托撤单 | 是  
 交易 | 交易接口 | swap-api/v1/swap_trigger_cancelall | POST | 合约计划委托全部撤单 | 是  
-交易 | 交易接口 | swap-api/v1/swap_trigger_openorders | POST | 获取计划委托当前委托接口 | 是  
-交易 | 交易接口 | swap-api/v1/swap_trigger_hisorders | POST | 获取计划委托历史委托接口 | 是  
+读取 | 交易接口 | swap-api/v1/swap_trigger_openorders | POST | 获取计划委托当前委托接口 | 是  
+读取 | 交易接口 | swap-api/v1/swap_trigger_hisorders | POST | 获取计划委托历史委托接口 | 是  
   
 ## 访问地址
 
@@ -12323,22 +12324,22 @@ page_size | false | int | 页长，不填默认20，不得多于50 |
     
     {
         "status": "ok",
-        "ts": 1578127363768,
         "data": {
+            "total_page": 271,
+            "current_page": 1,
+            "total_size": 271,
             "settlement_record": [
                 {
                     "symbol": "BTC",
                     "contract_code": "BTC-USD",
-                    "settlement_time": 1593460800000,
+                    "settlement_time": 1606377600000,
                     "clawback_ratio": 0,
-                    "settlement_price": 9133.21,
-                    "settlement_type":"settlement"
+                    "settlement_price": 17596.8,
+                    "settlement_type": "settlement"
                 }
-            ],
-            "current_page": 1,
-            "total_page": 1,
-            "total_size": 5
-        }
+            ]
+        },
+        "ts": 1606379293628
     }
     
     
