@@ -1023,62 +1023,62 @@ WebSocket私有订单成交推送接口(需要API KEY验签)
 
 权限类型 | 接口数据类型 | 请求方法 | 类型 | 描述 | 需要验签  
 ---|---|---|---|---|---  
-读取 | 基础信息接口 | api/v1/contract_contract_info | GET | 获取合约信息 | 否  
-读取 | 基础信息接口 | api/v1/contract_index | GET | 获取合约指数信息 | 否  
-读取 | 基础信息接口 | api/v1/contract_price_limit | GET | 获取合约最高限价和最低限价 | 否  
-读取 | 基础信息接口 | api/v1/contract_open_interest | GET | 获取当前可用合约总持仓量 | 否  
-读取 | 基础信息接口 | api/v1/contract_delivery_price | GET | 获取预估交割价 | 否  
-读取 | 基础信息接口 | api/v1/contract_api_state | GET | 查询系统状态 | 否  
+读取 | 基础信息接口 | /api/v1/contract_contract_info | GET | 获取合约信息 | 否  
+读取 | 基础信息接口 | /api/v1/contract_index | GET | 获取合约指数信息 | 否  
+读取 | 基础信息接口 | /api/v1/contract_price_limit | GET | 获取合约最高限价和最低限价 | 否  
+读取 | 基础信息接口 | /api/v1/contract_open_interest | GET | 获取当前可用合约总持仓量 | 否  
+读取 | 基础信息接口 | /api/v1/contract_delivery_price | GET | 获取预估交割价 | 否  
+读取 | 基础信息接口 | /api/v1/contract_api_state | GET | 查询系统状态 | 否  
 读取 | 市场行情接口 | /market/depth | GET | 获取行情深度数据 | 否  
 读取 | 市场行情接口 | /market/history/kline | GET | 获取K线数据 | 否  
 读取 | 市场行情接口 | /market/detail/merged | GET | 获取聚合行情 | 否  
 读取 | 市场行情接口 | /market/trade | GET | 获取市场最近成交记录 | 否  
 读取 | 市场行情接口 | /market/history/trade | GET | 批量获取最近的交易记录 | 否  
-读取 | 市场行情接口 | api/v1/contract_risk_info | GET | 查询合约风险准备金余额和预估分摊比例 | 否  
-读取 | 市场行情接口 | api/v1/contract_insurance_fund | GET | 查询合约风险准备金余额历史数据 | 否  
-读取 | 市场行情接口 | api/v1/contract_adjustfactor | GET | 查询平台阶梯调整系数 | 否  
-读取 | 市场行情接口 | api/v1/contract_his_open_interest | GET | 平台持仓量的查询 | 否  
-读取 | 市场行情接口 | api/v1/contract_elite_account_ratio | GET | 精英账户多空持仓对比-账户数 | 否  
-读取 | 市场行情接口 | api/v1/contract_elite_position_ratio | GET | 精英账户多空持仓对比-持仓量 | 否  
-读取 | 市场行情接口 | api/v1/contract_liquidation_orders | GET | 获取强平订单 | 否  
-读取 | 市场行情接口 | api/v1/contract_settlement_records | GET | 查询平台历史结算记录 | 否  
-读取 | 市场行情接口 | api/v1/index/market/history/index | GET | 获取指数K线数据 | 否  
-读取 | 市场行情接口 | api/v1/index/market/history/basis | GET | 获取基差数据 | 否  
-读取 | 资产接口 | api/v1/contract_account_info | POST | 获取用户账户信息 | 是  
-读取 | 资产接口 | api/v1/contract_position_info | POST | 获取用户持仓信息 | 是  
-读取 | 账户接口 | api/v1/contract_sub_account_list | POST | 币查询母账户下所有子账户资产信息 | 是  
-读取 | 账户接口 | api/v1/contract_sub_account_info | POST | 查询单个子账户资产信息 | 是  
-读取 | 账户接口 | api/v1/contract_sub_position_info | POST | 查询单个子账户持仓信息的 | 是  
-读取 | 账户接口 | api/v1/contract_financial_record | POST | 查询用户财务记录 | 是  
-读取 | 账户接口 | api/v1/contract_financial_record_exact | POST | 组合查询财务记录 | 是  
-读取 | 账户接口 | api/v1/contract_user_settlement_records | POST | 查询用户结算记录 | 是  
-读取 | 账户接口 | api/v1/contract_order_limit | POST | 查询用户当前的下单量限制 | 是  
-读取 | 账户接口 | api/v1/contract_fee | POST | 查询用户当前的手续费费率 | 是  
-读取 | 账户接口 | api/v1/contract_transfer_limit | POST | 查询用户当前的划转限制 | 是  
-读取 | 账户接口 | api/v1/contract_position_limit | POST | 用户持仓量限制的查询 | 是  
-读取 | 账户接口 | api/v1/contract_account_position_info | POST | 查询用户账户和持仓信息 | 是  
-交易 | 账户接口 | api/v1/contract_master_sub_transfer | POST | 母子账户划转 | 是  
-读取 | 账户接口 | api/v1/contract_master_sub_transfer_record | POST |
+读取 | 市场行情接口 | /api/v1/contract_risk_info | GET | 查询合约风险准备金余额和预估分摊比例 | 否  
+读取 | 市场行情接口 | /api/v1/contract_insurance_fund | GET | 查询合约风险准备金余额历史数据 | 否  
+读取 | 市场行情接口 | /api/v1/contract_adjustfactor | GET | 查询平台阶梯调整系数 | 否  
+读取 | 市场行情接口 | /api/v1/contract_his_open_interest | GET | 平台持仓量的查询 | 否  
+读取 | 市场行情接口 | /api/v1/contract_elite_account_ratio | GET | 精英账户多空持仓对比-账户数 | 否  
+读取 | 市场行情接口 | /api/v1/contract_elite_position_ratio | GET | 精英账户多空持仓对比-持仓量 | 否  
+读取 | 市场行情接口 | /api/v1/contract_liquidation_orders | GET | 获取强平订单 | 否  
+读取 | 市场行情接口 | /api/v1/contract_settlement_records | GET | 查询平台历史结算记录 | 否  
+读取 | 市场行情接口 | /index/market/history/index | GET | 获取指数K线数据 | 否  
+读取 | 市场行情接口 | /index/market/history/basis | GET | 获取基差数据 | 否  
+读取 | 资产接口 | /api/v1/contract_account_info | POST | 获取用户账户信息 | 是  
+读取 | 资产接口 | /api/v1/contract_position_info | POST | 获取用户持仓信息 | 是  
+读取 | 账户接口 | /api/v1/contract_sub_account_list | POST | 币查询母账户下所有子账户资产信息 | 是  
+读取 | 账户接口 | /api/v1/contract_sub_account_info | POST | 查询单个子账户资产信息 | 是  
+读取 | 账户接口 | /api/v1/contract_sub_position_info | POST | 查询单个子账户持仓信息的 | 是  
+读取 | 账户接口 | /api/v1/contract_financial_record | POST | 查询用户财务记录 | 是  
+读取 | 账户接口 | /api/v1/contract_financial_record_exact | POST | 组合查询财务记录 | 是  
+读取 | 账户接口 | /api/v1/contract_user_settlement_records | POST | 查询用户结算记录 | 是  
+读取 | 账户接口 | /api/v1/contract_order_limit | POST | 查询用户当前的下单量限制 | 是  
+读取 | 账户接口 | /api/v1/contract_fee | POST | 查询用户当前的手续费费率 | 是  
+读取 | 账户接口 | /api/v1/contract_transfer_limit | POST | 查询用户当前的划转限制 | 是  
+读取 | 账户接口 | /api/v1/contract_position_limit | POST | 用户持仓量限制的查询 | 是  
+读取 | 账户接口 | /api/v1/contract_account_position_info | POST | 查询用户账户和持仓信息 | 是  
+交易 | 账户接口 | /api/v1/contract_master_sub_transfer | POST | 母子账户划转 | 是  
+读取 | 账户接口 | /api/v1/contract_master_sub_transfer_record | POST |
 获取母账户下的所有母子账户划转记录 | 是  
-交易 | 交易接口 | api/v1/contract_order | POST | 合约下单 | 是  
-交易 | 交易接口 | api/v1/contract_batchorder | POST | 合约批量下单 | 是  
-交易 | 交易接口 | api/v1/contract_cancel | POST | 撤销订单 | 是  
-交易 | 交易接口 | api/v1/contract_cancelall | POST | 全部撤单 | 是  
-交易 | 交易接口 | api/v1/contract_switch_lever_rate | POST | 切换杠杆 | 是  
-读取 | 交易接口 | api/v1/contract_order_info | POST | 获取合约订单信息 | 是  
-读取 | 交易接口 | api/v1/contract_order_detail | POST | 获取订单明细信息 | 是  
-读取 | 交易接口 | api/v1/contract_openorders | POST | 获取合约当前未成交委托 | 是  
-读取 | 交易接口 | api/v1/contract_hisorders | POST | 获取合约历史委托 | 是  
-读取 | 交易接口 | api/v1/contract_hisorders_exact | POST | 组合查询合约历史委托 | 是  
-读取 | 交易接口 | api/v1/contract_matchresults | POST | 获取历史成交记录 | 是  
-读取 | 交易接口 | api/v1/contract_matchresults_exact | POST | 组合查询合约历史成交记录 | 是  
-读取 | 账户接口 | api/v1/contract_trigger_openorders | POST | 获取计划委托当前委托接口 | 是  
-读取 | 账户接口 | api/v1/contract_trigger_hisorders | POST | 获取计划委托历史委托接口 | 是  
-交易 | 账户接口 | v1/futures/transfer | POST | 币币账户和合约账户间进行资金的划转 | 是  
-交易 | 交易接口 | api/v1/lightning_close_position | POST | 闪电平仓下单 | 是  
-交易 | 交易接口 | api/v1/contract_trigger_order | POST | 合约计划委托下单 | 是  
-交易 | 交易接口 | api/v1/contract_trigger_cancel | POST | 合约计划委托撤单 | 是  
-交易 | 交易接口 | api/v1/contract_trigger_cancelall | POST | 合约计划委托全部撤单 | 是  
+交易 | 交易接口 | /api/v1/contract_order | POST | 合约下单 | 是  
+交易 | 交易接口 | /api/v1/contract_batchorder | POST | 合约批量下单 | 是  
+交易 | 交易接口 | /api/v1/contract_cancel | POST | 撤销订单 | 是  
+交易 | 交易接口 | /api/v1/contract_cancelall | POST | 全部撤单 | 是  
+交易 | 交易接口 | /api/v1/contract_switch_lever_rate | POST | 切换杠杆 | 是  
+读取 | 交易接口 | /api/v1/contract_order_info | POST | 获取合约订单信息 | 是  
+读取 | 交易接口 | /api/v1/contract_order_detail | POST | 获取订单明细信息 | 是  
+读取 | 交易接口 | /api/v1/contract_openorders | POST | 获取合约当前未成交委托 | 是  
+读取 | 交易接口 | /api/v1/contract_hisorders | POST | 获取合约历史委托 | 是  
+读取 | 交易接口 | /api/v1/contract_hisorders_exact | POST | 组合查询合约历史委托 | 是  
+读取 | 交易接口 | /api/v1/contract_matchresults | POST | 获取历史成交记录 | 是  
+读取 | 交易接口 | /api/v1/contract_matchresults_exact | POST | 组合查询合约历史成交记录 | 是  
+读取 | 账户接口 | /api/v1/contract_trigger_openorders | POST | 获取计划委托当前委托接口 | 是  
+读取 | 账户接口 | /api/v1/contract_trigger_hisorders | POST | 获取计划委托历史委托接口 | 是  
+交易 | 账户接口 | /v1/futures/transfer | POST | 币币账户和合约账户间进行资金的划转 | 是  
+交易 | 交易接口 | /api/v1/lightning_close_position | POST | 闪电平仓下单 | 是  
+交易 | 交易接口 | /api/v1/contract_trigger_order | POST | 合约计划委托下单 | 是  
+交易 | 交易接口 | /api/v1/contract_trigger_cancel | POST | 合约计划委托撤单 | 是  
+交易 | 交易接口 | /api/v1/contract_trigger_cancelall | POST | 合约计划委托全部撤单 | 是  
   
 ## 访问地址
 
@@ -1746,7 +1746,7 @@ ts | true | long | 当前系统时间戳 |
 
 ### 1、/api/v1/contract_hisorders 历史委托查询接口：
 
-  * 为了保证时效性和降低延迟，强烈建议用户使用api/v1/contract_order_info获取用户订单信息接口来查询订单信息，获取合约订单信息接口从内存里面查询，无延迟，接口响应速度更快。
+  * 为了保证时效性和降低延迟，强烈建议用户使用/api/v1/contract_order_info获取用户订单信息接口来查询订单信息，获取合约订单信息接口从内存里面查询，无延迟，接口响应速度更快。
 
   * 如果用户一定要使用/api/v1/contract_hisorders 历史委托查询接口，请尽量输入更多的查询条件，symbol、trade_type（推荐传0查询全部）、type、status、create_date尽量都输入，并且查询日期create_date参数输入尽量小的整数，最好只查询一天的数据；
 
@@ -1758,13 +1758,13 @@ ts | true | long | 当前系统时间戳 |
 
   * 为了提升查询的性能和响应速度，查询条件symbol、type（推荐不填查询全部）、create_date，尽量都输入，并且查询日期create_date参数输入尽量小的整数，最好只查询一天的数据；
 
-### 4、api/v1/contract_order_detail 获取订单明细接口：
+### 4、/api/v1/contract_order_detail 获取订单明细接口：
 
   * 查询条件created_at使用13位long类型时间戳（包含毫秒时间），如果输入准确的时间戳，查询性能将会提升。
 
-  * 例如:"2019/10/18 10:26:22"转换为时间戳为：1571365582123。也可以直接从contract_order下单接口返回报文中的ts中获取时间戳作为参数查询接口api/v1/contract_order_detail获取订单明细，同时created_at禁止传0；；
+  * 例如:"2019/10/18 10:26:22"转换为时间戳为：1571365582123。也可以直接从contract_order下单接口返回报文中的ts中获取时间戳作为参数查询接口/api/v1/contract_order_detail获取订单明细，同时created_at禁止传0；；
 
-### 5、api/v1/contract_trigger_hisorders 获取计划委托历史委托接口：
+### 5、/api/v1/contract_trigger_hisorders 获取计划委托历史委托接口：
 
   * 为了提升查询的性能和响应速度，参数symbol、contract_code、trade_type、status、create_date尽量都输入，并且查询日期create_date参数输入尽量小的整数，最好只查询一天的数据；
 
@@ -1796,9 +1796,9 @@ ts | true | long | 当前系统时间戳 |
 
 `}`
 
-### 7、api/v1/contract_order合约下单和api/v1/contract_batchorder合约批量下单接口：
+### 7、/api/v1/contract_order合约下单和api/v1/contract_batchorder合约批量下单接口：
 
-  * 推荐传参数client_order_id（用户级别唯一），主要防止下单和批量下单接口由于网络或其它原因接口超时或者没有返回，可以根据client_order_id通过请求接口api/v1/contract_order_info来快速获取订单是否下单正常或者快速获取订单信息。
+  * 推荐传参数client_order_id（用户级别唯一），主要防止下单和批量下单接口由于网络或其它原因接口超时或者没有返回，可以根据client_order_id通过请求接口/api/v1/contract_order_info来快速获取订单是否下单正常或者快速获取订单信息。
 
 ## 代码实例
 
@@ -2006,7 +2006,7 @@ depth增量数据market.$symbol.depth.size_${size}.high_freq是30MS检测一次�
 在结算时不能下单和撤单，若用户在结算期间下单或撤单会返回错误码“1056”，提示结算中无法下单和撤单。
 
 建议您在结算时间点每隔几秒钟轮询获取合约信息接口：
-api/v1/contract_contract_info，当返回报文中contract_status返回状态码为5、6、7、8中的任意一个时表示在结算中，当contract_status返回状态码为1时是表示结算完成可以正常下单和撤单。
+/api/v1/contract_contract_info，当返回报文中contract_status返回状态码为5、6、7、8中的任意一个时表示在结算中，当contract_status返回状态码为1时是表示结算完成可以正常下单和撤单。
 
 温馨提示您，交割合约在新加坡时间每周五16:00进行结算。在结算期间查询资金和持仓会返回错误码，返回的错误码及错误码表示的含义如下：
 
@@ -2057,11 +2057,11 @@ WS订阅私有账户，订单，仓位时，请注意也要定时维护好心跳
 
 ### Q10: API撤单成功为什么查询订单却是成交？
 
-请注意撤单成功或者下单成功只代表您撤单命令或者下单命令的成功，并不代表订单已经撤销，您可以通过该接口api/v1/contract_order_info去查询订单状态。
+请注意撤单成功或者下单成功只代表您撤单命令或者下单命令的成功，并不代表订单已经撤销，您可以通过该接口/api/v1/contract_order_info去查询订单状态。
 
 ### Q11: API一般从撤单开始到撤单成功需要多久？
 
-撤单命令执行成功一般几十ms，实际撤单状态要查询订单状态api/v1/contract_order_info获取。
+撤单命令执行成功一般几十ms，实际撤单状态要查询订单状态/api/v1/contract_order_info获取。
 
 ## 错误码相关
 
@@ -2092,7 +2092,7 @@ available. '}类似错误，说明此时可平仓量不足，您平仓时需查�
 
 ### 示例
 
-  * GET `api/v1/contract_contract_info`
+  * GET `/api/v1/contract_contract_info`
 
     
     
@@ -2157,7 +2157,7 @@ ts | true | long | 响应生成时间点，单位：毫秒 |
 
 ### 示例
 
-  * GET `api/v1/contract_index`
+  * GET `/api/v1/contract_index`
 
     
     
@@ -2202,7 +2202,7 @@ ts | true | long | 时间戳，单位：毫秒 |
 
 ### 示例
 
-  * GET `api/v1/contract_price_limit`
+  * GET `/api/v1/contract_price_limit`
 
     
     
@@ -2260,7 +2260,7 @@ ts | true | long | 响应生成时间点，单位：毫秒 |
 
 ### 示例
 
-  * GET `api/v1/contract_open_interest`
+  * GET `/api/v1/contract_open_interest`
 
     
     
@@ -2313,7 +2313,7 @@ ts | true | long | 响应生成时间点，单位：毫秒 |
 
 ### 示例
 
-  * GET `api/v1/contract_delivery_price`
+  * GET `/api/v1/contract_delivery_price`
 
     
     
@@ -2352,7 +2352,7 @@ ts | true | long | 响应生成时间点，单位：毫秒 |
 
 ### 示例
 
-  * GET `api/v1/contract_api_state`
+  * GET `/api/v1/contract_api_state`
 
     
     
@@ -2897,7 +2897,7 @@ ts | true | long | 响应生成时间点，单位：毫秒 |
   
 ## 查询合约风险准备金余额和预估分摊比例
 
-  * GET `api/v1/contract_risk_info`
+  * GET `/api/v1/contract_risk_info`
 
     
     
@@ -2940,7 +2940,7 @@ estimated_clawback | true | decimal | 预估分摊比例 |
   
 ## 查询合约风险准备金余额历史数据
 
-  * GET `api/v1/contract_insurance_fund`
+  * GET `/api/v1/contract_insurance_fund`
 
     
     
@@ -2992,7 +2992,7 @@ ts | true | long | 数据时间点，单位：毫秒 |
   
 ## 查询平台阶梯调整系数
 
-  * GET `api/v1/contract_adjustfactor`
+  * GET `/api/v1/contract_adjustfactor`
 
     
     
@@ -3067,7 +3067,7 @@ adjust_factor | true | decimal | 调整系数 |
 
 ### 实例
 
-  * GET `api/v1/contract_his_open_interest`
+  * GET `/api/v1/contract_his_open_interest`
 
     
     
@@ -3136,7 +3136,7 @@ tick字段：数组内的数据按照时间倒序排列； data字段：字典�
 
 ### 实例
 
-  * GET `api/v1/contract_elite_account_ratio`
+  * GET `/api/v1/contract_elite_account_ratio`
 
     
     
@@ -3190,7 +3190,7 @@ ts | true | long | 生成时间 |
 
 ### 实例
 
-  * GET `api/v1/contract_elite_position_ratio`
+  * GET `/api/v1/contract_elite_position_ratio`
 
     
     
@@ -3248,7 +3248,7 @@ ts | true | long | 生成时间 |
 
 ### 实例
 
-  * GET `api/v1/contract_liquidation_orders`
+  * GET `/api/v1/contract_liquidation_orders`
 
     
     
@@ -3543,7 +3543,7 @@ ts | true | long | 生成时间 |
 
 ### 示例
 
-  * POST `api/v1/contract_account_info`
+  * POST `/api/v1/contract_account_info`
 
 ### 请求参数
 
@@ -3604,7 +3604,7 @@ ts | true | long | 响应生成时间点，单位：毫秒 |
 
 ### 示例
 
-  * POST `api/v1/contract_position_info`
+  * POST `/api/v1/contract_position_info`
 
 ### 请求参数
 
@@ -3673,7 +3673,7 @@ ts | true | long | 响应生成时间点，单位：毫秒 |
 
 ### 请求参数
 
-  * POST `api/v1/contract_sub_account_list`
+  * POST `/api/v1/contract_sub_account_list`
 
 参数名称 | 是否必须 | 类型 | 描述 | 默认值 | 取值范围  
 ---|---|---|---|---|---  
@@ -3724,7 +3724,7 @@ risk_rate | true | decimal | 保证金率 |
 
 ## 查询单个子账户资产信息
 
-  * POST `api/v1/contract_sub_account_info`
+  * POST `/api/v1/contract_sub_account_info`
 
 > Request:
     
@@ -3800,7 +3800,7 @@ margin_static | true | decimal | 静态权益 |
 
 ## 查询单个子账户持仓信息
 
-  * POST `api/v1/contract_sub_position_info`
+  * POST `/api/v1/contract_sub_position_info`
 
 > Request:
     
@@ -3874,7 +3874,7 @@ last_price | true | decimal | 最新价 |
   
 ## 查询用户财务记录
 
-  * POST `api/v1/contract_financial_record`
+  * POST `/api/v1/contract_financial_record`
 
 > Request:
     
@@ -3951,7 +3951,7 @@ total_size | true | int | 总条数 |
   
 ## 组合查询用户财务记录
 
-  * POST `api/v1/contract_financial_record_exact`
+  * POST `/api/v1/contract_financial_record_exact`
 
 ### 请求参数
 
@@ -4063,7 +4063,7 @@ next_id | true | long | 下一条数据的流水id（仅在查询结果超过数
 
 ## 查询用户结算记录
 
-  * POST `api/v1/contract_user_settlement_records`
+  * POST `/api/v1/contract_user_settlement_records`
 
 ### 请求参数
 
@@ -4168,7 +4168,7 @@ ts | true | long | 时间戳 |
 
 ## 查询用户当前的下单量限制
 
-  * POST `api/v1/contract_order_limit`
+  * POST `/api/v1/contract_order_limit`
 
 > Request:
     
@@ -4253,7 +4253,7 @@ close_limit | true | long | 合约平仓单笔下单量最大值 |
   
 ## 查询用户当前的手续费费率
 
-  * POST `api/v1/contract_fee`
+  * POST `/api/v1/contract_fee`
 
 ### 请求参数
 
@@ -4300,7 +4300,7 @@ delivery_fee | true | string | 交割的手续费费率，小数形式 |
   
 ## 查询用户当前的划转限制
 
-  * POST `api/v1/contract_transfer_limit`
+  * POST `/api/v1/contract_transfer_limit`
 
 ### 请求参数
 
@@ -4350,7 +4350,7 @@ net_transfer_out_max_daily | true | decimal | 单日累计最大净转出量 |
   
 ## 用户持仓量限制的查询
 
-  * post `api/v1/contract_position_limit`
+  * post `/api/v1/contract_position_limit`
 
 ### 请求参数
 
@@ -4418,7 +4418,7 @@ sell_limit | true | decimal | 合约空仓持仓的最大值，单位为张 |
   
 ## 查询用户账户和持仓信息
 
-  * post `api/v1/contract_account_position_info`
+  * post `/api/v1/contract_account_position_info`
 
 ### 请求参数
 
@@ -4513,7 +4513,7 @@ last_price | decimal | true | 最新价
   
 ## 母子账户划转
 
-  * post `api/v1/contract_master_sub_transfer`
+  * post `/api/v1/contract_master_sub_transfer`
 
 > Request:
     
@@ -4565,7 +4565,7 @@ order_id | true | string | 划转订单ID |
   
 ## 获取母账户下的所有母子账户划转记录
 
-  * post `api/v1/contract_master_sub_transfer_record`
+  * post `/api/v1/contract_master_sub_transfer_record`
 
 ### 请求参数
 
@@ -4635,7 +4635,7 @@ total_size | true | int | 总条数 |
   
 ## 获取用户的API指标禁用信息
 
-  * get `api/v1/contract_api_trading_status`
+  * get `/api/v1/contract_api_trading_status`
 
 ### 请求参数
 
@@ -4710,7 +4710,7 @@ is_active | true | long | 该指标是否开启 | 1：已启用，0：未启用
 
 ## 查询用户可用杠杆倍数
 
-  * Post `api/v1/contract_available_level_rate`
+  * Post `/api/v1/contract_available_level_rate`
 
 ### 请求参数
 
@@ -4750,7 +4750,7 @@ available_level_rate | true | string | 实际可用杠杆倍数，多个以英�
 
 ### 示例
 
-  * POST `api/v1/contract_order`
+  * POST `/api/v1/contract_order`
 
 > Request:
     
@@ -4845,7 +4845,7 @@ bigint的包解析。
 
 ## 合约批量下单
 
-  * POST `api/v1/contract_batchorder`
+  * POST `/api/v1/contract_batchorder`
 
 > Request:
     
@@ -4974,7 +4974,7 @@ bigint的包解析。
 
 ### 示例
 
-  * POST `api/v1/contract_cancel`
+  * POST `/api/v1/contract_cancel`
 
 > Request:
     
@@ -5038,7 +5038,7 @@ ts | true | long | 响应生成时间点，单位：毫秒 |
 
 ### 示例
 
-  * POST `api/v1/contract_cancelall`
+  * POST `/api/v1/contract_cancelall`
 
 > Request:
     
@@ -5094,7 +5094,7 @@ ts | true | long | 响应生成时间点，单位：毫秒 |
   
 ## 切换杠杆
 
-  * POST `api/v1/contract_switch_lever_rate`
+  * POST `/api/v1/contract_switch_lever_rate`
 
 #### 备注
 
@@ -5150,7 +5150,7 @@ ts | true | long | 时间戳 |
 
 ### 示例
 
-  * POST `api/v1/contract_order_info`
+  * POST `/api/v1/contract_order_info`
 
 ### 请求参数
 
@@ -5261,7 +5261,7 @@ ts | true | long | 时间戳 |
 
 ### 示例
 
-  * POST `api/v1/contract_order_detail`
+  * POST `/api/v1/contract_order_detail`
 
 > Request:
     
@@ -5414,7 +5414,7 @@ ts | true | long | 时间戳 |
 
 ### 示例
 
-  * POST `api/v1/contract_openorders`  
+  * POST `/api/v1/contract_openorders`  
 
 ### 请求参数
 
@@ -5510,7 +5510,7 @@ ts | true | long | 时间戳 |
 
 ### 示例
 
-  * POST `api/v1/contract_hisorders`
+  * POST `/api/v1/contract_hisorders`
 
 > Request:
     
@@ -5638,7 +5638,7 @@ ts | true | long | 时间戳 |
 
 ## 组合查询合约历史委托
 
-  * POST `api/v1/contract_hisorders_exact`
+  * POST `/api/v1/contract_hisorders_exact`
 
 ### 请求参数
 
@@ -5793,7 +5793,7 @@ ts | true | long | 时间戳 |
 
 ### 实例
 
-  * POST `api/v1/contract_matchresults`
+  * POST `/api/v1/contract_matchresults`
 
 > Request:
     
@@ -5897,7 +5897,7 @@ ts | true | long | 时间戳 |
 
 ## 组合查询历史成交记录接口
 
-  * POST `api/v1/contract_matchresults_exact`
+  * POST `/api/v1/contract_matchresults_exact`
 
 ### 请求参数
 
@@ -6025,7 +6025,7 @@ ts | true | long | 时间戳 |
 
 ## 闪电平仓下单
 
-  * POST `api/v1/lightning_close_position`
+  * POST `/api/v1/lightning_close_position`
 
 ### 备注
 
@@ -6092,7 +6092,7 @@ client_order_id | false | long | 用户自己的订单id |
 
 ## 合约计划委托下单
 
-  * POST `api/v1/contract_trigger_order`
+  * POST `/api/v1/contract_trigger_order`
 
 ### 备注
 
@@ -6183,7 +6183,7 @@ order_id_str | string | true | 字符串类型的订单ID
   
 ## 合约计划委托撤单
 
-  * POST `api/v1/contract_trigger_cancel`
+  * POST `/api/v1/contract_trigger_cancel`
 
 ### 请求参数
 
@@ -6228,7 +6228,7 @@ ts | true | long | 响应生成时间点，单位：毫秒 |
   
 ## 合约计划委托全部撤单
 
-  * POST `api/v1/contract_trigger_cancelall`
+  * POST `/api/v1/contract_trigger_cancelall`
 
 ### 请求参数
 
@@ -6278,7 +6278,7 @@ ts | true | long | 响应生成时间点，单位：毫秒 |
   
 ## 获取计划委托当前委托
 
-  * POST `api/v1/contract_trigger_openorders`
+  * POST `/api/v1/contract_trigger_openorders`
 
 ### 请求参数
 
@@ -6362,7 +6362,7 @@ status | int | true | 订单状态 | 1:准备提交、2:已提交、3:报单中�
   
 ## 获取计划委托历史委托
 
-  * POST `api/v1/contract_trigger_hisorders`
+  * POST `/api/v1/contract_trigger_hisorders`
 
 ### 请求参数
 
