@@ -48,6 +48,7 @@ shell
     * 签名认证
     * 访问次数限制
     * 撤单率限制
+    * 停服维护
     * 获取当前系统状态
     * 查询系统是否可用
     * 获取当前系统时间戳
@@ -1290,6 +1291,16 @@ recovery-time：禁用的恢复时间戳，单位为毫秒，表示禁用结束�
       * 1) 优先使用对手价、最优5档、最优10档、最优20档、闪电平仓、opponent_ioc（对手价-IOC下单）、lightning_ioc（闪电平仓-IOC下单）、optimal_5_ioc（最优5档-IOC下单）、optimal_10_ioc（最优10档-IOC下单）、optimal_20_ioc（最优20档-IOC下单）、opponent_fok（对手价-FOK下单）、lightning_fok（闪电平仓-FOK下单）、optimal_5_fok（最优5档-FOK下单）、optimal_10_fok（最优10档-FOK下单）、optimal_20_fok（最优20档-FOK下单）等成交概率大的委托方式下单；
       * 2) IOC订单、FOK订单、Post_only订单尽量摆在买卖第一档的位置上；
     * 5、适当延长策略轮询时间。
+
+## 停服维护
+
+业务系统停服维护期间，除了以下2个提供给用户查询系统状态的接口外（[获取当前系统状态](https://docs.huobigroup.com/docs/dm/v1/cn/#cd63bde415)、[查询系统是否可用](https://docs.huobigroup.com/docs/dm/v1/cn/#bef5ec9210)），该业务所有rest接口都会固定返回{"status":
+"maintain"}报文。
+
+#### 2个接口为：
+
+  * 查询系统是否可用：https://api.hbdm.com/heartbeat/
+  * statuspage查询系统状态：https://status-dm.huobigroup.com/api/v2/summary.json
 
 ## 获取当前系统状态
 
