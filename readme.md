@@ -9341,7 +9341,6 @@ shell
 [v1 __](javascript:;)
 
   * [v1](/docs/spot/v1/en/)
-  * [v2](/docs/spot/v2/en/)
 
 [现货](/docs/spot/v1/en/) [交割合约](/docs/dm/v1/en/)
 [币本位永续合约](/docs/coin_margined_swap/v1/en/)
