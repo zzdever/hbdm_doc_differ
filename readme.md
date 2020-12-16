@@ -1309,7 +1309,8 @@ recovery-time：禁用的恢复时间戳，单位为毫秒，表示禁用结束�
 
   * 查询系统是否可用：https://api.hbdm.com/heartbeat/
   * statuspage查询系统状态：https://status-dm.huobigroup.com/api/v2/summary.json
-  * 除了以上两个rest接口获取系统维护停服信息外，也可以通过订阅WebSocket系统状态更新接口获取系统维护停服信息（[WebSocket系统状态更新接口](https://docs.huobigroup.com/docs/dm/v1/cn/#websocket-6)）
+
+除了以上两个rest接口获取系统维护停服信息外，也可以通过订阅WebSocket系统状态更新接口获取系统维护停服信息（[WebSocket系统状态更新接口](https://docs.huobigroup.com/docs/dm/v1/cn/#websocket-6)）
 
 ## 获取当前系统状态
 
@@ -10367,7 +10368,8 @@ recovery-time：禁用的恢复时间戳，单位为毫秒，表示禁用结束�
 
   * 查询系统是否可用：https://api.hbdm.com/heartbeat/
   * statuspage查询系统状态：https://status-swap.huobigroup.com/api/v2/summary.json
-  * 除了以上两个rest接口获取系统维护停服信息外，也可以通过订阅WebSocket系统状态更新接口获取系统维护停服信息（[WebSocket系统状态更新接口](https://docs.huobigroup.com/docs/coin_margined_swap/v1/cn/#websocket-6)）
+
+除了以上两个rest接口获取系统维护停服信息外，也可以通过订阅WebSocket系统状态更新接口获取系统维护停服信息（[WebSocket系统状态更新接口](https://docs.huobigroup.com/docs/coin_margined_swap/v1/cn/#websocket-6)）
 
 ## 获取当前系统状态
 
