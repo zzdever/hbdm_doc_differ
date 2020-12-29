@@ -1866,7 +1866,7 @@ ts | true | long | 当前系统时间戳 |
 
 **合约sdk**
 
-  * [Java sdk](https://github.com/huobiapi/Futures-Java-demo/tree/master/hbdm-java-sdk)
+  * [Java sdk](https://github.com/hbdmapi/huobi_future_Java)
 
 **异步库**
 
