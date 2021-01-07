@@ -4240,7 +4240,7 @@ status  | true  | string | 请求处理结果  | "ok" , "error"
 ts | true | long | 响应生成时间点，单位：毫秒 |  
 <data> |  |  | 字典类型 |  
 <financial_record> |  |  |  |  
-id | true | long | 财务记录ID（唯一） |  
+id | true | long | 财务记录ID（品种唯一） |  
 ts | true | long | 创建时间 |  
 symbol | true | string | 品种代码 | 支持大小写,"BTC","ETH"...  
 type | true | int | 交易类型 | 3:平多; 4:平空; 5:开仓手续费-吃单; 6:开仓手续费-挂单; 7:平仓手续费-吃单;
@@ -4349,7 +4349,7 @@ status  | true  | string | 请求处理结果  | "ok" , "error"
 ts | true | long | 响应生成时间点，单位：毫秒 |  
 <data> | true | object | 字典类型 |  
 <financial_record> | true | object array |  |  
-id | true | long | 流水id |  
+id | true | long | 流水id（品种唯一） |  
 ts | true | long | 创建时间 |  
 symbol | true | string | 品种代码 | "BTC","ETH"...  
 contract_code | true | string | 合约代码 | "BTC200919"...  
