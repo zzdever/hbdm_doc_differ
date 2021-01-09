@@ -18003,7 +18003,7 @@ trade_volume | true | decimal | 订单已成交数量 |
 volume | true | decimal | 订单总委托数量 |  
 <trade> | true | object array |  |  
 id | true | string | 全局唯一交易标识 |  
-trade_id | true | long | 撮合结果id，与api/v1/contract_matchresults返回结果中的match_id一样,
+trade_id | true | long | 撮合结果id，与api/v1/swap_matchresults返回结果中的match_id一样,
 非唯一，可重复，注意：一个撮合结果代表一个taker单和N个maker单的成交记录的集合，如果一个taker单吃了N个maker单，那这N笔trade都是一样的撮合结果id
 |  
 trade_price | true | decimal | 撮合价格 |  
