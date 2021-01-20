@@ -12458,8 +12458,8 @@ contract_code | string | false | 合约代码， 支持大小写，"BTC-USD",不
 status | true | string | 请求处理结果 | "ok" , "error"  
 <data> |  |  |  |  
 symbol | true | string | 品种代码 | "BTC", "ETH" ...  
-volume | true | decimal | 持仓量(张)。 值是买卖双边之和 |  
-amount | true | decimal | 持仓量(币)。 值是买卖双边之和 |  
+volume | true | decimal | 持仓量(张)。单边数量 |  
+amount | true | decimal | 持仓量(币)。单边数量 |  
 contract_code | true | string | 合约代码 | "BTC-USD" ...  
 trade_amount | true | decimal | 最近24小时成交量（币）（当前时间-24小时）。 值是买卖双边之和 |  
 trade_volume | true | decimal | 最近24小时成交量（张）（当前时间-24小时）。 值是买卖双边之和 |  
