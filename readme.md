@@ -2196,7 +2196,7 @@ Detail(market.$symbol.trade.detail) 是有成交更新就会推送，包括成�
 market.$symbol.depth.$type是全量数据，market.$symbol.depth.size_${size}.high_freq是增量数据，全量数据是100ms检查一次，至少1秒推送1次；增量30MS检查1次，无更新不推送。
 
 目前market
-depth增量数据market.$symbol.depth.size_${size}.high_freq是30MS检测一次，不是随机检测，30m检查一次更新，但是有三台机同时进行，每两次的时间间隔最小可能是0，但30ms内最多推送6次，最大时间间隔无上限，30ms内最少推送次数为0。
+depth增量数据market.$symbol.depth.size_${size}.high_freq是30MS检测一次，不是随机检测，30m检查一次更新，但是有二台机同时进行，每两次的时间间隔最小可能是0，但30ms内最多推送6次，最大时间间隔无上限，30ms内最少推送次数为0。
 
 ### Q13: 增量数据market.$symbol.depth.size_${size}.high_freq推送如何维护本地数据？
 
@@ -5505,8 +5505,8 @@ ts | true | long | 时间戳 |
 
 参数名称 | 是否必须 | 类型 | 描述  
 ---|---|---|---  
-order_id | false | string | 订单ID(多个订单ID中间以","分隔,一次最多允许查询50个订单)  
-client_order_id | false | string | 客户订单ID(多个订单ID中间以","分隔,一次最多允许查询50个订单)  
+order_id | false(请看备注) | string | 订单ID(多个订单ID中间以","分隔,一次最多允许查询50个订单)  
+client_order_id | false(请看备注) | string | 客户订单ID(多个订单ID中间以","分隔,一次最多允许查询50个订单)  
 symbol | true | string | 支持大小写，"BTC","ETH"...  
   
 ### 备注：
@@ -9323,7 +9323,7 @@ symbol | string | 品种ID
 contract_type | string | 合约类型  
 contract_code | string | 合约代码  
 status | int | 订单状态(1准备提交 2准备提交 3已提交 4部分成交 5部分成交已撤单 6全部成交 7已撤单)  
-order_id | bigint | 订单ID  
+order_id | long | 订单ID  
 order_id_str | string | 订单ID  
 client_order_id | long | 客户端订单ID  
 order_type | int | 订单类型 1:报单 、 2:撤单 、 3:强平、4:交割  
@@ -15410,13 +15410,15 @@ ts | true | long | 时间戳 |
 
 参数名称 | 是否必须 | 类型 | 描述  
 ---|---|---|---  
-order_id | false | string | 订单ID(多个订单ID中间以","分隔,一次最多允许查询50个订单)  
-client_order_id | false | string | 客户订单ID(多个订单ID中间以","分隔,一次最多允许查询50个订单)  
+order_id | false(请看备注) | string | 订单ID(多个订单ID中间以","分隔,一次最多允许查询50个订单)  
+client_order_id | false(请看备注) | string | 客户订单ID(多个订单ID中间以","分隔,一次最多允许查询50个订单)  
 contract_code | true | string | 合约代码,支持大小写,"BTC-USD"  
   
 ### 备注：
 
   * 最多只能查询 4 小时内的撤单信息。
+
+  * order_id和client_order_id至少要填写一个。
 
   * order_id和client_order_id都可以用来查询，同时只可以设置其中一种，如果设置了两种，默认以order_id来查询。结算后，会把结束状态的订单（5部分成交已撤单 6全部成交 7已撤单）删除掉。
 
