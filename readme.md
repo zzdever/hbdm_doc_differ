@@ -18,6 +18,7 @@ shell
     * API 简介
     * 做市商项目
   * 更新日志
+    * 1.2.4 2021年2月5日【新增：获取平台阶梯保证金接口、批量设置子账户交易权限接口、批量获取子账户资产信息接口。4-7 修改接口，新增字段。8 查询用户结算记录接口（为避免影响系统性能，接口仅支持查询最近90天用户结算记录）】
     * 1.2.3 2021年1月29日 【新增：批量获取聚合行情接口。 2-14 修改接口，新增字段。修改：计划委托订单的订单ID由原本的自然数自增ID 改为长度为 18 位的唯一标识ID。推荐使用下单后返回的 order_id_str（字符串类型的订单 ID），避免发生长度过大而被系统截断的情况。】
     * 1.2.2 2021年01月12号 【1 新增获取预估结算价。2-7 新增止盈止损API接口，8-23 修改接口，新增字段。新增【合约策略订单】一级菜单，将本次新增的双向止盈止损相关接口以及原有的计划委托相关接口挪到该菜单下】
     * 1.2.1 2020年12月2日 【修改获取订单明细信息接口（查询无成交撤单数据时，如果不传“created_at”和“order_type”参数，由原来的只能查询到最近12小时数据，改为只能查询到最近2小时数据）；修改获取合约历史委托接口（查询无成交撤单数据时，由原来的只保留最近24小时数据，改为只保留最近2小时数据。）；修改组合查询合约历史委托接口（查询无成交撤单数据时，由原来的只保留最近24小时数据，改为只保留最近2小时数据。）】
@@ -81,6 +82,7 @@ shell
     * 查询合约风险准备金余额历史数据
     * 查询平台阶梯调整系数
     * 平台持仓量的查询
+    * 获取平台阶梯保证金
     * 精英账户多空持仓对比-账户数
     * 精英账户多空持仓对比-持仓量
     * 获取强平订单
@@ -90,7 +92,9 @@ shell
   * 合约资产接口
     * 获取用户账户信息
     * 获取用户持仓信息
+    * 批量设置子账户交易权限
     * 查询母账户下所有子账户资产信息
+    * 批量获取子账户资产信息
     * 查询单个子账户资产信息
     * 查询单个子账户持仓信息
     * 查询用户财务记录
@@ -207,6 +211,61 @@ protection)（做市商项目不支持点卡抵扣、VIP、交易量相关活动
   2. 提供其他交易平台 maker 交易量截图证明（比如30天内成交量，或者 VIP 等级等）；
 
 # 更新日志
+
+## 1.2.4 2021年2月5日【新增：获取平台阶梯保证金接口、批量设置子账户交易权限接口、批量获取子账户资产信息接口。4-7 修改接口，新增字段。8
+查询用户结算记录接口（为避免影响系统性能，接口仅支持查询最近90天用户结算记录）】
+
+### 1、新增获取平台阶梯保证金接口
+
+  * 接口名称：获取平台阶梯保证金
+  * 接口类型：公共接口
+  * 接口URL：/api/v1/contract_ladder_margin
+
+### 2、新增批量设置子账户交易权限接口
+
+  * 接口名称：批量设置子账户交易权限
+  * 接口类型：私有接口
+  * 接口URL：/api/v1/contract_sub_auth
+
+### 3、新增批量获取子账户资产信息接口
+
+  * 接口名称：批量获取子账户资产信息
+  * 接口类型：私有接口
+  * 接口URL：/api/v1/contract_sub_account_info_list
+
+### 4、修改获取市场最近成交记录接口（返参data参数下新增quantity，表示成交量（币）。计算公式：成交量（币） =
+成交量（张）*合约面值/成交价格）
+
+  * 接口名称：获取市场最近成交记录
+  * 接口类型：公共接口
+  * 接口URL：/market/trade
+
+### 5、修改批量获取最近的交易记录接口（返参data参数下内层data中新增quantity，表示成交量（币）。计算公式：成交量（币） =
+成交量（张）*合约面值/成交价格）
+
+  * 接口名称：批量获取最近的交易记录
+  * 接口类型：公共接口
+  * 接口URL：/market/history/trade
+
+### 6、修改订阅 Trade Detail 数据接口（返参tick参数下的data参数中新增quantity，表示成交量（币）。计算公式：成交量（币）
+= 成交量（张）*合约面值/成交价格）
+
+  * 接口名称：订阅 Trade Detail 数据
+  * 接口类型：公共接口
+  * 订阅地址：market.$symbol.trade.detail
+
+### 7、修改请求 Trade Detail 数据接口（返参data参数中新增quantity，表示成交量（币）。计算公式：成交量（币） =
+成交量（张）*合约面值/成交价格）
+
+  * 接口名称：请求 Trade Detail 数据
+  * 接口类型：公共接口
+  * 订阅地址：market.$symbol.trade.detail
+
+### 8、修改查询用户结算记录接口（为避免影响系统性能，接口仅支持查询最近90天用户结算记录）
+
+  * 接口名称：查询用户结算记录
+  * 接口类型：私有接口
+  * 接口URL：/api/v1/contract_user_settlement_records
 
 ## 1.2.3 2021年1月29日 【新增：批量获取聚合行情接口。 2-14 修改接口，新增字段。修改：计划委托订单的订单ID由原本的自然数自增ID
 改为长度为 18 位的唯一标识ID。推荐使用下单后返回的 order_id_str（字符串类型的订单 ID），避免发生长度过大而被系统截断的情况。】
@@ -1306,6 +1365,7 @@ WebSocket私有订单成交推送接口(需要API KEY验签)
 读取 | 市场行情接口 | /api/v1/contract_insurance_fund | GET | 查询合约风险准备金余额历史数据 | 否  
 读取 | 市场行情接口 | /api/v1/contract_adjustfactor | GET | 查询平台阶梯调整系数 | 否  
 读取 | 市场行情接口 | /api/v1/contract_his_open_interest | GET | 平台持仓量的查询 | 否  
+读取 | 市场行情接口 | /api/v1/contract_ladder_margin | GET | 获取平台阶梯保证金 | 否  
 读取 | 市场行情接口 | /api/v1/contract_elite_account_ratio | GET | 精英账户多空持仓对比-账户数 | 否  
 读取 | 市场行情接口 | /api/v1/contract_elite_position_ratio | GET | 精英账户多空持仓对比-持仓量 | 否  
 读取 | 市场行情接口 | /api/v1/contract_liquidation_orders | GET | 获取强平订单 | 否  
@@ -1315,7 +1375,9 @@ WebSocket私有订单成交推送接口(需要API KEY验签)
 读取 | 市场行情接口 | /api/v1/contract_estimated_settlement_pr ice | GET | 获取预估结算价 | 否  
 读取 | 资产接口 | /api/v1/contract_account_info | POST | 获取用户账户信息 | 是  
 读取 | 资产接口 | /api/v1/contract_position_info | POST | 获取用户持仓信息 | 是  
+交易 | 账户接口 | /api/v1/contract_sub_auth | POST | 批量设置子账户交易权限 | 是  
 读取 | 账户接口 | /api/v1/contract_sub_account_list | POST | 币查询母账户下所有子账户资产信息 | 是  
+读取 | 账户接口 | /api/v1/contract_sub_account_info_list | POST | 批量获取子账户资产信息 | 是  
 读取 | 账户接口 | /api/v1/contract_sub_account_info | POST | 查询单个子账户资产信息 | 是  
 读取 | 账户接口 | /api/v1/contract_sub_position_info | POST | 查询单个子账户持仓信息的 | 是  
 读取 | 账户接口 | /api/v1/contract_financial_record | POST | 查询用户财务记录 | 是  
@@ -2316,6 +2378,70 @@ depth增量数据market.$symbol.depth.size_${size}.high_freq是30MS检测一次�
 
 如果季度合约例如BTC_CQ转为次周合约BTC_NW，WS不会自动通知，您需要重新变更订阅为BTC_NW。
 
+### Q15: 订阅多个合约代码同一主题时, 需要多个 ws 连接吗?
+
+对于交割合约、币永续、u永续、期权之间, 由于是不同的接口地址, 需要不同的 ws 连接
+
+对于交割合约、币永续、u永续、期权各自里面, 只要接口地址是一样的, 一个 ws 连接即可.
+
+### Q16: 是否可以通过 ws 下单和撤单?
+
+目前不支持 ws 下单和撤单
+
+### Q17: 如何订阅订单状态?
+
+a. 订单交易成功: ”订阅合约订单撮合数据（matchOrders.$symbol）"或"订阅订单成交数据（orders.$symbol）"
+
+b. 订单撤单成功: 订阅"资产变动数据（accounts.$symbol）”
+
+### Q18: ”订阅合约订单撮合数据（matchOrders.$symbol）"和"订阅订单成交数据（orders.$symbol）"的区别
+
+两者推送的数据不一样, 订单成交数据（orders.$symbol）会比订单撮合数据（matchOrders.$symbol）字段多一些
+
+通常情况下,
+撮合完成后的推送(订单撮合数据“matchOrders.$symbol”)要比清算完成后的(订单成交数据“orders.$symbol”)推送快,
+但不能保证撮合完成后的推送一定比清算完成后的推送更快;
+
+强平以及轧差订单不会推送"订单撮合数据（matchOrders.$symbol）”
+
+### Q19: "订阅 KLine 数据（market.$symbol.kline.$period）”多久推送一次
+
+有成交时, 500ms推送一次
+
+无成交时, 根据订阅的周期推送
+
+### Q20: 如何判断推送是否延迟
+
+判断是否延迟, 请先同步服务器时间, 同步服务器时间接口为: https://api.hbdm.com/api/v1/timestamp, 返回数据中的
+ts 是时间戳（毫秒）, 对应的时区是 UTC+8.
+
+每个推送数据的外层都会有一个推送数据 ts, 这个 ts 是服务器推送数据给客户端那一刻的间戳（毫秒）, 对应的时区是 UTC+8.
+
+当有推送数据到达时, 程序记录此时本地时间 ts. 当发现本地时间 ts 远远大于推送数据 ts 时（本地时间远远晚于推送数据时间）,
+可以通过一下方式定位延迟和解决延迟:
+
+a. 减少订阅时推送的数据.
+
+b. 查看本地网络和服务器间的稳定性和速度（请把 api.btcgateway.pro 替换为程序使用的域名）
+
+curl -o /dev/null -s -w
+time_namelookup"(s)":%{time_namelookup}"\n"time_connect"(s)":%{time_connect}"\n"time_starttransfer"(s)":%{time_starttransfer}"\n"time_total"(s)":%{time_total}"\n"speed_download"(B/s)":%{speed_download}"\n"
+api.btcgateway.pro
+
+收到类似以下数据:
+
+time_namelookup(s):0.001378
+
+time_connect(s):0.128641
+
+time_starttransfer(s):0.276588
+
+time_total(s):0.276804
+
+speed_download(B/s):2010.000
+
+若连续多次运行以上命令, 每次得到的结果差异很大, 可以: a.选择合适的火币域名, b.优化或者重新选择程序所在网络.
+
 ## 交易相关
 
 ### Q1: 交割合约什么时候结算？周五结算时通过哪些接口可以查询状态？
@@ -2389,6 +2515,136 @@ WS订阅私有账户，订单，仓位时，请注意也要定时维护好心跳
 1、不满足可开最低张数的担保资产需求； 2、超出限价机制下单开仓； 3、超出单笔下单数量上限； 4、超出单个用户持仓数量上限；
 5、交割前10分钟内只能平仓，不能开仓；(错误代码 1105) 6、强平系统接管处理中
 
+### Q14: 如何查询交易所系统状态
+
+交易所系统常见的两种状态: 系统处于结算/交割；停机维护. 当系统处于这两种状态时, 调用 api 接口会返回响应的错误代码和错误信息
+
+a.如何判断是否是结算/交割完成
+
+通过"获取合约信息”接口: /api/v1/contract_contract_info
+
+在返回值中的 contract_status 来判断, 如果值为 1 表示已经结算/交割完成, 可以正常交易了
+
+b.如何判断是否是停机维护
+
+通过"查询系统是否可用”接口: https://api.hbdm.com/heartbeat/
+
+或者"订阅系统状态更新”接口: "topic ": "public.$service.heartbeat"
+
+在推送值中的 heartbeat 来判断, 如果值为 1 表示系统为可用, 可以正常连接了
+
+### Q15: 是否支持双向持仓
+
+支持的. 火币目前是支持同时持有空单和多单的
+
+### Q16: 如何保证快速成交
+
+火币合约目前是没有市价的. 为提高成交概率, 可以使用对手价: opponent, 最优5档: optimal_5, 最优10档: optimal_10,
+最优20档: optimal_20. 其中最优20档的成交概率最大, 但是滑点也最大.
+
+需要注意的是, 以上下单价格方式, 不保证 100% 成交的. 系统执行下单时, 是获取当时时刻的对方 N 档价格, 进行下单的.
+
+### Q17: api 程序如何更快连接到交易所
+
+推荐使用 AWS 东京 c 区服务器, 同时使用 api.hbdm.vn 域名连接
+
+### Q18: 现货与合约之间, 划转报 Abnormal service 错误
+
+a.检查请求地址是否为火币 Global 地址: api.huobi.pro
+
+b.检查币的精度是否不超过 8 位小数
+
+### Q19: 如何确认是否开仓/平仓成功
+
+"合约下单（/api/v1/contract_order）”接口或者"合约批量下单（/api/v1/contract_batchorder）”接口下单成功后,
+不代表已经开仓/平仓成功. 只是意味着服务器已经成功收到你的下单指令
+
+查询是否开仓/平仓成功，可以使用返回的“order_id” 通过“获取合约订单信息（/api/v1/contract_order_info）” 或
+“获取订单明细信息（/api/v1/contract_order_detail）”这两个接口来查询订单状态。当订单已经成交后，接口返回参数中的status
+值为 6 （全部成交）。
+
+但同时需要注意：
+
+a.获取合约订单信息（/api/v1/contract_order_info）接口在系统结算或交割后，会把结束状态的订单（5部分成交已撤单 6全部成交
+7已撤单）删除掉。
+
+b.获取订单明细信息（/api/v1/contract_order_detail）接口存在延迟情况，所以查询时最好带上：created_at（下单时间戳）和
+order_type(订单类型，默认填1)，会直接查询数据库，查询结果会更及时。
+
+### Q20: 为什么系统自动撤单了?
+
+下单时 order_price_type 为: IOC, FOK, Maker（post_only） 当盘口不满足条件时, 会自动撤单
+
+post_only, 只做Maker（Post only）订单, 不会立刻在市场上成交, 如果委托会立即与已有委托成交, 那么该委托会被取消,
+保证用户始终为Maker.
+
+IOC 订单, 若不能在市场上立即成交, 则未成交的部分立即取消.
+
+FOK 订单, 若不能全部成交则立即全部取消.
+
+### Q21: 如何获取用户当前资产最大可开张数
+
+目前没有直接获取当前资产最大可开张数的接口.
+
+### Q22: order_id 和 order_id_str 是一样的吗?
+
+order_id_str 是 order_id 的字符串格式, 两者的值是一样的
+
+对于 18 位的 order_id, 在 nodejs 和 javascript 的 JSON.parse 默认是 int, 解析会有问题, 因此推荐使用
+order_id_str
+
+### Q23: 如何获取成交数据中的主买/主卖数量
+
+"获取市场最近成交记录（/market/trade）”接口或"sub": "market.$symbol.trade.detail"订阅, 可以获取此数据,
+其中:
+
+amount: 成交量(张), 买卖双边成交量之和
+
+direction: 主动成交方向
+
+### Q24: 获取K线数据时, from 和 to 的时间间隔是 2000*period, 为什么获取的 data 为[]?
+
+获取 K 线时, from 和 to 两个时间点是全都包含在内的, 因此是 2001 条数据. 此时数量超出了最大条数 2000. 所以返回 []
+
+另外，当 from 和 to 的时间超过 2 年，返回的数据也会是 []
+
+### Q25: 如何获取合约最新价格
+
+a.调用"获取K线数据”接口, 任意 period, 返回数据的最后一条数据的 close 就是最新价.
+
+b.调用"获取市场最近成交记录”接口, 返回数据的 price 就是最新价
+
+### Q26: 如何获取最新指数价?
+
+有两种方式获取最新指数价:
+
+a.通过调用"获取合约指数信息（/api/v1/contract_index）”接口, 返回数据中的 index_price 就是最新指数价
+
+b.通过订阅"指数K线数据（market.$symbol.index.$period）”websocket, 返回数据的最后一条k线的 close
+就是最新指数价
+
+### Q27: API 升级会影响程序的运行吗?
+
+一般情况, API 升级会部分影响 ws 断连, 请做好 ws 重连逻辑. 升级内容可以订阅升级公告:
+
+交割: https://status-dm.huobigroup.com/
+
+币本位永续: https://status-swap.huobigroup.com/
+
+USDT本位永续: https://status-linear-swap.huobigroup.com/
+
+### Q28: "获取用户账户信息（/api/v1/contract_account_info）"中 margin_balance 是指什么?
+
+margin_balance 是指账户权益
+
+margin_balance(账户权益 ) = margin_position(持仓保证金) + margin_frozen(冻结保证金) +
+margin_available(可用保证金)
+
+### Q29: 获取用户账户信息（/api/v1/contract_account_info）中的risk_rate
+"保证金率”和WEB端的"担保资产率”是一样的吗?
+
+是一样的. 当 risk_rate <= 0 时, 用户的仓位将会被系统强平.
+
 ## 错误码相关
 
 ### Q1: 1030错误是什么原因？
@@ -2401,6 +2657,13 @@ later.","ts":1588093883199}类似错误，说明您的输入的请求参数值�
 
 如果您出现{'index': 1, 'err_code': 1048, 'err_msg': 'Insufficient close amount
 available. '}类似错误，说明此时可平仓量不足，您平仓时需查询目前已有的仓位张数再去平仓。
+
+1、检查平仓的张数是否过大（当有平仓的限价挂单时, 会占用可平仓位的张数, 建议您撤销这些挂单后再去重试）.
+
+2、检查仓位方向和开平方向（平多: 卖出平多(direction用sell、offset用close)、平空:
+买入平空(direction用buy、offset用close)、闪电平仓只需传: direction（平多:sell、平空: buy））.
+
+3、止盈止损的挂单和计划委托的挂单, 不会占仓位数.
 
 ### Q3: API返回1032错误码是什么原因？
 
@@ -3266,17 +3529,18 @@ symbol | true | string | 合约名称 |  |
         "tick": {
             "data": [
                 {
-                    "amount": "4",
-                    "ts": 1604298443540,
-                    "id": 1137660004780000,
-                    "price": "14117.98",
+                    "amount": "20",
+                    "quantity": "0.0505043235488782105914132044058961778",
+                    "ts": 1612491134327,
+                    "id": 1236092630180000,
+                    "price": "39600.57",
                     "direction": "sell"
                 }
             ],
-            "id": 1604298454352,
-            "ts": 1604298454352
+            "id": 1612491135025,
+            "ts": 1612491135025
         },
-        "ts": 1604298454352
+        "ts": 1612491135025
     }
     
 
@@ -3295,6 +3559,7 @@ direction | true | string | 主动成交方向 |
 id | true | long | 成交唯一id（品种唯一） |  
 price | true | string | 成交价 |  
 ts | true | long | 成交时间 |  
+quantity | true | string | 成交量（币）。 |  
 </data> |  |  |  |  
 </tick> |  |  |  |  
 ts | true | long | 发送时间 |  
@@ -3342,37 +3607,39 @@ size | true | int | 获取交易记录的数量 |  | [1, 2000]
     
     
     {
+        "status": "ok",
+        "ts": 1612491154213,
         "ch": "market.BTC_NQ.trade.detail",
         "data": [
             {
+                "id": 123609277049,
+                "ts": 1612491144090,
                 "data": [
                     {
-                        "amount": 12,
-                        "direction": "buy",
-                        "id": 1137660361550000,
-                        "price": 14119.84,
-                        "ts": 1604298530920
+                        "amount": 20,
+                        "quantity": 0.0504908595134751268141050255319653845,
+                        "ts": 1612491144090,
+                        "id": 1236092770490000,
+                        "price": 39611.13,
+                        "direction": "sell"
                     }
-                ],
-                "id": 113766036155,
-                "ts": 1604298530920
+                ]
             },
             {
+                "id": 123609282167,
+                "ts": 1612491148260,
                 "data": [
                     {
-                        "amount": 4,
-                        "direction": "sell",
-                        "id": 1137660376740000,
-                        "price": 14123.14,
-                        "ts": 1604298531331
+                        "amount": 20,
+                        "quantity": 0.0504865897520300657739291289447696903,
+                        "ts": 1612491148260,
+                        "id": 1236092821670000,
+                        "price": 39614.48,
+                        "direction": "sell"
                     }
-                ],
-                "id": 113766037674,
-                "ts": 1604298531331
+                ]
             }
-        ],
-        "status": "ok",
-        "ts": 1604298553734
+        ]
     }
     
 
@@ -3388,6 +3655,7 @@ direction | true | string | 主动成交方向 |
 id | true | long | 成交唯一id（品种唯一） |  
 price | true | decimal | 成交价格 |  
 ts | true | long | 成交时间 |  
+quantity | true | decimal | 成交量（币）。 |  
 </data> |  |  |  |  
 id | true | long | 订单唯一id（品种唯一） |  
 ts | true | long | 最新成交时间 |  
@@ -3395,6 +3663,10 @@ ts | true | long | 最新成交时间 |
 status | true | string |  | "ok"，"error"  
 ts | true | long | 响应生成时间点，单位：毫秒 |  
   
+#### 备注
+
+  * 2021年2月3日 21:00:00 后返回参数才会有quantity字段。
+
 ## 查询合约风险准备金余额和预估分摊比例
 
   * GET `/api/v1/contract_risk_info`
@@ -3554,12 +3826,12 @@ ts | true | long | 响应生成时间点，单位：毫秒 |
 symbol | true | string | 品种代码 | "BTC","ETH"...  
 <list> |  |  |  |  
 lever_rate | true | decimal | 杠杆倍数 |  
-<ladderDetail> |  |  |  |  
+<ladders> |  |  |  |  
 min_size | true | decimal | 净持仓量的最小值 |  
 max_size | true | decimal | 净持仓量的最大值 |  
 ladder | true | int | 档位 |  
 adjust_factor | true | decimal | 调整系数 |  
-</ladderDetail> |  |  |  |  
+</ladders> |  |  |  |  
 </list> |  |  |  |  
 </data> |  |  |  |  
   
@@ -3632,6 +3904,87 @@ ts | true | long | 统计时间 |
 
 tick字段：数组内的数据按照时间倒序排列； data字段：字典类型。
 
+## 获取平台阶梯保证金
+
+  * GET `api/v1/contract_ladder_margin`
+
+### 请求参数：
+
+**参数名称** | **是否必须** | **类型** | **描述** | **取值范围**  
+---|---|---|---|---  
+symbol | false | string | 品种代码，不填默认返回所有品种的阶梯保证金 | 比如： “BTC”、“ETH”...  
+  
+> Response
+    
+    
+    {
+        "status":"ok",
+        "data":[
+            {
+                "symbol":"BTC",
+                "list":[
+                    {
+                        "lever_rate":20,
+                        "ladders":[
+                            {
+                                "min_margin_balance":0,
+                                "max_margin_balance":20,
+                                "min_margin_available":0,
+                                "max_margin_available":20
+                            },
+                            {
+                                "min_margin_balance":20,
+                                "max_margin_balance":80,
+                                "min_margin_available":20,
+                                "max_margin_available":50
+                            },
+                            {
+                                "min_margin_balance":80,
+                                "max_margin_balance":380,
+                                "min_margin_available":50,
+                                "max_margin_available":110
+                            },
+                            {
+                                "min_margin_balance":380,
+                                "max_margin_balance":980,
+                                "min_margin_available":110,
+                                "max_margin_available":170
+                            },
+                            {
+                                "min_margin_balance":980,
+                                "max_margin_balance":null,
+                                "min_margin_available":170,
+                                "max_margin_available":null
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "ts":1612489488052
+    }
+    
+
+### 返回参数：
+
+**参数名称** | **是否必须** | **类型** | **描述** | **取值范围**  
+---|---|---|---|---  
+status | true | string | 请求处理结果 | "ok" , "error"  
+<data> | true | object array |  |  
+symbol | true | string | 品种代码 | 比如："BTC"  
+<list> | true | object array |  |  
+lever_rate | true | int | 杠杆倍数 |  
+<ladders> | true | object array | 该合约对应杠杆倍数下的阶梯保证金数据 |  
+min_margin_balance | true | decimal | 最小账户权益（该阶梯权益范围起点，包含该值） |  
+max_margin_balance | true | decimal | 最大账户权益（该阶梯权益范围终点，不包含该值，该值属于下一阶梯的权益范围起点）
+|  
+min_margin_available | true | decimal | 最小可用保证金（范围内包含该值） |  
+max_margin_available | true | decimal | 最大可用保证金（范围内不包含该值，该值属于下一阶梯的最小可用保证金） |  
+</ladders> |  |  |  |  
+</list> |  |  |  |  
+</data> |  |  |  |  
+ts | true | long | 响应生成时间点，单位：毫秒 |  
+  
 ## 精英账户多空持仓对比-账户数
 
 ### 实例
@@ -4169,6 +4522,56 @@ ts | true | long | 响应生成时间点，单位：毫秒 |
 
   * 如果有某个品种在结算中，不带请求参数去查询持仓，会返回错误码1080(1080 In settlement or delivery. Unable to get positions of some contracts. )。建议您带上请求参数去查询持仓，避免报错查询不到持仓。
 
+## 批量设置子账户交易权限
+
+  * POST `/api/v1/contract_sub_auth`
+
+### 请求参数
+
+参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
+---|---|---|---|---  
+sub_uid | true | string | 子账户uid (多个uid中间以","分隔,一次最多允许开通10个子账户) |  
+sub_auth | true | int | 子账户交易权限，1 开启，0关闭 |  
+  
+#### 备注：
+
+  * 首次帮子账户开启交易权限时，系统会自动帮子账户先开通合约。
+  * 若子账户交易权益已开启，此时请求开启权限，则接口会直接返回成功；若子账户交易权益已关闭，此时用户请求关闭权限，则接口会直接返回成功；
+
+> Response:
+    
+    
+    {
+        "status": "ok",
+        "data": {
+            "errors": [
+                {
+                    "sub_uid": "1234567",
+                    "err_code": 1010,
+                    "err_msg": "Account doesnt exist."
+                }
+            ],
+            "successes": "123456789"
+        },
+        "ts": 1612490081318
+    } 
+    
+
+### 返回参数
+
+参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
+---|---|---|---|---  
+status | true | string | 请求处理结果 | "ok" , "error"  
+<data> | true |  |  |  
+<errors> | true | object array |  |  
+sub_uid | true | string | 开通失败的子账户uid |  
+err_code | true | int | 错误码 |  
+err_msg | true | string | 错误信息 |  
+</errors> |  |  |  |  
+successes | true | string | 开通合约成功的子账户uid列表 |  
+</data> |  |  |  |  
+ts | true | long | 响应生成时间点，单位：毫秒 |  
+  
 ## 查询母账户下所有子账户资产信息
 
 ### 请求参数
@@ -4222,6 +4625,82 @@ risk_rate | true | decimal | 保证金率 |
 
 只返回已经开通合约交易的子账户数据.
 
+## 批量获取子账户资产信息
+
+  * POST `/api/v1/contract_sub_account_info_list`
+
+### 请求参数
+
+参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
+---|---|---|---|---  
+symbol | false | string | 品种代码 | "BTC","ETH"... ,如果缺省，默认返回所有品种  
+page_index | false | int | 第几页,不填默认第一页 |  
+page_size | false | int | 不填默认20，不得多于50 |  
+  
+#### 备注：
+
+  * 只返回已经开通合约交易的子账户数据.
+
+> Response:
+    
+    
+    {
+        "status": "ok",
+        "data": {
+            "total_page": 1,
+            "current_page": 1,
+            "total_size": 2,
+            "sub_list": [
+                {
+                    "sub_uid": 123456789,
+                    "account_info_list": [
+                        {
+                            "symbol": "BCH",
+                            "margin_balance": 0,
+                            "liquidation_price": null,
+                            "risk_rate": null
+                        }
+                    ]
+                },
+                {
+                    "sub_uid": 12345678,
+                    "account_info_list": [
+                        {
+                            "symbol": "BCH",
+                            "margin_balance": 0,
+                            "liquidation_price": null,
+                            "risk_rate": null
+                        }
+                    ]
+                }
+            ]
+        },
+        "ts": 1612490180078
+    }
+    
+    
+
+### 返回参数
+
+参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
+---|---|---|---|---  
+status | true | string | 请求处理结果 | "ok" , "error"  
+ts | true | long | 响应生成时间点，单位：毫秒 |  
+<data> | true | object | 字典类型 |  
+<sub_list> | true | object array |  |  
+sub_uid | true | long | 子账户UID |  
+<account_info_list> | true | object array |  |  
+symbol | true | string | 品种代码 | "BTC","ETH"...  
+margin_balance | true | decimal | 账户权益 |  
+liquidation_price | true | decimal | 预估强平价 |  
+risk_rate | true | decimal | 保证金率 |  
+</account_info_list> |  |  |  |  
+</sub_list> |  |  |  |  
+current_page | true | int | 当前页 |  
+total_page | true | int | 总页数 |  
+total_size | true | int | 总条数 |  
+</data> |  |  |  |  
+  
 ## 查询单个子账户资产信息
 
   * POST `/api/v1/contract_sub_account_info`
@@ -4581,6 +5060,7 @@ page_size | false | int | 页大小 | 不填默认20，不得多于50（超过�
   * 默认按时间倒序查询，新数据排在前。
   * 起始时间与结束时间不符合取值范围时，报错1067，参数不合法。
   * 查询结算开始时间在起始时间之后，结束时间之前的用户结算记录数据。
+  * 该接口仅支持用户查询最近90天的数据。
 
 > Response:
     
@@ -8785,14 +9265,16 @@ symbol | true | string | 交易对 |  | 支持大小写，
                 "ts":1604386167285,
                 "id":1138433247400000,
                 "price":"13586.25",
-                "direction":"buy"
+                "direction":"buy",
+                "quantity": "0.0013"
             },
             {
                 "amount":"20",
                 "ts":1604386167469,
                 "id":1138433248730000,
                 "price":"13586.25",
-                "direction":"buy"
+                "direction":"buy",
+                "quantity": "0.0157"
             }
         ],
         "id":"id8",
@@ -8815,9 +9297,14 @@ price | true | string | 价格 |
 amount | true | string | 成交量(张)。 值是买卖双边之和 |  
 direction | true | string | 主动成交方向 |  
 ts | true | long | 订单成交时间 |  
+quantity | true | string | 成交量（币） |  
 </data> |  |  |  |  
 ts | true | long | 发送时间 |  
   
+#### 备注
+
+  * 2021年2月3日 21:00:00 后返回参数才会有quantity字段。
+
 ## 订阅 Trade Detail 数据
 
 ### 成功建立和 WebSocket API 的连接之后，向 Server发送如下格式的数据来订阅数据：
@@ -8872,14 +9359,16 @@ symbol | true | string | 交易对 |  | 支持大小写，
                     "ts":1604386599123,
                     "id":1138436723890000,
                     "price":13562.5,
-                    "direction":"sell"
+                    "direction":"sell",
+                    "quantity": 0.157
                 },
                 {
                     "amount":2,
                     "ts":1604386599123,
                     "id":1138436723890001,
                     "price":13562.5,
-                    "direction":"sell"
+                    "direction":"sell",
+                    "quantity": 0.00152
                 }
             ]
         }
@@ -8901,6 +9390,7 @@ ts | true | long | 订单时间戳 |
 id | true | long | 成交唯一id（品种唯一） |  
 price | true | decimal | 价格 |  
 direction | true | string | 买卖方向 |  
+quantity | true | decimal | 成交量（币） |  
 </data> |  |  |  |  
 </tick> |  |  |  |  
   
@@ -10558,6 +11048,7 @@ shell
     * 币本位永续合约API简介
     * 做市商项目
   * 更新日志
+    * 1.1.5 2021年2月5日【新增：获取平台阶梯保证金接口、批量设置子账户交易权限接口、批量获取子账户资产信息接口。4-7 修改接口，新增字段。8 查询用户结算记录接口（为避免影响系统性能，接口仅支持查询最近90天用户结算记录）】
     * 1.1.4 2021年1月29日 【新增：批量获取聚合行情接口、获取标记价格的 K 线数据、订阅标记价格 K 线数据 WS 接口、请求标记价格 K 线数据 WS 接口。5-17 修改接口，新增字段。修改：计划委托订单的订单ID由原本的自然数自增ID 改为长度为 18 位的唯一标识ID。推荐使用下单后返回的 order_id_str（字符串类型的订单 ID），避免发生长度过大而被系统截断的情况。】
     * 1.1.3 2021年01月12号 【1 新增获取预估结算价。2-7 新增止盈止损订单接口。8-21 修改接口，新增字段。 新增【合约策略订单】一级菜单，将本次新增的双向止盈止损相关接口以及原有的计划委托相关接口挪到该菜单下】
     * 1.1.2 2020年12月2日 【修改获取订单明细信息接口（查询无成交撤单数据时，如果不传“created_at”和“order_type”参数，由原来的只能查询到最近12小时数据，改为只能查询到最近2小时数据）；修改获取合约历史委托接口（查询无成交撤单数据时，由原来的只保留最近24小时数据，改为只保留最近2小时数据。）；修改组合查询合约历史委托接口（查询无成交撤单数据时，由原来的只保留最近24小时数据，改为只保留最近2小时数据。）】
@@ -10607,6 +11098,7 @@ shell
     * 查询合约风险准备金余额历史数据
     * 查询平台阶梯调整系数
     * 平台持仓量的查询
+    * 获取平台阶梯保证金
     * 精英账户多空持仓对比-账户数
     * 精英账户多空持仓对比-持仓量
     * 获取预估结算价
@@ -10622,7 +11114,9 @@ shell
     * 获取用户账户信息
     * 获取用户持仓信息
     * 查询用户账户和持仓信息
+    * 批量设置子账户交易权限
     * 查询母账户下所有子账户资产信息
+    * 批量获取子账户资产信息
     * 查询单个子账户资产信息
     * 查询单个子账户持仓信息
     * 查询用户财务记录
@@ -10745,6 +11239,61 @@ protection)（做市商项目不支持点卡抵扣、VIP、交易量相关活动
   2. 提供其他交易平台 maker 交易量截图证明（比如30天内成交量，或者 VIP 等级等）；
 
 # 更新日志
+
+## 1.1.5 2021年2月5日【新增：获取平台阶梯保证金接口、批量设置子账户交易权限接口、批量获取子账户资产信息接口。4-7 修改接口，新增字段。8
+查询用户结算记录接口（为避免影响系统性能，接口仅支持查询最近90天用户结算记录）】
+
+### 1、新增获取平台阶梯保证金
+
+  * 接口名称：获取平台阶梯保证金
+  * 接口类型：公共接口
+  * 接口URL：/swap-api/v1/swap_ladder_margin
+
+### 2、新增批量设置子账户交易权限接口
+
+  * 接口名称：批量设置子账户交易权限
+  * 接口类型：私有接口
+  * 接口URL：/swap-api/v1/swap_sub_auth
+
+### 3、新增批量获取子账户资产信息接口
+
+  * 接口名称：批量获取子账户资产信息
+  * 接口类型：私有接口
+  * 接口URL：/swap-api/v1/swap_sub_account_info_list
+
+### 4、修改获取市场最近成交记录接口（返参data参数下新增quantity，表示成交量（币）。计算公式：成交量（币） =
+成交量（张）*合约面值/成交价格）
+
+  * 接口名称：获取市场最近成交记录
+  * 接口类型：公共接口
+  * 接口URL：/swap-ex/market/trade
+
+### 5、修改批量获取最近的交易记录接口（返参data参数下内层data中新增quantity，表示成交量（币）。计算公式：成交量（币） =
+成交量（张）*合约面值/成交价格）
+
+  * 接口名称：批量获取最近的交易记录
+  * 接口类型：公共接口
+  * 接口URL：/swap-ex/market/history/trade
+
+### 6、修改订阅 Trade Detail 数据接口（返参tick参数下的data参数中新增quantity，表示成交量（币）。计算公式：成交量（币）
+= 成交量（张）*合约面值/成交价格）
+
+  * 接口名称：订阅 Trade Detail 数据
+  * 接口类型：公共接口
+  * 订阅地址：market.$contract_code.trade.detail
+
+### 7、修改请求 Trade Detail 数据接口（返参data参数中新增quantity，表示成交量（币）。计算公式：成交量（币） =
+成交量（张）*合约面值/成交价格）
+
+  * 接口名称：请求 Trade Detail 数据
+  * 接口类型：公共接口
+  * 订阅地址：market.$contract_code.trade.detail
+
+### 8、修改查询用户结算记录接口（为避免影响系统性能，接口仅支持查询最近90天用户结算记录）
+
+  * 接口名称：查询用户结算记录
+  * 接口类型：私有接口
+  * 接口URL：/swap-api/v1/swap_user_settlement_records
 
 ## 1.1.4 2021年1月29日 【新增：批量获取聚合行情接口、获取标记价格的 K 线数据、订阅标记价格 K 线数据 WS 接口、请求标记价格 K
 线数据 WS 接口。5-17 修改接口，新增字段。修改：计划委托订单的订单ID由原本的自然数自增ID 改为长度为 18
@@ -11544,6 +12093,7 @@ IOC下单），lightning_fok（闪电平仓-FOK下单），lightning(闪电平�
 读取 | 市场行情接口 | /swap-api/v1/swap_insurance_fund | GET | 查询合约风险准备金余额历史数据 | 否  
 读取 | 市场行情接口 | /swap-api/v1/swap_adjustfactor | GET | 查询平台阶梯调整系数 | 否  
 读取 | 市场行情接口 | /swap-api/v1/swap_his_open_interest | GET | 平台持仓量的查询 | 否  
+读取 | 市场行情接口 | /swap-api/v1/swap_ladder_margin | GET | 获取平台阶梯保证金 | 否  
 读取 | 市场行情接口 | /swap-api/v1/swap_elite_account_ratio | GET | 精英账户多空持仓对比-账户数 | 否  
 读取 | 市场行情接口 | /swap-api/v1/swap_elite_position_ratio | GET | 精英账户多空持仓对比-持仓量 |
 否  
@@ -11561,7 +12111,9 @@ IOC下单），lightning_fok（闪电平仓-FOK下单），lightning(闪电平�
 读取 | 市场行情接口 | /swap-api/v1/swap_estimated_settlement_price | GET | 获取预估结算价 | 否  
 读取 | 账户接口 | /swap-api/v1/swap_account_info | POST | 获取用户账户信息 | 是  
 读取 | 账户接口 | /swap-api/v1/swap_position_info | POST | 获取用户持仓信息 | 是  
+交易 | 账户接口 | /swap-api/v1/swap_sub_auth | POST | 批量设置子账户交易权限 | 是  
 读取 | 账户接口 | /swap-api/v1/swap_sub_account_list | POST | 查询母账户下所有子账户资产信息 | 是  
+读取 | 账户接口 | /swap-api/v1/swap_sub_account_info_list | POST | 批量获取子账户资产信息 | 是  
 读取 | 账户接口 | /swap-api/v1/swap_sub_account_info | POST | 查询单个子账户资产信息 | 是  
 读取 | 账户接口 | /swap-api/v1/swap_sub_position_info | POST | 查询单个子账户持仓信息 | 是  
 读取 | 账户接口 | /swap-api/v1/swap_financial_record | POST | 查询用户财务记录 | 是  
@@ -12545,6 +13097,73 @@ api/v1/swap_historical_funding_rate）返回字段中“当期资金费率（fun
 
 在正常情况下当期资金费率和实际资金费率是相等的。只有在支付资金费率会导致用户爆仓时，会少收或不收资金费率（少收或不收的资金费率值就是实际资金费率）。当期资金费率不变。
 
+### Q15: 订阅多个合约代码同一主题时, 需要多个 ws 连接吗?
+
+对于交割合约、币永续、u永续、期权之间, 由于是不同的接口地址, 需要不同的 ws 连接
+
+对于交割合约、币永续、u永续、期权各自里面, 只要接口地址是一样的, 一个 ws 连接即可.
+
+### Q16: 是否可以通过 ws 下单和撤单?
+
+目前不支持 ws 下单和撤单
+
+### Q17: 如何订阅订单状态?
+
+a. 订单交易成功:
+”订阅合约订单撮合数据（matchOrders.$contract_code）"或"订阅订单成交数据（orders.$contract_code）"
+
+b. 订单撤单成功: 订阅"资产变动数据（accounts.$contract_code）”
+
+### Q18:
+”订阅合约订单撮合数据（matchOrders.$contract_code）"和"订阅订单成交数据（orders.$contract_code）"的区别？
+
+两者推送的数据不一样,
+订单成交数据（orders.$contract_code）会比订单撮合数据（matchOrders.$contract_code）字段多一些
+
+通常情况下,
+撮合完成后的推送(订单撮合数据“matchOrders.$contract_code”)要比清算完成后的(订单成交数据“orders.$contract_code”)推送快,
+但不能保证撮合完成后的推送一定比清算完成后的推送更快;
+
+强平以及轧差订单不会推送"订单撮合数据（matchOrders.$contract_code）”
+
+### Q19: "订阅 KLine 数据（market.$contract_code.kline.$period）”多久推送一次？
+
+有成交时, 500ms推送一次
+
+无成交时, 根据订阅的周期推送
+
+### Q20: 如何判断推送是否延迟
+
+判断是否延迟, 请先同步服务器时间, 同步服务器时间接口为: https://api.hbdm.com/api/v1/timestamp, 返回数据中的
+ts 是时间戳（毫秒）, 对应的时区是 UTC+8.
+
+每个推送数据的外层都会有一个推送数据 ts, 这个 ts 是服务器推送数据给客户端那一刻的间戳（毫秒）, 对应的时区是 UTC+8.
+
+当有推送数据到达时, 程序记录此时本地时间 ts. 当发现本地时间 ts 远远大于推送数据 ts 时（本地时间远远晚于推送数据时间）,
+可以通过一下方式定位延迟和解决延迟:
+
+a. 减少订阅时推送的数据.
+
+b. 查看本地网络和服务器间的稳定性和速度（请把 api.btcgateway.pro 替换为程序使用的域名）
+
+curl -o /dev/null -s -w
+time_namelookup"(s)":%{time_namelookup}"\n"time_connect"(s)":%{time_connect}"\n"time_starttransfer"(s)":%{time_starttransfer}"\n"time_total"(s)":%{time_total}"\n"speed_download"(B/s)":%{speed_download}"\n"
+api.btcgateway.pro
+
+收到类似以下数据:
+
+time_namelookup(s):0.001378
+
+time_connect(s):0.128641
+
+time_starttransfer(s):0.276588
+
+time_total(s):0.276804
+
+speed_download(B/s):2010.000
+
+若连续多次运行以上命令, 每次得到的结果差异很大, 可以: a.选择合适的火币域名, b.优化或者重新选择程序所在网络.
+
 ## 交易相关
 
 ### Q1: 币本位永续的资金费率结算周期是什么？资金费率结算时通过哪些接口可以查询状态？
@@ -12623,6 +13242,138 @@ api/v1/swap_matchresults）、组合查询合约历史委托（/swap-
 api/v1/swap_hisorders_exact）、组合查询历史成交记录接口（/swap-
 api/v1/swap_matchresults_exact）这四个接口中的返回字段order_source(订单来源)来判断，当order_source返回的为“risk”说明这个订单就是被强平的订单。
 
+### Q14: 如何查询交易所系统状态
+
+交易所系统常见的两种状态: 系统处于结算/交割；停机维护. 当系统处于这两种状态时, 调用 api 接口会返回响应的错误代码和错误信息
+
+a.如何判断是否是结算/交割完成
+
+通过"获取合约信息”接口: /swap-api/v1/swap_contract_info
+
+在返回值中的 contract_status 来判断, 如果值为 1 表示已经结算/交割完成, 可以正常交易了
+
+b.如何判断是否是停机维护
+
+通过"查询系统是否可用”接口: https://api.hbdm.com/heartbeat/
+
+或者"订阅系统状态更新”接口: "topic ": "public.$service.heartbeat"
+
+在推送值中的 heartbeat 来判断, 如果值为 1 表示系统为可用, 可以正常连接了
+
+### Q15: 是否支持双向持仓
+
+支持的. 火币目前是支持同时持有空单和多单的
+
+### Q16: 如何保证快速成交
+
+火币合约目前是没有市价的. 为提高成交概率, 可以使用对手价: opponent, 最优5档: optimal_5, 最优10档: optimal_10,
+最优20档: optimal_20. 其中最优20档的成交概率最大, 但是滑点也最大.
+
+需要注意的是, 以上下单价格方式, 不保证 100% 成交的. 系统执行下单时, 是获取当时时刻的对方 N 档价格, 进行下单的.
+
+### Q17: api 程序如何更快连接到交易所
+
+推荐使用 AWS 东京 c 区服务器, 同时使用 api.hbdm.vn 域名连接
+
+### Q18: 现货与合约之间, 划转报 Abnormal service 错误
+
+a.检查请求地址是否为火币 Global 地址: api.huobi.pro
+
+b.检查币的精度是否不超过 8 位小数
+
+### Q19: 如何确认是否开仓/平仓成功
+
+"合约下单（swap-api/v1/swap_order）”接口或者"合约批量下单（swap-
+api/v1/swap_batchorder）”接口下单成功后, 不代表已经开仓/平仓成功. 只是意味着服务器已经成功收到你的下单指令
+
+查询是否开仓/平仓成功，可以使用返回的“order_id” 通过“获取合约订单信息（swap-api/v1/swap_order_info）” 或
+“获取订单明细信息（swap-api/v1/swap_order_detail）”这两个接口来查询订单状态。当订单已经成交后，接口返回参数中的status
+值为 6 （全部成交）。
+
+但同时需要注意：
+
+a.获取合约订单信息（swap-api/v1/swap_order_info）接口在系统结算或交割后，会把结束状态的订单（5部分成交已撤单 6全部成交
+7已撤单）删除掉。
+
+b.获取订单明细信息（swap-api/v1/swap_order_detail）接口存在延迟情况，所以查询时最好带上：created_at（下单时间戳）和
+order_type(订单类型，默认填1)，会直接查询数据库，查询结果会更及时。
+
+### Q20: 为什么系统自动撤单了?
+
+下单时 order_price_type 为: IOC, FOK, Maker（post_only） 当盘口不满足条件时, 会自动撤单
+
+post_only, 只做Maker（Post only）订单, 不会立刻在市场上成交, 如果委托会立即与已有委托成交, 那么该委托会被取消,
+保证用户始终为Maker.
+
+IOC 订单, 若不能在市场上立即成交, 则未成交的部分立即取消.
+
+FOK 订单, 若不能全部成交则立即全部取消.
+
+### Q21: 如何获取用户当前资产最大可开张数？
+
+目前没有直接获取当前资产最大可开张数的接口.
+
+### Q22: order_id 和 order_id_str 是一样的吗?
+
+order_id_str 是 order_id 的字符串格式, 两者的值是一样的
+
+对于 18 位的 order_id, 在 nodejs 和 javascript 的 JSON.parse 默认是 int, 解析会有问题, 因此推荐使用
+order_id_str
+
+### Q23: 如何获取成交数据中的主买/主卖数量
+
+"获取市场最近成交记录（swap-ex/market/trade）”接口或"sub":
+"market.$contract_code.trade.detail"订阅, 可以获取此数据, 其中:
+
+amount: 成交量(张), 买卖双边成交量之和
+
+direction: 主动成交方向
+
+### Q24: 获取K线数据(swap-ex/market/history/kline)时, from 和 to 的时间间隔是 2000*period,
+为什么获取的 data 为[]?
+
+获取 K 线时, from 和 to 两个时间点是全都包含在内的, 因此是 2001 条数据. 此时数量超出了最大条数 2000. 所以返回 []
+
+另外，当 from 和 to 的时间超过 2 年，返回的数据也会是 []
+
+### Q25: 如何获取合约最新价格
+
+a.调用"获取K线数据(swap-ex/market/history/kline)”接口, 任意 period, 返回数据的最后一条数据的 close
+就是最新价.
+
+b.调用"获取市场最近成交记录(swap-ex/market/trade)”接口, 返回数据的 price 就是最新价
+
+### Q26: 如何获取最新指数价?
+
+有两种方式获取最新指数价:
+
+a.通过调用"获取合约指数信息（swap-api/v1/swap_index）”接口, 返回数据中的 index_price 就是最新指数价
+
+b.通过订阅"指数K线数据（market.$contract_code.index.$period）”websocket, 返回数据的最后一条k线的
+close 就是最新指数价
+
+### Q27: API 升级会影响程序的运行吗?
+
+一般情况, API 升级会部分影响 ws 断连, 请做好 ws 重连逻辑. 升级内容可以订阅升级公告:
+
+交割: https://status-dm.huobigroup.com/
+
+币本位永续: https://status-swap.huobigroup.com/
+
+USDT本位永续: https://status-linear-swap.huobigroup.com/
+
+### Q28: "获取用户账户信息（swap-api/v1/swap_account_info）"中 margin_balance 是指什么?
+
+margin_balance 是指账户权益
+
+margin_balance(账户权益) = margin_position(持仓保证金) + margin_frozen(冻结保证金) +
+margin_available(可用保证金)
+
+### Q29: 获取用户账户信息（swap-api/v1/swap_account_info）中的risk_rate
+"保证金率”和WEB端的"担保资产率”是一样的吗?
+
+是一样的. 当 risk_rate <= 0 时, 用户的仓位将会被系统强平.
+
 ## 错误码相关
 
 ### Q1: 1030错误是什么原因？
@@ -12635,6 +13386,13 @@ later.","ts":1588093883199}类似错误，说明您的输入的请求参数值�
 
 如果您出现{'index': 1, 'err_code': 1048, 'err_msg': 'Insufficient close amount
 available. '}类似错误，说明此时可平仓量不足，您平仓时需查询目前已有的仓位张数再去平仓。
+
+1、检查平仓的张数是否过大（当有平仓的限价挂单时, 会占用可平仓位的张数, 建议您撤销这些挂单后再去重试）.
+
+2、检查仓位方向和开平方向（平多: 卖出平多(direction用sell、offset用close)、平空:
+买入平空(direction用buy、offset用close)、闪电平仓只需传: direction（平多:sell、平空: buy））.
+
+3、止盈止损的挂单和计划委托的挂单, 不会占仓位数.
 
 ### Q3: API返回1032错误码是什么原因？
 
@@ -13334,11 +14092,11 @@ contract_code | true | string | 合约代码,支持大小写 | "BTC-USD" ... |
           "ts": 最新成交时间,
           "data": [
             {
-                      "id":  成交唯一id（品种唯一）,
-                      "price": 成交价钱,
-             "amount": 成交量(张)，买卖双边成交量之和,
-             "direction": 主动成交方向,
-             "ts": 成交时间
+                "id":  成交唯一id（品种唯一）,
+                "price": 成交价钱,
+                 "amount": 成交量(张)，买卖双边成交量之和,
+                 "direction": 主动成交方向,
+                 "ts": 成交时间
             }
           ]
         }
@@ -13357,7 +14115,8 @@ contract_code | true | string | 合约代码,支持大小写 | "BTC-USD" ... |
                     "direction": "sell",
                     "id": 509516201220000,
                     "price": "13789.5",
-                    "ts": 1603852755227
+                    "ts": 1603852755227,
+                    "quantity": "0.344"
                 }
             ],
             "id": 1603852755779,
@@ -13383,6 +14142,7 @@ price | true | string | 价格 |  |
 amount | true | string | 数量（张）。 值是买卖双边之和 |  |  
 direction | true | string | 买卖方向 |  |  
 ts | true | long | 订单成交时间 |  |  
+quantity | true | string | 成交量（币） |  |  
 </data> |  |  |  |  |  
 id | true | long | 订单唯一id（品种唯一） |  |  
 ts | true | long | 最新成交时间 |  |  
@@ -13439,21 +14199,24 @@ size | true | int | 获取交易记录的数量 | 1 | [1, 2000]
                         "direction": "sell",
                         "id": 509517815610000,
                         "price": 13804,
-                        "ts": 1603852832106
+                        "ts": 1603852832106,
+                        "quantity": 0.044
                     },
                     {
                         "amount": 4,
                         "direction": "sell",
                         "id": 509517815610001,
                         "price": 13804,
-                        "ts": 1603852832106
+                        "ts": 1603852832106,
+                        "quantity": 0.034
                     },
                     {
                         "amount": 2,
                         "direction": "sell",
                         "id": 509517815610002,
                         "price": 13804,
-                        "ts": 1603852832106
+                        "ts": 1603852832106,
+                        "quantity": 0.0144
                     }
                 ],
                 "id": 50951781561,
@@ -13480,11 +14243,16 @@ price | true | decimal | 价格 |
 amount | true | int | 数量（张）。 值是买卖双边之和 |  
 direction | true | string | 买卖方向 |  
 ts | true | long | 订单成交时间 |  
+quantity | true | decimal | 成交量（币） |  
 </data> |  |  |  |  
 id | true | long | 订单唯一id（品种唯一） |  
 ts | true | long | 最新成交时间 |  
 </data> |  |  |  |  
   
+#### 备注
+
+  * 2021年2月3日 21:00:00 后返回参数才会有quantity字段。
+
 ## 查询合约风险准备金余额和预估分摊比例
 
   * GET `/swap-api/v1/swap_risk_info`
@@ -13729,6 +14497,90 @@ ts | true | long | 统计时间 |
 
 tick字段：数组内的数据按照时间倒序排列；
 
+## 获取平台阶梯保证金
+
+  * GET `/swap-api/v1/swap_ladder_margin`
+
+### 请求参数：
+
+**参数名称** | **是否必须** | **类型** | **描述** | **取值范围**  
+---|---|---|---|---  
+contract_code | false | string | 合约代码，不填默认返回所有合约的阶梯保证金 | 比如： “BTC-USD”、“ETH-
+USD”。。。  
+  
+> Response
+    
+    
+    {
+        "status": "ok",
+        "data": [
+            {
+                "symbol": "BTC",
+                "contract_code": "BTC-USD",
+                "list": [
+                    {
+                        "lever_rate": 20,
+                        "ladders": [
+                            {
+                                "min_margin_balance": 0,
+                                "max_margin_balance": 10,
+                                "min_margin_available": 0,
+                                "max_margin_available": 10
+                            },
+                            {
+                                "min_margin_balance": 10,
+                                "max_margin_balance": 50,
+                                "min_margin_available": 10,
+                                "max_margin_available": 30
+                            },
+                            {
+                                "min_margin_balance": 50,
+                                "max_margin_balance": 250,
+                                "min_margin_available": 30,
+                                "max_margin_available": 70
+                            },
+                            {
+                                "min_margin_balance": 250,
+                                "max_margin_balance": 950,
+                                "min_margin_available": 70,
+                                "max_margin_available": 140
+                            },
+                            {
+                                "min_margin_balance": 950,
+                                "max_margin_balance": null,
+                                "min_margin_available": 140,
+                                "max_margin_available": null
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "ts": 1612494867085
+    }
+    
+
+### 返回参数：
+
+**参数名称** | **是否必须** | **类型** | **描述** | **取值范围**  
+---|---|---|---|---  
+status | true | string | 请求处理结果 | "ok" , "error"  
+<data> | true | object array |  |  
+symbol | true | string | 品种代码 | 比如："BTC"  
+contract_code | true | string | 合约代码 | 比如："BTC-USD"  
+<list> | true | object array |  |  
+lever_rate | true | int | 杠杆倍数 |  
+<ladders> | true | object array | 该合约对应杠杆倍数下的阶梯保证金数据 |  
+min_margin_balance | true | decimal | 最小账户权益（该阶梯权益范围起点，包含该值） |  
+max_margin_balance | true | decimal | 最大账户权益（该阶梯权益范围终点，不包含该值，该值属于下一阶梯的权益范围起点）
+|  
+min_margin_available | true | decimal | 最小可用保证金（范围内包含该值） |  
+max_margin_available | true | decimal | 最大可用保证金（范围内不包含该值，该值属于下一阶梯的最小可用保证金） |  
+</ladders> |  |  |  |  
+</list> |  |  |  |  
+</data> |  |  |  |  
+ts | true | long | 响应生成时间点，单位：毫秒 |  
+  
 ## 精英账户多空持仓对比-账户数
 
   * GET `/swap-api/v1/swap_elite_account_ratio`
@@ -14641,6 +15493,56 @@ last_price | true | decimal | 最新价 |
 </positions> |  |  |  |  
 </data> |  |  |  |  
   
+## 批量设置子账户交易权限
+
+  * POST `/swap-api/v1/swap_sub_auth`
+
+### 请求参数
+
+参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
+---|---|---|---|---  
+sub_uid | true | string | 子账户uid (多个uid中间以","分隔,一次最多允许开通10个子账户) |  
+sub_auth | true | int | 子账户交易权限，1 开启，0关闭 |  
+  
+#### 备注：
+
+  * 首次帮子账户开启交易权限时，系统会自动帮子账户先开通合约。
+  * 若子账户交易权益已开启，此时请求开启权限，则接口会直接返回成功；若子账户交易权益已关闭，此时用户请求关闭权限，则接口会直接返回成功；
+
+> Response:
+    
+    
+    {
+        "status": "ok",
+        "data": {
+            "errors": [
+                {
+                    "sub_uid": "1234567",
+                    "err_code": 1010,
+                    "err_msg": "Account doesnt exist."
+                }
+            ],
+            "successes": "146190163"
+        },
+        "ts": 1612495818455
+    } 
+    
+
+### 返回参数
+
+参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
+---|---|---|---|---  
+status | true | string | 请求处理结果 | "ok" , "error"  
+<data> | true |  |  |  
+<errors> | true | object array |  |  
+sub_uid | true | string | 开通失败的子账户uid |  
+err_code | true | int | 错误码 |  
+err_msg | true | string | 错误信息 |  
+</errors> |  |  |  |  
+successes | true | string | 开通合约成功的子账户uid列表 |  
+</data> |  |  |  |  
+ts | true | long | 响应生成时间点，单位：毫秒 |  
+  
 ## 查询母账户下所有子账户资产信息
 
 ### 请求参数
@@ -14696,6 +15598,74 @@ risk_rate | true | decimal | 保证金率 |
 
 只返回已经开通合约交易的子账户数据.
 
+## 批量获取子账户资产信息
+
+  * POST `/swap-api/v1/swap_sub_account_info_list`
+
+### 请求参数
+
+参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
+---|---|---|---|---  
+contract_code | false | string | 合约代码 | "BTC-USD"... ,如果缺省，默认返回所有合约  
+page_index | false | int | 第几页,不填默认第一页 |  
+page_size | false | int | 不填默认20，不得多于50 |  
+  
+#### 备注：
+
+  * 只返回已经开通合约交易的子账户数据.
+  * 子账户列表默认按照开通合约时间升序，先开通合约排在前面
+
+> Response:
+    
+    
+    {
+        "status": "ok",
+        "data": {
+            "total_page": 1,
+            "current_page": 1,
+            "total_size": 1,
+            "sub_list": [
+                {
+                    "sub_uid": 123456789,
+                    "account_info_list": [
+                        {
+                            "symbol": "TRX",
+                            "margin_balance": 50,
+                            "liquidation_price": null,
+                            "risk_rate": null,
+                            "contract_code": "TRX-USD"
+                        }
+                    ]
+                }
+            ]
+        },
+        "ts": 1612496369035
+    }
+    
+    
+
+### 返回参数
+
+参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
+---|---|---|---|---  
+status | true | string | 请求处理结果 | "ok" , "error"  
+ts | true | long | 响应生成时间点，单位：毫秒 |  
+<data> | true | object | 字典类型 |  
+<sub_list> | true | object array |  |  
+sub_uid | true | long | 子账户UID |  
+<account_info_list> | true | object array |  |  
+symbol | true | string | 品种代码 | "BTC","ETH"...  
+contract_code | true | string | 合约代码 | "BTC-USD" ...  
+margin_balance | true | decimal | 账户权益 |  
+liquidation_price | true | decimal | 预估强平价 |  
+risk_rate | true | decimal | 保证金率 |  
+</account_info_list> |  |  |  |  
+</sub_list> |  |  |  |  
+current_page | true | int | 当前页 |  
+total_page | true | int | 总页数 |  
+total_size | true | int | 总条数 |  
+</data> |  |  |  |  
+  
 ## 查询单个子账户资产信息
 
   * POST `/swap-api/v1/swap_sub_account_info`
@@ -15031,6 +16001,7 @@ page_size | false | int | 页大小 | 不填默认20，不得多于50（超过�
   * 默认按照时间倒序查询，新数据排在前
   * 当起始时间或结束时间不符合取值范围时，报错1067，参数不合法。
   * 查询结算开始时间在起始时间之后，结束时间之前的用户结算记录数据。
+  * 该接口仅支持用户查询最近90天的数据。
 
 > Response:
     
@@ -18892,7 +19863,7 @@ ask | true | array | 卖一盘,[price(挂单价), vol(此价格挂单张数)] |
 bid | true | array | 买一盘,[price(挂单价), vol(此价格挂单张数)] |  
 version | true | long | 版本号 |  
 ts | true | long | 响应生成时间点，单位：毫秒（指数据生成时间） |  
-<\tick> |  |  |  |  
+</tick> |  |  |  |  
   
   * **说明** ：
   * 当买一价、买一量、卖一价、卖一量，其中任一数据发生变化时，进行逐笔推送；
@@ -18940,6 +19911,27 @@ size | false | int | 数据条数，最多50，不填默认50 | [1,50]
 ---|---|---|---|---  
 contract_code | true | string | 交易对 | 合约代码，支持大小写，比如"BTC-USD"  
   
+> 请求成功返回数据的例子：
+    
+    
+    {
+        "data":[
+            {
+                "amount":"2",
+                "ts":1603876250774,
+                "id":509977028010022,
+                "price":"13689.8",
+                "direction":"sell",
+                "quantity": "0.0031"
+            }
+        ],
+        "id":"id8",
+        "rep":"market.BTC-USD.trade.detail",
+        "status":"ok",
+        "ts":1603876266723
+    }
+    
+
 ### 返回参数
 
 参数名称 | 是否必须 | 类型 | 描述 | 默认值  
@@ -18953,28 +19945,13 @@ price | true | string | 价格 |
 amount | true | string | 数量（张） |  
 direction | true | string | 买卖方向 |  
 ts | true | long | 订单成交时间 |  
+quantity | true | string | 成交量（币） |  
 </data> |  |  |  |  
 ts | true | long | 发送时间 |  
   
-> 请求成功返回数据的例子：
-    
-    
-    {
-        "data":[
-            {
-                "amount":"2",
-                "ts":1603876250774,
-                "id":509977028010022,
-                "price":"13689.8",
-                "direction":"sell"
-            }
-        ],
-        "id":"id8",
-        "rep":"market.BTC-USD.trade.detail",
-        "status":"ok",
-        "ts":1603876266723
-    }
-    
+#### 备注
+
+  * 2021年2月3日 21:00:00 后返回参数才会有quantity字段。
 
 ## 订阅 Trade Detail 数据
 
@@ -19027,7 +20004,8 @@ contract_code | true | string | 交易对 | 合约代码，支持大小写，比
                     "ts":1603876416513,
                     "id":509980358530000,
                     "price":13686,
-                    "direction":"sell"
+                    "direction":"sell",
+                    "quantity": 0.0031
                 }
             ]
         }
@@ -19050,6 +20028,7 @@ ts | true | long | 订单时间戳 |
 id | true | long | 成交唯一id（品种唯一） |  
 price | true | decimal | 价格 |  
 direction | true | string | 买卖方向 |  
+quantity | true | decimal | 成交量（币） |  
 </data> |  |  |  |  
 </tick> |  |  |  |  
   
