@@ -8,7 +8,7 @@
 
 [现货](/docs/spot/v1/en/) [交割合约](/docs/dm/v1/en/)
 [币本位永续合约](/docs/coin_margined_swap/v1/en/)
-[USDT本位永续合约](/docs/usdt_swap/v1/en/) [期权合约](/docs/option/v1/en/)
+[USDT本位永续合约](/docs/usdt_swap/v1/en/)
 
 [简体中文](/docs/spot/v1/cn/)
 
@@ -18,6 +18,11 @@ shell
     * API 简介
     * 做市商项目
   * 更新日志
+    * 1.2.9 2021年5月17日 【修改：母子账户划转（新增选填入参：client_order_id）】
+    * 1.2.8 2021年5月12日 【新增：跟踪委托订单接口】
+    * 1.2.7 2021年4月28日 【新增:获取市场最优挂单接口。修改：获取标记价格K线接口（支持symbol入参直接使用合约代码请求，例于：BTC210326）、订阅标记价格K线数据接口（支持symbol入参直接使用合约代码请求，例于：BTC210326）、请求标记价格K线数据接口（支持symbol入参直接使用合约代码请求，例于：BTC210326）】
+    * 1.2.6 2021年3月15日 【新增：获取标记价格K线接口、订阅标记价格K线数据接口、请求标记价格K线数据接口】
+    * 1.2.5 2021年2月26日 【新增：获取账户总资产估值接口。修改获取合约最高限价和最低限价接口（支持用户所有入参都不填，接口返回所有当前上市合约的限价数据。）、修改获取市场最近成交记录接口（支持用户所有入参都不填，接口返回所有当前上市合约的最近成交数据；当用户不传入参时， 返参ch值为market.*trade.detail。在返参tick下新增字段：symbol。）】
     * 1.2.4 2021年2月5日【新增：获取平台阶梯保证金接口、批量设置子账户交易权限接口、批量获取子账户资产信息接口。4-7 修改接口，新增字段。8 查询用户结算记录接口（为避免影响系统性能，接口仅支持查询最近90天用户结算记录）】
     * 1.2.3 2021年1月29日 【新增：批量获取聚合行情接口。 2-14 修改接口，新增字段。修改：计划委托订单的订单ID由原本的自然数自增ID 改为长度为 18 位的唯一标识ID。推荐使用下单后返回的 order_id_str（字符串类型的订单 ID），避免发生长度过大而被系统截断的情况。】
     * 1.2.2 2021年01月12号 【1 新增获取预估结算价。2-7 新增止盈止损API接口，8-23 修改接口，新增字段。新增【合约策略订单】一级菜单，将本次新增的双向止盈止损相关接口以及原有的计划委托相关接口挪到该菜单下】
@@ -73,7 +78,9 @@ shell
     * 获取预估结算价
     * 查询系统状态
     * 获取行情深度数据
+    * 获取市场最优挂单
     * 获取K线数据
+    * 获取标记价格的K线数据
     * 获取聚合行情
     * 批量获取聚合行情
     * 获取市场最近成交记录
@@ -90,6 +97,7 @@ shell
     * 获取指数K线数据
     * 获取基差数据
   * 合约资产接口
+    * 获取账户总资产估值
     * 获取用户账户信息
     * 获取用户持仓信息
     * 批量设置子账户交易权限
@@ -135,6 +143,11 @@ shell
     * 查询止盈止损订单当前委托
     * 查询止盈止损订单历史委托
     * 查询开仓单关联的止盈止损订单详情
+    * 跟踪委托订单下单
+    * 跟踪委托订单撤单
+    * 跟踪委托订单全部撤单
+    * 跟踪委托订单当前委托
+    * 跟踪委托订单历史委托
   * 合约划转接口
     * 现货-交割合约账户间进行资金的划转
     * err-code列表
@@ -164,6 +177,8 @@ shell
     * 请求(req)指数K线数据
     * 订阅(sub)基差数据
     * 请求(req)基差数据
+    * 订阅标记价格K线数据
+    * 请求标记价格K线数据
   * WebSocket订单和用户数据接口
     * 订阅订单成交数据（sub）
     * 取消订阅订单成交数据（unsub）
@@ -203,14 +218,124 @@ shell
 做市商项目不支持点卡抵扣、VIP、交易量相关活动以及任何形式的返佣活动。
 
 欢迎有优秀 maker 策略交易量大的用户参与长期合约做市商项目。如果您的火币交割合约账户中有折合大于 3 BTC
-资产，或火币币本位永续合约账户中有折合大于 3 BTC 资产，或火币期权合约账户中有折合大于 3 BTC 资产，或火币USDT本位永续合约账户中有大于
-30000 USDT 资产，请提供以下信息到 [[email protected]](/cdn-cgi/l/email-
+资产，或火币币本位永续合约账户中有折合大于 3 BTC 资产，或火币USDT本位永续合约账户中有大于 100000 USDT 资产，请提供以下信息到
+[[email protected]](/cdn-cgi/l/email-
 protection)（做市商项目不支持点卡抵扣、VIP、交易量相关活动以及任何形式的返佣活动）:
 
   1. 提供火币UID （需不存在返佣关系的 UID）；
   2. 提供其他交易平台 maker 交易量截图证明（比如30天内成交量，或者 VIP 等级等）；
 
 # 更新日志
+
+## 1.2.9 2021年5月17日 【修改：母子账户划转（新增选填入参：client_order_id）】
+
+### 1、修改母子账户划转接口（新增选填入参：client_order_id）
+
+  * 接口名称：母子账户划转
+  * 接口类型：私有接口
+  * 接口URL：/api/v1/contract_master_sub_transfer
+
+## 1.2.8 2021年5月12日 【新增：跟踪委托订单接口】
+
+### 1、新增跟踪委托订单下单接口
+
+  * 接口名称：跟踪委托订单下单
+  * 接口类型：私有接口
+  * 接口URL：/api/v1/contract_track_order
+
+### 2、新增跟踪委托订单撤单接口
+
+  * 接口名称：跟踪委托订单撤单
+  * 接口类型：私有接口
+  * 接口URL：/api/v1/contract_track_cancel
+
+### 3、新增跟踪委托订单全部撤单接口
+
+  * 接口名称：跟踪委托订单全部撤单
+  * 接口类型：私有接口
+  * 接口URL：/api/v1/contract_track_cancelall
+
+### 4、新增跟踪委托订单当前委托接口
+
+  * 接口名称：跟踪委托订单当前委托
+  * 接口类型：私有接口
+  * 接口URL：/api/v1/contract_track_openorders
+
+### 5、新增跟踪委托订单历史委托接口
+
+  * 接口名称：跟踪委托订单历史委托
+  * 接口类型：私有接口
+  * 接口URL：/api/v1/contract_track_hisorders
+
+## 1.2.7 2021年4月28日
+【新增:获取市场最优挂单接口。修改：获取标记价格K线接口（支持symbol入参直接使用合约代码请求，例于：BTC210326）、订阅标记价格K线数据接口（支持symbol入参直接使用合约代码请求，例于：BTC210326）、请求标记价格K线数据接口（支持symbol入参直接使用合约代码请求，例于：BTC210326）】
+
+### 1、新增获取市场最优挂单接口
+
+  * 接口名称：获取市场最优挂单
+  * 接口类型：公共接口
+  * 接口URL：/market/bbo
+
+### 2、修改获取标记价格K线接口（支持symbol入参直接使用合约代码请求，例于：BTC210326）
+
+  * 接口名称：获取标记价格的K线数据
+  * 接口类型：公共接口
+  * 接口URL：/index/market/history/mark_price_kline
+
+### 3、修改订阅标记价格K线数据接口（支持symbol入参直接使用合约代码请求，例于：BTC210326）
+
+  * 接口名称：订阅标记价格K线数据
+  * 接口类型：公共接口
+  * 订阅地址：market.$symbol.mark_price.$period
+
+### 4、修改请求标记价格K线数据接口（支持symbol入参直接使用合约代码请求，例于：BTC210326）
+
+  * 接口名称：请求标记价格K线数据
+  * 接口类型：公共接口
+  * 订阅地址：market.$symbol.mark_price.$period
+
+## 1.2.6 2021年3月15日 【新增：获取标记价格K线接口、订阅标记价格K线数据接口、请求标记价格K线数据接口】
+
+### 1、新增获取标记价格K线接口
+
+  * 接口名称：获取标记价格的K线数据
+  * 接口类型：公共接口
+  * 接口URL：/index/market/history/mark_price_kline
+
+### 2、新增订阅标记价格K线数据接口
+
+  * 接口名称：订阅标记价格K线数据
+  * 接口类型：公共接口
+  * 订阅地址：market.$symbol.mark_price.$period
+
+### 3、新增请求标记价格K线数据接口
+
+  * 接口名称：请求标记价格K线数据
+  * 接口类型：公共接口
+  * 订阅地址：market.$symbol.mark_price.$period
+
+## 1.2.5 2021年2月26日
+【新增：获取账户总资产估值接口。修改获取合约最高限价和最低限价接口（支持用户所有入参都不填，接口返回所有当前上市合约的限价数据。）、修改获取市场最近成交记录接口（支持用户所有入参都不填，接口返回所有当前上市合约的最近成交数据；当用户不传入参时，
+返参ch值为market.*trade.detail。在返参tick下新增字段：symbol。）】
+
+### 1、新增获取账户总资产估值接口
+
+  * 接口名称：获取账户总资产估值
+  * 接口类型：私有接口
+  * 接口URL：/api/v1/contract_balance_valuation
+
+### 2、修改获取合约最高限价和最低限价接口（支持用户所有入参都不填，接口返回所有当前上市合约的限价数据。）
+
+  * 接口名称：获取合约最高限价和最低限价
+  * 接口类型：共公接口
+  * 接口URL：/api/v1/contract_price_limit
+
+### 3、修改获取市场最近成交记录接口（支持用户所有入参都不填，接口返回所有当前上市合约的最近成交数据；当用户不传入参时，
+返参ch值为market.*trade.detail。在返参tick下新增字段：symbol。）
+
+  * 接口名称：获取市场最近成交记录
+  * 接口类型：共公接口
+  * 接口URL：/market/trade
 
 ## 1.2.4 2021年2月5日【新增：获取平台阶梯保证金接口、批量设置子账户交易权限接口、批量获取子账户资产信息接口。4-7 修改接口，新增字段。8
 查询用户结算记录接口（为避免影响系统性能，接口仅支持查询最近90天用户结算记录）】
@@ -233,29 +358,29 @@ protection)（做市商项目不支持点卡抵扣、VIP、交易量相关活动
   * 接口类型：私有接口
   * 接口URL：/api/v1/contract_sub_account_info_list
 
-### 4、修改获取市场最近成交记录接口（返参data参数下新增quantity，表示成交量（币）。计算公式：成交量（币） =
-成交量（张）*合约面值/成交价格）
+### 4、修改获取市场最近成交记录接口（返参data参数下新增quantity，表示成交量（币）。计算公式：成交量（币） = 成交量（张）*
+合约面值/成交价格）
 
   * 接口名称：获取市场最近成交记录
   * 接口类型：公共接口
   * 接口URL：/market/trade
 
 ### 5、修改批量获取最近的交易记录接口（返参data参数下内层data中新增quantity，表示成交量（币）。计算公式：成交量（币） =
-成交量（张）*合约面值/成交价格）
+成交量（张）* 合约面值/成交价格）
 
   * 接口名称：批量获取最近的交易记录
   * 接口类型：公共接口
   * 接口URL：/market/history/trade
 
 ### 6、修改订阅 Trade Detail 数据接口（返参tick参数下的data参数中新增quantity，表示成交量（币）。计算公式：成交量（币）
-= 成交量（张）*合约面值/成交价格）
+= 成交量（张）* 合约面值/成交价格）
 
   * 接口名称：订阅 Trade Detail 数据
   * 接口类型：公共接口
   * 订阅地址：market.$symbol.trade.detail
 
 ### 7、修改请求 Trade Detail 数据接口（返参data参数中新增quantity，表示成交量（币）。计算公式：成交量（币） =
-成交量（张）*合约面值/成交价格）
+成交量（张）* 合约面值/成交价格）
 
   * 接口名称：请求 Trade Detail 数据
   * 接口类型：公共接口
@@ -1357,8 +1482,10 @@ WebSocket私有订单成交推送接口(需要API KEY验签)
 读取 | 基础信息接口 | /api/v1/contract_api_state | GET | 查询系统状态 | 否  
 读取 | 市场行情接口 | /market/depth | GET | 获取行情深度数据 | 否  
 读取 | 市场行情接口 | /market/history/kline | GET | 获取K线数据 | 否  
+读取 | 市场行情接口 | /index/market/history/mark_price_kline | GET | 获取标记价格的K线数据 | 否  
 读取 | 市场行情接口 | /market/detail/merged | GET | 获取聚合行情 | 否  
 读取 | 市场行情接口 | /market/detail/batch_merged | GET | 批量获取聚合行情 | 否  
+读取 | 市场行情接口 | /market/bbo | GET | 获取市场最优挂单 | 否  
 读取 | 市场行情接口 | /market/trade | GET | 获取市场最近成交记录 | 否  
 读取 | 市场行情接口 | /market/history/trade | GET | 批量获取最近的交易记录 | 否  
 读取 | 市场行情接口 | /api/v1/contract_risk_info | GET | 查询合约风险准备金余额和预估分摊比例 | 否  
@@ -1373,6 +1500,7 @@ WebSocket私有订单成交推送接口(需要API KEY验签)
 读取 | 市场行情接口 | /index/market/history/index | GET | 获取指数K线数据 | 否  
 读取 | 市场行情接口 | /index/market/history/basis | GET | 获取基差数据 | 否  
 读取 | 市场行情接口 | /api/v1/contract_estimated_settlement_pr ice | GET | 获取预估结算价 | 否  
+读取 | 资产接口 | /api/v1/contract_balance_valuation | POST | 获取账户总资产估值 | 是  
 读取 | 资产接口 | /api/v1/contract_account_info | POST | 获取用户账户信息 | 是  
 读取 | 资产接口 | /api/v1/contract_position_info | POST | 获取用户持仓信息 | 是  
 交易 | 账户接口 | /api/v1/contract_sub_auth | POST | 批量设置子账户交易权限 | 是  
@@ -1416,6 +1544,11 @@ WebSocket私有订单成交推送接口(需要API KEY验签)
 读取 | 策略接口 | /api/v1/contract_tpsl_openorders | POST | 止盈止损订单当前委托 | 是  
 读取 | 策略接口 | /api/v1/contract_tpsl_hisorders | POST | 止盈止损订单历史委托 | 是  
 读取 | 策略接口 | /api/v1/contract_relation_tpsl_order | POST | 查询开仓单关联的止盈止损订单 | 是  
+交易 | 策略接口 | /api/v1/contract_track_order | POST | 跟踪委托订单下单 | 是  
+交易 | 策略接口 | /api/v1/contract_track_cancel | POST | 跟踪委托订单撤单 | 是  
+交易 | 策略接口 | /api/v1/contract_track_cancelall | POST | 跟踪委托订单全部撤单 | 是  
+读取 | 策略接口 | /api/v1/contract_track_openorders | POST | 跟踪委托订单当前委托 | 是  
+读取 | 策略接口 | /api/v1/contract_track_hisorders | POST | 跟踪委托订单历史委托 | 是  
   
 ## 访问地址
 
@@ -1549,7 +1682,7 @@ API Key 包括以下两部分
 
 ## 访问次数限制
 
-  * 交割合约、币本位永续合约、期权合约和USDT本位永续合约都分开限频
+  * 交割合约、币本位永续合约和USDT本位永续合约都分开限频
 
   * 公开行情接口和用户私有接口都有访问次数限制
 
@@ -1559,7 +1692,7 @@ API Key 包括以下两部分
 
   * 行情类的公开接口，比如：获取K线数据、获取聚合行情、市场行情、获取行情深度数据、获取指数k线、获取基差数、获取市场最近成交记录：
 
-（1） restful接口：同一个IP, 所有业务（交割合约、币本位永续合约、期权合约和USDT本位永续合约）总共1秒最多800个请求
+（1） restful接口：同一个IP, 所有业务（交割合约、币本位永续合约和USDT本位永续合约）总共1秒最多800个请求
 
 （2） websocket：req请求，同一时刻最多请求50次；sub请求，无限制，服务器主动推送数据
 
@@ -1869,8 +2002,6 @@ heartbeat | int | 交割合约 1: 可用 0: 不可用(即停服维护)
 swap_heartbeat | int | 币本位永续 1: 可用 0: 不可用(即停服维护)  
 estimated_recovery_time | long | null: 正常. 交割合约预计恢复时间， 单位:毫秒  
 swap_estimated_recovery_time | long | null: 正常. 币本位永续合约预计恢复时间，单位：毫秒.  
-option_heartbeat | int | 期权合约 1: 可用 0: 不可用(即停服维护)  
-option_estimated_recovery_time | long | null: 正常. 期权合约预计恢复时间，单位：毫秒.  
 linear_swap_heartbeat | long | USDT本位永续 1: 可用 0: 不可用(即停服维护)  
 linear_swap_estimated_recovery_time | long | null: 正常. USDT本位永续合约预计恢复时间，单位：毫秒.  
 </data> |  |  
@@ -1885,8 +2016,6 @@ linear_swap_estimated_recovery_time | long | null: 正常. USDT本位永续合�
             "estimated_recovery_time":null,
             "swap_heartbeat":1,
             "swap_estimated_recovery_time":null,
-            "option_heartbeat":1,
-            "option_estimated_recovery_time":null,
             "linear_swap_heartbeat":1,
             "linear_swap_estimated_recovery_time":null
         },
@@ -1896,7 +2025,7 @@ linear_swap_estimated_recovery_time | long | null: 正常. USDT本位永续合�
 
 ## 获取当前系统时间戳
 
-get `https://api.hbdm.com/api/v1/timestamp`
+  * GET `https://api.hbdm.com/api/v1/timestamp`
 
 ### 请求参数
 
@@ -2041,8 +2170,8 @@ ts | true | long | 当前系统时间戳 |
 1231 | 您尚未做身份认证  
 1232 | 您上传的图片格式/大小不符合要求,请重新上传  
 1233 | 您尚未开通高倍数协议 (使用高倍数请先使用主账号登录web或APP端同意高倍数协议)  
-1234 | {0}合约开仓委托订单数量不得超过{1}  
-1235 | {0}合约平仓委托订单数量不得超过{1}  
+1234 | {0}合约未完成的开仓委托数量不得超过{1}笔  
+1235 | {0}合约未完成的平仓委托数量不得超过{1}笔  
 1250 | 无法获取HT_token  
 1251 | 无法获取BTC净资产,请稍后再试  
 1252 | 无法获取币币账户资产,请稍后再试  
@@ -2105,6 +2234,46 @@ ts | true | long | 当前系统时间戳 |
 1407 | 止损价不得{0}{1}{2}  
 1408 | 该止盈止损委托单未生效, 无法撤销  
 1409 | 您没有止盈止损订单权限,请联系客服  
+1410 | 批量操作子账号的数量不能超过{0}个  
+1411 | 结算中, 暂时无法查询订单信息  
+1412 | {0}不符合价格精度限制{1}  
+1413 | 您没有跟踪委托订单权限,请联系客服  
+1414 | 您尚未开通网格交易协议(使用网格交易请先使用主账号登录web或APP端同意协议)  
+1415 | 终止价不得在网格价格范围内,请修改!  
+1416 | 超出最大运行时长({0}天{1}时),请修改!  
+1417 | 超出网格数量范围({0}~{1}个),请修改!  
+1418 | 最多同时运行{0}个网格, 请先终止其它网格  
+1419 | 超出初始化保证金范围({0}~{1}}{2})  
+1420 | 您没有合约的网格交易权限, 请联系客服  
+1421 | 当前合约有委托单或持仓, 请先撤销或平仓  
+1422 | 预计每格收益率小于0,请修改!  
+1423 | 网格最低价和最高价的价差不合理,请修改!  
+1424 | 该网格已因其它原因被终止, 无法修改或手动终止  
+1425 | 回调比例必须{0}{1}, 请修改!  
+1426 | 激活价必须{0}最新价  
+1427 | {0}合约跟踪委托订单数量不得超过{1}  
+1428 | 相同合约的优惠券只能领取1张  
+1429 | 已领取,请勿重复领取  
+1430 | 此优惠券已失效,请刷新  
+1431 | 系统维护中,预计GMT+8 {0} 可恢复  
+1432 | 存在初始化中的网格,暂时无法下单  
+1433 | 您有限价单导致网格终止,请前往历史委托查看详情  
+1434 | 小于最小初始担保资产({0}{1}), 导致每个网格的数量小于最小下单量, 请修改!  
+1435 | 该网格已被您手动终止  
+1436 | 网格超时, 自动终止  
+1437 | 系统原因导致网格终止, 请联系客服  
+1438 | 网格触发终止条件, 已终止  
+1439 | 网格触发强平, 已终止  
+1440 | {0}合约撤销失败  
+1441 | 触发价必须小于网格最高终止价, 大于网格最低终止价, 请修改!  
+1442 | 有效时长必须大于已运行时长1分钟以上, 请修改!  
+1443 | 合约{0}交割导致网格终止  
+1450 | 您所在的风险等级不支持使用当前倍数  
+1451 | 您所在的风险等级不支持使用当前倍数, 请登录主账号查看  
+1452 | 网格订单数量超出平台数量限制, 暂时无法下单  
+1453 | 计划委托订单数量超出平台数量限制, 暂时无法下单  
+1454 | 止盈止损订单数量超出平台数量限制, 暂时无法下单  
+1455 | 跟踪委托订单数量超出平台数量限制, 暂时无法下单  
 12001 | 无效的提交时间  
 12002 | 错误的签名版本  
 12003 | 错误的签名方法  
@@ -2174,6 +2343,10 @@ ts | true | long | 当前系统时间戳 |
 ### 7、/api/v1/contract_order合约下单和api/v1/contract_batchorder合约批量下单接口：
 
   * 推荐传参数client_order_id（用户级别唯一），主要防止下单和批量下单接口由于网络或其它原因接口超时或者没有返回，可以根据client_order_id通过请求接口/api/v1/contract_order_info来快速获取订单是否下单正常或者快速获取订单信息。
+
+### 8、服务器部署最佳选择：
+
+  * 建议您将服务器放置在AWS东京C区，并且使用api.hbdm.vn域名，能有效减少网络断连与网络超时情况。
 
 ## 代码实例
 
@@ -2248,7 +2421,6 @@ colo相当于是 创建一个VPC节点，直接连了火币合约的内网，会
 交割签名过程和现货签名过程类似，除了参考以下注意事项外，请参照现货或者永续的demo代码来验证签名是否成功，demo代码验证通过后，再去核对您自己的签名代码。币本位永续的demo代码在
 [ 这里 ](https://docs.huobigroup.com/docs/coin_margined_swap/v1/cn/#2cff7db524)
 查看。交割的demo代码在[ 这里](https://docs.huobigroup.com/docs/dm/v1/cn/#2cff7db524)
-查看。期权的demo代码在[ 这里](https://docs.huobigroup.com/docs/option/v1/cn/#2cff7db524)
 查看。USDT本位永续的demo代码在 [ 这里
 ](https://docs.huobigroup.com/docs/usdt_swap/v1/cn/#2cff7db524) 查看。
 
@@ -2276,6 +2448,9 @@ colo相当于是 创建一个VPC节点，直接连了火币合约的内网，会
 
   12. Api Key 与 Secret Key中是否存在隐藏特殊字符，影响签名.
 
+如果通过以上的方法还没找出签名失败的原因，可以通过专门验证签名的 [ demo
+](https://github.com/hbdmapi/huobi_api_rules ) 来确认您的签名是在哪一步出现问题。
+
 ### Q7: 公开行情根据ip限速，需要私钥的根据uid限速是吗？
 
 是的。私有的根据UID来限速，不是根据API—KEY限速，母子帐号是分开分别限速，互不影响。
@@ -2297,9 +2472,14 @@ colo相当于是 创建一个VPC节点，直接连了火币合约的内网，会
 
 ### Q3: 有没有历史K线数据或者历史的公开市场逐笔成交数据？
 
-历史K线数据可以通过API接口/market/history/kline去获取，只填写from,to参数，不写size参数，最多只能获取连续两年的数据。
+历史K线数据可以通过API接口/market/history/kline去获取，通过from,to来截取时间段获取（时间段不能超过两年），每次获取的数据不得超过2000条。
 
-历史的公开市场逐笔成交数据目前没有，您可以通过订阅market.$symbol.trade.detail来本地进行存储。
+历史的公开市场逐笔成交数据，您可以通过订阅market.$symbol.trade.detail来本地进行存储。
+
+或者您可以通过 [历史行情数据下载](https://futures.huobi.be/zh-cn/data/landing_page) 来获取数据。
+
+您也可以通过 [Python的历史行情数据下载DEMO](https://github.com/hbdmapi/huobi_public_data)
+来获取数据。
 
 ### Q4: 如何获取K线上的MACD等技术指标？
 
@@ -2380,9 +2560,9 @@ depth增量数据market.$symbol.depth.size_${size}.high_freq是30MS检测一次�
 
 ### Q15: 订阅多个合约代码同一主题时, 需要多个 ws 连接吗?
 
-对于交割合约、币永续、u永续、期权之间, 由于是不同的接口地址, 需要不同的 ws 连接
+对于交割合约、币永续、u永续之间, 由于是不同的接口地址, 需要不同的 ws 连接
 
-对于交割合约、币永续、u永续、期权各自里面, 只要接口地址是一样的, 一个 ws 连接即可.
+对于交割合约、币永续、u永续各自里面, 只要接口地址是一样的, 一个 ws 连接即可.
 
 ### Q16: 是否可以通过 ws 下单和撤单?
 
@@ -2418,7 +2598,7 @@ ts 是时间戳（毫秒）, 对应的时区是 UTC+8.
 每个推送数据的外层都会有一个推送数据 ts, 这个 ts 是服务器推送数据给客户端那一刻的间戳（毫秒）, 对应的时区是 UTC+8.
 
 当有推送数据到达时, 程序记录此时本地时间 ts. 当发现本地时间 ts 远远大于推送数据 ts 时（本地时间远远晚于推送数据时间）,
-可以通过一下方式定位延迟和解决延迟:
+可以通过以下方式定位延迟和解决延迟:
 
 a. 减少订阅时推送的数据.
 
@@ -2602,7 +2782,7 @@ amount: 成交量(张), 买卖双边成交量之和
 
 direction: 主动成交方向
 
-### Q24: 获取K线数据时, from 和 to 的时间间隔是 2000*period, 为什么获取的 data 为[]?
+### Q24: 获取K线数据时, from 和 to 的时间间隔是 2000 * period, 为什么获取的 data 为[]?
 
 获取 K 线时, from 和 to 两个时间点是全都包含在内的, 因此是 2001 条数据. 此时数量超出了最大条数 2000. 所以返回 []
 
@@ -2637,8 +2817,13 @@ USDT本位永续: https://status-linear-swap.huobigroup.com/
 
 margin_balance 是指账户权益
 
-margin_balance(账户权益 ) = margin_position(持仓保证金) + margin_frozen(冻结保证金) +
-margin_available(可用保证金)
+1、账户权益（margin_balance）= 静态权益（margin_static）+ 未实现盈亏（profit_unreal）。
+
+2、账户权益（margin_balance）= 账户余额 + 已实现盈亏（profit_real）+ 未实现盈亏（profit_unreal）。
+
+注：账户余额 = 静态权益（margin_static）- 已实现盈亏（profit_real），我们在API中只给出了静态权益字段。
+
+以上二种计算方式都可以得出帐户权益。
 
 ### Q29: 获取用户账户信息（/api/v1/contract_account_info）中的risk_rate
 "保证金率”和WEB端的"担保资产率”是一样的吗?
@@ -2667,7 +2852,7 @@ available. '}类似错误，说明此时可平仓量不足，您平仓时需查�
 
 ### Q3: API返回1032错误码是什么原因？
 
-1032代表您的访问次数超出限制，币本位永续合约、交割合约、期权合约和USDT永续合约是分开限制频率，请查看合约交易接入说明中的访问次数限制，并且可以在api接口response中的header打印当前的频率限制次数来看是否超出限制频率。建议加大请求间隔延时避免超出限制频率。
+1032代表您的访问次数超出限制，币本位永续合约、交割合约和USDT永续合约是分开限制频率，请查看合约交易接入说明中的访问次数限制，并且可以在api接口response中的header打印当前的频率限制次数来看是否超出限制频率。建议加大请求间隔延时避免超出限制频率。
 
 ## 如何更有效的解决问题
 
@@ -2699,29 +2884,44 @@ contract_code | string | false | BTC180914
   
 ### 备注：
 
-如果不填，默认查询所有所有合约信息; 如果contract_code填了值，那就按照contract_code去查询;
-如果contract_code没有填值，则按照symbol+contract_type去查询;
+如果不填，默认查询所有所有合约信息;
+
+如果contract_code填了值，那就按照contract_code去查询;
+
+如果contract_code没有填值，则按照symbol+contract_type去查询,contract_type参数需要和symbol配合查询;
 
 > Response:
     
     
     {
-        "status": "ok",
-        "data": [
+        "status":"ok",
+        "data":[
             {
-                "symbol": "BTC",
-                "contract_code": "BTC210122",
-                "contract_type": "this_week",
-                "contract_size": 100,
-                "price_tick": 0.000001,
-                "delivery_date": "20210122",
-                "delivery_time": "1611285000000",
-                "create_date": "20201230",
-                "contract_status": 1,
-                "settlement_time": "1609902600000"
+                "symbol":"BTC",
+                "contract_code":"BTC210813",
+                "contract_type":"this_week",
+                "contract_size":100,
+                "price_tick":0.01,
+                "delivery_date":"20210813",
+                "delivery_time":"1628841600000",
+                "create_date":"20210730",
+                "contract_status":1,
+                "settlement_time":"1628668800000"
+            },
+            {
+                "symbol":"ETH",
+                "contract_code":"ETH210813",
+                "contract_type":"this_week",
+                "contract_size":10,
+                "price_tick":0.001,
+                "delivery_date":"20210813",
+                "delivery_time":"1628841600000",
+                "create_date":"20210730",
+                "contract_status":1,
+                "settlement_time":"1628668800000"
             }
         ],
-        "ts": 1604296501822
+        "ts":1628650535608
     }
     
 
@@ -2739,8 +2939,8 @@ contract_size | true | decimal | 合约面值，即1张合约对应多少美元 
 price_tick | true | decimal | 合约价格最小变动精度 | 0.001, 0.01...  
 delivery_date | true | string | 合约交割日期 | 如"20180720"  
 create_date | true | string | 合约上市日期 | 如"20180706"  
-settlement_time | true | long | 下次结算时间（毫秒时间戳） |  
-delivery_time | true | long | 交割时间（毫秒时间戳） |  
+settlement_time | true | string | 下次结算时间（毫秒时间戳） |  
+delivery_time | true | string | 交割时间（毫秒时间戳） |  
 contract_status | true | int | 合约状态 | 合约状态:
 0:已下市、1:上市、2:待上市、3:停牌，4:暂停上市中、5:结算中、6:交割中、7:结算完成、8:交割完成、9:暂停交易中  
 </data> |  |  |  |  
@@ -2761,7 +2961,7 @@ ts | true | long | 响应生成时间点，单位：毫秒 |
 
 参数名称 | 参数类型 | 必填 | 描述  
 ---|---|---|---  
-symbol | string | false | 支持大小写，"BTC","ETH"...  
+symbol | string | false | 指数代码，不传查询所有指数信息。支持大小写，"BTC","ETH"...  
   
 > Response:
     
@@ -2813,24 +3013,27 @@ contract_code | string | false | BTC180914 ...
   
 ### 备注：
 
+所有入参都不填，接口返回所有当前上市合约的限价数据。
+
 如果contract_code填了值，那就按照contract_code去查询；
-如contract_code没有填值，则按照symbol+contract_type去查询，两个查询条件必填一个。
+
+contract_type参数需要和symbol配合查询，仅传contract_type查询不到合约数据。
 
 > Response:
     
     
     {
-        "status": "ok",
-        "data": [
+        "status":"ok",
+        "data":[
             {
-                "symbol": "BTC",
-                "contract_code": "BTC201225",
-                "contract_type": "quarter",
-                "high_limit": 14724.88,
-                "low_limit": 13057.92
+                "symbol":"BTC",
+                "contract_code":"BTC210813",
+                "contract_type":"this_week",
+                "high_limit":46365.84,
+                "low_limit":44547.58
             }
         ],
-        "ts": 1604296680648
+        "ts":1628650919495
     }
     
 
@@ -2869,24 +3072,32 @@ contract_type | string | false | 合约类型 (当周:"this_week", 次周:"next_
 当季:"quarter",次季:"next_quarter")  
 contract_code | string | false | BTC180914  
   
+#### 备注
+
+不传参数时可以查询所有品种合约总持仓。
+
+如果contract_code填了值，那就按照contract_code去查询；
+
+如果contract_code没有填值，则按照symbol+contract_type去查询,contract_type参数需要和symbol配合查询;
+
 > Response:
     
     
     {
-        "status": "ok",
-        "data": [
+        "status":"ok",
+        "data":[
             {
-                "volume": 4368,
-                "amount": 14.560485349511650388,
-                "symbol": "BTC",
-                "contract_type": "quarter",
-                "contract_code": "BTC210326",
-                "trade_amount": 48.1258043574155547968554033365689969656,
-                "trade_volume": 14896,
-                "trade_turnover": 1489600
+                "volume":399976,
+                "amount":877.273288561929011611,
+                "symbol":"BTC",
+                "contract_type":"this_week",
+                "contract_code":"BTC210813",
+                "trade_amount":4986.5280025389395513567887943123717024664,
+                "trade_volume":2272868,
+                "trade_turnover":227286800
             }
         ],
-        "ts": 1609835966723
+        "ts":1628651933482
     }
     
 
@@ -2923,17 +3134,17 @@ ts | true | long | 响应生成时间点，单位：毫秒 |
 
 参数名称 | 参数类型 | 必填 | 描述  
 ---|---|---|---  
-symbol | string | true | 支持大小写，"BTC","ETH"...  
+symbol | string | true | 合约品种，支持大小写，"BTC","ETH"...  
   
 > Response:
     
     
     {
-        "status": "ok",
-        "data": {
-            "delivery_price": 13212.3643864774624373956594
+        "status":"ok",
+        "data":{
+            "delivery_price":40883.1892735875313108822711
         },
-        "ts": 1604296995036
+        "ts":1628652034810
     }
     
 
@@ -3042,22 +3253,31 @@ symbol | string | false | 支持大小写，"BTC","ETH"...，如果缺省，默�
     
     
     {
-        "status": "ok",
-        "data": [
+        "status":"ok",
+        "data":[
             {
-                "symbol": "BTC",
-                "open": 1,
-                "close": 1,
-                "cancel": 1,
-                "transfer_in": 1,
-                "transfer_out": 1,
-                "master_transfer_sub": 1,
-                "sub_transfer_master": 1
+                "symbol":"BTC",
+                "open":1,
+                "close":1,
+                "cancel":1,
+                "transfer_in":1,
+                "transfer_out":1,
+                "master_transfer_sub":1,
+                "sub_transfer_master":1
+            },
+            {
+                "symbol":"ETH",
+                "open":1,
+                "close":1,
+                "cancel":1,
+                "transfer_in":1,
+                "transfer_out":1,
+                "master_transfer_sub":1,
+                "sub_transfer_master":1
             }
         ],
-        "ts": 1604297099976
-    }
-    
+        "ts":1628652120762
+    } 
     
 
 ### 返回参数
@@ -3077,18 +3297,6 @@ master_transfer_sub | true | int | 从母账号划转到子账号的权限："1"
 sub_transfer_master | true | int | 从子账号划转到母账号的权限："1"表示可用，“0”表示不可用 |  
 </data> |  |  |  |  
   
-### 备注
-
-  * open，指交易权限中对应的“API-开仓-普通订单”的权限，开启为可用，关闭为不可用；
-
-  * close，指交易权限中对应的“API-平仓-普通订单”的权限，开启为可用，关闭为不可用；
-
-  * cancel，指交易权限中对应的“API-撤单-普通订单”的权限，开启为可用，关闭为不可用；
-
-  * transfer_in，指交易权限中对应的“其他-划转-从币币转入”的权限，开启为可用，关闭为不可用；
-
-  * transfer_out，指交易权限中对应的“其他-划转-转出至币币”的权限，开启为可用，关闭为不可用；
-
 ## 获取行情深度数据
 
 ### 示例
@@ -3113,21 +3321,6 @@ step5, step14, step15（step1至step5,step14，step15
 是进行了深度合并后的深度），使用step0时，不合并深度获取150档数据;获得20档深度数据，使用 step6, step7, step8, step9,
 step10, step11, step12, step13（step7至step13是进行了深度合并后的深度），使用step6时，不合并深度获取20档数据  
   
-> tick 说明:
-    
-    
-        "tick": {
-          "id": 消息id.
-          "ts": 消息生成时间，单位：毫秒.
-          "bids": 买盘,[price(挂单价), vol(此价格挂单张数)], //按price降序.
-          "asks": 卖盘,[price(挂单价), vol(此价格挂单张数)]  //按price升序.
-          "ch": 数据所属的 channel,
-          "mrid": 订单ID,
-          "ts": 时间戳,
-          "version": 版本
-        }
-    
-
 > Response:
     
     
@@ -3172,8 +3365,8 @@ step10, step11, step12, step13（step7至step13是进行了深度合并后的深
 ch | true | string | 数据所属的 channel，格式：market.$symbol.depth.$type |  
 status | true | string | 请求处理结果 | "ok" , "error"  
 <tick> | true | object |  |  
-asks | true | array | 卖盘,[price(挂单价), vol(此价格挂单张数)], 按price升序 |  
-bids | true | array | 买盘,[price(挂单价), vol(此价格挂单张数)], 按price降序 |  
+asks | false | array | 卖盘,[price(挂单价), vol(此价格挂单张数)], 按price升序 |  
+bids | false | array | 买盘,[price(挂单价), vol(此价格挂单张数)], 按price降序 |  
 ch | true | string | 数据所属的 channel，格式：market.$symbol.depth.$type |  
 id | true | long | 消息id |  
 mrid | true | long | 订单ID |  
@@ -3197,6 +3390,70 @@ step4、step10 | 0.01
 step5、step11 | 0.1  
 step14、step12 | 1  
 step15、step13 | 10  
+  
+## 获取市场最优挂单
+
+  * GET `/market/bbo`
+
+### 请求参数
+
+参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
+---|---|---|---|---  
+symbol | false | string | 合约标识，不填返回全部合约的最优挂单信息 |
+如"BTC_CW"表示BTC当周合约，"BTC_NW"表示BTC次周合约，"BTC_CQ"表示BTC当季合约 ，"BTC_NQ"表示BTC次季度合约。
+支持使用合约code来查询数据，
+例如："BTC200918"(当周)，"BTC200925"(次周)，"BTC201225"(季度)，"BTC210326"(次季度)。  
+  
+> Response
+    
+    
+    {
+        "status":"ok",
+        "ticks":[
+            {
+                "symbol":"BTC_CW",
+                "ask":[
+                    45651.21,
+                    498
+                ],
+                "bid":[
+                    45644.31,
+                    40
+                ],
+                "mrid":144083800866,
+                "ts":1628652339586
+            },
+            {
+                "symbol":"BTC_NW",
+                "ask":[
+                    45659.01,
+                    8
+                ],
+                "bid":[
+                    45659,
+                    184
+                ],
+                "mrid":144083799954,
+                "ts":1628652337609
+            }
+        ],
+        "ts":1628652339605
+    }
+    
+
+### 返回参数
+
+参数名称 | 是否必须 | 数据类型 | 描述 | 取值范围  
+---|---|---|---|---  
+status | true | string | 请求处理结果 | "ok" , "error"  
+<ticks> | true | object array |  |  
+symbol | true | string | 品种代码 | "BTC","ETH"...  
+mrid | true | long | 撮合ID，唯一标识 |  
+ask | false | array | [卖1价,卖1量(张)] |  
+bid | false | array | [买1价,买1量(张)] |  
+ts | true | long | 系统检测orderbook时间点，单位：毫秒 |  
+</ticks> |  |  |  |  
+ts | true | long | 响应生成时间点，单位：毫秒 |  
   
 ## 获取K线数据
 
@@ -3231,52 +3488,35 @@ to | false | long | 结束时间戳 10位 单位S |  |
   * 4、如果size、from、to 均填写，会忽略from、to参数。
   * 支持查询已下市四周内的合约的K线数据（即到期日在过去最近四周的合约），可输入已下市四周内的合约的合约代码进行查询K线数据。
 
-> Data说明：
-    
-    
-    "data": [
-      {
-        "id": K线id,
-        "vol": 成交量(张)，买卖双边成交量之和,
-        "count": 成交笔数,
-        "open": 开盘价,
-        "close": 收盘价,当K线为最晚的一根时，是最新成交价
-        "low": 最低价,
-        "high": 最高价,
-        "amount": 成交量(币), 即 sum(每一笔成交量(张)*单张合约面值/该笔成交价)
-       }
-    ]
-    
-
 > Response:
     
     
     {
-        "ch": "market.BTC_NQ.kline.5min",
-        "data": [
+        "ch":"market.BTC_CQ.kline.1min",
+        "ts":1628652530074,
+        "status":"ok",
+        "data":[
             {
-                "amount": 4.30994018951037,
-                "close": 14103.1,
-                "count": 39,
-                "high": 14110,
-                "id": 1604297400,
-                "low": 14098.29,
-                "open": 14098.75,
-                "vol": 608
+                "id":1628652420,
+                "open":45875.02,
+                "close":45851,
+                "low":45850.93,
+                "high":45880.01,
+                "amount":2.6471133153472473090872159941957749262,
+                "vol":1214,
+                "count":50
             },
             {
-                "amount": 0.19851299586596685,
-                "close": 14104.87,
-                "count": 1,
-                "high": 14104.87,
-                "id": 1604297700,
-                "low": 14104.87,
-                "open": 14104.87,
-                "vol": 28
+                "id":1628652480,
+                "open":45863.34,
+                "close":45857.52,
+                "low":45851.87,
+                "high":45863.34,
+                "amount":0.6411077350166105446511274681130233384,
+                "vol":294,
+                "count":7
             }
-        ],
-        "status": "ok",
-        "ts": 1604297729928
+        ]
     }
     
 
@@ -3285,22 +3525,89 @@ to | false | long | 结束时间戳 10位 单位S |  |
 参数名称 | 是否必须 | 数据类型 | 描述 | 取值范围  
 ---|---|---|---|---  
 ch | true | string | 数据所属的 channel，格式：market.$symbol.kline.$period |  
-data | true | object | KLine 数据 |  
+<data> | true | object | KLine 数据 |  
+id | true | int | K线id,也就是K线时间戳，K线起始时间 |  
+vol | true | decimal | 成交量张数。 值是买卖双边之和 |  
+count | true | decimal | 成交笔数。 值是买卖双边之和 |  
+open | true | decimal | 开盘价 |  
+close | true | decimal | 收盘价 |  
+low | true | decimal | 最低价 |  
+high | true | decimal | 最高价 |  
+amount | true | decimal | 成交量(币)。 值是买卖双边之和 |  
+</data> |  |  |  |  
 status | true | string | 请求处理结果 | "ok" , "error"  
 ts | true | long | 响应生成时间点，单位：毫秒 |  
   
-### data参数
+## 获取标记价格的K线数据
 
-**参数名称** | **类型** | **描述** |  
----|---|---|---  
-id | int | K线id,也就是K线时间戳，K线起始时间 |  
-vol | decimal | 成交量张数。 值是买卖双边之和 |  
-count | decimal | 成交笔数。 值是买卖双边之和 |  
-open | decimal | 开盘价 |  
-close | decimal | 收盘价 |  
-low | decimal | 最低价 |  
-high | decimal | 最高价 |  
-amount | decimal | 成交量(币)。 值是买卖双边之和 |  
+  * GET `/index/market/history/mark_price_kline`
+
+### 请求参数（以GET URL方式传输参数）
+
+**参数名称** | **是否必须** | **类型** | **描述** | **默认值** | **取值范围**  
+---|---|---|---|---|---  
+symbol | true | string | 合约标识 |  |
+如"BTC_CW"表示BTC当周合约，"BTC_NW"表示BTC次周合约，"BTC_CQ"表示BTC当季合约
+，"BTC_NQ"表示BTC次季度合约季度合约。支持使用合约code来查询数据，
+例如："BTC200918"(当周)，"BTC200925"(次周)，"BTC201225"(季度)，"BTC210326"(次季度)。  
+period | true | string | K线类型 |  | 1min, 5min, 15min, 30min, 60min,4hour,1day,
+1week,1mon  
+size | true | int | K线获取数量 |  | [1,2000]  
+  
+##### 备注：
+
+  * 最多一次2000条数据
+  * 入参大小写不敏感，均支持
+
+> Response
+    
+    
+    {
+        "ch": "market.BTC_CQ.mark_price.5min",
+        "data": [
+            {
+                "amount": "0",
+                "close": "45853.29",
+                "count": "0",
+                "high": "45936.25",
+                "id": 1628652300,
+                "low": "45853.05",
+                "open": "45931.25",
+                "vol": "0"
+            },
+            {
+                "amount": "0",
+                "close": "45862.49",
+                "count": "0",
+                "high": "45862.49",
+                "id": 1628652600,
+                "low": "45851.31",
+                "open": "45852.5",
+                "vol": "0"
+            }
+        ],
+        "status": "ok",
+        "ts": 1628652647728
+    }
+    
+
+### 返回参数：
+
+**参数名称** | **是否必须** | **类型** | **描述** | **默认值** | **取值范围**  
+---|---|---|---|---|---  
+ch | true | string | 数据所属的 channel |  |  
+<data> | true | object array |  |  |  
+id | true | long | k线id |  |  
+vol | true | string | 成交量(张)，数值为0 |  |  
+count | true | string | 成交笔数，数值为0 |  |  
+open | true | string | 开盘值 |  |  
+close | true | string | 收盘值 |  |  
+low | true | string | 最低值 |  |  
+high | true | string | 最高值 |  |  
+amount | true | string | 成交量(币), 数值为0 |  |  
+</data> |  |  |  |  |  
+status | true | string | 请求处理结果 | "ok" , "error" |  
+ts | true | number | 响应生成时间点，单位：毫秒 |  |  
   
 ## 获取聚合行情
 
@@ -3322,23 +3629,6 @@ symbol | true | string | 合约名称 |  |
 "BTC_NQ"表示次季度合约"。支持使用合约code来查询数据，
 例如："BTC200918"(当周)，"BTC200925"(次周)，"BTC201225"(季度)，"BTC210326"(次季度)。  
   
-> tick说明:
-    
-    
-        "tick": {
-          "id": K线id,
-          "vol": 成交量（张），买卖双边成交量之和,
-          "count": 成交笔数,
-          "open": 开盘价,
-          "close": 收盘价,当K线为最晚的一根时，是最新成交价
-          "low": 最低价,
-          "high": 最高价,
-          "amount": 成交量(币), 即 sum(每一笔成交量(张)*单张合约面值/该笔成交价)
-          "bid": [买1价,买1量(张)],
-          "ask": [卖1价,卖1量(张)]
-        }
-    
-
 > Response:
     
     
@@ -3374,24 +3664,20 @@ symbol | true | string | 合约名称 |  |
 ---|---|---|---|---  
 ch | true | string | 数据所属的 channel，格式： market.$symbol.detail.merged |  
 status | true | string | 请求处理结果 | "ok" , "error"  
-tick | true | object | 开盘价和收盘价（从当天零点(UTC+8)开始） |  
+<tick> | true | object | 开盘价和收盘价（从当天零点(UTC+8)开始） |  
+id | true | int | K线id,也就是K线时间戳 |  
+vol | true | string | 成交量张数（最近24（当前时间-24小时）小时成交量张）。 值是买卖双边之和 |  
+count | true | decimal | 成交笔数（最近24（当前时间-24小时）小时成交笔数）。 值是买卖双边之和 |  
+open | true | string | 开盘价 |  
+close | true | string | 收盘价 |  
+low | true | string | 最低价 |  
+high | true | string | 最高价 |  
+amount | true | string | 成交量(币) （最近24（当前时间-24小时）小时成交量币）。 值是买卖双边之和 |  
+ts | true | long | 时间戳 |  
+ask | true | object | 卖盘,[price(挂单价), vol(此价格挂单张数)], 按price升序 |  
+bid | true | object | 买盘,[price(挂单价), vol(此价格挂单张数)], 按price降序 |  
+</tick> |  |  |  |  
 ts | true | long | 响应生成时间点，单位：毫秒 |  
-  
-### tick参数
-
-**参数名称** | **类型** | **描述** |  
----|---|---|---  
-id | int | K线id,也就是K线时间戳 |  
-vol | string | 成交量张数（最近24（当前时间-24小时）小时成交量张）。 值是买卖双边之和 |  
-count | decimal | 成交笔数（最近24（当前时间-24小时）小时成交笔数）。 值是买卖双边之和 |  
-open | string | 开盘价 |  
-close | string | 收盘价 |  
-low | string | 最低价 |  
-high | string | 最高价 |  
-amount | string | 成交量(币) （最近24（当前时间-24小时）小时成交量币）。 值是买卖双边之和 |  
-ts | long | 时间戳 |  
-ask | true | object | 卖盘,[price(挂单价), vol(此价格挂单张数)], 按price升序  
-bid | true | object | 买盘,[price(挂单价), vol(此价格挂单张数)], 按price降序  
   
 ## 批量获取聚合行情
 
@@ -3469,15 +3755,15 @@ status | true | string | 请求处理结果 | "ok" , "error"
 <ticks> | true | object array |  |  
 symbol | true | string | 合约标识 | "BTC_CW","BTC_NW","BTC_CQ","BTC_NQ"  
 id | true | long | K线id |  
-amount | true | string | 成交量(币) |  
+amount | true | string | 成交量(币) （最近24（当前时间-24小时）小时成交量币）。 值是买卖双边之和 |  
 ask | true | array | [卖1价,卖1量(张)] |  
 bid | true | array | [买1价,买1量(张)] |  
 open | true | string | 开盘价 |  
 close | true | string | 收盘价,当K线为最晚的一根时，是最新成交价 |  
-count | true | decimal | 成交笔数 |  
+count | true | decimal | 成交笔数（最近24（当前时间-24小时）小时成交笔数）。 值是买卖双边之和 |  
 high | true | string | 最高价 |  
 low | true | string | 最低价 |  
-vol | true | string | 成交量（张），买卖双边成交量之和 |  
+vol | true | string | 成交量（张）（最近24（当前时间-24小时）小时成交量张）。 值是买卖双边之和 |  
 ts | true | long | 时间戳 |  
 </ticks> |  |  |  |  
 ts | true | long | 响应生成时间点，单位：毫秒 |  
@@ -3495,52 +3781,35 @@ ts | true | long | 响应生成时间点，单位：毫秒 |
 
 ### 请求参数
 
-参数名称 | 是否必须 | 类型 | 描述 | 默认值 | 取值范围  
----|---|---|---|---|---  
-symbol | true | string | 合约名称 |  |
+参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
+---|---|---|---|---  
+symbol | false | string | 合约名称，不填返回所有当前上市合约的最近成交数据 |
 支持大小写，如"BTC_CW"表示BTC当周合约，"BTC_NW"表示BTC次周合约，"BTC_CQ"表示BTC当季合约,
 "BTC_NQ"表示次季度合约"。支持使用合约code来查询数据，
 例如："BTC200918"(当周)，"BTC200925"(次周)，"BTC201225"(季度)，"BTC210326"(次季度)。  
   
-> Tick说明：
-    
-    
-        "tick": {
-          "id": 订单唯一id（品种唯一),
-          "ts": 最新成交时间,
-          "data": [
-             {
-                "id": 成交唯一id（品种唯一）,
-                "price": 成交价钱,
-                "amount": 成交量(张)，买卖双边成交量之和,
-                "direction": 主动成交方向,
-                "ts": 成交时间
-             }
-          ]
-        }
-    
-
 > Response:
     
     
     {
-        "ch": "market.BTC_NQ.trade.detail",
+        "ch": "market.*.trade.detail",
         "status": "ok",
         "tick": {
             "data": [
                 {
-                    "amount": "20",
-                    "quantity": "0.0505043235488782105914132044058961778",
-                    "ts": 1612491134327,
-                    "id": 1236092630180000,
-                    "price": "39600.57",
-                    "direction": "sell"
+                    "amount": "4",
+                    "quantity": "0.0129032258064516129032258064516129032",
+                    "ts": 1613998847438,
+                    "id": 50710000,
+                    "price": "31000",
+                    "direction": "buy",
+                    "symbol": "BTC_NQ"
                 }
             ],
-            "id": 1612491135025,
-            "ts": 1612491135025
+            "id": 1614068483482,
+            "ts": 1614068483482
         },
-        "ts": 1612491135025
+        "ts": 1614068483482
     }
     
 
@@ -3549,17 +3818,18 @@ symbol | true | string | 合约名称 |  |
 参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
 ---|---|---|---|---  
 ch | true | string | 数据所属的 channel，格式： market.$symbol.trade.detail |  
-status | true | string |  | "ok","error"  
+status | true | string | 请求处理结果 | "ok","error"  
 <tick> | true | object |  |  
 id | true | long | 订单唯一id（品种唯一） |  
 ts | true | long | 最新成交时间 |  
 <data> | true | object array |  |  
 amount | true | string | 成交量(张)。 值是买卖双边之和 |  
-direction | true | string | 主动成交方向 |  
+direction | true | string | 买卖方向，即taker(主动成交)的方向 |  
 id | true | long | 成交唯一id（品种唯一） |  
 price | true | string | 成交价 |  
 ts | true | long | 成交时间 |  
 quantity | true | string | 成交量（币） |  
+symbol | true | string | 合约名称 |  
 </data> |  |  |  |  
 </tick> |  |  |  |  
 ts | true | long | 发送时间 |  
@@ -3585,24 +3855,6 @@ symbol | true | string | 合约名称 |  |
 例如："BTC200918"(当周)，"BTC200925"(次周)，"BTC201225"(季度)，"BTC210326"(次季度)。  
 size | true | int | 获取交易记录的数量 |  | [1, 2000]  
   
-> data说明：
-    
-    
-        "data": {
-          "id": 订单唯一id（品种唯一）,
-          "ts": 最新成交时间,
-          "data": [
-            {
-              "id": 成交唯一id（品种唯一）,
-              "price": 成交价,
-              "amount": 成交量(张)，买卖双边成交量之和,
-              "direction": 主动成交方向,
-              "ts": 成交时间
-            }
-          ]
-        }
-    
-
 > Response:
     
     
@@ -3651,7 +3903,7 @@ ch | true | string | 数据所属的 channel，格式： market.$symbol.trade.de
 <data> | true | object array |  |  
 <data> | true | object array |  |  
 amount | true | decimal | 成交量(张)。 值是买卖双边之和 |  
-direction | true | string | 主动成交方向 |  
+direction | true | string | 买卖方向，即taker(主动成交)的方向 |  
 id | true | long | 成交唯一id（品种唯一） |  
 price | true | decimal | 成交价格 |  
 ts | true | long | 成交时间 |  
@@ -3660,7 +3912,7 @@ quantity | true | decimal | 成交量（币） |
 id | true | long | 订单唯一id（品种唯一） |  
 ts | true | long | 最新成交时间 |  
 </data> |  |  |  |  
-status | true | string |  | "ok"，"error"  
+status | true | string | 请求处理结果 | "ok"，"error"  
 ts | true | long | 响应生成时间点，单位：毫秒 |  
   
 #### 备注
@@ -4180,7 +4432,7 @@ start_time | false | long | 起始时间 （时间戳，单位毫秒） | 取值
 ，默认取当前时间- 90天  
 end_time | false | long | 结束时间（时间戳，单位毫秒） | 取值范围：(start_time, 当前时间)，默认取当前时间  
 page_index | false | int | 页码，不填默认第1页 |  
-page_size | false | int | 页长，不填默认20，不得多于50 |  
+page_size | false | int | 页长，不填默认20，不得多于50 | [1-50]  
   
 > Response:
     
@@ -4312,10 +4564,10 @@ id | true | decimal | 指数K线id,也就是K线时间戳，K线起始时间 |
 vol | true | decimal | 成交量张数,值为0 |  
 count | true | decimal | 成交笔数，值为0 |  
 open | true | decimal | 开盘指数价 |  
-close | true | decimal | 收盘指数价,当K线为最晚的一根时，是最新成交价 |  
+close | true | decimal | 收盘指数价,当K线为最晚的一根时，是最新指数价 |  
 low | true | decimal | 最低指数价 |  
 high | true | decimal | 最高指数价 |  
-amount | true | decimal | 成交量(币), 即 sum(每一笔成交量(张)*单张合约面值/该笔成交价)，值为0 |  
+amount | true | decimal | 成交量(币), 即 sum(每一笔成交量(张) * 单张合约面值/该笔成交价)，值为0 |  
 </data> |  |  |  |  
 status | true | string | 请求处理结果 | "ok" , "error"  
 ts | true | long | 响应生成时间点 单位：毫秒 |  
@@ -4339,7 +4591,7 @@ symbol | true | string | 合约名称 |  |
 支持大小写，如"BTC_CW"表示BTC当周合约，"BTC_NW"表示BTC次周合约，"BTC_CQ"表示BTC当季合约, "BTC_NQ"表示次季度合约"  
 period | true | string | 周期 |  | 仅支持小写，1min,5min, 15min, 30min,
 60min,4hour,1day,1mon  
-basis_price_type | false | string | 基差价格类型，表示在周期内计算基差使用的价格类型 | 不填，默认使用开盘价 |
+basis_price_type | false | string | 基差价格类型，表示在周期内计算基差使用的价格类型 | 开盘价：open |
 仅支持小写，开盘价：open，收盘价：close，最高价：high，最低价：low，平均价=（最高价+最低价）/2：average  
 size | true | int | 基差获取数量 |  | [1,2000]  
   
@@ -4381,7 +4633,7 @@ contract_price | true | string | 合约最新成交价 |
 index_price | true | string | 指数基准价，与基差价格类型匹配 |  
 basis | true | string | 基差=合约基准价 - 指数基准价 |  
 basis_rate | true | string | 基差率=基差/指数基准价 |  
-<\data> |  |  |  |  
+</data> |  |  |  |  
 ts | true | long | 生成时间 |  
   
 ### 说明：
@@ -4392,6 +4644,44 @@ ts | true | long | 生成时间 |
 
 # 合约资产接口
 
+## 获取账户总资产估值
+
+  * POST `/api/v1/contract_balance_valuation`
+
+### 请求参数
+
+参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
+---|---|---|---|---  
+valuation_asset | false | string | 资产估值币种，即按该币种为单位进行估值，不填默认"BTC" |
+"BTC","USD","CNY","EUR","GBP","VND","HKD","TWD","MYR","SGD","KRW","RUB","TRY"  
+  
+> Response:
+    
+    
+    {
+        "status": "ok",
+        "data": [
+            {
+                "valuation_asset": "CNY",
+                "balance": "295098.370590947021036643"
+            }
+        ],
+        "ts": 1614044220841
+    }
+    
+
+### 返回参数
+
+参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
+---|---|---|---|---  
+status | true | string | 请求处理结果 |  
+<data> | true | object array |  |  
+valuation_asset | true | string | 资产估值币种，即按该币种为单位进行估值 |
+"BTC","USD","CNY","EUR","GBP","VND","HKD","TWD","MYR","SGD","KRW","RUB","TRY"  
+balance | true | string | 资产估值 |  
+</data> |  |  |  |  
+ts | true | long | 时间戳 |  
+  
 ## 获取用户账户信息
 
 ### 示例
@@ -4423,8 +4713,7 @@ symbol | false | string | 品种代码 |  | 支持大小写,"BTC","ETH"...如果
                 "liquidation_price": null,
                 "lever_rate": 10,
                 "adjust_factor": 0.2,
-                "margin_static": 453.151955780787465997,
-                "is_debit": 0
+                "margin_static": 453.151955780787465997
             }
         ],
         "ts": 1604300060777
@@ -4513,7 +4802,7 @@ profit_rate | true | decimal | 收益率 |
 profit | true | decimal | 收益 |  
 position_margin | true | decimal | 持仓保证金 |  
 lever_rate | true | int | 杠杠倍数 |  
-direction | true | string | "buy":买 "sell":卖 |  
+direction | true | string | 仓位方向 | "buy":买，即多仓 "sell":卖，即空仓  
 last_price | true | decimal | 最新价 |  
 </data> |  |  |  |  
 ts | true | long | 响应生成时间点，单位：毫秒 |  
@@ -4531,7 +4820,7 @@ ts | true | long | 响应生成时间点，单位：毫秒 |
 参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
 ---|---|---|---|---  
 sub_uid | true | string | 子账户uid (多个uid中间以","分隔,一次最多允许开通10个子账户) |  
-sub_auth | true | int | 子账户交易权限，1 开启，0关闭 |  
+sub_auth | true | int | 子账户交易权限 | 1 开启，0关闭  
   
 #### 备注：
 
@@ -4635,7 +4924,7 @@ risk_rate | true | decimal | 保证金率 |
 ---|---|---|---|---  
 symbol | false | string | 品种代码 | "BTC","ETH"... ,如果缺省，默认返回所有品种  
 page_index | false | int | 第几页,不填默认第一页 |  
-page_size | false | int | 不填默认20，不得多于50 |  
+page_size | false | int | 不填默认20，不得多于50 | [1-50]  
   
 #### 备注：
 
@@ -4714,7 +5003,7 @@ total_size | true | int | 总条数 |
     }
     
 
-### 请求参数*
+### 请求参数
 
 参数名称 | 是否必须 | 类型 | 描述 | 默认值 | 取值范围  
 ---|---|---|---|---|---  
@@ -4740,8 +5029,7 @@ sub_uid | true | long | 子账户的UID |  |
                 "liquidation_price": null,
                 "lever_rate": 5,
                 "adjust_factor": 0.1,
-                "margin_static": 50,
-                "is_debit": 0
+                "margin_static": 5
             }
         ],
         "ts": 1604301730723
@@ -4847,7 +5135,7 @@ profit_rate | true | decimal | 收益率 |
 profit | true | decimal | 收益 |  
 position_margin | true | decimal | 持仓保证金 |  
 lever_rate | true | int | 杠杆倍数 |  
-direction | true | string | 仓位方向 | "buy":多 "sell":空  
+direction | true | string | 仓位方向 | "buy":买，即多仓 "sell":卖，即空仓  
 last_price | true | decimal | 最新价 |  
 </data> |  |  |  |  
   
@@ -4877,9 +5165,9 @@ type | false | string | 不填查询全部类型,【查询多类型中间用，�
 13:强制平空; 14:从币币转入; 15:转出至币币; 16:结算未实现盈亏-多仓; 17:结算未实现盈亏-空仓; 19:穿仓分摊; 26:系统;
 28:活动奖励; 29:返利; 30:资金费-收入; 31:资金费-支出; 34:转出到子账号合约账户; 35:从子账号合约账户转入;
 36:转出到母账号合约账户; 37:从母账号合约账户转入;  
-create_date | false | int | 可随意输入正整数，如果参数超过90则默认查询90天的数据 |  
+create_date | false | int | 可随意输入正整数，如果参数超过90则默认查询90天的数据 | [1-90]  
 page_index | false | int | 第几页,不填默认第一页 |  
-page_size | false | int | 不填默认20，不得多于50 |  
+page_size | false | int | 不填默认20，不得多于50 | [1-50]  
   
 > Response:
     
@@ -4945,7 +5233,7 @@ type | false | string | 不填查询全部类型,【查询多类型中间用，�
 start_time | false | long | 起始时间（时间戳，单位毫秒） | 详见备注  
 end_time | false | long | 结束时间（时间戳，单位毫秒） | 详见备注  
 from_id | false | long | 查询起始id（取返回数据的id ） |  
-size | false | int | 数据条数 | 默认取20，最大50  
+size | false | int | 数据条数,默认取20，最大50 | [1-50]  
 direct | false | string | 查询方向 | prev 向前；next 向后；默认值取prev  
   
 #### 备注：
@@ -4954,7 +5242,7 @@ direct | false | string | 查询方向 | prev 向前；next 向后；默认值�
     * start_time：取值范围为[(当前时间 - 90天)，当前时间] ；默认值取clamp（end_time - 10天，当前时间-90天，当前时间-10天），即时间最远取当前时间-90天，最近取当前时间-10天。
     * end_time：取值范围为：[(当前时间 - 90天)，above++)，若大于当前时间则直接取当前时间；若填写了start_time，则end_time必须大于start_time。默认值直接取当前时间。
   * 当from_id缺省时，查询方向为prev则从结束时间往前查，查询方向为向后则从起始时间往后查；即查询创建时间大于等于起始时间，且小于等于结束时间的财务记录数据。
-  * 无论查询方向是向前还是向后，返回的数据都是按创建时间倒序。
+  * 无论查询方向是向前还是向后，返回的数据都是按id倒序。
   * 当start_time或end_time填写值不符合取值范围，则报错参数不合法。
   * 仅支持查询90天内数据。
 
@@ -5053,7 +5341,7 @@ start_time | false | long | 起始时间（时间戳，单位毫秒） | 取值�
 ，默认取当前时间- 90天  
 end_time | false | long | 结束时间（时间戳，单位毫秒） | 取值范围：(start_time, 当前时间]，默认取当前时间  
 page_index | false | int | 页码 | 不填默认第1页  
-page_size | false | int | 页大小 | 不填默认20，不得多于50（超过则按照50进行查询）  
+page_size | false | int | 页大小,不填默认20，不得多于50（超过则按照50进行查询） | [1-50]  
   
 #### 备注：
 
@@ -5330,7 +5618,7 @@ net_transfer_out_max_daily | true | decimal | 单日累计最大净转出量 |
   
 ## 用户持仓量限制的查询
 
-  * post `/api/v1/contract_position_limit`
+  * POST `/api/v1/contract_position_limit`
 
 ### 请求参数
 
@@ -5398,7 +5686,7 @@ sell_limit | true | decimal | 合约空仓持仓的最大值，单位为张 |
   
 ## 查询用户账户和持仓信息
 
-  * post `/api/v1/contract_account_position_info`
+  * POST `/api/v1/contract_account_position_info`
 
 ### 请求参数
 
@@ -5486,14 +5774,14 @@ profit_rate | decimal | true | 收益率
 profit | decimal | true | 收益  
 position_margin | decimal | true | 持仓保证金  
 lever_rate | int | true | 杠杆倍数  
-direction | string | true | "buy":买 "sell":卖  
+direction | string | true | 仓位方向 "buy":买，即多仓 "sell":卖，即空仓  
 last_price | decimal | true | 最新价  
 </positions> |  |  |  
 </data> |  |  |  
   
 ## 母子账户划转
 
-  * post `/api/v1/contract_master_sub_transfer`
+  * POST `/api/v1/contract_master_sub_transfer`
 
 > Request:
     
@@ -5515,10 +5803,13 @@ symbol | true | string | 品种代码 | 支持大小写,"BTC","ETH"...
 amount | true | decimal | 划转金额 |  
 type | true | string | 划转类型 | 仅支持小写,master_to_sub：母账户划转到子账户，
 sub_to_master：子账户划转到母账户  
+client_order_id | false | long | 客户自己填写和维护的订单号 |
+必须为数字,请注意必须小于等于9223372036854775807  
   
 ### 备注：
 
-母账户与每个子账户相互划转限频10次/分钟。
+  * 母账户与每个子账户相互划转限频10次/分钟。
+  * client_order_id仅在8小时内有效，即8小时内同一个用户同一个划转路径无法使用相同的client_order_id进行二次划转（比如母账户发起母转子，使用client_order_id=1，则8小时内无法继续使用client_order_id=1进行母转子；但是可以用client_order_id=1进行子转母。）。
 
 > Response:
     
@@ -5541,11 +5832,12 @@ status | true | string | 请求处理结果 | "ok" , "error"
 ts | true | long | 响应生成时间点，单位：毫秒 |  
 <data> | true | object |  |  
 order_id | true | string | 划转订单ID |  
+client_order_id | false | long | 用户下单时填写的客户端订单ID，没填则不返回 |  
 </data> |  |  |  |  
   
 ## 获取母账户下的所有母子账户划转记录
 
-  * post `/api/v1/contract_master_sub_transfer_record`
+  * POST `/api/v1/contract_master_sub_transfer_record`
 
 ### 请求参数
 
@@ -5615,7 +5907,7 @@ total_size | true | int | 总条数 |
   
 ## 获取用户的API指标禁用信息
 
-  * get `/api/v1/contract_api_trading_status`
+  * GET `/api/v1/contract_api_trading_status`
 
 ### 请求参数
 
@@ -5690,7 +5982,7 @@ is_active | true | long | 该指标是否开启 | 1：已启用，0：未启用
 
 ## 查询用户可用杠杆倍数
 
-  * Post `/api/v1/contract_available_level_rate`
+  * POST `/api/v1/contract_available_level_rate`
 
 ### 请求参数
 
@@ -5739,15 +6031,15 @@ available_level_rate | true | string | 实际可用杠杆倍数，多个以英�
         "contract_code": "bch210326",
         "direction": "buy",
         "offset":"open",
-        "price":"360",
+        "price":360,
         "lever_rate":75,
         "volume": 1,
         "order_price_type":"opponent",
         "tp_trigger_price": 450,
         "tp_order_price": 450,
         "tp_order_price_type": "optimal_5",
-        "sl_trigger_price": "330",
-        "sl_order_price": "330",
+        "sl_trigger_price": 330,
+        "sl_order_price": 330,
         "sl_order_price_type": "optimal_5"
     }
     
@@ -5767,9 +6059,9 @@ direction | string | true | "buy":买 "sell":卖
 offset | string | true | "open":开 "close":平  
 lever_rate | int | true | 杠杆倍数[“开仓”若有10倍多单，就不能再下20倍多单,
 "平仓"可以不填杠杆倍数;首次使用高倍杠杆(>20倍)，请使用主账号登录web端同意高倍杠杆协议后，才能使用接口下高倍杠杆(>20倍)]  
-order_price_type | string | true | 订单报价类型 "limit":限价 "opponent":对手价
-"post_only":只做maker单,post
-only下单只受用户持仓数量限制,optimal_5：最优5档、optimal_10：最优10档、optimal_20：最优20档，ioc:IOC订单，fok：FOK订单,
+order_price_type | string | true | 订单报价类型 "limit":限价，"opponent":对手价
+，"post_only":只做maker单,post
+only下单只受用户持仓数量限制,"optimal_5"：最优5档，"optimal_10"：最优10档，"optimal_20"：最优20档，"ioc":IOC订单，"fok"：FOK订单,
 "opponent_ioc"： 对手价-
 IOC下单，"optimal_5_ioc"：最优5档-IOC下单，"optimal_10_ioc"：最优10档-IOC下单，"optimal_20_ioc"：最优20档-IOC下单,"opponent_fok"：
 对手价-
@@ -5851,30 +6143,30 @@ bigint的包解析。
                 "contract_code": "bch210326",
                 "direction": "buy",
                 "offset": "open",
-                "price": "360",
+                "price": 360,
                 "lever_rate": 75,
                 "volume": 1,
                 "order_price_type": "opponent",
                 "tp_trigger_price": 450,
                 "tp_order_price": 450,
                 "tp_order_price_type": "optimal_5",
-                "sl_trigger_price": "330",
-                "sl_order_price": "330",
+                "sl_trigger_price": 330,
+                "sl_order_price": 330,
                 "sl_order_price_type": "optimal_5"
             },
             {
                 "contract_code": "bch210326",
                 "direction": "buy",
                 "offset": "open",
-                "price": "360",
+                "price": 360,
                 "lever_rate": 75,
                 "volume": 1,
                 "order_price_type": "post_only",
                 "tp_trigger_price": 450,
                 "tp_order_price": 450,
                 "tp_order_price_type": "optimal_5",
-                "sl_trigger_price": "330",
-                "sl_order_price": "330",
+                "sl_trigger_price": 330,
+                "sl_order_price": 330,
                 "sl_order_price_type": "optimal_5"
             }
         ]
@@ -5902,9 +6194,9 @@ direction | string | true | "buy":买 "sell":卖
 offset | string | true | "open":开 "close":平  
 leverRate | int | true |
 杠杆倍数[“开仓”若有10倍多单，就不能再下20倍多单;首次使用高倍杠杆(>20倍)，请使用主账号登录web端同意高倍杠杆协议后，才能使用接口下高倍杠杆(>20倍)]  
-orderPriceType | string | true | 订单报价类型 "limit":限价 "opponent":对手价
-"post_only":只做maker单,post
-only下单只受用户持仓数量限制,optimal_5：最优5档、optimal_10：最优10档、optimal_20：最优20档，ioc：IOC订单，fok：FOK订单,"opponent_ioc"：
+orderPriceType | string | true | 订单报价类型 "limit":限价，"opponent":对手价
+，"post_only":只做maker单,post
+only下单只受用户持仓数量限制,"optimal_5"：最优5档，"optimal_10"：最优10档，"optimal_20"：最优20档，"ioc":IOC订单，"fok"：FOK订单,"opponent_ioc"：
 对手价-
 IOC下单，"optimal_5_ioc"：最优5档-IOC下单，"optimal_10_ioc"：最优10档-IOC下单，"optimal_20_ioc"：最优20档-IOC下单,"opponent_fok"：
 对手价-
@@ -5993,7 +6285,6 @@ bigint的包解析。
     
     
     {
-        "client_order_id":"11223344556688,11223344556699",
         "order_id":"634696656176029696,634693443368525824",
         "symbol":"btc"
     }
@@ -6007,7 +6298,7 @@ order_id | false (请看备注) | string | 订单ID(多个订单ID中间以","�
 client_order_id | false (请看备注) | string | 客户订单ID(多个订单ID中间以","分隔,一次最多允许撤消10个订单)  
 symbol | true | string | 支持大小写,"BTC","ETH"...  
   
-### 备注：
+#### 备注：
 
   * order_id和client_order_id都可以用来撤单，至少要填写一个,同时只可以设置其中一种，如果设置了两种，默认以order_id来撤单。
 
@@ -6124,7 +6415,7 @@ ts | true | long | 响应生成时间点，单位：毫秒 |
 
 **参数名称** | **是否必须** | **类型** | **描述** | **取值范围**  
 ---|---|---|---|---  
-symbol | true | String | 品种代码 | "BTC","ETH"...  
+symbol | true | string | 品种代码 | "BTC","ETH"...  
 lever_rate | true | int |
 要切换的杠杆倍数。[首次使用高倍杠杆(>20倍)，请使用主账号登录web端同意高倍杠杆协议后，才能使用接口下高倍杠杆(>20倍)] |  
   
@@ -6176,8 +6467,7 @@ ts | true | long | 时间戳 |
     
     
     {
-        "client_order_id":"11223344556688,11223344556699",
-        "order_id":"634696656176029696,634693443368525824",
+        "order_id":"773119326353580033,634693443368525824",
         "symbol":"btc"
     }
     
@@ -6250,9 +6540,9 @@ contract_type | true | string | 合约类型 | 当周:"this_week", 次周:"next_
 contract_code | true | string | 合约代码 | "BTC180914" ...  
 volume | true | decimal | 委托数量 |  
 price | true | decimal | 委托价格 |  
-order_price_type | true | string | 订单报价类型 | 订单报价类型 订单报价类型 "limit":限价
-"opponent":对手价 "post_only":只做maker单,post
-only下单只受用户持仓数量限制,optimal_5：最优5档、optimal_10：最优10档、optimal_20：最优20档，ioc:IOC订单，fok：FOK订单  
+order_price_type | true | string | 订单报价类型 | 订单报价类型 订单报价类型
+"limit":限价，"opponent":对手价 ，"post_only":只做maker单,post
+only下单只受用户持仓数量限制,"optimal_5"：最优5档，"optimal_10"：最优10档，"optimal_20"：最优20档，"ioc":IOC订单，"fok"：FOK订单,  
 direction | true | string | 买卖方向 | "buy":买 "sell":卖  
 offset | true | string | 开平方向 | "open":开 "close":平  
 lever_rate | true | int | 杠杆倍数 | 1\5\10\20  
@@ -6316,7 +6606,7 @@ page_size | false | int | 不填默认20,不得多于50
   
 ### 备注
 
-获取订单明细接口查询撤单数据时，如果传“created_at”和“order_type”参数则能查询最近24小时数据，如果不传“created_at”和“order_type”参数只能查询到最近2小时数据。
+获取订单明细接口查询撤单数据时，如果传“created_at”和“order_type”参数则能查询最近6小时数据，如果不传“created_at”和“order_type”参数只能查询到最近2小时数据。
 
 order_id返回是18位，nodejs和javascript默认解析18有问题，nodejs和javascript里面JSON.parse默认是int，超过18位的数字用json-
 bigint的包解析。
@@ -6403,9 +6693,9 @@ created_at | true | long | 创建时间 |
 canceled_at | true | long | 撤单时间 |  
 order_source | true | string | 订单来源 |
 （system:系统、web:用户网页、api:用户API、m:用户M站、risk:风控系统、settlement:交割结算、ios：ios客户端、android：安卓客户端、windows：windows客户端、mac：mac客户端、trigger：计划委托触发、tpsl:止盈止损触发）  
-order_price_type | true | string | 订单报价类型 | 订单报价类型 "limit":限价 "opponent":对手价
-"post_only":只做maker单,post
-only下单只受用户持仓数量限制,optimal_5：最优5档、optimal_10：最优10档、optimal_20：最优20档，ioc:IOC订单，fok：FOK订单  
+order_price_type | true | string | 订单报价类型 | 订单报价类型 "limit":限价，"opponent":对手价
+，"post_only":只做maker单,post
+only下单只受用户持仓数量限制,"optimal_5"：最优5档，"optimal_10"：最优10档，"optimal_20"：最优20档，"ioc":IOC订单，"fok"：FOK订单,  
 margin_frozen | true | decimal | 冻结保证金 |  
 profit | true | decimal | 订单总平仓盈亏（使用持仓均价计算，不包含仓位跨结算的已实现盈亏。） |  
 total_page | true | int | 总共页数 |  
@@ -6443,7 +6733,7 @@ created_at | true | long | 创建时间 |
 real_profit | true | decimal | 该笔成交的真实收益（使用开仓均价计算，包含仓位跨结算的已实现盈亏。） |  
 profit | true | decimal | 该笔成交的平仓盈亏（使用持仓均价计算，不包含仓位跨结算的已实现盈亏。） |  
 </trades> |  |  |  |  
-</data > |  |  |  |  
+</data> |  |  |  |  
 ts | true | long | 时间戳 |  
   
 #### 备注：
@@ -6528,8 +6818,8 @@ contract_type | true | string | 合约类型 | 当周:"this_week", 次周:"next_
 contract_code | true | string | 合约代码 | "BTC180914" ...  
 volume | true | decimal | 委托数量 |  
 price | true | decimal | 委托价格 |  
-order_price_type | true | string | 订单报价类型 | "limit":限价 "opponent":对手价
-"post_only":只做maker单,post only下单只受用户持仓数量限制  
+order_price_type | true | string | 订单报价类型 | "limit":限价，"opponent":对手价
+，"post_only":只做maker单,post only下单只受用户持仓数量限制  
 order_type | true | int | 订单类型 | 1:报单 、 2:撤单 、 3:强平、4:交割  
 direction | true | string | 买卖方向 | "buy":买 "sell":卖  
 offset | true | string | 开平方向 | "open":开 "close":平  
@@ -6685,7 +6975,7 @@ trade_volume | true | decimal | 成交数量 |
 trade_turnover | true | decimal | 成交总金额 |  
 fee | true | decimal | 手续费 |  
 trade_avg_price | true | decimal | 成交均价 |  
-status | true | int | 订单状态 |  
+status | true | int | 订单状态 | 3:未成交, 4: 部分成交,5: 部分成交已撤单,6: 全部成交,7:已撤单  
 order_type | true | int | 订单类型 | 1:报单 、 2:撤单 、 3:强平、4:交割  
 fee_asset | true | string | 手续费币种 | （"BTC","ETH"...）  
 liquidation_type | true | string | 强平类型 | 0:非强平类型，1：多空轧差， 2:部分接管，3：全部接管  
@@ -6719,9 +7009,9 @@ type | true | int | 类型 | 1:所有订单,2:结束状态的订单
 status | true | string | 订单状态 | 可查询多个状态，"3,4,5" , 0:全部,3:未成交, 4: 部分成交,5:
 部分成交已撤单,6: 全部成交,7:已撤单  
 contract_code | false | string | 合约代码 |  
-order_price_type | false | string | 订单报价类型 | 订单报价类型 "limit":限价 "opponent":对手价
-"post_only":只做maker单,post
-only下单只受用户持仓数量限制,optimal_5：最优5档、optimal_10：最优10档、optimal_20：最优20档，ioc:IOC订单，fok：FOK订单,
+order_price_type | false | string | 订单报价类型 | 订单报价类型 "limit":限价，"opponent":对手价
+，"post_only":只做maker单,post
+only下单只受用户持仓数量限制,"optimal_5"：最优5档，"optimal_10"：最优10档，"optimal_20"：最优20档，"ioc":IOC订单，"fok"：FOK订单,
 "opponent_ioc"： 对手价-
 IOC下单，"optimal_5_ioc"：最优5档-IOC下单，"optimal_10_ioc"：最优10档-IOC下单，"optimal_20_ioc"：最优20档-IOC下单,"opponent_fok"：
 对手价-
@@ -6729,7 +7019,7 @@ FOK下单，"optimal_5_fok"：最优5档-FOK下单，"optimal_10_fok"：最优10
 start_time | false | long | 起始时间（时间戳，单位毫秒） | 详见备注  
 end_time | false | long | 结束时间（时间戳，单位毫秒） | 详见备注  
 from_id | false | long | 查询起始id（取返回数据的query_id字段） |  
-size | false | int | 数据条数 | 默认取20，最大50  
+size | false | int | 数据条数，默认取20，最大50 | [1-50]  
 direct | false | string | 查询方向 | prev 向前；next 向后；默认值取prev  
   
 #### 备注：
@@ -6739,7 +7029,7 @@ direct | false | string | 查询方向 | prev 向前；next 向后；默认值�
     * start_time：取值范围为[(当前时间 - 90天)，当前时间] ；默认值取clamp（end_time - 10天，当前时间-90天，当前时间-10天），即时间最远取当前时间-90天，最近取当前时间-10天。
     * end_time：取值范围为：[(当前时间 - 90天)，above++)]，若大于当前时间则直接取当前时间；若填写了start_time，则end_time必须大于start_time。默认值直接取当前时间。
   * 当from_id缺省时，查询方向为prev则从结束时间往前查，查询方向为向后则从起始时间往后查；即查询创建时间大于等于起始时间，且小于等于结束时间的历史委托数据。
-  * 无论查询方向是向前还是向后，返回的数据都是按创建时间倒序。
+  * 无论查询方向是向前还是向后，返回的数据都是按query_id倒序。
   * 当start_time或end_time填写值不符合取值范围，则报错参数不合法。
   * 仅支持查询90天内数据。
 
@@ -6833,9 +7123,9 @@ price | true | decimal | 委托价格 |
 create_date | true | long | 创建时间 |  
 order_source | true | string | 订单来源 |
 （system:系统、web:用户网页、api:用户API、m:用户M站、risk:风控系统、settlement:交割结算、ios：ios客户端、android：安卓客户端、windows：windows客户端、mac：mac客户端、trigger：计划委托触发、tpsl:止盈止损触发）  
-order_price_type | true | string | 订单报价类型 | 订单报价类型 "limit":限价 "opponent":对手价
-"post_only":只做maker单,post
-only下单只受用户持仓数量限制,optimal_5：最优5档、optimal_10：最优10档、optimal_20：最优20档，ioc:IOC订单，fok：FOK订单,
+order_price_type | true | string | 订单报价类型 | 订单报价类型 "limit":限价，"opponent":对手价
+，"post_only":只做maker单,post
+only下单只受用户持仓数量限制,"optimal_5"：最优5档，"optimal_10"：最优10档，"optimal_20"：最优20档，"ioc":IOC订单，"fok"：FOK订单,
 "opponent_ioc"： 对手价-
 IOC下单，"optimal_5_ioc"：最优5档-IOC下单，"optimal_10_ioc"：最优10档-IOC下单，"optimal_20_ioc"：最优20档-IOC下单,"opponent_fok"：
 对手价-
@@ -6892,7 +7182,7 @@ trade_type | true | int | 交易类型 |  | 0:全部,1:买入开多,2: 卖出开
 卖出强平,6: 买入强平  
 create_date | true | int | 日期 |  | 可随意输入正整数，如果参数超过90则默认查询90天的数据  
 contract_code | false | string | 合约code |  |  
-page_index | false | int | 页码，不填默认第1页 | 1 |  
+page_index | false | int | 页码，不填默认第1页 |  |  
 page_size | false | int | 不填默认20，不得多于50 | 20 | [1-50]  
   
 > Response:
@@ -6947,7 +7237,7 @@ order_id | true | long | 订单ID |
 order_id_str | true | string | String类型订单ID |  
 symbol | true | string | 品种代码 |  
 order_source | true | string | 订单来源 |
-（system:系统、web:用户网页、api:用户API、m:用户M站、risk:风控系统、settlement:交割结算、ios：ios客户端、android：安卓客户端、windows：windows客户端、mac：mac客户端、trigger：计划委托触发）  
+（system:系统、web:用户网页、api:用户API、m:用户M站、risk:风控系统、settlement:交割结算、ios：ios客户端、android：安卓客户端、windows：windows客户端、mac：mac客户端、trigger：计划委托触发、tpsl:止盈止损触发）  
 contract_type | true | string | 合约类型 | 当周:"this_week", 次周:"next_week",
 当季:"quarter", 次季:"next_quarter"  
 contract_code | true | string | 合约代码 | "BTC180914" ...  
@@ -6990,7 +7280,7 @@ contract_code | false | string | 合约code |
 start_time | false | long | 起始时间（时间戳，单位毫秒） | 详见备注  
 end_time | false | long | 结束时间（时间戳，单位毫秒） | 详见备注  
 from_id | false | long | 查询起始id（取返回数据的query_id字段） |  
-size | false | int | 数据条数 | 默认取20，最大50  
+size | false | int | 数据条数,默认取20，最大50 | [1-50]  
 direct | false | string | 查询方向 | prev 向前；next 向后；默认值取prev  
   
 #### 备注：
@@ -6999,7 +7289,7 @@ direct | false | string | 查询方向 | prev 向前；next 向后；默认值�
     * start_time：取值范围为[(当前时间 - 90天)，当前时间] ；默认值取clamp（end_time - 10天，当前时间-90天，当前时间-10天），即时间最远取当前时间-90天，最近取当前时间-10天。
     * end_time：取值范围为：[(当前时间 - 90天)，above++)]，若大于当前时间则直接取当前时间；若填写了start_time，则end_time必须大于start_time。默认值直接取当前时间。
   * 当from_id缺省时，查询方向为prev则从结束时间往前查，查询方向为向后则从起始时间往后查；即查询成交时间大于等于起始时间，且小于等于结束时间的成交数据。
-  * 无论查询方向是向前还是向后，返回的数据都是按成交时间倒序。
+  * 无论查询方向是向前还是向后，返回的数据都是按query_id倒序。
   * 当start_time或end_time填写值不符合取值范围，则报错参数不合法。
   * 仅支持查询90天内数据。
 
@@ -7095,7 +7385,7 @@ role | true | string | taker或maker |
 fee_asset | true | string | 手续费币种 | （"BTC","ETH"...）  
 real_profit | true | decimal | 真实收益（使用开仓均价计算，包含仓位跨结算的已实现盈亏。） |  
 order_source | true | string | 订单来源 |
-（system:系统、web:用户网页、api:用户API、m:用户M站、risk:风控系统、settlement:交割结算、ios：ios客户端、android：安卓客户端、windows：windows客户端、mac：mac客户端、trigger：计划委托触发）  
+（system:系统、web:用户网页、api:用户API、m:用户M站、risk:风控系统、settlement:交割结算、ios：ios客户端、android：安卓客户端、windows：windows客户端、mac：mac客户端、trigger：计划委托触发、tpsl:止盈止损触发）  
 </trades> |  |  |  |  
 remain_size | true | int | 剩余数据条数（在时间范围内，因受到数据条数限制而未查询到的数据条数） |  
 next_id | true | long | 下一条数据的query_id（仅在查询结果超过数据条数限制时才有值） |  
@@ -7133,8 +7423,6 @@ IOC
   * 如果contract_code填了值，那就按照contract_code去下单，如果contract_code没有填值，则按照symbol+contract_type去下单。
 
   * 闪电平仓，是指在对手价平仓的基础上，实行'最优30档'成交，即用户发出的平仓订单能够迅速以30档范围内对手方价格进行成交，未成交部分自动转为限价委托单。
-
-  * client_order_id，24小时有效，超过24小时的订单根据client_order_id将查询不到。
 
 > Response:
     
@@ -7186,6 +7474,8 @@ client_order_id | false | long | 用户自己的订单id |
   * optimal_5：最优5档、optimal_10：最优10档、optimal_20：最优20档下单order_price价格参数不用传，"limit":限价需要传价格。
 
   * 若存在持仓，那么下单时杠杆倍数必须与持仓杠杆相同，否则下单失败。若需使用新杠杆下单，则必须先使用切换杠杆接口将持仓杠杆切换成功后再下单。
+
+  * 该接口的限频次数为1秒5次。
 
 > Request:
     
@@ -7256,15 +7546,11 @@ lever_rate | true | int |
 status | string | true | 响应状态: ok,error  
 err_code | int | false | 错误码  
 err_msg | string | false | 错误信息  
-data | List<OrderInsertRspInfo> | false | 返回数据-泛型，支持各种返回的数据格式类型  
-ts | long | true | 时间戳  
-  
-  * OrderInsertRspInfo
-
-属性 | 数据类型 | 是否必填 | 说明  
----|---|---|---  
+<data> | list | false | 返回数据-泛型，支持各种返回的数据格式类型  
 order_id | long | true | 订单ID : 全局唯一  
 order_id_str | string | true | 字符串类型的订单ID  
+</data> |  |  |  
+ts | long | true | 时间戳  
   
 ## 合约计划委托撤单
 
@@ -7277,6 +7563,10 @@ order_id_str | string | true | 字符串类型的订单ID
 symbol | string | true | 支持大小写,BTC,LTC...  
 order_id | string | true | 用户订单ID（多个订单ID中间以","分隔,一次最多允许撤消10个订单 ）  
   
+#### 备注
+
+  * 该接口的限频次数为1秒5次。
+
 > Response:
     
     
@@ -7332,9 +7622,11 @@ offset | string | false | 开平方向（不填默认全部）"open":开 "close"
 
   * 只要有contract_code，则撤销该code的合约
 
-  * 只传symbol+contract_type， 则撤销二者拼接所成的合约订单
+  * 传symbol+contract_type， 则撤销二者拼接所成的合约订单
 
   * direction与offset可只填其一，只填其一则按对应的条件去撤单。（如用户只传了direction=buy，则撤销所有买单，包括开仓和平仓）
+
+  * 该接口的限频次数为1秒5次。
 
 > Response:
     
@@ -7377,7 +7669,7 @@ symbol | string | true | 支持大小写,BTC,LTC...
 contract_code | string | false | 支持大小写,合约code  
 page_index | int | false | 第几页，不填默认第一页  
 page_size | int | false | 不填默认20，不得多于50  
-trade_type | false | int | 交易类型，不填默认查询全部 0:全部,1:买入 开多,2: 卖出开空,3: 买入平空,4: 卖出平多。  
+trade_type | int | false | 交易类型，不填默认查询全部 0:全部,1:买入 开多,2: 卖出开空,3: 买入平空,4: 卖出平多。  
   
 > Response:
     
@@ -7416,16 +7708,10 @@ trade_type | false | int | 交易类型，不填默认查询全部 0:全部,1:�
 
 ### 返回参数
 
-参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
+参数名称 | 类型 | 是否必须 | 描述 | 取值范围  
 ---|---|---|---|---  
-status | true | string | 请求处理结果 | "ok" , "error"  
-data | true | object | 返回数据 |  
-ts | true | long | 响应生成时间点，单位：毫秒 |  
-  
-  * data详情：
-
-参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
----|---|---|---|---  
+status | string | true | 请求处理结果 | "ok" , "error"  
+<data> | object | true |  |  
 total_page | int | true | 总页数 |  
 current_page | int | true | 当前页 |  
 total_size | int | true | 总条数 |  
@@ -7450,6 +7736,8 @@ order_price_type | string | true | 订单报价类型 |
 "limit":限价，"optimal_5":最优5档，"optimal_10":最优10档，"optimal_20":最优20档  
 status | int | true | 订单状态 | 1:准备提交、2:已提交、3:报单中、8：撤单未找到、9：撤单中、10：失败'  
 </orders> |  |  |  |  
+</data> |  |  |  |  
+ts | long | true | 响应生成时间点，单位：毫秒 |  
   
 ## 获取计划委托历史委托
 
@@ -7520,16 +7808,10 @@ sort_by | false | string | 排序字段（降序），不填默认按照created_
 
 ### 返回参数
 
-参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
+参数名称 | 类型 | 是否必须 | 描述 | 取值范围  
 ---|---|---|---|---  
-status | true | string | 请求处理结果 | "ok" , "error"  
-data | true | object | 返回数据 |  
-ts | true | long | 响应生成时间点，单位：毫秒 |  
-  
-  * data详情：
-
-参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
----|---|---|---|---  
+status | string | true | 请求处理结果 | "ok" , "error"  
+<data> | object | true | 返回数据 |  
 total_page | int | true | 总页数 |  
 current_page | int | true | 当前页 |  
 total_size | int | true | 总条数 |  
@@ -7562,6 +7844,8 @@ update_time | long | true | 订单更新时间，单位：毫秒 |
 fail_code | int | true | 被触发时下order单失败错误码 |  
 fail_reason | string | true | 被触发时下order单失败原因 |  
 </orders> |  |  |  |  
+<data> |  |  |  |  
+ts | long | true | 响应生成时间点，单位：毫秒 |  
   
 ## 对仓位设置止盈止损订单
 
@@ -7587,10 +7871,10 @@ fail_reason | string | true | 被触发时下order单失败原因 |
 
 参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
 ---|---|---|---|---  
-symbol | false | String | 品种代码 | "BTC","ETH"...  
-contract_type | false | String | 合约类型 |
+symbol | false | string | 品种代码 | "BTC","ETH"...  
+contract_type | false | string | 合约类型 |
 “this_week”:当周，“next_week”:次周，“quarter”:当季，“next_quarter”：次季度  
-contract_code | false | String | 合约代码 | BTC190903  
+contract_code | false | string | 合约代码 | BTC190903  
 direction | true | string | 买卖方向 | buy:买入平空 sell:卖出平多  
 volume | true | decimal | 委托数量(张) |  
 tp_trigger_price | false | decimal | 止盈触发价格 |  
@@ -7719,7 +8003,7 @@ ts | true | long | 响应生成时间点，单位：毫秒 |
 
 参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
 ---|---|---|---|---  
-symbol | false | String | 品种代码 | "BTC","ETH"...  
+symbol | false | string | 品种代码 | "BTC","ETH"...  
 contract_code | false | string | 合约代码 | "BTC180914" ...  
 contract_type | false | string | 合约类型 | 当周:"this_week", 周:"next_week",
 当季:"quarter"，次季度：“next_quarter”  
@@ -7768,10 +8052,10 @@ ts | true | long | 响应生成时间点，单位：毫秒 |
 
 参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
 ---|---|---|---|---  
-symbol | true | String | 品种代码 | "BTC","ETH"...  
+symbol | true | string | 品种代码 | "BTC","ETH"...  
 contract_code | false | string | 合约代码,"BTC180914" ... |  
 page_index | false | int | 第几页，不填默认第一页 |  
-page_size | false | int | 不填默认20，不得多于50 |  
+page_size | false | int | 不填默认20，不得多于50 | [1-50]  
 trade_type | false | int | 交易类型，不填默认查询全部 | 0:全部,3: 买入平空,4: 卖出平多。  
   
 > Response
@@ -7855,13 +8139,13 @@ ts | true | long | 响应生成时间点，单位：毫秒 |
 
 参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
 ---|---|---|---|---  
-symbol | true | String | 品种代码 | "BTC","ETH"...  
+symbol | true | string | 品种代码 | "BTC","ETH"...  
 contract_code | false | string | 合约代码,"BTC180914" ... |  
 status | true | string | 订单状态 |
 多个以英文逗号隔开，止盈止损订单状态：0:全部（表示全部结束状态的订单）、4:委托成功、5:委托失败、6:已撤单、11：已失效  
 create_date | true | long | 日期 | 可随意输入正整数，如果参数超过90则默认查询90天的数据  
 page_index | false | int | 第几页，不填默认第一页 |  
-page_size | false | int | 不填默认20，不得多于50 |  
+page_size | false | int | 不填默认20，不得多于50 | [1-50]  
 sort_by | false | string | 排序字段（降序），不填默认按照created_at降序 |
 "created_at"：按订单创建时间进行降序，"update_time"：按订单更新时间进行降序  
   
@@ -7959,7 +8243,7 @@ ts | true | long | 响应生成时间点，单位：毫秒 |
 
 参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
 ---|---|---|---|---  
-symbol | true | String | 品种代码 | "BTC","ETH"...  
+symbol | true | string | 品种代码 | "BTC","ETH"...  
 order_id | true | long | 开仓订单ID |  
   
 > Response
@@ -8099,6 +8383,346 @@ fail_reason | true | string | 被触发时下order单失败原因 |
 triggered_price | true | decimal | 被触发时的价格 |  
 relation_order_id | true | string | 该字段为关联限价单的关联字段，未触发前数值为-1 |  
 </tpsl_order_info> |  |  |  |  
+</data> |  |  |  |  
+ts | true | long | 响应生成时间点，单位：毫秒 |  
+  
+## 跟踪委托订单下单
+
+  * POST `/api/v1/contract_track_order`
+
+### 请求参数
+
+参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
+---|---|---|---|---  
+symbol | false（请看备注） | string | 品种代码 | "BTC","ETH"...  
+contract_type | false（请看备注） | string | 合约类型 |
+“this_week”:当周，“next_week”:次周，“quarter”:当季，“next_quarter”：次季度  
+contract_code | false（请看备注） | string | 合约代码 | BTC190903  
+direction | true | string | 买卖方向 | buy:买 sell:卖  
+offset | true | string | 开平方向 | open:开 close:平  
+lever_rate | false | int | 杠杆倍数，开仓操作为必填，平仓操作为非必填 |  
+volume | true | decimal | 委托数量(张) |  
+callback_rate | true | decimal | 回调幅度 | 如：0.01 表示1%，不可小于0.001（0.1%）  
+active_price | true | decimal | 激活价格 |  
+order_price_type | true | string | 委托类型 |
+最优5档：optimal_5，最优10档：optimal_10，最优20档：optimal_20，理论价格：formula_price  
+  
+#### 备注：
+
+  * 委托类型为理论价格，表示跟踪委托触发成功后，以下单以来市场最低（最高）价的（1 ± 回调幅度）作为委托价（精度为币种最小变动单位，截断）向市场下委托类型为limit的订单。
+  * 无论是最优N档还是理论价格下单，都不能保证订单能完全成交，主要取决于市场情况。
+  * symbol+contract_type和contract_code必填其一，只要填写了contract_code就直接取contract_code。
+  * 该接口的限频次数为1秒5次。
+
+> Response
+    
+    
+    {
+        "status": "ok",
+        "data": {
+            "order_id": 825041038916751360,
+            "order_id_str": "825041038916751360"
+        },
+        "ts": 1616746712203
+    }
+    
+
+### 返回参数
+
+参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
+---|---|---|---|---  
+status | true | string | 请求处理结果 | "ok" , "error"  
+ts | true | long | 时间戳 |  
+<data> | true | object | 成功处理返回的数据 |  
+order_id | true | long | 跟踪委托订单ID[全局唯一] |  
+order_id_str | true | string | 字符串类型的跟踪委托订单ID |  
+</data> |  |  |  |  
+  
+## 跟踪委托订单撤单
+
+  * POST `/api/v1/contract_track_cancel`
+
+### 请求参数
+
+参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
+---|---|---|---|---  
+symbol | true | string | 品种代码 | "BTC","ETH"...  
+order_id | true | string | 用户跟踪委托订单ID（多个订单ID中间以","分隔,一次最多允许撤消10个订单 ） |  
+  
+#### 备注
+
+  * 该接口的限频次数为1秒5次。
+
+> Response:
+    
+    
+    {
+        "status": "ok",
+        "data": {
+            "errors": [
+                {
+                    "order_id": "825041038916751361",
+                    "err_code": 1061,
+                    "err_msg": "This order doesnt exist."
+                }
+            ],
+            "successes": "825041038916751360"
+        },
+        "ts": 1616746795262
+    }
+    
+
+### 返回参数
+
+参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
+---|---|---|---|---  
+status | true | string | 请求处理结果 | "ok" :成功, "error"：失败  
+<data> | true | object |  | 字典  
+<errors> | true | object |  | 字典  
+order_id | true | string | 跟踪委托订单ID[全局唯一] |  
+err_code | false | long | 错误码 |  
+err_msg | false | string | 错误信息 |  
+</errors> |  |  |  |  
+successes | true | string | 成功的订单 |  
+</data> |  |  |  |  
+ts | true | long | 响应生成时间点，单位：毫秒 |  
+  
+## 跟踪委托订单全部撤单
+
+  * POST `/api/v1/contract_track_cancelall`
+
+### 请求参数
+
+参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
+---|---|---|---|---  
+symbol | true | string | 品种代码 | "BTC","ETH"...  
+contract_code | false | string | 合约代码 | "BTC180914" ...  
+contract_type | false | string | 合约类型 | 当周:"this_week", 周:"next_week",
+当季:"quarter"，次季度：“next_quarter”  
+direction | false | string | 买卖方向（不填默认全部） | "buy":买 "sell":卖  
+offset | false | string | 开平方向（不填默认全部） | "open":开 "close":平  
+  
+#### 备注：
+
+  * 只传symbol，撤该该品种下该订单类型的所有周期合约的跟踪委托订单
+  * 只要有contract_code，则撤销该code的合约的跟踪委托订单
+  * 只传symbol+contract_type， 则撤销二者拼接所成的合约跟踪委托订单
+  * direction与offset可只填其一，只填其一则按对应的条件去撤单。（如用户只传了direction=buy，则撤销所有买单，包括开仓和平仓）
+  * 该接口的限频次数为1秒5次。
+
+> Response:
+    
+    
+    {
+        "status": "ok",
+        "data": {
+            "errors": [],
+            "successes": "825041902725271552,825042030290833408,825042223069433856"
+        },
+        "ts": 1616747043604
+    }
+    
+
+### 返回参数
+
+参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
+---|---|---|---|---  
+status | true | string | 请求处理结果 | "ok" :成功, "error"：失败  
+<data> | true | object |  | 字典  
+<errors> | true | object |  | 字典  
+order_id | true | string | 跟踪委托订单ID[全局唯一] |  
+err_code | false | long | 错误码 |  
+err_msg | false | string | 错误信息 |  
+</errors> |  |  |  |  
+successes | true | string | 成功的订单 |  
+</data> |  |  |  |  
+ts | true | long | 响应生成时间点，单位：毫秒 |  
+  
+## 跟踪委托订单当前委托
+
+  * POST `/api/v1/contract_track_openorders`
+
+### 请求参数
+
+参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
+---|---|---|---|---  
+symbol | true | string | 品种代码 | "BTC","ETH"...  
+contract_code | false | string | 合约代码,"BTC180914" ... |  
+trade_type | false | int | 交易类型（不填默认查询全部） | 0:全部,1:买入开多,2: 卖出开空,3: 买入平空,4:
+卖出平多  
+page_index | false | int | 第几页，不填默认第一页 |  
+page_size | false | int | 不填默认20，不得多于50 | [1-50]  
+  
+> Response:
+    
+    
+    {
+        "status":"ok",
+        "data":{
+            "orders":[
+                {
+                    "symbol":"BTC",
+                    "contract_type":"quarter",
+                    "contract_code":"BTC210326",
+                    "volume":1,
+                    "order_type":1,
+                    "direction":"sell",
+                    "offset":"close",
+                    "lever_rate":75,
+                    "order_id":825042343047499776,
+                    "order_id_str":"825042343047499776",
+                    "order_source":"api",
+                    "created_at":1616747023128,
+                    "order_price_type":"formula_price",
+                    "status":2,
+                    "callback_rate":0.003,
+                    "active_price":54323,
+                    "is_active":0
+                }
+            ],
+            "total_page":1,
+            "current_page":1,
+            "total_size":3
+        },
+        "ts":1616747242096
+    }
+    
+
+### 返回参数
+
+参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
+---|---|---|---|---  
+status | true | string | 请求处理结果 | "ok" :成功, "error"：失败  
+<data> | true | object |  | 字典  
+total_page | true | int | 总页数 |  
+total_size | true | int | 总条数 |  
+current_page | true | int | 当前页 |  
+<orders> | true | object array |  |  
+symbol | true | string | 品种代码 |  
+contract_type | true | string | 合约类型 | 当周:"this_week", 次周:"next_week",
+当季:"quarter" ，次季度：“next_quarter”  
+contract_code | true | string | 合约代码 | "BTC180914" ...  
+volume | true | decimal | 委托数量 |  
+order_type | true | int | 订单类型：1、报单 2、撤单 |  
+direction | true | string | 买卖方向 | 买："buy",卖："sell"  
+offset | true | string | 开平方向 | 开："open",平："close"  
+lever_rate | true | int | 杠杆倍数 |  
+order_id | true | long | 跟踪委托订单ID |  
+order_id_str | true | string | 字符串类型的跟踪委托订单ID |  
+order_source | true | string | 来源 |  
+created_at | true | long | 订单创建时间 |  
+order_price_type | true | string | 订单报价类型 |
+最优5档：optimal_5，最优10档：optimal_10，最优20档：optimal_20，理论价格：formula_price  
+status | true | int | 订单状态： | 2:等待委托、4:已委托、5:委托失败、6:已撤单  
+callback_rate | true | decimal | 回调幅度 | 如：0.01 表示1%  
+active_price | true | decimal | 激活价格 |  
+is_active | true | int | 激活价格是否已激活 | 1：已激活；0：未激活  
+</orders> |  |  |  |  
+</data> |  |  |  |  
+ts | true | long | 响应生成时间点，单位：毫秒 |  
+  
+## 跟踪委托订单历史委托
+
+  * POST `/api/v1/contract_track_hisorders`
+
+### 请求参数
+
+参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
+---|---|---|---|---  
+symbol | true | string | 品种代码 | "BTC","ETH"...  
+contract_code | false | string | 合约代码,"BTC180914" ... |  
+status | true | string | 订单状态 |
+多个以英文逗号隔开，跟踪委托订单状态：0:全部（表示全部结束状态的订单）、4:已委托、5:委托失败、6:已撤单  
+trade_type | true | int | 交易类型 | 0:全部,1:买入开多,2: 卖出开空,3: 买入平空,4: 卖出平多  
+create_date | true | long | 日期 | 可随意输入正整数，如果参数超过90则默认查询90天的数据  
+page_index | false | int | 第几页，不填默认第一页 |  
+page_size | false | int | 不填默认20，不得多于50 | [1-50]  
+sort_by | false | string | 排序字段（降序），不填默认按照created_at降序 |
+"created_at"：按订单创建时间进行降序，"update_time"：按订单更新时间进行降序  
+  
+> Response:
+    
+    
+    {
+        "status":"ok",
+        "data":{
+            "orders":[
+                {
+                    "symbol":"BTC",
+                    "contract_type":"quarter",
+                    "contract_code":"BTC210326",
+                    "triggered_price":null,
+                    "volume":1,
+                    "order_type":1,
+                    "direction":"buy",
+                    "offset":"close",
+                    "lever_rate":75,
+                    "order_id":825042223069433856,
+                    "order_id_str":"825042223069433856",
+                    "order_source":"api",
+                    "created_at":1616746994523,
+                    "update_time":1616747101872,
+                    "order_price_type":"formula_price",
+                    "status":6,
+                    "canceled_at":1616747044182,
+                    "fail_code":null,
+                    "fail_reason":null,
+                    "callback_rate":0.003,
+                    "active_price":52323,
+                    "is_active":0,
+                    "market_limit_price":null,
+                    "formula_price":null,
+                    "real_volume":0,
+                    "relation_order_id":"-1"
+                }
+            ],
+            "total_page":1,
+            "current_page":1,
+            "total_size":5
+        },
+        "ts":1616747533336
+    }
+    
+
+### 返回参数
+
+参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
+---|---|---|---|---  
+status | true | string | 请求处理结果 | "ok" :成功, "error"：失败  
+<data> | true | object |  | 字典  
+total_page | true | int | 总页数 |  
+total_size | true | int | 总条数 |  
+current_page | true | int | 当前页 |  
+<orders> | true | object array |  |  
+symbol | true | string | 品种代码 |  
+contract_type | true | string | 合约类型 | 当周:"this_week", 次周:"next_week",
+当季:"quarter" ，次季度：“next_quarter”  
+contract_code | true | string | 合约代码 | "BTC180914" ...  
+volume | true | decimal | 委托数量 |  
+order_type | true | int | 订单类型：1、报单 2、撤单 |  
+direction | true | string | 买卖方向 | 买："buy",卖："sell"  
+offset | true | string | 开平方向 | 开："open",平："close"  
+lever_rate | true | int | 杠杆倍数 |  
+order_id | true | long | 跟踪委托订单ID |  
+order_id_str | true | string | 字符串类型的跟踪委托订单ID |  
+order_source | true | string | 来源 |  
+created_at | true | long | 订单创建时间 |  
+update_time | true | long | 订单更新时间，单位毫秒 |  
+order_price_type | true | string | 订单报价类型 |
+最优5档：optimal_5，最优10档：optimal_10，最优20档：optimal_20 ，理论价格：formula_price  
+status | true | int | 订单状态： | 2:等待委托、4:已委托、5:委托失败、6:已撤单  
+canceled_at | true | long | 撤单时间 |  
+fail_code | true | int | 被触发时下order单失败错误码 |  
+fail_reason | true | string | 被触发时下order单失败原因 |  
+callback_rate | true | decimal | 回调幅度 | 如：0.01 表示1%  
+active_price | true | decimal | 激活价格 |  
+is_active | true | int | 激活价格是否已激活 | 1：已激活；0：未激活  
+market_limit_price | true | decimal | 市场最低/最高价（买入则为市场最低价、卖出则为市场最高价） |  
+formula_price | true | decimal | 理论价格（市场最低（最高）价的（1 ± 回调幅度）） |  
+real_volume | true | decimal | 实际委托数量 |  
+triggered_price | true | decimal | 被触发时的价格 |  
+relation_order_id | true | string | 该字段为关联限价单的关联字段，未触发前数值为-1 |  
+</orders> |  |  |  |  
 </data> |  |  |  |  
 ts | true | long | 响应生成时间点，单位：毫秒 |  
   
@@ -8243,6 +8867,8 @@ Depth增量推送数据 | 否
 否  
 读取 | 指数与基差接口 | market.$symbol.index.$period | sub | 订阅(sub)指数K线数据 | 否  
 读取 | 指数与基差接口 | market.$symbol.index.$period | req | 请求(req)指数K线数据 | 否  
+读取 | 指数与基差接口 | market.$symbol.mark_price.$period | sub | 订阅标记价格K线数据 | 否  
+读取 | 指数与基差接口 | market.$symbol.mark_price.$period | req | 请求标记价格K线数据 | 否  
 读取 | 交易接口 | public.$symbol.liquidation_orders | sub | 订阅强平订单数据（免鉴权） | 否  
 读取 | 交易接口 | public.$symbol.contract_info | sub | 订阅合约信息变动数据（免鉴权） | 否  
 读取 | 交易接口 | orders.$symbol | sub | 订阅订单成交数据 | 是  
@@ -8288,7 +8914,7 @@ Depth增量推送数据 | 否
 
   * 行情类的公开接口，比如：获取K线数据、获取聚合行情、市场行情、获取行情深度数据、获取指数k线、获取基差数据、获取市场最近成交记录：
 
-（1） restful接口：同一个IP, 所有业务（交割合约、币本位永续合约、期权合约和USDT本位永续合约）总共1秒最多800个请求
+（1） restful接口：同一个IP, 所有业务（交割合约、币本位永续合约和USDT本位永续合约）总共1秒最多800个请求
 
 （2） websocket：req请求，同一时刻最多请求50次；sub请求，无限制，服务器主动推送数据
 
@@ -8554,7 +9180,7 @@ cid | string | 选填；请求时携带则会返回。
 err-code | int | 成功返回 0, 失败为其他值，详细响应码列列表请参考附录  
 err-msg | string | 可选，若出错表示详细错误信息  
 ts | long | 服务端应答时间戳  
-user-id | long | ⽤户 id  
+user-id | string | ⽤户 id  
   
 > 鉴权成功应答数据示例
     
@@ -8565,7 +9191,7 @@ user-id | long | ⽤户 id
       "ts": 1489474081631,
       "err-code": 0,
       "data": {
-        "user-id": 12345678
+        "user-id": "12345678"
       }
     }
     
@@ -8666,7 +9292,7 @@ open | true | decimal | 开盘价
 close | true | decimal | 收盘价,当K线为最晚的一根时，是最新成交价  
 low | true | decimal | 最低价  
 high | true | decimal | 最高价  
-amount | true | decimal | 成交量(币), 即 sum(每一笔成交量(张)*单张合约面值/该笔成交价)。 值是买卖双边之和  
+amount | true | decimal | 成交量(币), 即 sum(每一笔成交量(张) * 单张合约面值/该笔成交价)。 值是买卖双边之和  
 </tick> |  |  |  
   
 ## 请求 KLine 数据
@@ -8758,10 +9384,10 @@ open | true | decimal | 开盘价
 close | true | decimal | 收盘价,当K线为最晚的一根时，是最新成交价  
 low | true | decimal | 最低价  
 high | true | decimal | 最高价  
-amount | true | decimal | 成交量(币), 即 sum(每一笔成交量(张)*单张合约面值/该笔成交价)。 值是买卖双边之和  
+amount | true | decimal | 成交量(币), 即 sum(每一笔成交量(张) * 单张合约面值/该笔成交价)。 值是买卖双边之和  
 </data> |  |  |  
   
-> 之后每当 KLine 有更新时，client 会收到数据：
+> 请求成功返回数据的例子：
     
     
     {
@@ -8911,8 +9537,8 @@ ts | true | long | 数据进入行情服务器时间戳，单位：毫秒 |
 <tick> |  |  |  |  
 mrid | true | long | 订单ID |  
 id | true | long | tick ID |  
-asks | true | object | 卖盘,[price(挂单价), vol(此价格挂单张数)], 按price升序 |  
-bids | true | object | 买盘,[price(挂单价), vol(此价格挂单张数)], 按price降序 |  
+asks | false | object | 卖盘,[price(挂单价), vol(此价格挂单张数)], 按price升序 |  
+bids | false | object | 买盘,[price(挂单价), vol(此价格挂单张数)], 按price降序 |  
 ts | true | long | 深度生成时间戳，100MS生成一次，单位：毫秒 |  
 version | true | long | 版本号 |  
 ch | true | string | 数据所属的 channel，格式：market.$symbol.depth.$type |  
@@ -9102,8 +9728,8 @@ ts | true | long | 进入行情服务器系统时间点，单位：毫秒 |
 <tick> |  |  |  |  
 mrid | true | long | 订单ID |  
 id | true | long | tick ID |  
-ask | true | object | 卖盘,[price(挂单价), vol(此价格挂单张数)] |  
-bid | true | object | 买盘,[price(挂单价), vol(此价格挂单张数)] |  
+ask | false | object | 卖盘,[price(挂单价), vol(此价格挂单张数)] |  
+bid | false | object | 买盘,[price(挂单价), vol(此价格挂单张数)] |  
 ts | true | long | 系统检测orderbook时间点，单位：毫秒 |  
 version | true | long | 版本号 |  
 ch | true | string | 数据所属的 channel，格式： market.$symbol.bbo |  
@@ -9189,7 +9815,7 @@ symbol | true | string | 交易对 |  | 支持大小写，
 
 参数名称 | 是否必须 | 数据类型 | 描述  
 ---|---|---|---  
-ch | true | string | 数据所属的 channel，格式： market.$symbol.detail.merged  
+ch | true | string | 数据所属的 channel，格式： market.$symbol.detail  
 ts | true | long | 响应生成时间点，单位：毫秒  
 <tick> |  |  |  
 id | true | long | ID  
@@ -9198,7 +9824,7 @@ open | true | decimal | 开盘价
 close | true | decimal | 收盘价,当K线为最晚的一根时，是最新成交价  
 high | true | decimal | 最高价  
 low | true | decimal | 最低价  
-amount | true | decimal | 成交量(币), 即 sum(每一笔成交量(张)*单张合约面值/该笔成交价)。 值是买卖双边之和  
+amount | true | decimal | 成交量(币), 即 sum(每一笔成交量(张) * 单张合约面值/该笔成交价)。 值是买卖双边之和  
 vol | true | decimal | 成交量（张）。 值是买卖双边之和  
 count | true | decimal | 成交笔数。 值是买卖双边之和  
 ask | true | array | [卖1价,卖1量(张)]  
@@ -9223,7 +9849,7 @@ bid | true | array | [买1价,买1量(张)]
 
 `}`
 
-> 请求 Market Detail 数据请求参数的例子：
+> 请求 Trade Detail 数据请求参数的例子：
     
     
     
@@ -9237,7 +9863,7 @@ bid | true | array | [买1价,买1量(张)]
 
 ### 请求参数
 
-参数名称 | 是否必须 | 类型 | 描述 | 默认值  
+参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
 ---|---|---|---|---  
 req | true | string |
 请求数据的主题，该接口固定为：market.$symbol.trade.detail，详细参数见req请求参数说明 |  
@@ -9295,7 +9921,7 @@ id | true | string | 请求 ID |
 id | true | long | 成交唯一id（品种唯一） |  
 price | true | string | 价格 |  
 amount | true | string | 成交量(张)。 值是买卖双边之和 |  
-direction | true | string | 主动成交方向 |  
+direction | true | string | 买卖方向，即taker(主动成交)的方向 |  
 ts | true | long | 订单成交时间 |  
 quantity | true | string | 成交量（币） |  
 </data> |  |  |  |  
@@ -9389,7 +10015,7 @@ amount | true | decimal | 数量（张）。 值是买卖双边之和 |
 ts | true | long | 订单时间戳 |  
 id | true | long | 成交唯一id（品种唯一） |  
 price | true | decimal | 价格 |  
-direction | true | string | 买卖方向 |  
+direction | true | string | 买卖方向，即taker(主动成交)的方向 |  
 quantity | true | decimal | 成交量（币） |  
 </data> |  |  |  |  
 </tick> |  |  |  |  
@@ -9467,20 +10093,16 @@ period | true | string | K线类型 |  | 仅支持小写,1min, 5min, 15min, 30mi
 ---|---|---|---|---  
 ch | string | 数据所属的 channel，格式： market.$symbol.index.$period |  |  
 ts | long | 响应生成时间点，单位：毫秒 |  |  
-tick | object array | tick返回，详情：推送tick参数 |  |  
-  
-### 推送tick参数
-
-**参数名称** | **类型** | **描述** |  
----|---|---|---  
-id | string | 指数K线id,也就是K线时间戳，K线起始时间 |  
-vol | string | 成交量张数为0 |  
-count | decimal | 成交笔数为0 |  
-open | string | 开盘指数价 |  
-close | string | 收盘指数价 |  
-low | string | 最低指数价 |  
-high | string | 最高指数价 |  
-amount | string | 数值为0 |  
+<tick> | object array |  |  |  
+id | string | 指数K线id,也就是K线时间戳，K线起始时间 |  |  
+vol | string | 成交量张数为0 |  |  
+count | decimal | 成交笔数为0 |  |  
+open | string | 开盘指数价 |  |  
+close | string | 收盘指数价 |  |  
+low | string | 最低指数价 |  |  
+high | string | 最高指数价 |  |  
+amount | string | 数值为0 |  |  
+</tick> |  |  |  |  
   
 ## 请求(req)指数K线数据
 
@@ -9570,19 +10192,14 @@ period | true | string | K线类型 |  | 1min, 5min, 15min, 30min, 60min,4hour,1
 
 ### 返回参数
 
-**参数名称** | **类型** | **描述** | **默认值** | **取值范围**  
----|---|---|---|---  
-req | true | string | 数据所属的 channel，格式：market.$symbol.index.$period |  
-status | true | string | 请求处理结果 | "ok" , "error"  
-id | true | string | 业务方id |  
-wsid | true | long | wsid |  
-ts | true | long | 响应生成时间点，单位：毫秒 |  
-tick | object array | tick返回，详情：推送tick参数 |  |  
-  
-### 推送tick参数
-
-**参数名称** | **类型** | **描述** |  
+**参数名称** | **类型** | **描述** | **取值范围**  
 ---|---|---|---  
+req | string | 数据所属的 channel，格式：market.$symbol.index.$period |  
+status | string | 请求处理结果 | "ok" , "error"  
+id | string | 业务方id |  
+wsid | long | wsid |  
+ts | long | 响应生成时间点，单位：毫秒 |  
+<data> | object array |  |  
 id | decimal | 指数K线id,也就是K线时间戳，K线起始时间 |  
 vol | decimal | 成交量张数为0 |  
 count | decimal | 成交笔数为0 |  
@@ -9591,6 +10208,7 @@ close | decimal | 收盘指数价 |
 low | decimal | 最低指数价 |  
 high | decimal | 最高指数价 |  
 amount | decimal | 数值为0 |  
+</data> | object array |  |  
   
 ## 订阅(sub)基差数据
 
@@ -9657,18 +10275,14 @@ basis_price_type | false | string | 基差价格类型，表示在周期内计�
 ---|---|---|---|---|---  
 ch | true | string | 数据所属的
 channel，格式：market.$symbol.basis.$period.$basis_price_type |  |  
-tick | true | object array | tick返回，详情：tick参数说明 |  |  
+<tick> | true | object array |  |  |  
+id | true | long | 唯一标识 |  |  
+contract_price | true | string | 合约最新成交价 |  |  
+index_price | true | string | 指数基准价，与基差价格类型匹配 |  |  
+basis | true | string | 基差=合约基准价 - 指数基准价 |  |  
+basis_rate | true | string | 基差率=基差/指数基准价 |  |  
+</tick> |  |  |  |  |  
 ts | true | long | 响应生成时间点，单位：毫秒 |  |  
-  
-#### tick参数说明
-
-**参数名称** | **类型** | **描述**  
----|---|---  
-id | long | 唯一标识  
-contract_price | string | 合约最新成交价  
-index_price | string | 指数基准价，与基差价格类型匹配  
-basis | string | 基差=合约基准价 - 指数基准价  
-basis_rate | string | 基差率=基差/指数基准价  
   
 ## 请求(req)基差数据
 
@@ -9756,26 +10370,199 @@ basis_price_type | false | string | 基差价格类型，表示在周期内计�
 
 ### 返回参数
 
+**参数名称** | **是否必须** | **类型** | **描述** | **取值范围**  
+---|---|---|---|---  
+req | true | string | 数据所属的
+channel，格式：market.$symbol.basis.$period.$basis_price_type |  
+status | true | string | 请求处理结果 | "ok" , "error"  
+id | true | string | 业务方id |  
+wsid | true | long | wsid |  
+ts | true | long | 响应生成时间点，单位：毫秒 |  
+<data> | true | object array |  |  
+id | true | long | 唯一标识 |  
+contract_price | true | string | 合约最新成交价 |  
+index_price | true | string | 指数基准价，与基差价格类型匹配 |  
+basis | true | string | 基差=合约基准价 - 指数基准价 |  
+basis_rate | true | string | 基差率=基差/指数基准价 |  
+</data> |  |  |  |  
+  
+## 订阅标记价格K线数据
+
+### 成功建立和 WebSocket API 的连接之后，向 Server发送如下格式的数据来订阅数据：
+
+`{`
+
+`"sub": "market.$symbol.mark_price.$period",`
+
+`"id": "id generate by client"`
+
+`}`
+
+> 正确订阅请求参数的例子：
+    
+    
+        {
+        "sub": "market.BTC_CW.mark_price.1min",
+        "id": "id1"
+        }
+    
+    
+
+### 请求参数
+
+参数名称 | 是否必须 | 类型 | 描述 | 默认值  
+---|---|---|---|---  
+sub | true | string |
+需要订阅的主题，该接口固定为：market.$symbol.mark_price.$period，详细参数见sub订阅参数说明 |  
+id | false | string | 业务方自主生成的id |  
+  
+### sub订单参数说明
+
 **参数名称** | **是否必须** | **类型** | **描述** | **默认值** | **取值范围**  
 ---|---|---|---|---|---  
-req | true | string | 数据所属的
-channel，格式：market.$symbol.basis.$period.$basis_price_type |  |  
-status | true | string | 请求处理结果 | "ok" , "error" |  
+symbol | true | string | 合约标识 |  |
+如"BTC_CW"表示BTC当周合约，"BTC_NW"表示BTC次周合约，"BTC_CQ"表示BTC当季合约
+，"BTC_NQ"表示BTC次季度合约季度合约。支持使用合约code来查询数据，
+例如："BTC200918"(当周)，"BTC200925"(次周)，"BTC201225"(季度)，"BTC210326"(次季度)。  
+period | true | string | K线类型 |  | 1min, 5min, 15min, 30min, 60min,4hour,1day,
+1week, 1mon  
+  
+> 每当标记价格有更新时，client 会收到数据，例子
+    
+    
+    {
+        "ch":"market.BTC_CW.mark_price.15min",
+        "ts":1615773631266,
+        "tick":{
+            "id":1615773600,
+            "open":"60533.89",
+            "close":"60603.01",
+            "high":"60603.01",
+            "low":"60533.89",
+            "amount":"0",
+            "vol":"0",
+            "count":"0"
+        }
+    }
+    
+
+### 返回参数：
+
+**参数名称** | **是否必须** | **类型** | **描述** | **默认值** | **取值范围**  
+---|---|---|---|---|---  
+ch | true | string | 数据所属的 channel |  |  
+<tick> | true | object array |  |  |  
+id | true | long | k线id |  |  
+vol | true | string | 成交量(张)，数值为0 |  |  
+count | true | string | 成交笔数，数值为0 |  |  
+open | true | string | 开盘值 |  |  
+close | true | string | 收盘值 |  |  
+low | true | string | 最低值 |  |  
+high | true | string | 最高值 |  |  
+amount | true | string | 成交量(币), 数值为0 |  |  
+</tick> |  |  |  |  |  
+ts | true | number | 响应生成时间点，单位：毫秒 |  |  
+  
+## 请求标记价格K线数据
+
+### 成功建立和 WebSocket API 的连接之后，向 Server 发送如下格式的数据来请求数据：
+
+`{`
+
+`"req": "market.$symbol.mark_price.$period",`
+
+`"id": "id generated by client",`
+
+`"from": "type: long 单位：秒",`
+
+`"to": "type: long 单位：秒，必须比 from 大",`
+
+`}`
+
+> 正确订阅请求参数的例子:
+    
+    
+        {
+        "req": "market.BTC_CW.mark_price.1imin",
+        "id": "id4",
+        "from":1571000000,
+        "to":1573098606
+        }
+    
+
+### 请求参数
+
+参数名称 | 是否必须 | 类型 | 描述 | 默认值  
+---|---|---|---|---  
+req | true | string |
+需要订阅的主题，该接口固定为：market.$symbol.mark_price.$period，详细参数见req请求参数说明 |  
+id | false | string | 业务方自主生成的id |  
+from | true | long | 开始时间，单位：秒 |  
+to | true | long | 结束时间，单位：秒，必须比 from 大 |  
+  
+### req请求参数说明：
+
+**参数名称** | **是否必须** | **类型** | **描述** | **默认值** | **取值范围**  
+---|---|---|---|---|---  
+symbol | true | string | 合约标识 |  |
+如"BTC_CW"表示BTC当周合约，"BTC_NW"表示BTC次周合约，"BTC_CQ"表示BTC当季合约
+，"BTC_NQ"表示BTC次季度合约季度合约。支持使用合约code来查询数据，
+例如："BTC200918"(当周)，"BTC200925"(次周)，"BTC201225"(季度)，"BTC210326"(次季度)。  
+period | true | string | K线类型 |  | 1min, 5min, 15min, 30min, 60min,4hour,1day,
+1week, 1mon  
+  
+### 说明：
+
+  * 一次返回最多2000条数据；
+
+> 请求成功返回数据的例子：
+    
+    
+    {
+        "id":"id4",
+        "rep":"market.BTC_CW.mark_price.15min",
+        "wsid":2998253842,
+        "ts":1615773843201,
+        "status":"ok",
+        "data":[
+            {
+                "id":1615651200,
+                "open":"60284.67",
+                "close":"60362.04",
+                "low":"60270.85",
+                "high":"60468.55",
+                "amount":"0",
+                "vol":"0",
+                "count":"0"
+            }
+        ]
+    }
+    
+
+### 返回参数：
+
+**参数名称** | **是否必须** | **类型** | **描述** | **默认值** | **取值范围**  
+---|---|---|---|---|---  
+rep | true | string | 数据所属的 channel |  |  
+status | true | string | 请求处理结果 |  | "ok" , "error"  
 id | true | string | 业务方id |  |  
 wsid | true | long | wsid |  |  
-ts | true | long | 响应生成时间点，单位：毫秒 |  |  
-data | true | object array | data返回，详情：data参数描述 |  |  
+ts | true | number | 响应生成时间点，单位：毫秒 |  |  
+<data> | true | object array |  |  |  
+id | true | long | k线id |  |  
+vol | true | string | 成交量(张)，数值为0 |  |  
+count | true | string | 成交笔数，数值为0 |  |  
+open | true | string | 开盘值 |  |  
+close | true | string | 收盘值 |  |  
+low | true | string | 最低值 |  |  
+high | true | string | 最高值 |  |  
+amount | true | string | 成交量(币), 数值为0 |  |  
+</data> |  |  |  |  |  
   
-### data参数描述
+#### 备注
 
-**参数名称** | **类型** | **描述**  
----|---|---  
-id | long | 唯一标识  
-contract_price | string | 合约最新成交价  
-index_price | string | 指数基准价，与基差价格类型匹配  
-basis | string | 基差=合约基准价 - 指数基准价  
-basis_rate | string | 基差率=基差/指数基准价  
-  
+  * 标记价格于2021-3-15上线后才有数据。此前是没有历史数据的请悉知。
+
 # WebSocket订单和用户数据接口
 
 ## 订阅订单成交数据（sub）
@@ -10101,9 +10888,9 @@ created_at | long | 创建时间
 is_tpsl | int | 是否设置止盈止损，1：是；0：否  
 order_source | string |
 订单来源（system:系统、web:用户网页、api:用户API、m:用户M站、risk:风控系统、settlement:交割结算、ios：ios客户端、android：安卓客户端、windows：windows客户端、mac：mac客户端、trigger：计划委托触发、tpsl:止盈止损触发）  
-order_price_type | string | 订单报价类型: "limit":限价 "opponent":对手价
-"post_only":只做maker单,post
-only下单只受用户持仓数量限制,optimal_5：最优5档、optimal_10：最优10档、optimal_20：最优20档，ioc：IOC订单，fok：FOK订单,"opponent_ioc":
+order_price_type | string | 订单报价类型: "limit":限价，"opponent":对手价
+，"post_only":只做maker单,post
+only下单只受用户持仓数量限制,"optimal_5"：最优5档，"optimal_10"：最优10档，"optimal_20"：最优20档，"ioc":IOC订单，"fok"：FOK订单,"opponent_ioc":
 对手价-IOC下单，"optimal_5_ioc": 最优5档-IOC下单，"optimal_10_ioc":
 最优10档-IOC下单，"optimal_20_ioc"：最优20档-IOC下单，"opponent_fok"： 对手价-
 FOK下单，"optimal_5_fok"：最优5档-FOK下单，"optimal_10_fok"：最优10档-FOK下单，"optimal_20_fok"：最优20档-FOK下单  
@@ -10390,7 +11177,7 @@ profit_rate | decimal | 收益率
 profit | decimal | 收益  
 position_margin | decimal | 持仓保证金  
 lever_rate | decimal | 杠杆倍数  
-direction | string | 仓位方向 "buy":买 "sell":卖  
+direction | string | 仓位方向 "buy":买，即多仓 "sell":卖，即空仓  
 last_price | decimal | 最新成交价  
 </data> |  |  
   
@@ -10471,7 +11258,7 @@ positions.* | positions.symbol1 | 不允许
     
     
 
-### **请求参数**
+### 请求参数
 
 参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
 ---|---|---|---|---  
@@ -10479,24 +11266,6 @@ op | true | string | 订阅固定值为sub |
 cid | false | string | Client 请求唯一 ID |  
 topic | true | string | 必填;订阅主题名称:public.$symbol.liquidation_orders;
 订阅某个品种下的强平订单信息；$symbol为品种代码（BTC、ETH），如果值为 * 时代表订阅所有品种; symbol支持大小写 |  
-  
-### **返回参数说明**
-
-参数名称 | 是否必须 | 数据类型 | 描述 | 取值范围  
----|---|---|---|---  
-op | true | string | 操作名称，推送固定值为 notify; |  
-topic | true | string | 推送的主题 |  
-ts | true | long | 服务端应答时间戳 |  
-<data> | true | array object |  |  
-symbol | true | string | 品种代码 | "BTC","ETH"...  
-contract_code | true | string | 合约代码 |  
-direction | true | string | 仓位方向 | "buy":买 "sell":卖  
-offset | true | string | 开平方向 | "open":开 "close":平  
-volume | true | decimal | 强平数量（张） |  
-amount | true | decimal | 强平数量（币） |  
-price | true | decimal | 破产价格 |  
-created_at | true | long | 订单创建时间 |  
-</data> |  |  |  |  
   
 > 当有订单被爆仓账户接管后，返回的参数示例如下：
     
@@ -10520,6 +11289,24 @@ created_at | true | long | 订单创建时间 |
     }
     
 
+### 返回参数说明
+
+参数名称 | 是否必须 | 数据类型 | 描述 | 取值范围  
+---|---|---|---|---  
+op | true | string | 操作名称，推送固定值为 notify; |  
+topic | true | string | 推送的主题 |  
+ts | true | long | 服务端应答时间戳 |  
+<data> | true | array object |  |  
+symbol | true | string | 品种代码 | "BTC","ETH"...  
+contract_code | true | string | 合约代码 |  
+direction | true | string | 仓位方向 | "buy":买 "sell":卖  
+offset | true | string | 开平方向 | "open":开 "close":平  
+volume | true | decimal | 强平数量（张） |  
+amount | true | decimal | 强平数量（币） |  
+price | true | decimal | 破产价格 |  
+created_at | true | long | 订单创建时间 |  
+</data> |  |  |  |  
+  
 ## 取消订阅强平订单(免鉴权)（unsub）
 
 ### 取消订阅强平订单数据格式
@@ -10771,7 +11558,7 @@ cid | false | string | 选填；Client 请求唯一 ID
 topic | true | string | 必填；订阅主题名称:trigger_order.$symbol;
 订阅某个品种下的计划委托订单更新信息；$symbol为品种代码（BTC、ETH），如果值为 * 时代表订阅所有品种; symbol支持大小写;  
   
-> **返回示例** :
+> 返回示例:
     
     
     {
@@ -10811,7 +11598,7 @@ topic | true | string | 必填；订阅主题名称:trigger_order.$symbol;
     }
     
 
-### **返回参数说明** ：
+### 返回参数说明：
 
 参数名称 | 是否必须 | 数据类型 | 描述 | 取值范围  
 ---|---|---|---|---  
@@ -10929,11 +11716,11 @@ trigger_order.* | trigger_order.symbol1 | 不允许
     {
         "op": "sub",
         "cid": "id generated by client",
-        "topic ": "public.futures.heartbeat"
+        "topic": "public.futures.heartbeat"
     }
     
 
-### **请求参数** :
+### 请求参数:
 
 参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
 ---|---|---|---|---  
@@ -10941,13 +11728,13 @@ op | true | string | 必填;订阅固定值为sub |
 cid | false | string | 选填;Client 请求唯一 ID |  
 topic | true | string | 必填;订阅主题名称:public.$service.heartbeat; 订阅交割合约的系统状态信息 |  
   
-### **sub订阅参数说明** :
+### sub订阅参数说明:
 
 参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
 ---|---|---|---|---  
 service | true | string | 业务代码 | futures：交割  
   
-> **返回示例** :
+> 返回示例:
     
     
     {
@@ -10963,7 +11750,7 @@ service | true | string | 业务代码 | futures：交割
     
     
 
-### **返回参数说明** ：
+### 返回参数说明：
 
 参数名称 | 是否必须 | 数据类型 | 描述 | 取值范围  
 ---|---|---|---|---  
@@ -11038,7 +11825,7 @@ shell
 
 [现货](/docs/spot/v1/en/) [交割合约](/docs/dm/v1/en/)
 [币本位永续合约](/docs/coin_margined_swap/v1/en/)
-[USDT本位永续合约](/docs/usdt_swap/v1/en/) [期权合约](/docs/option/v1/en/)
+[USDT本位永续合约](/docs/usdt_swap/v1/en/)
 
 [简体中文](/docs/spot/v1/cn/)
 
@@ -11048,6 +11835,11 @@ shell
     * 币本位永续合约API简介
     * 做市商项目
   * 更新日志
+    * 1.2.0 2021年5月17日 【修改：母子账户划转（新增选填入参：client_order_id）】
+    * 1.1.9 2021年05月12日 【新增：跟踪委托订单接口】
+    * 1.1.8 2021年04月29日 【修改撤销订单接口（将原来的 client_order_id 有效时间从24小时改为8小时。超过8小时的订单根据client_order_id将查询不到。）、修改获取合约订单信息接口（将原来的 client_order_id 有效时间从24小时改为8小时。超过8小时的订单根据client_order_id将查询不到。将原来只能查询最近4小时内的撤单信息改为只可以查询最近2小时内的撤单信息。）】
+    * 1.1.7 2021年4月28日 【新增:获取市场最优挂单接口。】
+    * 1.1.6 2021年2月26日 【新增：获取账户总资产估值接口、批量获取合约资金费率接口。修改获取合约最高限价和最低限价接口（支持用户所有入参都不填，接口返回所有当前上市合约的限价数据。）、修改获取市场最近成交记录接口（支持用户所有入参都不填，接口返回所有当前上市合约的最近成交数据；当用户不传入参时， 返参ch值为market.*trade.detail。在返参tick下新增字段：contract_code。）】
     * 1.1.5 2021年2月5日【新增：获取平台阶梯保证金接口、批量设置子账户交易权限接口、批量获取子账户资产信息接口。4-7 修改接口，新增字段。8 查询用户结算记录接口（为避免影响系统性能，接口仅支持查询最近90天用户结算记录）】
     * 1.1.4 2021年1月29日 【新增：批量获取聚合行情接口、获取标记价格的 K 线数据、订阅标记价格 K 线数据 WS 接口、请求标记价格 K 线数据 WS 接口。5-17 修改接口，新增字段。修改：计划委托订单的订单ID由原本的自然数自增ID 改为长度为 18 位的唯一标识ID。推荐使用下单后返回的 order_id_str（字符串类型的订单 ID），避免发生长度过大而被系统截断的情况。】
     * 1.1.3 2021年01月12号 【1 新增获取预估结算价。2-7 新增止盈止损订单接口。8-21 修改接口，新增字段。 新增【合约策略订单】一级菜单，将本次新增的双向止盈止损相关接口以及原有的计划委托相关接口挪到该菜单下】
@@ -11088,6 +11880,7 @@ shell
     * 获取合约最高限价和最低限价
     * 获取当前可用合约总持仓量
     * 获取行情深度数据
+    * 获取市场最优挂单
     * 获取K线数据
     * 获取标记价格的K线数据
     * 获取聚合行情
@@ -11104,6 +11897,7 @@ shell
     * 获取预估结算价
     * 查询系统状态
     * 获取合约的资金费率
+    * 批量获取合约资金费率
     * 获取合约的历史资金费率
     * 获取强平订单
     * 查询平台历史结算记录
@@ -11111,6 +11905,7 @@ shell
     * 获取实时预测资金费率的K线数据
     * 获取基差数据
   * 合约资产接口
+    * 获取账户总资产估值
     * 获取用户账户信息
     * 获取用户持仓信息
     * 查询用户账户和持仓信息
@@ -11156,6 +11951,11 @@ shell
     * 查询止盈止损订单当前委托
     * 查询止盈止损订单历史委托
     * 查询开仓单关联的止盈止损订单详情
+    * 跟踪委托订单下单
+    * 跟踪委托订单撤单
+    * 跟踪委托订单全部撤单
+    * 跟踪委托订单当前委托
+    * 跟踪委托订单历史委托
   * 币本位永续合约划转接口
     * 现货-币本位永续合约账户间进行资金的划转
     * 响应码列表
@@ -11226,19 +12026,115 @@ shell
 
 你可以通过选择上方下拉菜单的版本号来切换文档对应的 API 版本，也可以通过点击右上方的语言按钮来切换文档语言。
 
-## 做市商项目
+## 做市商项目
 
 做市商项目不支持点卡抵扣、VIP、交易量相关活动以及任何形式的返佣活动。
 
 欢迎有优秀 maker 策略交易量大的用户参与长期合约做市商项目。如果您的火币交割合约账户中有折合大于 3 BTC
-资产，或火币币本位永续合约账户中有折合大于 3 BTC 资产，或火币期权合约账户中有折合大于 3 BTC 资产，或火币USDT本位永续合约账户中有大于
-30000 USDT 资产，请提供以下信息到 [[email protected]](/cdn-cgi/l/email-
+资产，或火币币本位永续合约账户中有折合大于 3 BTC 资产，或火币USDT本位永续合约账户中有大于 100000 USDT 资产，请提供以下信息到
+[[email protected]](/cdn-cgi/l/email-
 protection)（做市商项目不支持点卡抵扣、VIP、交易量相关活动以及任何形式的返佣活动）:
 
   1. 提供火币 UID （需不存在返佣关系的 UID）；
   2. 提供其他交易平台 maker 交易量截图证明（比如30天内成交量，或者 VIP 等级等）；
 
 # 更新日志
+
+## 1.2.0 2021年5月17日 【修改：母子账户划转（新增选填入参：client_order_id）】
+
+### 1、修改母子账户划转接口（新增选填入参：client_order_id）
+
+  * 接口名称：母子账户划转
+  * 接口类型：私有接口
+  * 接口URL：/swap-api/v1/swap_master_sub_transfer
+
+## 1.1.9 2021年05月12日 【新增：跟踪委托订单接口】
+
+### 1、新增跟踪委托订单下单接口
+
+  * 接口名称：跟踪委托订单下单
+  * 接口类型：私有接口
+  * 接口URL：/swap-api/v1/swap_track_order
+
+### 2、新增跟踪委托订单撤单接口
+
+  * 接口名称：跟踪委托订单撤单
+  * 接口类型：私有接口
+  * 接口URL：/swap-api/v1/swap_track_cancel
+
+### 3、新增跟踪委托订单全部撤单接口
+
+  * 接口名称：跟踪委托订单全部撤单
+  * 接口类型：私有接口
+  * 接口URL：/swap-api/v1/swap_track_cancelall
+
+### 4、新增跟踪委托订单当前委托接口
+
+  * 接口名称：跟踪委托订单当前委托
+  * 接口类型：私有接口
+  * 接口URL：/swap-api/v1/swap_track_openorders
+
+### 5、新增跟踪委托订单历史委托接口
+
+  * 接口名称：跟踪委托订单历史委托
+  * 接口类型：私有接口
+  * 接口URL：/swap-api/v1/swap_track_hisorders
+
+## 1.1.8 2021年04月29日 【修改撤销订单接口（将原来的 client_order_id
+有效时间从24小时改为8小时。超过8小时的订单根据client_order_id将查询不到。）、修改获取合约订单信息接口（将原来的
+client_order_id
+有效时间从24小时改为8小时。超过8小时的订单根据client_order_id将查询不到。将原来只能查询最近4小时内的撤单信息改为只可以查询最近2小时内的撤单信息。）】
+
+### 1、修改撤销订单接口（将原来的 client_order_id
+有效时间从24小时改为8小时。超过8小时的订单根据client_order_id将查询不到。）
+
+  * 接口名称：撤销订单
+  * 接口类型：私有接口
+  * 接口URL：/swap-api/v1/swap_cancel
+
+### 2、修改获取合约订单信息接口（将原来的 client_order_id
+有效时间从24小时改为8小时。超过8小时的订单根据client_order_id将查询不到。将原来只能查询最近4小时内的撤单信息改为只可以查询最近2小时内的撤单信息。）
+
+  * 接口名称：获取合约订单信息
+  * 接口类型：私有接口
+  * 接口URL：/swap-api/v1/swap_order_info
+
+## 1.1.7 2021年4月28日 【新增:获取市场最优挂单接口。】
+
+### 1、新增获取市场最优挂单接口
+
+  * 接口名称：获取市场最优挂单
+  * 接口类型：公共接口
+  * 接口URL：/swap-ex/market/bbo
+
+## 1.1.6 2021年2月26日
+【新增：获取账户总资产估值接口、批量获取合约资金费率接口。修改获取合约最高限价和最低限价接口（支持用户所有入参都不填，接口返回所有当前上市合约的限价数据。）、修改获取市场最近成交记录接口（支持用户所有入参都不填，接口返回所有当前上市合约的最近成交数据；当用户不传入参时，
+返参ch值为market.*trade.detail。在返参tick下新增字段：contract_code。）】
+
+### 1、新增获取账户总资产估值的接口
+
+  * 接口名称：获取账户总资产估值
+  * 接口类型：私有接口
+  * 接口URL：/swap-api/v1/swap_balance_valuation
+
+### 2、新增批量获取合约资金费率接口
+
+  * 接口名称：批量获取合约资金费率
+  * 接口类型：共公接口
+  * 接口URL：/swap-api/v1/swap_batch_funding_rate
+
+### 3、修改获取合约最高限价和最低限价接口（支持用户所有入参都不填，接口返回所有当前上市合约的限价数据。）
+
+  * 接口名称：获取合约最高限价和最低限价
+  * 接口类型：共公接口
+  * 接口URL：/swap-api/v1/swap_price_limit
+
+### 4、修改获取市场最近成交记录接口（支持用户所有入参都不填，接口返回所有当前上市合约的最近成交数据；当用户不传入参时，
+返参ch值为market.*trade.detail。在返参data下新增字段：contract_code。）
+
+  * 接口名称：获取市场最近成交记录
+  * 接口类型：共公接口
+  * 接口URL：/swap-ex/market/trade
 
 ## 1.1.5 2021年2月5日【新增：获取平台阶梯保证金接口、批量设置子账户交易权限接口、批量获取子账户资产信息接口。4-7 修改接口，新增字段。8
 查询用户结算记录接口（为避免影响系统性能，接口仅支持查询最近90天用户结算记录）】
@@ -11261,29 +12157,29 @@ protection)（做市商项目不支持点卡抵扣、VIP、交易量相关活动
   * 接口类型：私有接口
   * 接口URL：/swap-api/v1/swap_sub_account_info_list
 
-### 4、修改获取市场最近成交记录接口（返参data参数下新增quantity，表示成交量（币）。计算公式：成交量（币） =
-成交量（张）*合约面值/成交价格）
+### 4、修改获取市场最近成交记录接口（返参data参数下新增quantity，表示成交量（币）。计算公式：成交量（币） = 成交量（张）*
+合约面值/成交价格）
 
   * 接口名称：获取市场最近成交记录
   * 接口类型：公共接口
   * 接口URL：/swap-ex/market/trade
 
 ### 5、修改批量获取最近的交易记录接口（返参data参数下内层data中新增quantity，表示成交量（币）。计算公式：成交量（币） =
-成交量（张）*合约面值/成交价格）
+成交量（张）* 合约面值/成交价格）
 
   * 接口名称：批量获取最近的交易记录
   * 接口类型：公共接口
   * 接口URL：/swap-ex/market/history/trade
 
 ### 6、修改订阅 Trade Detail 数据接口（返参tick参数下的data参数中新增quantity，表示成交量（币）。计算公式：成交量（币）
-= 成交量（张）*合约面值/成交价格）
+= 成交量（张）* 合约面值/成交价格）
 
   * 接口名称：订阅 Trade Detail 数据
   * 接口类型：公共接口
   * 订阅地址：market.$contract_code.trade.detail
 
 ### 7、修改请求 Trade Detail 数据接口（返参data参数中新增quantity，表示成交量（币）。计算公式：成交量（币） =
-成交量（张）*合约面值/成交价格）
+成交量（张）* 合约面值/成交价格）
 
   * 接口名称：请求 Trade Detail 数据
   * 接口类型：公共接口
@@ -12083,6 +12979,7 @@ IOC下单），lightning_fok（闪电平仓-FOK下单），lightning(闪电平�
 读取 | 基础行情接口 | /swap-api/v1/swap_price_limit | GET | 获取合约最高限价和最低限价 | 否  
 读取 | 基础行情接口 | /swap-api/v1/swap_open_interest | GET | 获取当前可用合约总持仓量 | 否  
 读取 | 市场行情接口 | /swap-ex/market/depth | GET | 获取行情深度数据 | 否  
+读取 | 市场行情接口 | /swap-ex/market/bbo | GET | 获取市场最优挂单 | 否  
 读取 | 市场行情接口 | /swap-ex/market/history/kline | GET | 获取K线数据 | 否  
 读取 | 市场行情接口 | /index/market/history/swap_mark_price_kline | GET | 获取标记价格的 K
 线数据 | 否  
@@ -12099,6 +12996,7 @@ IOC下单），lightning_fok（闪电平仓-FOK下单），lightning(闪电平�
 否  
 读取 | 市场行情接口 | /swap-api/v1/swap_api_state | GET | 查询系统状态 | 否  
 读取 | 市场行情接口 | /swap-api/v1/swap_funding_rate | GET | 获取合约的资金费率 | 否  
+读取 | 市场行情接口 | /swap-api/v1/swap_batch_funding_rate | GET | 批量获取合约资金费率 | 否  
 读取 | 市场行情接口 | /swap-api/v1/swap_historical_funding_rate | GET | 获取合约的历史资金费率 |
 否  
 读取 | 市场行情接口 | /swap-api/v1/swap_liquidation_orders | GET | 获取强平订单 | 否  
@@ -12109,6 +13007,7 @@ IOC下单），lightning_fok（闪电平仓-FOK下单），lightning(闪电平�
 获取实时预测资金费率的K线数据 | 否  
 读取 | 市场行情接口 | /index/market/history/swap_basis | GET | 获取基差数据 | 否  
 读取 | 市场行情接口 | /swap-api/v1/swap_estimated_settlement_price | GET | 获取预估结算价 | 否  
+读取 | 账户接口 | /swap-api/v1/swap_balance_valuation | POST | 获取账户总资产估值 | 是  
 读取 | 账户接口 | /swap-api/v1/swap_account_info | POST | 获取用户账户信息 | 是  
 读取 | 账户接口 | /swap-api/v1/swap_position_info | POST | 获取用户持仓信息 | 是  
 交易 | 账户接口 | /swap-api/v1/swap_sub_auth | POST | 批量设置子账户交易权限 | 是  
@@ -12149,6 +13048,11 @@ IOC下单），lightning_fok（闪电平仓-FOK下单），lightning(闪电平�
 读取 | 策略接口 | /swap-api/v1/swap_tpsl_openorders | POST | 止盈止损订单当前委托 | 是  
 读取 | 策略接口 | /swap-api/v1/swap_tpsl_hisorders | POST | 止盈止损订单历史委托 | 是  
 读取 | 策略接口 | /swap-api/v1/swap_relation_tpsl_order | POST | 查询开仓单关联的止盈止损订单 | 是  
+交易 | 策略接口 | /swap-api/v1/swap_track_order | POST | 跟踪委托订单下单 | 是  
+交易 | 策略接口 | /swap-api/v1/swap_track_cancel | POST | 跟踪委托订单撤单 | 是  
+交易 | 策略接口 | /swap-api/v1/swap_track_cancelall | POST | 跟踪委托订单全部撤单 | 是  
+读取 | 策略接口 | /swap-api/v1/swap_track_openorders | POST | 跟踪委托订单当前委托 | 是  
+读取 | 策略接口 | /swap-api/v1/swap_track_hisorders | POST | 跟踪委托订单历史委托 | 是  
   
 ## 访问地址
 
@@ -12283,7 +13187,7 @@ api/v1/swap_order?AccessKeyId=e2xxxxxx-99xxxxxx-84xxxxxx-7xxxx&SignatureMethod=H
 
 ## 访问次数限制
 
-  * 交割合约、币本位永续合约、期权合约和USDT本位永续合约都分开限频
+  * 交割合约、币本位永续合约和USDT本位永续合约都分开限频
 
   * 公开行情接口和用户私有接口都有访问次数限制
 
@@ -12293,7 +13197,7 @@ api/v1/swap_order?AccessKeyId=e2xxxxxx-99xxxxxx-84xxxxxx-7xxxx&SignatureMethod=H
 
   * 行情类的公开接口，比如：获取K线数据、获取聚合行情、市场行情、获取行情深度数据、获取溢价指数K线、获取实时预测资金费率k线，获取基差数据、获取市场最近成交记录：
 
-（1） restful接口：同一个IP, 所有业务（交割合约、币本位永续合约、期权合约和USDT本位永续合约）总共1秒最多800个请求
+（1） restful接口：同一个IP, 所有业务（交割合约、币本位永续合约和USDT本位永续合约）总共1秒最多800个请求
 
 （2） websocket：req请求，同一时刻最多请求50次；sub请求，无限制，服务器主动推送数据
 
@@ -12606,8 +13510,6 @@ heartbeat | int | 交割合约 1: 可用 0: 不可用(即停服维护)
 swap_heartbeat | int | 币本位永续 1: 可用 0: 不可用(即停服维护)  
 estimated_recovery_time | long | null: 正常. 交割合约预计恢复时间， 单位:毫秒  
 swap_estimated_recovery_time | long | null: 正常. 币本位永续合约预计恢复时间，单位：毫秒.  
-option_heartbeat | int | 期权合约 1: 可用 0: 不可用(即停服维护)  
-option_estimated_recovery_time | long | null: 正常. 期权合约预计恢复时间，单位：毫秒.  
 linear_swap_heartbeat | long | USDT本位永续 1: 可用 0: 不可用(即停服维护)  
 linear_swap_estimated_recovery_time | long | null: 正常. USDT本位永续合约预计恢复时间，单位：毫秒.  
 </data> |  |  
@@ -12622,8 +13524,6 @@ linear_swap_estimated_recovery_time | long | null: 正常. USDT本位永续合�
             "estimated_recovery_time":null,
             "swap_heartbeat":1,
             "swap_estimated_recovery_time":null,
-            "option_heartbeat":1,
-            "option_estimated_recovery_time":null,
             "linear_swap_heartbeat":1,
             "linear_swap_estimated_recovery_time":null
         },
@@ -12633,7 +13533,7 @@ linear_swap_estimated_recovery_time | long | null: 正常. USDT本位永续合�
 
 ## 获取当前系统时间戳
 
-get `https://api.hbdm.com/api/v1/timestamp`
+  * GET `https://api.hbdm.com/api/v1/timestamp`
 
 ### 请求参数
 
@@ -12778,8 +13678,8 @@ ts | true | long | 当前系统时间戳 |
 1231 | 您尚未做身份认证  
 1232 | 您上传的图片格式/大小不符合要求,请重新上传  
 1233 | 您尚未开通高倍数协议 (使用高倍数请先使用主账号登录web或APP端同意高倍数协议)  
-1234 | {0}合约开仓委托订单数量不得超过{1}  
-1235 | {0}合约平仓委托订单数量不得超过{1}  
+1234 | {0}合约未完成的开仓委托数量不得超过{1}笔  
+1235 | {0}合约未完成的平仓委托数量不得超过{1}笔  
 1250 | 无法获取HT_token  
 1251 | 无法获取BTC净资产,请稍后再试  
 1252 | 无法获取币币账户资产,请稍后再试  
@@ -12842,6 +13742,46 @@ ts | true | long | 当前系统时间戳 |
 1407 | 止损价不得{0}{1}{2}  
 1408 | 该止盈止损委托单未生效, 无法撤销  
 1409 | 您没有止盈止损订单权限,请联系客服  
+1410 | 批量操作子账号的数量不能超过{0}个  
+1411 | 结算中, 暂时无法查询订单信息  
+1412 | {0}不符合价格精度限制{1}  
+1413 | 您没有跟踪委托订单权限,请联系客服  
+1414 | 您尚未开通网格交易协议(使用网格交易请先使用主账号登录web或APP端同意协议)  
+1415 | 终止价不得在网格价格范围内,请修改!  
+1416 | 超出最大运行时长({0}天{1}时),请修改!  
+1417 | 超出网格数量范围({0}~{1}个),请修改!  
+1418 | 最多同时运行{0}个网格, 请先终止其它网格  
+1419 | 超出初始化保证金范围({0}~{1}}{2})  
+1420 | 您没有合约的网格交易权限, 请联系客服  
+1421 | 当前合约有委托单或持仓, 请先撤销或平仓  
+1422 | 预计每格收益率小于0,请修改!  
+1423 | 网格最低价和最高价的价差不合理,请修改!  
+1424 | 该网格已因其它原因被终止, 无法修改或手动终止  
+1425 | 回调比例必须{0}{1}, 请修改!  
+1426 | 激活价必须{0}最新价  
+1427 | {0}合约跟踪委托订单数量不得超过{1}  
+1428 | 相同合约的优惠券只能领取1张  
+1429 | 已领取,请勿重复领取  
+1430 | 此优惠券已失效,请刷新  
+1431 | 系统维护中,预计GMT+8 {0} 可恢复  
+1432 | 存在初始化中的网格,暂时无法下单  
+1433 | 您手动下撤单导致网格终止,请前往历史委托查看详情  
+1434 | 小于最小初始担保资产({0}{1}), 导致每个网格的数量小于最小下单量, 请修改!  
+1435 | 该网格已被您手动终止  
+1436 | 网格超时, 自动终止  
+1437 | 系统原因导致网格终止, 请联系客服  
+1438 | 网格触发终止条件, 已终止  
+1439 | 网格触发强平, 已终止  
+1440 | {0}合约撤销失败  
+1441 | 触发价必须小于网格最高终止价, 大于网格最低终止价, 请修改!  
+1442 | 有效时长必须大于已运行时长1分钟以上, 请修改!  
+1443 | 合约{0}交割导致网格终止  
+1450 | 您所在的风险等级不支持使用当前倍数  
+1451 | 您所在的风险等级不支持使用当前倍数, 请登录主账号查看  
+1452 | 网格订单数量超出平台数量限制, 暂时无法下单  
+1453 | 计划委托订单数量超出平台数量限制, 暂时无法下单  
+1454 | 止盈止损订单数量超出平台数量限制, 暂时无法下单  
+1455 | 跟踪委托订单数量超出平台数量限制, 暂时无法下单  
 12001 | 无效的提交时间  
 12002 | 错误的签名版本  
 12003 | 错误的签名方法  
@@ -12878,11 +13818,11 @@ ts | true | long | 当前系统时间戳 |
 
 ### 5、订阅Market Depth 数据的WebSocket：
 
-  * 获得150档深度数据，使用step0, step1, step2, step3, step4, step5, step14, step15；
+  * 获得150档深度数据，使用step0, step1, step2, step3, step4, step5, step14, step15, step16, step17；
 
-  * 获得20档深度数据，使用 step6, step7, step8, step9, step10, step11, step12, step13；
+  * 获得20档深度数据，使用 step6, step7, step8, step9, step10, step11, step12, step13, step18, step19；
 
-  * 由于每100ms推送一次150档全量数据，数据量比较大，如果客户端网络带宽不足或者处理不及时，webSocket断开可能比较频繁，强烈建议使用step6, step7, step8, step9, step10, step11, step12, step13 取20档数据。比如订阅20档数据
+  * 由于每100ms推送一次150档全量数据，数据量比较大，如果客户端网络带宽不足或者处理不及时，webSocket断开可能比较频繁，强烈建议使用step6, step7, step8, step9, step10, step11, step12, step13, step18, step19 取20档数据。比如订阅20档数据
 
 `{`
 
@@ -12907,6 +13847,10 @@ ts | true | long | 当前系统时间戳 |
 ### 6、/swap-api/v1/swap_order合约下单和swap-api/v1/swap_batchorder合约批量下单接口：
 
   * 推荐传参数client_order_id（用户级别唯一），主要防止下单和批量下单接口由于网络或其它原因接口超时或者没有返回，可以根据client_order_id通过请求接口/swap-api/v1/swap_order_info来快速获取订单是否下单正常或者快速获取订单信息。
+
+### 7、服务器部署最佳选择：
+
+  * 建议您将服务器放置在AWS东京C区，并且使用api.hbdm.vn域名，能有效减少网络断连与网络超时情况。
 
 ## 代码实例
 
@@ -12965,7 +13909,6 @@ colo相当于是 创建一个VPC节点，直接连了火币合约的内网，会
 币本位永续签名过程和交割签名过程类似，除了参考以下注意事项外，请参照交割的demo代码来验证签名是否成功，demo代码验证通过后，再去核对您自己的签名代码。币本位永续的demo代码在
 [ 这里 ](https://docs.huobigroup.com/docs/coin_margined_swap/v1/cn/#2cff7db524)
 查看。交割的demo代码在[ 这里](https://docs.huobigroup.com/docs/dm/v1/cn/#2cff7db524)
-查看。期权的demo代码在[ 这里](https://docs.huobigroup.com/docs/option/v1/cn/#2cff7db524)
 查看。USDT本位永续的demo代码在 [ 这里
 ](https://docs.huobigroup.com/docs/usdt_swap/v1/cn/#2cff7db524) 查看。
 
@@ -12993,6 +13936,9 @@ colo相当于是 创建一个VPC节点，直接连了火币合约的内网，会
 
   12. Api Key 与 Secret Key中是否存在隐藏特殊字符，影响签名。
 
+如果通过以上的方法还没找出签名失败的原因，可以通过专门验证签名的 [ demo
+](https://github.com/hbdmapi/huobi_api_rules ) 来确认您的签名是在哪一步出现问题。
+
 ### Q7: 公开行情根据ip限速，需要私钥的根据uid限速是吗？
 
 是的。私有的根据UID来限速，不是根据API—KEY限速，母子帐号是分开分别限速，互不影响。
@@ -13014,10 +13960,14 @@ colo相当于是 创建一个VPC节点，直接连了火币合约的内网，会
 
 ### Q3: 有没有历史K线数据或者历史的公开市场逐笔成交数据？
 
-历史K线数据可以通过API接口/swap-
-ex/market/history/kline去获取，只填写from,to参数，不写size参数，最多只能获取连续两年的数据。
+历史K线数据可以通过API接口/market/history/kline去获取，通过from,to来截取时间段获取（时间段不能超过两年），每次获取的数据不得超过2000条。
 
-历史的公开市场逐笔成交数据目前没有，您可以通过订阅market.$contract_code.trade.detail来本地进行存储。
+历史的公开市场逐笔成交数据，您可以通过订阅market.$symbol.trade.detail来本地进行存储。
+
+或者您可以通过 [历史行情数据下载](https://futures.huobi.be/zh-cn/data/landing_page) 来获取数据。
+
+您也可以通过 [Python的历史行情数据下载DEMO](https://github.com/hbdmapi/huobi_public_data)
+来获取数据。
 
 ### Q4: 如何获取K线上的MACD等技术指标？
 
@@ -13035,14 +13985,14 @@ API没有获取K线上的MACD等技术指标接口，您可以参考TradingView�
 
 订阅行情深度(market.$contract_code.depth.$type)：
 
-step1和step7 按5位小数合并，买盘向下、卖盘向上 step2和step8 按4位小数合并，买盘向下、卖盘向上 step3和step9
-按3位小数合并，买盘向下、卖盘向上 step4和step10 按2位小数合并，买盘向下、卖盘向上 step5和step11
-按1位小数合并，买盘向下、卖盘向上 step12和step14 按个位数合并，买盘向下、卖盘向上 step13和step15
-按十位数合并，买盘向下、卖盘向上 step4 合并为0.01 例如，下买单价格 100.123， 100.245， 盘口就显示下单价格 100.12，
-100.24 如果是卖单 盘口显示价格： 100.13， 100.25
+step16和step18 按7位小数合并，买盘向下、卖盘向上 step17和step19 按6位小数合并，买盘向下、卖盘向上 step1和step7
+按5位小数合并，买盘向下、卖盘向上 step2和step8 按4位小数合并，买盘向下、卖盘向上 step3和step9 按3位小数合并，买盘向下、卖盘向上
+step4和step10 按2位小数合并，买盘向下、卖盘向上 step5和step11 按1位小数合并，买盘向下、卖盘向上 step12和step14
+按个位数合并，买盘向下、卖盘向上 step13和step15 按十位数合并，买盘向下、卖盘向上 step4 合并为0.01 例如，下买单价格
+100.123， 100.245， 盘口就显示下单价格 100.12， 100.24 如果是卖单 盘口显示价格： 100.13， 100.25
 
-（“向下”和“向上”即是否四舍五入，如买盘向下则不进一位，卖盘向上则进一位） step0到step5,step14,step15是150档；
-step6到step13是20档； step6是不合并小数； 结合以上举例说明：
+（“向下”和“向上”即是否四舍五入，如买盘向下则不进一位，卖盘向上则进一位） step0到step5,step14到step17是150档；
+step6到step13,step18、step19是20档； step6是不合并小数； 结合以上举例说明：
 
 假设当前价格1.123456 6位小数点，如果我单选step1，如果价格是买盘，显示价格是
 1.12345（不四舍五入），如果是卖盘，就是1.12346（四舍五入）；
@@ -13099,9 +14049,9 @@ api/v1/swap_historical_funding_rate）返回字段中“当期资金费率（fun
 
 ### Q15: 订阅多个合约代码同一主题时, 需要多个 ws 连接吗?
 
-对于交割合约、币永续、u永续、期权之间, 由于是不同的接口地址, 需要不同的 ws 连接
+对于交割合约、币永续、u永续之间, 由于是不同的接口地址, 需要不同的 ws 连接
 
-对于交割合约、币永续、u永续、期权各自里面, 只要接口地址是一样的, 一个 ws 连接即可.
+对于交割合约、币永续、u永续各自里面, 只要接口地址是一样的, 一个 ws 连接即可.
 
 ### Q16: 是否可以通过 ws 下单和撤单?
 
@@ -13140,7 +14090,7 @@ ts 是时间戳（毫秒）, 对应的时区是 UTC+8.
 每个推送数据的外层都会有一个推送数据 ts, 这个 ts 是服务器推送数据给客户端那一刻的间戳（毫秒）, 对应的时区是 UTC+8.
 
 当有推送数据到达时, 程序记录此时本地时间 ts. 当发现本地时间 ts 远远大于推送数据 ts 时（本地时间远远晚于推送数据时间）,
-可以通过一下方式定位延迟和解决延迟:
+可以通过以下方式定位延迟和解决延迟:
 
 a. 减少订阅时推送的数据.
 
@@ -13329,8 +14279,8 @@ amount: 成交量(张), 买卖双边成交量之和
 
 direction: 主动成交方向
 
-### Q24: 获取K线数据(swap-ex/market/history/kline)时, from 和 to 的时间间隔是 2000*period,
-为什么获取的 data 为[]?
+### Q24: 获取K线数据(swap-ex/market/history/kline)时, from 和 to 的时间间隔是 2000 *
+period, 为什么获取的 data 为[]?
 
 获取 K 线时, from 和 to 两个时间点是全都包含在内的, 因此是 2001 条数据. 此时数量超出了最大条数 2000. 所以返回 []
 
@@ -13362,12 +14312,17 @@ close 就是最新指数价
 
 USDT本位永续: https://status-linear-swap.huobigroup.com/
 
-### Q28: "获取用户账户信息（swap-api/v1/swap_account_info）"中 margin_balance 是指什么?
+### Q28: "获取用户账户信息（/api/v1/contract_account_info）"中 margin_balance 是指什么?
 
 margin_balance 是指账户权益
 
-margin_balance(账户权益) = margin_position(持仓保证金) + margin_frozen(冻结保证金) +
-margin_available(可用保证金)
+1、账户权益（margin_balance）= 静态权益（margin_static）+ 未实现盈亏（profit_unreal）。
+
+2、账户权益（margin_balance）= 账户余额 + 已实现盈亏（profit_real）+ 未实现盈亏（profit_unreal）。
+
+注：账户余额 = 静态权益（margin_static）- 已实现盈亏（profit_real），我们在API中只给出了静态权益字段。
+
+以上二种计算方式都可以得出帐户权益。
 
 ### Q29: 获取用户账户信息（swap-api/v1/swap_account_info）中的risk_rate
 "保证金率”和WEB端的"担保资产率”是一样的吗?
@@ -13396,7 +14351,7 @@ available. '}类似错误，说明此时可平仓量不足，您平仓时需查�
 
 ### Q3: API返回1032错误码是什么原因？
 
-1032代表您的访问次数超出限制，币本位永续合约、交割合约、期权合约和USDT永续合约是分开限制频率，请查看合约交易接入说明中的访问次数限制，并且可以在api接口response中的header打印当前的频率限制次数来看是否超出限制频率。建议加大请求间隔延时避免超出限制频率。
+1032代表您的访问次数超出限制，币本位永续合约、交割合约和USDT永续合约是分开限制频率，请查看合约交易接入说明中的访问次数限制，并且可以在api接口response中的header打印当前的频率限制次数来看是否超出限制频率。建议加大请求间隔延时避免超出限制频率。
 
 ## 如何更有效的解决问题
 
@@ -13527,7 +14482,7 @@ ts | true | long | 时间戳，单位：毫秒 |
 
 参数名称 | 参数类型 | 必填 | 描述  
 ---|---|---|---  
-contract_code | string | true | 合约代码，支持大小写，BTC-USD  
+contract_code | string | false | 合约代码，支持大小写，不填返回所有当前上市合约的限价数据 BTC-USD  
   
 > Response:
     
@@ -13633,24 +14588,10 @@ ts | true | long | 响应生成时间点，单位：毫秒 |
 ---|---|---|---  
 contract_code | string | true | 合约代码，支持大小写, "BTC-USD" ...  
 type | string | true | (150档数据) step0, step1, step2, step3, step4, step5,
-step14, step15（合并深度1-5,14-15）；step0时，不合并深度, (20档数据) step6, step7, step8,
-step9, step10, step11, step12, step13（合并深度7-13）；step6时，不合并深度  
+step14, step15, step16, step17（合并深度1-5,14-17）；step0时，不合并深度, (20档数据) step6,
+step7, step8, step9, step10, step11, step12, step13, step18,
+step19（合并深度7-13,18-19）；step6时，不合并深度  
   
-> tick 说明:
-    
-    
-        "tick": {
-          "id": 消息id.
-          "ts": 消息生成时间，单位：毫秒.
-          "bids": 买盘,[price(挂单价), vol(此价格挂单张数)], //按price降序.
-          "asks": 卖盘,[price(挂单价), vol(此价格挂单张数)]  //按price升序.
-          "ch": 数据所属的 channel,
-          "mrid": 订单ID,
-          "ts": 时间戳,
-          "version": 版本
-        }
-    
-
 > Response:
     
     
@@ -13693,13 +14634,13 @@ step9, step10, step11, step12, step13（合并深度7-13）；step6时，不合�
 
 参数名称 | 是否必须 | 数据类型 | 描述 | 取值范围  
 ---|---|---|---|---  
-ch | true | string | 数据所属的 channel，格式： market.period |  
+ch | true | string | 数据所属的 channel，格式： market.$contract_code.depth.$type |  
 status | true | string | 请求处理结果 | "ok" , "error"  
 <tick> |  |  |  |  
-asks | true | object | 卖盘,[price(挂单价), vol(此价格挂单张数)], 按price升序 |  
-bids | true | object | 买盘,[price(挂单价), vol(此价格挂单张数)], 按price降序 |  
+asks | false | object | 卖盘,[price(挂单价), vol(此价格挂单张数)], 按price升序 |  
+bids | false | object | 买盘,[price(挂单价), vol(此价格挂单张数)], 按price降序 |  
 mrid | true | long | 订单ID |  
-ch | true | string | 订阅Channel |  
+ch | true | string | 订阅Channel，格式： market.$contract_code.depth.$type |  
 id | true | long | tick id |  
 version | true | long | 版本号 |  
 ts | true | long | 深度生成时间戳，单位：毫秒 |  
@@ -13709,11 +14650,13 @@ ts | true | long | 响应生成时间点，单位：毫秒 |
 ### 备注
 
   * 合并深度时，一定报价精度内的市场挂单将予以合并显示。合并深度仅改变显示方式，不改变实际成交价格。
-
-  * step1至step5, step14, step15是进行了深度合并后的150档深度数据，step7至step13是进行了深度合并后的20档深度数据，对应精度如下：
+  * step16、step17、step18、step19仅供SHIB-USD合约使用，暂不支持其他合约使用。
+  * step1至step5, step14至step17是进行了深度合并后的150档深度数据，step7至step13, step18, step19 是进行了深度合并后的20档深度数据，对应精度如下：
 
 Depth 类型 | 精度  
 ---|---  
+step16、step18 | 0.0000001  
+step17、step19 | 0.000001  
 step1、step7 | 0.00001  
 step2、step8 | 0.0001  
 step3、step9 | 0.001  
@@ -13721,6 +14664,54 @@ step4、step10 | 0.01
 step5、step11 | 0.1  
 step14、step12 | 1  
 step15、step13 | 10  
+  
+## 获取市场最优挂单
+
+  * GET `/swap-ex/market/bbo`
+
+### 请求参数
+
+参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
+---|---|---|---|---  
+contract_code | false | string | 合约代码，不填返回全部合约的市场最优挂单信息 | "BTC-USD" ...  
+  
+> Response
+    
+    
+    {
+        "status": "ok",
+        "ticks": [
+            {
+                "contract_code": "LTC-USD",
+                "ask": [
+                    178,
+                    10
+                ],
+                "bid": [
+                    176,
+                    9
+                ],
+                "mrid": 1301759,
+                "ts": 1616747942659
+            }
+        ],
+        "ts": 1616747957364
+    }
+    
+
+### 返回参数
+
+参数名称 | 是否必须 | 数据类型 | 描述 | 取值范围  
+---|---|---|---|---  
+status | true | string | 请求处理结果 | "ok" , "error"  
+<ticks> | true | object array |  |  
+contract_code | true | string | 合约代码 | "BTC-USD","ETH-USD"...  
+mrid | true | long | 撮合ID，唯一标识 |  
+ask | false | array | [卖1价,卖1量(张)] |  
+bid | false | array | [买1价,买1量(张)] |  
+ts | true | long | 系统检测orderbook时间点，单位：毫秒 |  
+</ticks> |  |  |  |  
+ts | true | long | 响应生成时间点，单位：毫秒 |  
   
 ## 获取K线数据
 
@@ -13738,7 +14729,7 @@ step15、step13 | 10
 
 参数名称 | 是否必须 | 类型 | 描述 | 默认值 | 取值范围  
 ---|---|---|---|---|---  
-contract_code | true | string | 合约代码 | 仅支持大写， "BTC-USD" ... |  
+contract_code | true | string | 合约代码 |  | 仅支持大写， "BTC-USD" ...  
 period | true | string | K线类型 |  | 1min, 5min, 15min, 30min, 60min,4hour,1day,
 1mon  
 size | false | int | 获取数量 | 150 | [1,2000]  
@@ -13751,24 +14742,6 @@ to | false | long | 结束时间戳 10位 单位S |  |
   * 2、如果size、from、to 均不填写，则返回错误。
   * 3、如果填写from，也要填写to。最多可获取连续两年的数据。
   * 4、如果size、from、to 均填写，会忽略from、to参数
-
-> Data说明：
-    
-    
-    "data": [
-      {
-        "id": K线id,
-        "vol": 成交量(张)，买卖双边成交量之和,
-        "count": 成交笔数,
-        "open": 开盘价,
-        "close": 收盘价,当K线为最晚的一根时，是最新成交价
-        "low": 最低价,
-        "high": 最高价,
-        "amount": 成交量(币), 即 sum(每一笔成交量(张)*单张合约面值/该笔成交价)
-       }
-    ]
-    
-    
 
 > Response:
     
@@ -13807,7 +14780,7 @@ to | false | long | 结束时间戳 10位 单位S |  |
 
 参数名称 | 是否必须 | 数据类型 | 描述 | 取值范围  
 ---|---|---|---|---  
-ch | true | string | 数据所属的 channel，格式： market.period |  
+ch | true | string | 数据所属的 channel，格式： market.$contract_code.kline.$period |  
 status | true | string | 请求处理结果 | "ok" , "error"  
 ts | true | long | 响应生成时间点，单位：毫秒 |  
 <data> |  |  |  |  
@@ -13818,7 +14791,7 @@ open | true | decimal | 开盘价 |
 close | true | decimal | 收盘价,当K线为最晚的一根时，是最新成交价 |  
 low | true | decimal | 最低价 |  
 high | true | decimal | 最高价 |  
-amount | true | decimal | 成交量(币), 即 sum(每一笔成交量(张)*单张合约面值/该笔成交价)。 值是买卖双边之和 |  
+amount | true | decimal | 成交量(币), 即 sum(每一笔成交量(张) * 单张合约面值/该笔成交价)。 值是买卖双边之和 |  
 </data> |  |  |  |  
   
 ## 获取标记价格的K线数据
@@ -13832,7 +14805,7 @@ amount | true | decimal | 成交量(币), 即 sum(每一笔成交量(张)*单张
 contract_code | true | string | 合约代码 |  | "BTC-USD","ETH-USD"...  
 period | true | string | K线类型 |  | 1min, 5min, 15min, 30min, 60min,4hour,1day,
 1week,1mon  
-size | true | int | K线获取数量 |  | [1,2000]  
+size | true | int | K线获取数量 |  | [1-2000]  
   
 #### 备注
 
@@ -13877,7 +14850,8 @@ size | true | int | K线获取数量 |  | [1,2000]
 
 **参数名称** | **是否必须** | **类型** | **描述** | **默认值** | **取值范围**  
 ---|---|---|---|---|---  
-ch | true | string | 数据所属的 channel，格式： market.period |  |  
+ch | true | string | 数据所属的 channel，格式：
+market.$contract_code.mark_price.$period |  |  
 <data> | true | object array |  |  |  
 id | true | long | k线id |  |  
 vol | true | string | 成交量(张)，数值为0 |  |  
@@ -13910,24 +14884,6 @@ ts | true | long | 响应生成时间点，单位：毫秒 |  |
 ---|---|---|---|---|---  
 contract_code | true | string | 合约代码 | 仅支持大写， "BTC-USD" ... |  
   
-> tick说明:
-    
-    
-        "tick": {
-          "id": K线id,
-          "vol": 成交量（张），买卖双边成交量之和,
-          "count": 成交笔数,
-          "open": 开盘价,
-          "close": 收盘价,当K线为最晚的一根时，是最新成交价
-          "low": 最低价,
-          "high": 最高价,
-          "amount": 成交量(币), 即 sum(每一笔成交量(张)*单张合约面值/该笔成交价)
-          "bid": [买1价,买1量(张)],
-          "ask": [卖1价,卖1量(张)]
-         }
-    
-    
-
 > Response:
     
     
@@ -13962,7 +14918,7 @@ contract_code | true | string | 合约代码 | 仅支持大写， "BTC-USD" ... 
 
 参数名称 | 是否必须 | 数据类型 | 描述 | 取值范围  
 ---|---|---|---|---  
-ch | true | string | 数据所属的 channel，格式： market.\$contract_code.detail.merged |  
+ch | true | string | 数据所属的 channel，格式： market.$contract_code.detail.merged |  
 status | true | string | 请求处理结果 | "ok" , "error"  
 ts | true | long | 响应生成时间点，单位：毫秒 |  
 <tick> |  |  | 开盘价和收盘价（从当天零点(UTC+8)开始） |  
@@ -13973,8 +14929,8 @@ open | true | string | 开盘价 |
 close | true | string | 收盘价,当K线为最晚的一根时，是最新成交价 |  
 low | true | string | 最低价 |  
 high | true | string | 最高价 |  
-amount | true | string | 成交量(币), 即 sum(每一笔成交量(张)*单张合约面值/该笔成交价)
-成交量张数（最近24（当前时间-24小时）小时成交量币）。 值是买卖双边之和 |  
+amount | true | string | 成交量(币), 即 sum(每一笔成交量(张) * 单张合约面值/该笔成交价)
+（最近24（当前时间-24小时）小时成交量币）。 值是买卖双边之和 |  
 ask | true | object | 卖盘,[price(挂单价), vol(此价格挂单张数)], 按price升序 |  
 bid | true | object | 买盘,[price(挂单价), vol(此价格挂单张数)], 按price降序 |  
 ts | true | long | 时间戳 |  
@@ -14053,15 +15009,15 @@ status | true | string | 请求处理结果 | "ok" , "error"
 <ticks> | true | object array |  |  
 contract_code | true | string | 合约代码 | "BTC-USD" ...  
 id | true | long | K线id |  
-amount | true | string | 成交量(币) |  
+amount | true | string | 成交量(币) （最近24（当前时间-24小时）小时成交量币）。 值是买卖双边之和 |  
 ask | true | array | [卖1价,卖1量(张)] |  
 bid | true | array | [买1价,买1量(张)] |  
 open | true | string | 开盘价 |  
 close | true | string | 收盘价,当K线为最晚的一根时，是最新成交价 |  
-count | true | decimal | 成交笔数 |  
+count | true | decimal | 成交笔数 （最近24（当前时间-24小时）小时成交笔数）。 值是买卖双边之和 |  
 high | true | string | 最高价 |  
 low | true | string | 最低价 |  
-vol | true | string | 成交量（张），买卖双边成交量之和 |  
+vol | true | string | 成交量（张）（最近24（当前时间-24小时）小时成交量张）。 值是买卖双边之和 |  
 ts | true | long | 时间戳 |  
 </ticks> |  |  |  |  
 ts | true | long | 响应生成时间点，单位：毫秒 |  
@@ -14080,33 +15036,16 @@ ts | true | long | 响应生成时间点，单位：毫秒 |
 
 ### 请求参数
 
-参数名称 | 是否必须 | 类型 | 描述 | 默认值 | 取值范围  
----|---|---|---|---|---  
-contract_code | true | string | 合约代码,支持大小写 | "BTC-USD" ... |  
+参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
+---|---|---|---|---  
+contract_code | false | string | 合约代码,支持大小写，不填返回所有当前上市合约的最近成交数据 | "BTC-USD"
+...  
   
-> Tick说明：
-    
-    
-        "tick": {
-          "id": 订单唯一id（品种唯一）,
-          "ts": 最新成交时间,
-          "data": [
-            {
-                "id":  成交唯一id（品种唯一）,
-                "price": 成交价钱,
-                 "amount": 成交量(张)，买卖双边成交量之和,
-                 "direction": 主动成交方向,
-                 "ts": 成交时间
-            }
-          ]
-        }
-    
-
 > Response:
     
     
     {
-        "ch": "market.BTC-USD.trade.detail",
+        "ch": "market.*.trade.detail",
         "status": "ok",
         "tick": {
             "data": [
@@ -14116,6 +15055,7 @@ contract_code | true | string | 合约代码,支持大小写 | "BTC-USD" ... |
                     "id": 509516201220000,
                     "price": "13789.5",
                     "ts": 1603852755227,
+                    "contract_code": "BTC-USD",
                     "quantity": "0.344"
                 }
             ],
@@ -14131,8 +15071,7 @@ contract_code | true | string | 合约代码,支持大小写 | "BTC-USD" ... |
 
 参数名称 | 是否必须 | 类型 | 描述 | 默认值 | 取值范围  
 ---|---|---|---|---|---  
-ch | true | string | 数据所属的 channel，格式： market.\$contract_code.trade.detail |
-|  
+ch | true | string | 数据所属的 channel，格式： market.$contract_code.trade.detail |  |  
 status | true | string |  |  | "ok","error"  
 ts | true | long | 发送时间 |  |  
 <tick> |  |  | Trade数据 |  |  
@@ -14140,9 +15079,10 @@ ts | true | long | 发送时间 |  |
 id | true | long | 成交唯一id（品种唯一） |  |  
 price | true | string | 价格 |  |  
 amount | true | string | 数量（张）。 值是买卖双边之和 |  |  
-direction | true | string | 买卖方向 |  |  
+direction | true | string | 买卖方向，即taker(主动成交)的方向 |  |  
 ts | true | long | 订单成交时间 |  |  
 quantity | true | string | 成交量（币） |  |  
+contract_code | true | string | 合约代码 |  |  
 </data> |  |  |  |  |  
 id | true | long | 订单唯一id（品种唯一） |  |  
 ts | true | long | 最新成交时间 |  |  
@@ -14165,27 +15105,8 @@ ts | true | long | 最新成交时间 |  |
 参数名称 | 是否必须 | 数据类型 | 描述 | 默认值 | 取值范围  
 ---|---|---|---|---|---  
 contract_code | true | string | 合约代码,支持大小写 | "BTC-USD" ... |  
-size | true | int | 获取交易记录的数量 | 1 | [1, 2000]  
+size | true | int | 获取交易记录的数量 | 1 | [1-2000]  
   
-> data说明：
-    
-    
-        "data": {
-             "id": 订单唯一id（品种唯一）,
-          "ts": 最新成交时间,
-          "data": [
-            {
-              "id": 成交唯一id（品种唯一）,
-              "price": 成交价,
-              "amount": 成交量(张)，买卖双边成交量之和,
-              "direction": 主动成交方向,
-              "ts": 成交时间
-            }
-          ]
-        }
-    
-    
-
 > Response:
     
     
@@ -14241,7 +15162,7 @@ ts | true | long | 响应生成时间点，单位：毫秒 |
 id | true | long | 成交唯一id（品种唯一） |  
 price | true | decimal | 价格 |  
 amount | true | int | 数量（张）。 值是买卖双边之和 |  
-direction | true | string | 买卖方向 |  
+direction | true | string | 买卖方向，即taker(主动成交)的方向 |  
 ts | true | long | 订单成交时间 |  
 quantity | true | decimal | 成交量（币） |  
 </data> |  |  |  |  
@@ -14313,8 +15234,8 @@ estimated_clawback | true | decimal | 预估分摊比例 |
 参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
 ---|---|---|---|---  
 contract_code | true | string | 合约代码 | 支持大小写，例如 "BTC-USD" ...  
-page_index | false | int | 页码，不填默认第1页 | 1  
-page_size | false | int | 不填默认100，不得多于100 | 100  
+page_index | false | int | 页码，不填默认第1页 |  
+page_size | false | int | 不填默认100，不得多于100 | [1-100]  
   
 > Response:
     
@@ -14453,7 +15374,7 @@ adjust_factor | true | decimal | 调整系数 |
 contract_code | true | string | 合约代码 | 支持大小写，"BTC-USD" ...  
 period | true | string | 时间周期类型 |
 1小时:"60min"，4小时:"4hour"，12小时:"12hour"，1天:"1day"  
-size | false | int | 获取数量 | 默认为：48，取值范围 [1,200]  
+size | false | int | 获取数量 | 默认为：48，取值范围 [1-200]  
 amount_type | true | int | 计价单位 | 1:张，2:币  
   
 > Response:
@@ -14809,22 +15730,6 @@ master_transfer_sub | true | int | 母账户划转到子账户的权限："1"表
 sub_transfer_master | true | int | 子账户划转到母账户的权限："1"表示可用，“0”表示不可用 |  
 </data> |  |  |  |  
   
-### 说明
-
-  * open，指交易权限中对应的“API-开仓-普通订单”的权限，开启为可用，关闭为不可用；
-
-  * close，指交易权限中对应的“API-平仓-普通订单”的权限，开启为可用，关闭为不可用；
-
-  * cancel，指交易权限中对应的“API-撤单-普通订单”的权限，开启为可用，关闭为不可用；
-
-  * transfer_in，指交易权限中对应的“其他-划转-从币币转入”的权限，开启为可用，关闭为不可用；
-
-  * transfer_out，指交易权限中对应的“其他-划转-转出至币币”的权限，开启为可用，关闭为不可用；
-
-  * master_transfer_sub，指交易权限中对应的“母账户划转到子账户”的权限，开启为可用，关闭为不可用；
-
-  * sub_transfer_master，指交易权限中对应的“子账户划转到母账户”的权限，开启为可用，关闭为不可用；
-
 ## 获取合约的资金费率
 
   * GET `/swap-api/v1/swap_funding_rate`
@@ -14875,6 +15780,61 @@ estimated_rate | true | string | 下一期预测资金费率（一分钟计算�
 next_funding_time | true | string | 下一期资金费率时间 |  
 </data> |  |  |  |  
   
+## 批量获取合约资金费率
+
+  * GET `/swap-api/v1/swap_batch_funding_rate`
+
+### 请求参数
+
+参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
+---|---|---|---|---  
+contract_code | false | string | 合约代码，不填返回全部合约 | "BTC-USD" ...  
+  
+> Response
+    
+    
+    {
+        "status": "ok",
+        "data": [
+            {
+                "estimated_rate": "0.000300000000000000",
+                "funding_rate": "0.00011111100000000000000",
+                "contract_code": "BSV-USD",
+                "symbol": "BSV",
+                "fee_asset": "BSV",
+                "funding_time": "1608721200000",
+                "next_funding_time": "1608721200000"
+            },
+            {
+                "estimated_rate": "0.000100000000000000",
+                "funding_rate": "0.0001555555555500",
+                "contract_code": "BTC-USD",
+                "symbol": "BTC",
+                "fee_asset": "BTC",
+                "funding_time": "1613778600000",
+                "next_funding_time": "1613807400000"
+            }
+        ],
+        "ts": 1614044281587
+    }
+    
+
+### 返回参数
+
+参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
+---|---|---|---|---  
+status | true | string | 请求处理结果 | "ok" , "error"  
+ts | true | long | 响应生成时间点，单位：毫秒 |  
+<data> | true | object array |  |  
+symbol | true | string | 品种代码 |  
+contract_code | true | string | 合约代码 | "BTC-USD" ...  
+fee_asset | true | string | 资金费币种 | "BTC","ETH"...  
+funding_time | true | string | 当期资金费率时间（毫秒） |  
+funding_rate | true | string | 当期资金费率 |  
+estimated_rate | true | string | 下一期预测资金费率 |  
+next_funding_time | true | string | 下一期资金费率时间（毫秒） |  
+</data> |  |  |  |  
+  
 ## 获取合约的历史资金费率
 
   * GET `/swap-api/v1/swap_historical_funding_rate`
@@ -14890,8 +15850,8 @@ next_funding_time | true | string | 下一期资金费率时间 |
 参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
 ---|---|---|---|---  
 contract_code | true | string | 合约代码 | 支持大小写，"BTC-USD" ...  
-page_index | false | int | 页码，不填默认第1页 | 1  
-page_size | false | int | 不填默认20，不得多于50 | 20  
+page_index | false | int | 页码，不填默认第1页 |  
+page_size | false | int | 不填默认20，不得多于50 | [1-50]  
   
 > Response:
     
@@ -14965,8 +15925,8 @@ total_size | true | int | 总条数 |
 contract_code | true | string | 合约代码 |  | 支持大小写，"BTC-USD" ...  
 trade_type | true | int | 交易类型 |  | 0:全部,5: 卖出强平,6: 买入强平  
 create_date | true | int | 日期 |  | 7，90（7天或者90天）  
-page_index | false | int | 页码,不填默认第1页 |  |  
-page_size | false | int | 不填默认20，不得多于50 |  |  
+page_index | false | int | 页码,不填默认第1页 | 1 |  
+page_size | false | int | 不填默认20，不得多于50 | 20 | [1-50]  
   
 > Response:
     
@@ -14999,7 +15959,7 @@ page_size | false | int | 不填默认20，不得多于50 |  |
 
 参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
 ---|---|---|---|---  
-status | true | string | 请求处理结果 |  
+status | true | string | 请求处理结果 | "ok" , "error"  
 <data> |  |  |  |  
 <orders> |  |  |  |  
 symbol | true | string | 品种代码 |  
@@ -15030,7 +15990,7 @@ start_time | false | long | 起始时间（时间戳，单位毫秒） | 取值�
 ，默认取当前时间- 90天  
 end_time | false | long | 结束时间（时间戳，单位毫秒） | 取值范围：(start_time, 当前时间)，默认取当前时间  
 page_index | false | int | 页码，不填默认第1页 |  
-page_size | false | int | 页长，不填默认20，不得多于50 |  
+page_size | false | int | 页长，不填默认20，不得多于50 | [1-50]  
   
 > Response:
     
@@ -15096,7 +16056,7 @@ total_size | true | int | 总条数 |
 contract_code | true | string | 合约代码 | 支持大小写，"BTC-USD" ...  
 period | true | string | K线类型 | 1min, 5min, 15min, 30min, 60min,4hour,1day,
 1week,1mon  
-size | true | int | K线获取数量 | [1,2000] （最多2000）  
+size | true | int | K线获取数量（最多2000） | [1-2000]  
   
 > Response:
     
@@ -15123,21 +16083,22 @@ size | true | int | K线获取数量 | [1,2000] （最多2000）
 
 ### 返回参数
 
-参数名称 | 是否必须 | 类型 | 描述 | 默认值 | 取值范围  
----|---|---|---|---|---  
-ch | true | string | 数据所属的 channel，格式： market.period |  |  
-<data> | true | object array |  |  |  
-id | true | long | 指数K线ID,也就是K线时间戳，K线起始时间 |  |  
-vol | true | string | 成交量(张)，数值为0 |  |  
-count | true | string | 成交笔数，数值为0 |  |  
-open | true | string | 开盘值（溢价指数） |  |  
-close | true | string | 收盘值（溢价指数） |  |  
-low | true | string | 最低值（溢价指数） |  |  
-high | true | string | 最高值（溢价指数） |  |  
-amount | true | string | 成交量(币), 数值为0 |  |  
-</data> |  |  |  |  |  
-status | true | string | 请求处理结果 | "ok" , "error" |  
-ts | true | long | 响应生成时间点，单位：毫秒 |  |  
+参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
+---|---|---|---|---  
+ch | true | string | 数据所属的
+channel，格式：market.$contract_code.premium_index.$period |  
+<data> | true | object array |  |  
+id | true | long | 指数K线ID,也就是K线时间戳，K线起始时间 |  
+vol | true | string | 成交量(张)，数值为0 |  
+count | true | string | 成交笔数，数值为0 |  
+open | true | string | 开盘值（溢价指数） |  
+close | true | string | 收盘值（溢价指数） |  
+low | true | string | 最低值（溢价指数） |  
+high | true | string | 最高值（溢价指数） |  
+amount | true | string | 成交量(币), 数值为0 |  
+</data> |  |  |  |  
+status | true | string | 请求处理结果 | "ok" , "error"  
+ts | true | long | 响应生成时间点，单位：毫秒 |  
   
 ## 获取实时预测资金费率的K线数据
 
@@ -15156,7 +16117,7 @@ ts | true | long | 响应生成时间点，单位：毫秒 |  |
 contract_code | true | string | 合约代码 | 支持大小写，"BTC-USD" ...  
 period | true | string | K线类型 | 1min, 5min, 15min, 30min, 60min,4hour,1day,
 1week,1mon  
-size | true | int | K线获取数量 | [1,2000] （最多2000）  
+size | true | int | K线获取数量（最多2000） | [1-2000]  
   
 > Response:
     
@@ -15184,7 +16145,8 @@ size | true | int | K线获取数量 | [1,2000] （最多2000）
 
 **参数名称** | **是否必须** | **类型** | **描述** | **默认值** | **取值范围**  
 ---|---|---|---|---|---  
-ch | true | string | 数据所属的 channel，格式： market.period |  |  
+ch | true | string | 数据所属的
+channel，格式：market.$contract_code.estimated_rate.$period |  |  
 <data> | true | object array |  |  |  
 id | true | long | k线id |  |  
 vol | true | string | 成交量(张)，数值为0 |  |  
@@ -15215,9 +16177,9 @@ ts | true | long | 响应生成时间点，单位：毫秒 |  |
 contract_code | true | string | 合约代码 |  | 如"BTC-USD"  
 period | true | string | 周期 |  | 1min,5min, 15min, 30min,
 60min,4hour,1day,1week,1mon  
-basis_price_type | false | string | 基差价格类型，表示在周期内计算基差使用的价格类型 | 不填，默认使用开盘价 |
+basis_price_type | false | string | 基差价格类型，表示在周期内计算基差使用的价格类型 | 开盘价：open |
 开盘价：open，收盘价：close，最高价：high，最低价：low，平均价=（最高价+最低价）/2：average  
-size | true | int | 基差获取数量 |  | [1,2000]  
+size | true | int | 基差获取数量 |  | [1-2000]  
   
 #### 备注：目前只支持查询2020/6/5 20:13:00之后的基差数据。
 
@@ -15252,7 +16214,8 @@ size | true | int | 基差获取数量 |  | [1,2000]
 
 **参数名称** | **是否必须** | **类型** | **描述** | **取值范围**  
 ---|---|---|---|---  
-ch | true | string | 数据所属的 channel，格式： market.basis |  
+ch | true | string | 数据所属的 channel，格式：market.$contract_code.basis.$period.open
+|  
 <data> |  | object array |  |  
 id | true | long | 唯一标识 |  
 contract_price | true | string | 合约最新成交价 |  
@@ -15265,6 +16228,44 @@ ts | true | long | 生成时间 |
   
 # 合约资产接口
 
+## 获取账户总资产估值
+
+  * POST `/swap-api/v1/swap_balance_valuation`
+
+### 请求参数
+
+参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
+---|---|---|---|---  
+valuation_asset | false | string | 资产估值币种，即按该币种为单位进行估值，不填默认"BTC" |
+"BTC","USD","CNY","EUR","GBP","VND","HKD","TWD","MYR","SGD","KRW","RUB","TRY"  
+  
+> Response:
+    
+    
+    {
+        "status": "ok",
+        "data": [
+            {
+                "valuation_asset": "CNY",
+                "balance": "167724.592639011521722342"
+            }
+        ],
+        "ts": 1614045313200
+    }
+    
+
+### 返回参数
+
+参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
+---|---|---|---|---  
+status | true | string | 请求处理结果 |  
+<data> | true | object array |  |  
+valuation_asset | true | string | 资产估值币种，即按该币种为单位进行估值 |
+"BTC","USD","CNY","EUR","GBP","VND","HKD","TWD","MYR","SGD","KRW","RUB","TRY"  
+balance | true | string | 资产估值 |  
+</data> |  |  |  |  
+ts | true | long | 时间戳 |  
+  
 ## 获取用户账户信息
 
 ### 示例
@@ -15386,7 +16387,7 @@ profit_rate | true | decimal | 收益率 |
 profit | true | decimal | 收益 |  
 position_margin | true | decimal | 持仓保证金 |  
 lever_rate | true | int | 杠杠倍数 |  
-direction | true | string | "buy":买 "sell":卖 |  
+direction | true | string | 仓位方向 | "buy":买，即多仓 "sell":卖，即空仓  
 last_price | true | decimal | 最新价 |  
 </data> |  |  |  |  
 ts | true | long | 响应生成时间点，单位：毫秒 |  
@@ -15397,7 +16398,7 @@ ts | true | long | 响应生成时间点，单位：毫秒 |
 
 ## 查询用户账户和持仓信息
 
-  * post `/swap-api/v1/swap_account_position_info`
+  * POST `/swap-api/v1/swap_account_position_info`
 
 ### 请求参数
 
@@ -15488,7 +16489,7 @@ profit_rate | true | decimal | 收益率 |
 profit | true | decimal | 收益 |  
 position_margin | true | decimal | 持仓保证金 |  
 lever_rate | true | int | 杠杠倍数 |  
-direction | true | string | "buy":买 "sell":卖 |  
+direction | true | string | 仓位方向 | "buy":买，即多仓 "sell":卖，即空仓  
 last_price | true | decimal | 最新价 |  
 </positions> |  |  |  |  
 </data> |  |  |  |  
@@ -15608,7 +16609,7 @@ risk_rate | true | decimal | 保证金率 |
 ---|---|---|---|---  
 contract_code | false | string | 合约代码 | "BTC-USD"... ,如果缺省，默认返回所有合约  
 page_index | false | int | 第几页,不填默认第一页 |  
-page_size | false | int | 不填默认20，不得多于50 |  
+page_size | false | int | 不填默认20，不得多于50 | [1-50]  
   
 #### 备注：
 
@@ -15712,7 +16713,7 @@ sub_uid | true | long | 子账户的UID |  |
 status | true | string | 请求处理结果 | "ok" , "error"  
 ts | true | long | 响应生成时间点，单位：毫秒 |  
 <data> |  |  |  |  
-symbol | true | string | 品种代码 | "BTC","ETH"...，当 $contract_code值为 * 时代表订阅所有品种  
+symbol | true | string | 品种代码 | "BTC","ETH"...  
 contract_code | true | string | 合约代码 | "BTC-USD" ...  
 margin_balance | true | decimal | 账户权益 |  
 margin_position | true | decimal | 持仓保证金（当前持有仓位所占用的保证金） |  
@@ -15790,7 +16791,7 @@ profit_rate | true | decimal | 收益率 |
 profit | true | decimal | 收益 |  
 position_margin | true | decimal | 持仓保证金 |  
 lever_rate | true | int | 杠杆倍数 |  
-direction | true | string | 仓位方向 | "buy":多 "sell":空  
+direction | true | string | 仓位方向 | "buy":买，即多仓 "sell":卖，即空仓  
 last_price | true | decimal | 最新价 |  
 </data> |  |  |  |  
   
@@ -15808,9 +16809,9 @@ type | false | string | 不填查询全部类型,【查询多类型中间用，�
 13:强制平空; 14:从币币转入; 15:转出至币币; 16:结算未实现盈亏-多仓; 17:结算未实现盈亏-空仓; 19:穿仓分摊; 26:系统;
 28:活动奖励; 29:返利; 30:资金费-收入; 31:资金费-支出; 34:转出到子账号合约账户; 35:从子账号合约账户转入;
 36:转出到母账号合约账户; 37:从母账号合约账户转入;  
-create_date | false | int | 可随意输入正整数，如果参数超过90则默认查询90天的数据 |  
+create_date | false | int | 可随意输入正整数，如果参数超过90则默认查询90天的数据 | [1-90]  
 page_index | false | int | 第几页,不填默认第一页 |  
-page_size | false | int | 不填默认20，不得多于50 |  
+page_size | false | int | 不填默认20，不得多于50 | [1-50]  
   
 > Response:
     
@@ -15895,7 +16896,7 @@ direct | false | string | 查询方向 | prev 向前；next 向后；默认值�
     * start_time：取值范围为[(当前时间 - 90天)，当前时间] ；默认值取clamp（end_time - 10天，当前时间-90天，当前时间-10天），即时间最远取当前时间-90天，最近取当前时间-10天。
     * end_time：取值范围为：[(当前时间 - 90天)，above++)，若大于当前时间则直接取当前时间；若填写了start_time，则end_time必须大于start_time。默认值直接取当前时间。
   * 当from_id缺省时，查询方向为prev则从结束时间往前查，查询方向为向后则从起始时间往后查；即查询创建时间大于等于起始时间，且小于等于结束时间的财务记录数据。
-  * 无论查询方向是向前还是向后，返回的数据都是按创建时间倒序。
+  * 无论查询方向是向前还是向后，返回的数据都是按id倒序。
   * 当start_time或end_time填写值不符合取值范围，则报错参数不合法。
   * 仅支持查询90天内数据
 
@@ -15994,7 +16995,7 @@ start_time | false | long | 起始时间（时间戳，单位毫秒） | 取值�
 ，默认取当前时间- 90天  
 end_time | false | long | 结束时间（时间戳，单位毫秒） | 取值范围：(start_time, 当前时间]，默认取当前时间  
 page_index | false | int | 页码 | 不填默认第1页  
-page_size | false | int | 页大小 | 不填默认20，不得多于50（超过则按照50进行查询）  
+page_size | false | int | 页大小 | 不填默认20，不得多于50 [1-50]  
   
 #### 备注
 
@@ -16287,7 +17288,7 @@ net_transfer_out_max_daily | true | decimal | 单日累计最大净转出量 |
   
 ## 用户持仓量限制的查询
 
-  * post `/swap-api/v1/swap_position_limit`
+  * POST `/swap-api/v1/swap_position_limit`
 
 ### 请求参数
 
@@ -16328,7 +17329,7 @@ sell_limit | true | decimal | 合约空仓持仓的最大值，单位为张 |
   
 ## 母子账户划转
 
-  * post `/swap-api/v1/swap_master_sub_transfer`
+  * POST `/swap-api/v1/swap_master_sub_transfer`
 
 > Request:
     
@@ -16349,10 +17350,13 @@ sub_uid | true | long | 子账号uid |
 contract_code | true | string | 品种代码 | 支持大小写,"BTC-USD"...  
 amount | true | decimal | 划转金额 |  
 type | true | string | 划转类型 | master_to_sub：母账户划转到子账户， sub_to_master：子账户划转到母账户  
+client_order_id | false | long | 客户自己填写和维护的订单号 |
+必须为数字,请注意必须小于等于9223372036854775807  
   
 ### 备注：
 
   * 母账户与每个子账户相互划转限频10次/分钟。
+  * client_order_id仅在8小时内有效，即8小时内同一个用户同一个划转路径无法使用相同的client_order_id进行二次划转（比如母账户发起母转子，使用client_order_id=1，则8小时内无法继续使用client_order_id=1进行母转子；但是可以用client_order_id=1进行子转母。）。
 
 > Response:
     
@@ -16374,11 +17378,12 @@ status | true | string | 请求处理结果 | "ok" , "error"
 ts | true | long | 响应生成时间点，单位：毫秒 |  
 <data> | true | object |  |  
 order_id | true | string | 划转订单ID |  
+client_order_id | false | long | 用户下单时填写的客户端订单ID，没填则不返回 |  
 </data> |  |  |  |  
   
 ## 获取母账户下的所有母子账户划转记录
 
-  * post `/swap-api/v1/swap_master_sub_transfer_record`
+  * POST `/swap-api/v1/swap_master_sub_transfer_record`
 
 ### 请求参数
 
@@ -16451,7 +17456,7 @@ total_size | true | int | 总条数 |
   
 ## 获取用户的API指标禁用信息
 
-  * get `/swap-api/v1/swap_api_trading_status`
+  * GET `/swap-api/v1/swap_api_trading_status`
 
 ### 请求参数
 
@@ -16542,15 +17547,15 @@ is_active | true | int | 该指标是否开启 | 1：已启用，0：未启用
         "contract_code": "ltc-usd",
         "direction": "sell",
         "offset":"open",
-        "price":"136",
+        "price":136,
         "lever_rate":5,
         "volume": 1,
         "order_price_type":"post_only",
         "tp_trigger_price": 135,
         "tp_order_price": 135,
         "tp_order_price_type": "optimal_5",
-        "sl_trigger_price": "138",
-        "sl_order_price": "138",
+        "sl_trigger_price": 138,
+        "sl_order_price": 138,
         "sl_order_price_type": "optimal_5"
     }
     
@@ -16568,9 +17573,9 @@ direction | string | true | "buy":买 "sell":卖
 offset | string | true | "open":开 "close":平  
 lever_rate | int | true |
 杠杆倍数[“开仓”若有10倍多单，就不能再下20倍多单;首次使用高倍杠杆(>20倍)，请使用主账号登录web端同意高倍杠杆协议后，才能使用接口下高倍杠杆(>20倍)]  
-order_price_type | string | true | 订单报价类型 "limit":限价 "opponent":对手价
-"post_only":只做maker单,post
-only下单只受用户持仓数量限制,optimal_5：最优5档、optimal_10：最优10档、optimal_20：最优20档，"fok":FOK订单，"ioc":IOC订单,
+order_price_type | string | true | 订单报价类型 "limit":限价，"opponent":对手价
+，"post_only":只做maker单,post
+only下单只受用户持仓数量限制,"optimal_5"：最优5档，"optimal_10：最优10档，"optimal_20"：最优20档，"fok":FOK订单，"ioc":IOC订单,
 opponent_ioc"： 对手价-
 IOC下单，"optimal_5_ioc"：最优5档-IOC下单，"optimal_10_ioc"：最优10档-IOC下单，"optimal_20_ioc"：最优20档-IOC下单,"opponent_fok"：
 对手价-
@@ -16586,7 +17591,7 @@ sl_order_price_type | string | false | 止损委托类型 不填默认为limit; 
   
 ### 备注
 
-  * 对手价下单price价格参数不用传，对手价下单价格是买一和卖一价,optimal_5：最优5档、optimal_10：最优10档、optimal_20：最优20档下单price价格参数不用传，"limit":限价，"post_only":只做maker单 需要传价格。
+  * 对手价下单price价格参数不用传，对手价下单价格是买一和卖一价,"optimal_5"：最优5档，"optimal_10：最优10档，"optimal_20"：最优20档下单price价格参数不用传，"limit":限价，"post_only":只做maker单 需要传价格。
 
   * 若存在持仓，那么下单时杠杆倍数必须与持仓杠杆相同，否则下单失败。若需使用新杠杆下单，则必须先使用切换杠杆接口将持仓杠杆切换成功后再下单。
 
@@ -16694,9 +17699,9 @@ direction | string | true | "buy":买 "sell":卖
 offset | string | true | "open":开 "close":平  
 lever_rate | int | true |
 杠杆倍数[“开仓”若有10倍多单，就不能再下20倍多单;首次使用高倍杠杆(>20倍)，请使用主账号登录web端同意高倍杠杆协议后，才能使用接口下高倍杠杆(>20倍)]  
-order_price_type | string | true | 订单报价类型 "limit":限价 "opponent":对手价
-"post_only":只做maker单,post
-only下单只受用户持仓数量限制,optimal_5：最优5档、optimal_10：最优10档、optimal_20：最优20档，"fok":FOK订单，"ioc":IOC订单,
+order_price_type | string | true | 订单报价类型 "limit":限价，"opponent":对手价
+，"post_only":只做maker单,post
+only下单只受用户持仓数量限制,"optimal_5"：最优5档，"optimal_10：最优10档，"optimal_20"：最优20档，"fok":FOK订单，"ioc":IOC订单,
 opponent_ioc"： 对手价-
 IOC下单，"optimal_5_ioc"：最优5档-IOC下单，"optimal_10_ioc"：最优10档-IOC下单，"optimal_20_ioc"：最优20档-IOC下单,"opponent_fok"：
 对手价-
@@ -16788,7 +17793,7 @@ contract_code | true | string | 合约代码,支持大小写,"BTC-USD"
 
   * 撤单接口返回结果只代表撤单命令发送成功，建议根据订单查询接口查询订单的状态来确定订单是否已真正撤销。
 
-  * client_order_id，24小时有效，超过24小时的订单根据client_order_id将查询不到。
+  * client_order_id，8 小时有效，超过 8 小时的订单根据client_order_id将查询不到。
 
 > Response:
     
@@ -16885,7 +17890,7 @@ ts | true | long | 响应生成时间点，单位：毫秒 |
 
 **参数名称** | **是否必须** | **类型** | **描述** | **取值范围**  
 ---|---|---|---|---  
-contract_code | true | String | 合约代码 | 比如“BTC-USD”  
+contract_code | true | string | 合约代码 | 比如“BTC-USD”  
 lever_rate | true | int |
 要切换的杠杆倍数。[首次使用高倍杠杆(>20倍)，请使用主账号登录web端同意高倍杠杆协议后，才能使用接口下高倍杠杆(>20倍)] |  
   
@@ -16940,13 +17945,13 @@ contract_code | true | string | 合约代码,支持大小写,"BTC-USD"
   
 ### 备注：
 
-  * 最多只能查询 4 小时内的撤单信息。
+  * 最多只能查询 2 小时内的撤单信息。
 
   * order_id和client_order_id至少要填写一个。
 
   * order_id和client_order_id都可以用来查询，同时只可以设置其中一种，如果设置了两种，默认以order_id来查询。结算后，会把结束状态的订单（5部分成交已撤单 6全部成交 7已撤单）删除掉。
 
-  * client_order_id，24小时有效，超过24小时的订单根据client_order_id将查询不到。
+  * client_order_id，8 小时有效，超过 8 小时的订单根据client_order_id将查询不到。
 
 > Response:
     
@@ -16998,8 +18003,8 @@ symbol | true | string | 品种代码 |
 contract_code | true | string | 合约代码 | "BTC-USD" ...  
 volume | true | decimal | 委托数量 |  
 price | true | decimal | 委托价格 |  
-order_price_type | true | string | 订单报价类型 | 订单报价类型 "limit":限价 "opponent":对手价
-"post_only":只做maker单,post only下单只受用户持仓数量限制  
+order_price_type | true | string | 订单报价类型 | 订单报价类型 "limit":限价，"opponent":对手价
+，"post_only":只做maker单,post only下单只受用户持仓数量限制  
 direction | true | string | 买卖方向 | "buy":买 "sell":卖  
 offset | true | string | 开平方向 | "open":开 "close":平  
 lever_rate | true | int | 杠杆倍数 |  
@@ -17051,7 +18056,7 @@ page_size | false | int | 不填默认20，不得多于50
   
 ### 备注
 
-获取订单明细接口查询撤单数据时，如果传“created_at”和“order_type”参数则能查询最近24小时数据，如果不传“created_at”和“order_type”参数只能查询到最近2小时数据。
+获取订单明细接口查询撤单数据时，如果传“created_at”和“order_type”参数则能查询最近6小时数据，如果不传“created_at”和“order_type”参数只能查询到最近2小时数据。
 
 order_id返回是18位，nodejs和javascript默认解析18有问题，nodejs和javascript里面JSON.parse默认是int，超过18位的数字用json-
 bigint的包解析。
@@ -17137,8 +18142,8 @@ created_at | true | long | 创建时间 |
 canceled_at | true | long | 撤单时间 |  
 order_source | true | string | 订单来源 |
 （system:系统、web:用户网页、api:用户API、m:用户M站、risk:风控系统、settlement:交割结算、ios：ios客户端、android：安卓客户端、windows：windows客户端、mac：mac客户端、trigger：计划委托触发、tpsl:止盈止损触发）  
-order_price_type | true | string | 订单报价类型 | 订单报价类型 "limit":限价 "opponent":对手价
-"post_only":只做maker单,post only下单只受用户持仓数量限制  
+order_price_type | true | string | 订单报价类型 | 订单报价类型 "limit":限价，"opponent":对手价
+，"post_only":只做maker单,post only下单只受用户持仓数量限制  
 margin_frozen | true | decimal | 冻结保证金 |  
 profit | true | decimal | 订单总平仓盈亏（使用持仓均价计算，不包含仓位跨结算的已实现盈亏。） |  
 total_page | true | int | 总共页数 |  
@@ -17252,15 +18257,15 @@ trade_type | false | int | 交易类型，不填默认查询全部 | 0 | 0:全�
 
 参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
 ---|---|---|---|---  
-status | true | string | 请求处理结果 |  
+status | true | string | 请求处理结果 | "ok" ,"error"  
 <data> |  |  |  |  
 <orders> |  |  |  |  
 symbol | true | string | 品种代码 |  
 contract_code | true | string | 合约代码 | "BTC-USD" ...  
 volume | true | decimal | 委托数量 |  
 price | true | decimal | 委托价格 |  
-order_price_type | true | string | 订单报价类型 "limit":限价 "opponent":对手价
-"post_only":只做maker单,post only下单只受用户持仓数量限制 |  
+order_price_type | true | string | 订单报价类型 "limit":限价，"opponent":对手价
+，"post_only":只做maker单,post only下单只受用户持仓数量限制 |  
 order_type | true | int | 订单类型 | 1:报单 、 2:撤单 、 3:强平、4:交割  
 direction | true | string | 订单方向 | "buy":买 "sell":卖  
 offset | true | string | 开平方向 | "open":开 "close":平  
@@ -17312,7 +18317,7 @@ status | true | string | 订单状态 | 可查询多个状态，"3,4,5" , 0:全�
 部分成交已撤单,6: 全部成交,7:已撤单 |  
 create_date | true | int | 日期 | 可随意输入正整数，如果参数超过90则默认查询90天的数据 |  
 page_index | false | int |  | 页码，不填默认第1页 | 1  
-page_size | false | int | 每页条数，不填默认20 | 20 | 不得多于50  
+page_size | false | int | 每页条数，不填默认20 | 20 | [1-50]  
 sort_by | false | string | 排序字段（降序），不填默认按照create_date降序 | create_date |
 "create_date"：按订单创建时间进行降序，"update_time"：按订单更新时间进行降序  
   
@@ -17367,7 +18372,7 @@ sort_by | false | string | 排序字段（降序），不填默认按照create_d
 
 参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
 ---|---|---|---|---  
-status  | true  | string  | 请求处理结果  |  
+status  | true  | string  | 请求处理结果  | "ok" ,"error"  
 <data> |  |  |  |  
 <orders> |  |  |  |  
 order_id | true | long | 订单ID |  
@@ -17425,9 +18430,9 @@ trade_type | true | int | 交易类型 | 0:全部,1:买入开多,2: 卖出开空
 type | true | int | 类型 | 1:所有订单,2:结束状态的订单  
 status | true | string | 订单状态 | 可查询多个状态，"3,4,5" , 0:全部,3:未成交, 4: 部分成交,5:
 部分成交已撤单,6: 全部成交,7:已撤单  
-order_price_type | false | string | 订单报价类型 | 订单报价类型 "limit":限价 "opponent":对手价
-"post_only":只做maker单,post
-only下单只受用户持仓数量限制,optimal_5：最优5档、optimal_10：最优10档、optimal_20：最优20档，ioc:IOC订单，fok：FOK订单,
+order_price_type | false | string | 订单报价类型 | 订单报价类型 "limit":限价，"opponent":对手价
+，"post_only":只做maker单,post
+only下单只受用户持仓数量限制,"optimal_5"：最优5档，"optimal_10"：最优10档，"optimal_20"：最优20档，"ioc":IOC订单，"fok"：FOK订单,
 "opponent_ioc"： 对手价-
 IOC下单，"optimal_5_ioc"：最优5档-IOC下单，"optimal_10_ioc"：最优10档-IOC下单，"optimal_20_ioc"：最优20档-IOC下单,"opponent_fok"：
 对手价-
@@ -17445,7 +18450,7 @@ direct | false | string | 查询方向 | prev 向前；next 向后；默认值�
     * start_time：取值范围为[(当前时间 - 90天)，当前时间] ；默认值取clamp（end_time - 10天，当前时间-90天，当前时间-10天），即时间最远取当前时间-90天，最近取当前时间-10天。
     * end_time：取值范围为：[(当前时间 - 90天)，above++)，若大于当前时间则直接取当前时间；若填写了start_time，则end_time必须大于start_time。默认值直接取当前时间。
   * 当from_id缺省时，查询方向为prev则从结束时间往前查，查询方向为向后则从起始时间往后查；即查询创建时间大于等于起始时间，且小于等于结束时间的历史委托数据。
-  * 无论查询方向是向前还是向后，返回的数据都是按创建时间倒序。
+  * 无论查询方向是向前还是向后，返回的数据都是按query_id倒序。
   * 当start_time或end_time填写值不符合取值范围，则报错参数不合法。
   * 仅支持查询90天内数据。
 
@@ -17536,9 +18541,9 @@ price | true | decimal | 委托价格 |
 create_date | true | long | 创建时间 |  
 order_source | true | string | 订单来源 |
 （system:系统、web:用户网页、api:用户API、m:用户M站、risk:风控系统、settlement:交割结算、ios：ios客户端、android：安卓客户端、windows：windows客户端、mac：mac客户端、trigger：计划委托触发、tpsl:止盈止损触发）  
-order_price_type | true | string | 订单报价类型 | 订单报价类型 "limit":限价 "opponent":对手价
-"post_only":只做maker单,post
-only下单只受用户持仓数量限制,optimal_5：最优5档、optimal_10：最优10档、optimal_20：最优20档，ioc:IOC订单，fok：FOK订单,
+order_price_type | true | string | 订单报价类型 | 订单报价类型 "limit":限价，"opponent":对手价
+，"post_only":只做maker单,post
+only下单只受用户持仓数量限制,"optimal_5"：最优5档，"optimal_10"：最优10档，"optimal_20"：最优20档，"ioc":IOC订单，"fok"：FOK订单,
 "opponent_ioc"： 对手价-
 IOC下单，"optimal_5_ioc"：最优5档-IOC下单，"optimal_10_ioc"：最优10档-IOC下单，"optimal_20_ioc"：最优20档-IOC下单,"opponent_fok"：
 对手价-
@@ -17582,7 +18587,7 @@ trade_type | true | int | 交易类型 |  | 0:全部,1:买入开多,2: 卖出开
 卖出强平,6: 买入强平  
 create_date | true | int | 日期 |  | 可随意输入正整数，如果参数超过90则默认查询90天的数据  
 page_index | false | int | 页码，不填默认第1页 | 1 |  
-page_size | false | int | 不填默认20，不得多于50 | 20 |  
+page_size | false | int | 不填默认20，不得多于50 | 20 | [1-50]  
   
 > Response:
     
@@ -17636,7 +18641,7 @@ order_id | true | long | 订单ID |
 order_id_str | true | string | 订单ID，字符串类型 |  
 symbol | true | string | 品种代码 |  
 order_source | true | string | 订单来源 |
-（system:系统、web:用户网页、api:用户API、m:用户M站、risk:风控系统、settlement:交割结算、ios：ios客户端、android：安卓客户端、windows：windows客户端、mac：mac客户端、trigger：计划委托触发）  
+（system:系统、web:用户网页、api:用户API、m:用户M站、risk:风控系统、settlement:交割结算、ios：ios客户端、android：安卓客户端、windows：windows客户端、mac：mac客户端、trigger：计划委托触发、tpsl:止盈止损触发）  
 contract_code | true | string | 合约代码 | "BTC-USD" ...  
 direction | true | string | 订单方向 | "buy":买 "sell":卖  
 offset | true | string | 开平方向 | "open":开 "close":平  
@@ -17684,7 +18689,7 @@ direct | false | string | 查询方向 | prev 向前；next 向后；默认值�
     * start_time：取值范围为[(当前时间 - 90天)，当前时间] ；默认值取clamp（end_time - 10天，当前时间-90天，当前时间-10天），即时间最远取当前时间-90天，最近取当前时间-10天。
     * end_time：取值范围为：[(当前时间 - 90天)，above++)，若大于当前时间则直接取当前时间；若填写了start_time，则end_time必须大于start_time。默认值直接取当前时间。
   * 当from_id缺省时，查询方向为prev则从结束时间往前查，查询方向为向后则从起始时间往后查；即查询成交时间大于等于起始时间，且小于等于结束时间的成交数据。
-  * 无论查询方向是向前还是向后，返回的数据都是按成交时间倒序。
+  * 无论查询方向是向前还是向后，返回的数据都是按query_id倒序。
   * 当start_time或end_time填写值不符合取值范围，则报错参数不合法。
   * 仅支持查询90天内数据。
 
@@ -17778,7 +18783,7 @@ role | true | string | taker或maker |
 real_profit | true | decimal | 真实收益（使用开仓均价计算，包含仓位跨结算的已实现盈亏。） |  
 fee_asset | true | string | 手续费币种 | （"BTC","ETH"...）  
 order_source | true | string | 订单来源 |
-（system:系统、web:用户网页、api:用户API、m:用户M站、risk:风控系统、settlement:交割结算、ios：ios客户端、android：安卓客户端、windows：windows客户端、mac：mac客户端、trigger：计划委托触发）  
+（system:系统、web:用户网页、api:用户API、m:用户M站、risk:风控系统、settlement:交割结算、ios：ios客户端、android：安卓客户端、windows：windows客户端、mac：mac客户端、trigger：计划委托触发、tpsl:止盈止损触发）  
 </trades> |  |  |  |  
 remain_size | true | int | 剩余数据条数（在时间范围内，因受到数据条数限制而未查询到的数据条数） |  
 next_id | true | long | 下一条数据的query_id（仅在查询结果超过数据条数限制时才有值） |  
@@ -17813,8 +18818,6 @@ IOC
 #### 备注：
 
   * 闪电平仓，是指在对手价平仓的基础上，实行'最优30档'成交，即用户发出的平仓订单能够迅速以30档范围内对手方价格进行成交，未成交部分自动转为限价委托单。
-
-  * client_order_id，24小时有效，超过24小时的订单根据client_order_id将查询不到。
 
 > Response:
     
@@ -17884,6 +18887,8 @@ lever_rate | false | int |
 
   * 若存在持仓，那么下单时杠杆倍数必须与持仓杠杆相同，否则下单失败。若需使用新杠杆下单，则必须先使用切换杠杆接口将持仓杠杆切换成功后再下单。
 
+  * 该接口的限频次数为1秒5次。
+
 > Response:
     
     
@@ -17932,6 +18937,10 @@ order_id_str | true | string | 字符串类型的订单ID |
 contract_code | true | string | 合约代码 | BTC-USD  
 order_id | true | string | 用户订单ID（多个订单ID中间以","分隔,一次最多允许撤消10个订单 ） |  
   
+#### 备注
+
+  * 该接口的限频次数为1秒5次。
+
 > Response:
     
     
@@ -17982,6 +18991,7 @@ offset | false | string | 开平方向（不填默认全部） | "open":开 "clo
 #### 备注：
 
   * direction与offset可只填其一，只填其一则按对应的条件去撤单。（如用户只传了direction=buy，则撤销所有买单，包括开仓和平仓）
+  * 该接口的限频次数为1秒5次。
 
 > Response:
     
@@ -18235,7 +19245,7 @@ ts | true | long | 响应生成时间点，单位：毫秒 |
 
 参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
 ---|---|---|---|---  
-contract_code | true | String | 合约代码 | BTC-USD  
+contract_code | true | string | 合约代码 | BTC-USD  
 direction | true | string | 买卖方向 | buy:买入平空 sell:卖出平多  
 volume | true | decimal | 委托数量(张) |  
 tp_trigger_price | false | decimal | 止盈触发价格 |  
@@ -18730,6 +19740,328 @@ relation_order_id | true | string | 该字段为关联限价单的关联字段�
 </data> |  |  |  |  
 ts | true | long | 响应生成时间点，单位：毫秒 |  
   
+## 跟踪委托订单下单
+
+  * POST `/swap-api/v1/swap_track_order`
+
+### 请求参数
+
+参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
+---|---|---|---|---  
+contract_code | true | string | 合约代码 | BTC-USD  
+direction | true | string | 买卖方向 | buy:买 sell:卖  
+offset | true | string | 开平方向 | open:开 close:平  
+lever_rate | false | int | 杠杆倍数，开仓操作为必填，平仓操作为非必填 |  
+volume | true | decimal | 委托数量(张) |  
+callback_rate | true | decimal | 回调幅度 | 如：0.01 表示1%，不可小于0.001（0.1%）  
+active_price | true | decimal | 激活价格 |  
+order_price_type | true | string | 委托类型 |
+最优5档：optimal_5，最优10档：optimal_10，最优20档：optimal_20，理论价格：formula_price  
+  
+#### 备注：
+
+  * 委托类型为理论价格，表示跟踪委托触发成功后，以下单以来市场最低（最高）价的（1 ± 回调幅度）作为委托价（精度为币种最小变动单位，截断）向市场下委托类型为limit的订单。
+  * 无论是最优N档还是理论价格下单，都不能保证订单能完全成交，主要取决于市场情况。
+  * 该接口的限频次数为1秒5次。
+
+> Response:
+    
+    
+    {
+        "status": "ok",
+        "data": {
+            "order_id": 825057614106017792,
+            "order_id_str": "825057614106017792"
+        },
+        "ts": 1616750664047
+    }
+    
+
+### 返回参数
+
+参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
+---|---|---|---|---  
+status | true | string | 请求处理结果 | "ok" , "error"  
+ts | true | long | 时间戳 |  
+<data> | true | object | 成功处理返回的数据 |  
+order_id | true | long | 跟踪委托订单ID [全局唯一] |  
+order_id_str | true | string | 字符串类型的跟踪委托订单ID |  
+</data> |  |  |  |  
+  
+## 跟踪委托订单撤单
+
+  * POST `/swap-api/v1/swap_track_cancel`
+
+### 请求参数
+
+参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
+---|---|---|---|---  
+contract_code | true | string | 合约代码 | BTC-USD  
+order_id | true | string | 用户跟踪委托订单ID（多个订单ID中间以","分隔,一次最多允许撤消10个订单 ） |  
+  
+#### 备注
+
+  * 该接口的限频次数为1秒5次。
+
+> Response:
+    
+    
+    {
+        "status": "ok",
+        "data": {
+            "errors": [
+                {
+                    "order_id": "825057948169748481",
+                    "err_code": 1061,
+                    "err_msg": "This order doesnt exist."
+                }
+            ],
+            "successes": "825057948169748480"
+        },
+        "ts": 1616750767892
+    }
+    
+
+### 返回参数
+
+参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
+---|---|---|---|---  
+status | true | string | 请求处理结果 | "ok" :成功, "error"：失败  
+<data> | true | object |  | 字典  
+<errors> | true | object |  | 字典  
+order_id | true | string | 跟踪委托订单ID[全局唯一] |  
+err_code | false | long | 错误码 |  
+err_msg | false | string | 错误信息 |  
+</errors> |  |  |  |  
+successes | true | string | 成功的订单 |  
+</data> |  |  |  |  
+ts | true | long | 响应生成时间点，单位：毫秒 |  
+  
+## 跟踪委托订单全部撤单
+
+  * POST `/swap-api/v1/swap_track_cancelall`
+
+### 请求参数
+
+参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
+---|---|---|---|---  
+contract_code | true | string | 合约代码 | BTC-USD  
+direction | false | string | 买卖方向（不填默认全部） | "buy":买 "sell":卖  
+offset | false | string | 开平方向（不填默认全部） | "open":开 "close":平  
+  
+#### 备注：
+
+  * direction与offset可只填其一，只填其一则按对应的条件去撤单。（如用户只传了direction=buy，则撤销所有买单，包括开仓和平仓）
+  * 该接口的限频次数为1秒5次。
+
+> Response:
+    
+    
+    {
+        "status": "ok",
+        "data": {
+            "errors": [],
+            "successes": "825057614106017792,825057886882578432"
+        },
+        "ts": 1616750829839
+    }
+    
+
+### 返回参数
+
+参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
+---|---|---|---|---  
+status | true | string | 请求处理结果 | "ok" :成功, "error"：失败  
+<data> | true | object |  | 字典  
+<errors> | true | object |  | 字典  
+order_id | true | string | 跟踪委托订单ID[全局唯一] |  
+err_code | false | long | 错误码 |  
+err_msg | false | string | 错误信息 |  
+</errors> |  |  |  |  
+successes | true | string | 成功的订单 |  
+</data> |  |  |  |  
+ts | true | long | 响应生成时间点，单位：毫秒 |  
+  
+## 跟踪委托订单当前委托
+
+  * POST `/swap-api/v1/swap_track_openorders`
+
+### 请求参数
+
+参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
+---|---|---|---|---  
+contract_code | true | string | 合约代码 | BTC-USD  
+trade_type | false | int | 交易类型（不填默认查询全部） | 0:全部,1:买入开多,2: 卖出开空,3: 买入平空,4:
+卖出平多  
+page_index | false | int | 第几页，不填默认第一页 |  
+page_size | false | int | 不填默认20，不得多于50 | [1-50]  
+  
+> Response:
+    
+    
+    {
+        "status": "ok",
+        "data": {
+            "orders": [
+                {
+                    "symbol": "LTC",
+                    "contract_code": "LTC-USD",
+                    "volume": 1.000000000000000000,
+                    "order_type": 1,
+                    "direction": "sell",
+                    "offset": "open",
+                    "lever_rate": 5,
+                    "order_id": 825057944222908416,
+                    "order_id_str": "825057944222908416",
+                    "order_source": "api",
+                    "created_at": 1616750742739,
+                    "order_price_type": "formula_price",
+                    "status": 2,
+                    "callback_rate": 0.003000000000000000,
+                    "active_price": 179.000000000000000000,
+                    "is_active": 0
+                }
+            ],
+            "total_page": 1,
+            "current_page": 1,
+            "total_size": 1
+        },
+        "ts": 1616750875170
+    }
+    
+
+### 返回参数
+
+参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
+---|---|---|---|---  
+status | true | string | 请求处理结果 | "ok" :成功, "error"：失败  
+<data> | true | object |  | 字典  
+total_page | true | int | 总页数 |  
+total_size | true | int | 总条数 |  
+current_page | true | int | 当前页 |  
+<orders> | true | object array |  |  
+symbol | true | string | 品种代码 |  
+contract_code | true | string | 合约代码 | BTC-USD  
+volume | true | decimal | 委托数量 |  
+order_type | true | int | 订单类型：1、报单 2、撤单 |  
+direction | true | string | 买卖方向 | 买："buy",卖："sell"  
+offset | true | string | 开平方向 | 开："open",平："close"  
+lever_rate | true | int | 杠杆倍数 |  
+order_id | true | long | 跟踪委托订单ID |  
+order_id_str | true | string | 字符串类型的跟踪委托订单ID |  
+order_source | true | string | 来源 |  
+created_at | true | long | 订单创建时间 |  
+order_price_type | true | string | 订单报价类型 |
+最优5档：optimal_5，最优10档：optimal_10，最优20档：optimal_20，理论价格：formula_price  
+status | true | int | 订单状态： | 2:等待委托、4:已委托、5:委托失败、6:已撤单  
+callback_rate | true | decimal | 回调幅度 | 如：0.01 表示1%  
+active_price | true | decimal | 激活价格 |  
+is_active | true | int | 激活价格是否已激活 | 1：已激活；0：未激活  
+</orders> |  |  |  |  
+</data> |  |  |  |  
+ts | true | long | 响应生成时间点，单位：毫秒 |  
+  
+## 跟踪委托订单历史委托
+
+  * POST `/swap-api/v1/swap_track_hisorders`
+
+### 请求参数
+
+参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
+---|---|---|---|---  
+contract_code | true | string | 合约代码 | BTC-USD  
+status | true | string | 订单状态 |
+多个以英文逗号隔开，跟踪委托订单状态：0:全部（表示全部结束状态的订单）、4:已委托、5:委托失败、6:已撤单  
+trade_type | true | int | 交易类型（不填默认查询全部） | 0:全部,1:买入开多,2: 卖出开空,3: 买入平空,4: 卖出平多  
+create_date | true | long | 日期 | 可随意输入正整数，如果参数超过90则默认查询90天的数据  
+page_index | false | int | 第几页，不填默认第一页 |  
+page_size | false | int | 不填默认20，不得多于50 |  
+sort_by | false | string | 排序字段（降序），不填默认按照created_at降序 |
+"created_at"：按订单创建时间进行降序，"update_time"：按订单更新时间进行降序  
+  
+> Response:
+    
+    
+    {
+        "status":"ok",
+        "data":{
+            "orders":[
+                {
+                    "symbol":"LTC",
+                    "contract_code":"LTC-USD",
+                    "triggered_price":null,
+                    "volume":1,
+                    "order_type":1,
+                    "direction":"sell",
+                    "offset":"open",
+                    "lever_rate":5,
+                    "order_id":825057948169748480,
+                    "order_id_str":"825057948169748480",
+                    "order_source":"api",
+                    "created_at":1616750743680,
+                    "update_time":1616750784353,
+                    "order_price_type":"formula_price",
+                    "status":6,
+                    "canceled_at":1616750768281,
+                    "fail_code":null,
+                    "fail_reason":null,
+                    "callback_rate":0.003,
+                    "active_price":179,
+                    "is_active":0,
+                    "market_limit_price":null,
+                    "formula_price":null,
+                    "real_volume":0,
+                    "relation_order_id":"-1"
+                }
+            ],
+            "total_page":1,
+            "current_page":1,
+            "total_size":3
+        },
+        "ts":1616751416065
+    }
+    
+
+### 返回参数
+
+参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
+---|---|---|---|---  
+status | true | string | 请求处理结果 | "ok" :成功, "error"：失败  
+<data> | true | object |  | 字典  
+total_page | true | int | 总页数 |  
+total_size | true | int | 总条数 |  
+current_page | true | int | 当前页 |  
+<orders> | true | object array |  |  
+symbol | true | string | 品种代码 |  
+contract_code | true | string | 合约代码 | BTC-USD  
+volume | true | decimal | 委托数量 |  
+order_type | true | int | 订单类型：1、报单 2、撤单 |  
+direction | true | string | 买卖方向 | 买："buy",卖："sell"  
+offset | true | string | 开平方向 | 开："open",平："close"  
+lever_rate | true | int | 杠杆倍数 |  
+order_id | true | long | 跟踪委托订单ID |  
+order_id_str | true | string | 字符串类型的跟踪委托订单ID |  
+order_source | true | string | 来源 |  
+created_at | true | long | 订单创建时间 |  
+update_time | true | long | 订单更新时间，单位毫秒 |  
+order_price_type | true | string | 订单报价类型 |
+最优5档：optimal_5，最优10档：optimal_10，最优20档：optimal_20 ，理论价格：formula_price  
+status | true | int | 订单状态： | 2:等待委托、4:已委托、5:委托失败、6:已撤单  
+canceled_at | true | long | 撤单时间 |  
+fail_code | true | int | 被触发时下order单失败错误码 |  
+fail_reason | true | string | 被触发时下order单失败原因 |  
+callback_rate | true | decimal | 回调幅度 | 如：0.01 表示1%  
+active_price | true | decimal | 激活价格 |  
+is_active | true | int | 激活价格是否已激活 | 1：已激活；0：未激活  
+market_limit_price | true | decimal | 市场最低/最高价（买入则为市场最低价、卖出则为市场最高价） |  
+formula_price | true | decimal | 理论价格（市场最低（最高）价的（1 ± 回调幅度）） |  
+real_volume | true | decimal | 实际委托数量 |  
+triggered_price | true | decimal | 被触发时的价格 |  
+relation_order_id | true | string | 该字段为关联限价单的关联字段，未触发前数值为-1 |  
+</orders> |  |  |  |  
+</data> |  |  |  |  
+ts | true | long | 响应生成时间点，单位：毫秒 |  
+  
 # 币本位永续合约划转接口
 
 ## 现货-币本位永续合约账户间进行资金的划转
@@ -18960,7 +20292,7 @@ Market Depth增量推送数据 | 否
 
   * 行情类的公开接口，比如：获取K线数据、获取聚合行情、市场行情、获取行情深度数据、获取溢价指数K线、获取实时预测资金费率k线，获取基差数据、获取市场最近成交记录：
 
-（1） restful接口：同一个IP, 所有业务（交割合约、币本位永续合约、期权合约和USDT本位永续合约）总共1秒最多800个请求
+（1） restful接口：同一个IP, 所有业务（交割合约、币本位永续合约和USDT本位永续合约）总共1秒最多800个请求
 
 （2） websocket：req请求，同一时刻最多请求50次；sub请求，无限制，服务器主动推送数据
 
@@ -19226,7 +20558,7 @@ cid | string | 选填；请求时携带则会返回。
 err-code | int | 成功返回 0, 失败为其他值，详细响应码列列表请参考附录  
 err-msg | string | 可选，若出错表示详细错误信息  
 ts | long | 服务端应答时间戳  
-user-id | long | ⽤户 id  
+user-id | string | ⽤户 id  
   
 > 鉴权成功应答数据示例
     
@@ -19237,7 +20569,7 @@ user-id | long | ⽤户 id
       "ts": 1489474081631,
       "err-code": 0,
       "data": {
-        "user-id": 123456789
+        "user-id": "123456789"
       }
     }
     
@@ -19322,7 +20654,7 @@ open | true | decimal | 开盘价
 close | true | decimal | 收盘价,当K线为最晚的一根时，是最新成交价  
 low | true | decimal | 最低价  
 high | true | decimal | 最高价  
-amount | true | decimal | 成交量(币), 即 sum(每一笔成交量(张)*单张合约面值/该笔成交价)。 值是买卖双边之和  
+amount | true | decimal | 成交量(币), 即 sum(每一笔成交量(张) * 单张合约面值/该笔成交价)。 值是买卖双边之和  
 </tick> |  |  |  
   
 > 之后每当 KLine 有更新时，client 会收到数据:
@@ -19432,10 +20764,10 @@ open | true | decimal | 开盘价
 close | true | decimal | 收盘价,当K线为最晚的一根时，是最新成交价  
 low | true | decimal | 最低价  
 high | true | decimal | 最高价  
-amount | true | decimal | 成交量(币), 即 sum(每一笔成交量(张)*单张合约面值/该笔成交价)。 值是买卖双边之和  
+amount | true | decimal | 成交量(币), 即 sum(每一笔成交量(张) * 单张合约面值/该笔成交价)。 值是买卖双边之和  
 </data> |  |  |  
   
-> 之后每当 KLine 有更新时，client 会收到数据：
+> 请求成功返回数据的例子：
     
     
     {
@@ -19505,19 +20837,21 @@ id | false | string | 选填;Client 请求唯一 ID |
 ---|---|---|---|---|---  
 contract_code | true | string | 合约代码 |  | 支持大小写，"BTC-USD" ...  
 type | true | string | Depth 类型 |  | (150档数据) step0, step1, step2, step3,
-step4, step5, step14, step15（合并深度1-5,14-15）,step0时，不合并深度;(20档数据) step6, step7,
-step8, step9, step10, step11, step12,
-step13（合并深度7-13）；step6时，不合并深度；step12（表示合并精度1的20档深度数据，表示整数位的个位）、step13（表示合并精度10的20档深度数据，表示整数位的十位）、step14（表示合并精度1的150档深度数据，表示整数位的个位）、step15（表示合并精度10的150档深度数据，表示整数位的十位）  
+step4, step5, step14, step15, step16,
+step17（合并深度1-5,14-17）,step0时，不合并深度;(20档数据) step6, step7, step8, step9, step10,
+step11, step12, step13, step18, step19（合并深度7-13,18-19）；step6时，不合并深度；  
   
 #### 备注
 
   * 合并深度时，一定报价精度内的市场挂单将予以合并显示。合并深度仅改变显示方式，不改变实际成交价格。
-
-  * step1至step5, step14, step15是进行了深度合并后的150档深度数据，step7至step13是进行了深度合并后的20档深度数据，对应精度如下：
+  * step16、step17、step18、step19仅供SHIB-USD合约使用，暂不支持其他合约使用。
+  * step1至step5, step14至step17是进行了深度合并后的150档深度数据，step7至step13, step18, step19是进行了深度合并后的20档深度数据，对应精度如下：
 
 档位 | Depth 类型 | 精度  
 ---|---|---  
 150档 | step0 | 不合并  
+150档 | step16 | 0.0000001  
+150档 | step17 | 0.000001  
 150档 | step1 | 0.00001  
 150档 | step2 | 0.0001  
 150档 | step3 | 0.001  
@@ -19526,6 +20860,8 @@ step13（合并深度7-13）；step6时，不合并深度；step12（表示合�
 150档 | step14 | 1  
 150档 | step15 | 10  
 20档 | step6 | 不合并  
+20档 | step18 | 0.0000001  
+20档 | step19 | 0.000001  
 20档 | step7 | 0.00001  
 20档 | step8 | 0.0001  
 20档 | step9 | 0.001  
@@ -19538,16 +20874,16 @@ step13（合并深度7-13）；step6时，不合并深度；step12（表示合�
 
 参数名称 | 是否必须 | 数据类型 | 描述 | 取值范围  
 ---|---|---|---|---  
-ch | true | string | 数据所属的 channel，格式： market.period |  
+ch | true | string | 数据所属的 channel，格式： market.$contract_code.depth.$type |  
 ts | true | long | 数据进入行情服务器时间戳，单位：毫秒 |  
 <tick> |  |  |  |  
 mrid | true | long | 订单ID |  
 id | true | long | tick ID |  
-asks | true | object | 卖盘,[price(挂单价), vol(此价格挂单张数)], 按price升序 |  
-bids | true | object | 买盘,[price(挂单价), vol(此价格挂单张数)], 按price降序 |  
+asks | false | object | 卖盘,[price(挂单价), vol(此价格挂单张数)], 按price升序 |  
+bids | false | object | 买盘,[price(挂单价), vol(此价格挂单张数)], 按price降序 |  
 ts | true | long | 深度生成时间戳，每100MS生成一次，单位：毫秒 |  
 version | true | long | 版本号 |  
-ch | true | string | 数据所属的 channel，格式： market.period |  
+ch | true | string | 数据所属的 channel，格式： market.$contract_code.depth.$type |  
 </tick> |  |  |  |  
   
 > 之后每当 depth 有更新时，client 会收到数据，例子：
@@ -19778,7 +21114,7 @@ open | true | decimal | 开盘价
 close | true | decimal | 收盘价,当K线为最晚的一根时，是最新成交价  
 high | true | decimal | 最高价  
 low | true | decimal | 最低价  
-amount | true | decimal | 成交量(币), 即 sum(每一笔成交量(张)*单张合约面值/该笔成交价)。 值是买卖双边之和  
+amount | true | decimal | 成交量(币), 即 sum(每一笔成交量(张) * 单张合约面值/该笔成交价)。 值是买卖双边之和  
 vol | true | decimal | 成交量（张）。 值是买卖双边之和  
 count | true | decimal | 成交笔数。 值是买卖双边之和  
 ask | true | array | [卖1价,卖1量(张)]  
@@ -19795,7 +21131,7 @@ bid | true | array | [买1价,买1量(张)]
 
 `{`
 
-`"req": "market.$contract_code.bbo",`
+`"sub": "market.$contract_code.bbo",`
 
 `"id": "id generated by client"`
 
@@ -19825,7 +21161,7 @@ id | false | string | 选填;Client 请求唯一 ID |
 ---|---|---|---|---  
 contract_code | true | string | 交易对 | 合约代码，支持大小写，比如"BTC-USD"  
   
-> **返回示例** :
+> 返回示例:
     
     
     {
@@ -19849,7 +21185,7 @@ contract_code | true | string | 交易对 | 合约代码，支持大小写，比
     }
     
 
-### **返回参数说明** ：
+### 返回参数说明：
 
 参数名称 | 是否必须 | 数据类型 | 描述 | 取值范围  
 ---|---|---|---|---  
@@ -19859,13 +21195,14 @@ ts | true | long | 响应生成时间点，单位：毫秒（指接口响应时�
 ch | true | string | 数据所属的 channel，格式： market.$contract_code.bbo |  
 mrid | true | string | 订单ID |  
 id | true | long | tick ID |  
-ask | true | array | 卖一盘,[price(挂单价), vol(此价格挂单张数)] |  
-bid | true | array | 买一盘,[price(挂单价), vol(此价格挂单张数)] |  
+ask | false | array | 卖一盘,[price(挂单价), vol(此价格挂单张数)] |  
+bid | false | array | 买一盘,[price(挂单价), vol(此价格挂单张数)] |  
 version | true | long | 版本号 |  
 ts | true | long | 响应生成时间点，单位：毫秒（指数据生成时间） |  
 </tick> |  |  |  |  
   
-  * **说明** ：
+#### 说明：
+
   * 当买一价、买一量、卖一价、卖一量，其中任一数据发生变化时，进行逐笔推送；
   * 如果同一时刻有多个买一卖一的价格/单量的变化，直接用最新的买一卖一进行推送，直接丢弃中间结果；
   * 由于客户端网络等原因导致接收数据失败，服务端会丢弃旧的队列数据；
@@ -19943,7 +21280,7 @@ id | true | long | 请求 ID |
 id | true | long | 成交唯一id（品种唯一） |  
 price | true | string | 价格 |  
 amount | true | string | 数量（张） |  
-direction | true | string | 买卖方向 |  
+direction | true | string | 买卖方向，即taker(主动成交)的方向 |  
 ts | true | long | 订单成交时间 |  
 quantity | true | string | 成交量（币） |  
 </data> |  |  |  |  
@@ -20027,7 +21364,7 @@ amount | true | decimal | 数量（张）。 值是买卖双边之和 |
 ts | true | long | 订单时间戳 |  
 id | true | long | 成交唯一id（品种唯一） |  
 price | true | decimal | 价格 |  
-direction | true | string | 买卖方向 |  
+direction | true | string | 买卖方向，即taker(主动成交)的方向 |  
 quantity | true | decimal | 成交量（币） |  
 </data> |  |  |  |  
 </tick> |  |  |  |  
@@ -20105,20 +21442,16 @@ period | true | string | K线类型 |  | 仅支持小写,1min, 5min, 15min, 30mi
 ---|---|---|---|---  
 ch | string | 数据所属的 channel，格式： market.$contract_code.index.$period |  |  
 ts | long | 响应生成时间点，单位：毫秒 |  |  
-tick | object array | tick返回，详情：推送tick参数 |  |  
-  
-### 推送tick参数
-
-**参数名称** | **类型** | **描述** |  
----|---|---|---  
-id | string | 指数K线id,也就是K线时间戳，K线起始时间 |  
-vol | string | 成交量张数为0 |  
-count | decimal | 成交笔数为0 |  
-open | string | 开盘指数价 |  
-close | string | 收盘指数价 |  
-low | string | 最低指数价 |  
-high | string | 最高指数价 |  
-amount | string | 数值为0 |  
+<tick> | object array |  |  |  
+id | string | 指数K线id,也就是K线时间戳，K线起始时间 |  |  
+vol | string | 成交量张数为0 |  |  
+count | decimal | 成交笔数为0 |  |  
+open | string | 开盘指数价 |  |  
+close | string | 收盘指数价 |  |  
+low | string | 最低指数价 |  |  
+high | string | 最高指数价 |  |  
+amount | string | 数值为0 |  |  
+</tick> |  |  |  |  
   
 ## 请求(req)指数K线数据
 
@@ -20215,20 +21548,16 @@ status | true | string | 请求处理结果 | "ok" , "error"
 id | true | string | 业务方id |  
 wsid | true | long | wsid |  
 ts | true | long | 响应生成时间点，单位：毫秒 |  
-tick | object array | tick返回，详情：推送tick参数 |  |  
-  
-### 推送tick参数
-
-**参数名称** | **类型** | **描述** |  
----|---|---|---  
-id | decimal | 指数K线id,也就是K线时间戳，K线起始时间 |  
-vol | decimal | 成交量张数为0 |  
-count | decimal | 成交笔数为0 |  
-open | decimal | 开盘指数价 |  
-close | decimal | 收盘指数价 |  
-low | decimal | 最低指数价 |  
-high | decimal | 最高指数价 |  
-amount | decimal | 数值为0 |  
+<tick> | object array |  |  |  
+id | true | decimal | 指数K线id,也就是K线时间戳，K线起始时间 |  
+vol | true | decimal | 成交量张数为0 |  
+count | true | decimal | 成交笔数为0 |  
+open | true | decimal | 开盘指数价 |  
+close | true | decimal | 收盘指数价 |  
+low | true | decimal | 最低指数价 |  
+high | true | decimal | 最高指数价 |  
+amount | true | decimal | 数值为0 |  
+</tick> |  |  |  |  
   
 ## 订阅溢价指数K线数据
 
@@ -20293,7 +21622,8 @@ period | true | string | K线类型 |  | 1min, 5min, 15min, 30min, 60min,4hour,1
 
 **参数名称** | **是否必须** | **类型** | **描述** | **默认值** | **取值范围**  
 ---|---|---|---|---|---  
-ch | true | string | 数据所属的 channel，格式： market.period |  |  
+ch | true | string | 数据所属的
+channel，格式：market.$contract_code.premium_index.$period |  |  
 <tick> | true | object array |  |  |  
 id | true | long | 指数K线id,也就是K线时间戳，K线起始时间 |  |  
 vol | true | string | 成交量(张)，数值为0 |  |  
@@ -20397,7 +21727,8 @@ period | true | string | K线类型 |  | 1min, 5min, 15min, 30min, 60min,4hour,1
 
 **参数名称** | **是否必须** | **类型** | **描述** | **默认值** | **取值范围**  
 ---|---|---|---|---|---  
-rep | true | string | 数据所属的 channel，格式： market.period |  |  
+rep | true | string | 数据所属的
+channel，格式：market.$contract_code.premium_index.$period |  |  
 status | true | string | 请求处理结果 | "ok" , "error" |  
 id | true | string | 业务方id |  |  
 wsid | true | long | wsid |  |  
@@ -20475,7 +21806,8 @@ period | true | string | K线类型 |  | 1min, 5min, 15min, 30min, 60min,4hour,1
 
 **参数名称** | **是否必须** | **类型** | **描述** | **默认值** | **取值范围**  
 ---|---|---|---|---|---  
-ch | true | string | 数据所属的 channel，格式： market.period |  |  
+ch | true | string | 数据所属的
+channel，格式：market.$contract_code.estimated_rate.$period |  |  
 <tick> | true | object array |  |  |  
 id | true | long | k线id |  |  
 vol | true | string | 成交量(张)，数值为0 |  |  
@@ -20581,7 +21913,8 @@ period | true | string | K线类型 |  | 1min, 5min, 15min, 30min, 60min,4hour,1
 
 **参数名称** | **是否必须** | **类型** | **描述** | **默认值** | **取值范围**  
 ---|---|---|---|---|---  
-rep | true | string | 数据所属的 channel，格式： market.period |  |  
+rep | true | string | 数据所属的
+channel，格式：market.$contract_code.estimated_rate.$period |  |  
 status | true | string | 请求处理结果 | "ok" , "error" |  
 id | true | string | 业务方id |  |  
 wsid | true | long | wsid |  |  
@@ -20635,10 +21968,10 @@ id | false | string | 选填;Client 请求唯一 ID |
 contract_code | true | string | 合约名称 |  | 如"BTC-USD"  
 period | true | string | 周期 |  | 1min, 5min, 15min, 30min,
 60min,4hour,1day,1week, 1mon  
-basis_price_type | false | string | 基差价格类型，表示在周期内计算基差使用的价格类型 | 不填，默认为使用开盘价 |
+basis_price_type | false | string | 基差价格类型，表示在周期内计算基差使用的价格类型 | 开盘价：open |
 开盘价：open，收盘价：close，最高价：high，最低价：low，平均价=（最高价+最低价）/2：average  
   
-> 之后每当预测资金费率有更新时，client 会收到数据，例子：
+> 订阅成功后收到的数据，例子：
     
     
     {
@@ -20659,7 +21992,8 @@ basis_price_type | false | string | 基差价格类型，表示在周期内计�
 
 **参数名称** | **类型** | **描述** | **默认值** | **取值范围**  
 ---|---|---|---|---  
-ch | string | 数据所属的 channel，格式： market.period |  |  
+ch | string | 数据所属的 channel，格式：
+market.$contract_code.basis.$period.$basis_price_type |  |  
 <tick> | object array |  |  |  
 id | long | 唯一标识 |  |  
 contract_price | string | 合约最新成交价 |  |  
@@ -20717,7 +22051,7 @@ to | true | long | 结束时间 （时间戳，单位秒） |
 contract_code | true | string | 合约名称 |  | 如"BTC-USD"  
 period | true | string | 周期 |  | 1min, 5min, 15min, 30min,
 60min,4hour,1day,1week, 1mon  
-basis_price_type | false | string | 基差价格类型，表示在周期内计算基差使用的价格类型 | 不填，默认为使用开盘价 |
+basis_price_type | false | string | 基差价格类型，表示在周期内计算基差使用的价格类型 | 开盘价：open |
 开盘价：open，收盘价：close，最高价：high，最低价：low，平均价=（最高价+最低价）/2：average  
   
 #### 备注：目前只支持查询2020/6/5 20:13:00之后的基差数据。
@@ -20755,7 +22089,8 @@ basis_price_type | false | string | 基差价格类型，表示在周期内计�
 
 **参数名称** | **类型** | **描述** | **默认值** | **取值范围**  
 ---|---|---|---|---  
-rep | true | string | 数据所属的 channel，格式： market.basis |  
+rep | true | string | 数据所属的
+channel，格式：market.$contract_code.basis.$period.$basis_price_type |  
 status | true | string | 请求处理结果 | "ok" , "error"  
 id | true | string | 业务方id |  
 wsid | true | long | wsid |  
@@ -21377,7 +22712,7 @@ profit_rate | decimal | 收益率
 profit | decimal | 收益  
 position_margin | decimal | 持仓保证金  
 lever_rate | int | 杠杆倍数  
-direction | string | 仓位方向 "buy":买 "sell":卖  
+direction | string | 仓位方向 "buy":买，即多仓 "sell":卖，即空仓  
 last_price | decimal | 最新价  
 </data> |  |  
   
@@ -21680,7 +23015,7 @@ volume | true | decimal | 强平数量(张) |
 amount | true | decimal | 强平数量(币) |  
 price | true | decimal | 破产价格 |  
 created_at | true | long | 订单创建时间 |  
-<\data> |  |  |  |  
+</data> |  |  |  |  
   
 ## 取消订阅强平订单(免鉴权)（unsub）
 
@@ -21766,7 +23101,7 @@ public.*.liquidation_orders | public.contract_code1.liquidation_orders | 不允�
     
     
 
-### **请求参数**
+### 请求参数
 
 参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
 ---|---|---|---|---  
@@ -21808,7 +23143,7 @@ ts | true | long | 服务端应答时间戳 |
 symbol | true | string | 品种代码 | "BTC","ETH"...  
 contract_code | true | string | 合约代码 |  
 fee_asset | true | string | 资金费币种 | "BTC","ETH"...  
-funding_time | true | string | 当期资金费率时间 | "open":开 "close":平  
+funding_time | true | string | 当期资金费率时间 |  
 funding_rate | true | string | 当期资金费率 |  
 estimated_rate | true | string | 下一期预测资金费率 |  
 settlement_time | true | string | 结算时间 | 如"1490759594752"  
@@ -22036,7 +23371,7 @@ topic | true | string | 订阅主题名称，必填 (trigger_order.$contract_cod
 订阅某个品种下的合约计划委托订单更新信息；$contract_code为品种代码（BTC-USD、ETH-USD），如果值为 * 时代表订阅所有品种;
 contract_code支持大小写; |  
   
-> **返回示例** :
+> 返回示例:
     
     
     {
@@ -22075,7 +23410,7 @@ contract_code支持大小写; |
     }
     
 
-### **返回参数说明** ：
+### 返回参数说明：
 
 参数名称 | 是否必须 | 数据类型 | 描述 | 取值范围  
 ---|---|---|---|---  
@@ -22113,7 +23448,7 @@ fail_code | true | int | 被触发时下order单失败错误码 |
 fail_reason | true | string | 被触发时下order单失败原因（英文） |  
 </data> |  |  |  |  
   
-#### **说明** ：
+#### 说明：
 
   * 订单状态系统处理的中间态不进行推送，比如报单中和撤单中；具体通知事件说明映射如下： 
     * 当订单状态流转到2（已提交），event通知事件为order（计划委托订单下单成功）；
@@ -22191,11 +23526,11 @@ trigger_order.* | trigger_order.contract_code1 | 不允许
     {
         "op": "sub",
         "cid": "id generated by client",
-        "topic ": "public.swap.heartbeat"
+        "topic": "public.swap.heartbeat"
     }
     
 
-### **请求参数** :
+### 请求参数:
 
 参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
 ---|---|---|---|---  
@@ -22203,13 +23538,13 @@ op | true | string | 订阅固定值为sub |
 cid | false | string | Client 请求唯一 ID |  
 topic | true | string | 订阅主题名称，必填 (public.$service.heartbeat) 订阅某个业务的系统状态信息 |  
   
-### **sub订阅参数说明** :
+### sub订阅参数说明:
 
 参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
 ---|---|---|---|---  
 service | true | string | 业务代码 | swap：币本位永续  
   
-> **返回示例** :
+> 返回示例:
     
     
     {
@@ -22225,7 +23560,7 @@ service | true | string | 业务代码 | swap：币本位永续
     
     
 
-### **返回参数说明** ：
+### 返回参数说明：
 
 参数名称 | 是否必须 | 数据类型 | 描述 | 取值范围  
 ---|---|---|---|---  
