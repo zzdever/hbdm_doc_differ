@@ -65,7 +65,7 @@ shell
     * 代码实例
   * 常见问题
     * 接入验签相关
-    * 结算相关
+    * 交割和结算相关
     * 行情及WS推送相关
     * 交易相关
     * 错误码相关
@@ -2462,7 +2462,7 @@ colo相当于是 创建一个VPC节点，直接连了火币合约的内网，会
 目前已经有异步量化框架开源，集成了火币交割合约与永续合约： [ 异步量化框架地址
 ](https://github.com/hbdmapi/hbdm_Python)，有使用反馈或者问题请在github issue区进行提问。
 
-## 结算相关
+## 交割和结算相关
 
 ### Q1: 交割合约什么时候结算？周五结算时通过哪些接口可以查询状态？
 
@@ -2471,7 +2471,7 @@ colo相当于是 创建一个VPC节点，直接连了火币合约的内网，会
 您可以通过下面两种方式查询结算状态：
 
   * restful每隔几秒轮询获取合约信息接口： /api/v1/contract_contract_info
-  * websocket订阅“订阅合约信息变动(免鉴权)（sub）”：public.$symbol.contract_info
+  * websocket订阅“订阅合约信息变动(免鉴权)”：public.$symbol.contract_info
 
 当返回报文中contract_status返回状态码为5、6、7、8中的任意一个时表示在结算中，当contract_status返回状态码为1时是表示结算完成可以正常下单和撤单。
 
