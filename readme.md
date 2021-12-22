@@ -23666,7 +23666,7 @@ shell
     * USDT本位合约API简介
     * 做市商项目
   * 更新日志
-    * 1.1.4 2021年12月18日 【新增USDT交割合约接口内容】
+    * 1.1.4 2021年12月22日 【新增USDT交割合约接口内容】
     * 1.1.3 2021年5月17日 【修改：母子账户划转（新增选填入参：client_order_id）。同账号不同保证金账户的划转（新增选填入参：client_order_id）】
     * 1.1.2 2021年05月12日 【新增：跟踪委托订单接口。】
     * 1.1.1 2021年04月29日 【修改撤销订单接口（将原来的 client_order_id 有效时间从24小时改为8小时。超过8小时的订单根据client_order_id将查询不到。）、修改获取合约订单信息接口（将原来的 client_order_id 有效时间从24小时改为8小时。超过8小时的订单根据client_order_id将查询不到。将原来只能查询最近4小时内的撤单信息改为只可以查询最近2小时内的撤单信息。）】
@@ -23688,7 +23688,7 @@ shell
     * 访问次数限制
     * 撤单率限制
     * 停服维护
-    * 获取当前系���状态
+    * 获取当前系统状态
     * 查询系统是否可用
     * 获取当前系统时间戳
     * 错误码详情
@@ -23924,7 +23924,7 @@ dm_mm@huobi.com（做市商项目不支持点卡抵扣、VIP、交易量相关�
 
 # 更新日志
 
-## 1.1.4 2021年12月18日 【新增USDT交割合约接口内容】
+## 1.1.4 2021年12月22日 【新增USDT交割合约接口内容】
 
 ###
 1、修改获取合约信息接口（新增选填入参：business_type（业务类型）、contract_type（合约类型）、pair（交易对）。返回参数data下新增字段：contract_type（合约类型），pair（交易对），business_type（业务类型），delivery_date（合约交割日期，永续无需交割时该字段为空字符串））
@@ -25086,7 +25086,7 @@ trades 下新增每笔成交收益字段：profit（平仓盈亏））
   * 接口URL: /linear-swap-api/v1/swap_order
 
 ###
-15、修改合约下单接口(全仓)（新增选填入参：tp_trigger_price（止盈触发价格）、tp_order_price（止盈委托价格）、tp_order_price_type（止盈委托类型）、sl_trigger_price（止损触发价格）、sl_order_price（止损��托价格）、sl_order_price_type（止损委托类型）。）
+15、修改合约下单接口(全仓)（新增选填入参：tp_trigger_price（止盈触发价格）、tp_order_price（止盈委托价格）、tp_order_price_type（止盈委托类型）、sl_trigger_price（止损触发价格）、sl_order_price（止损委托价格）、sl_order_price_type（止损委托类型）。）
 
   * 接口名称: 【全仓】合约下单
   * 接口类型: 私有接口
@@ -25114,7 +25114,7 @@ trades 下新增每笔成交收益字段：profit（平仓盈亏））
   * 接口URL: /linear-swap-api/v1/swap_order_info
 
 ###
-19、修改获取合约订单信息接口(���仓)（新增返回参数：is_tpsl(表示是否设置止盈止损，1：是；0：否),在返回参数order_source订单来源新增枚举值（tpsl:止盈止损触发））
+19、修改获取合约订单信息接口(全仓)（新增返回参数：is_tpsl(表示是否设置止盈止损，1：是；0：否),在返回参数order_source订单来源新增枚举值（tpsl:止盈止损触发））
 
   * 接口名称: 【全仓】获取合约订单信息
   * 接口类型: 私有接口
@@ -26287,9 +26287,9 @@ recovery-time：禁用的恢复时间戳，单位为毫秒，表示禁用结束�
   * 查询系统是否可用：https://api.hbdm.com/heartbeat/
   * statuspage查询系统状态：https://status-linear-swap.huobigroup.com/api/v2/summary.json
 
-除了以上两个rest接口获取系统维护停服信息外，也可以通过订阅WebSocket系统状态更新接口获取系统维护停���信息
+除了以上两个rest接口获取系统维护停服信息外，也可以通过订阅WebSocket系统状态更新接口获取系统维护停服信息
 
-## 获取当前系���状态
+## 获取当前系统状态
 
 此接口返回当前的系统状态，包含当前系统维护计划和故障进度等。
 
@@ -27640,7 +27640,7 @@ business_type | false（请看备注） | string | 业务类型，不填默认�
 
 参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
 ---|---|---|---|---  
-status | true | string | ���求处理结果 | "ok"  
+status | true | string | 请求处理结果 | "ok"  
 <data> | true | object array |  |  
 symbol | true | string | 品种代码 | "BTC","ETH" ...  
 contract_code | true | string | 合约代码 | 如 永续："BTC-USDT"... ，交割："BTC-
@@ -33909,7 +33909,7 @@ ts | true | long | 响应生成时间点，单位：毫秒 |
 ---|---|---|---|---  
 contract_code | true | string | 合约代码 | "BTC-USDT"  
 direction | false | string | 买卖方向（不填默认全部） | "buy":买 "sell":卖  
-offset | false | string | 开平方����不填默认全部） | "open":开 "close":平  
+offset | false | string | 开平方向（不填默认全部） | "open":开 "close":平  
   
 #### 备注：
 
@@ -35094,7 +35094,7 @@ trade_avg_price | true | decimal | 成交均价 |
 status | true | int | 订单状态 |  
 order_type | true | int | 订单类型 | 1:报单 、 2:撤单 、 3:强平、4:交割  
 fee_asset | true | string | 手续费币种 | （"USDT"...）  
-liquidation_type | true | string | 强平类型 | 0:非��平类型，1：多空轧差， 2:部分接管，3：全部接管  
+liquidation_type | true | string | 强平类型 | 0:非强平类型，1：多空轧差， 2:部分接管，3：全部接管  
 margin_mode | true | string | 保证金模式 | isolated：逐仓模式  
 margin_account | true | string | 保证金账户 | 比如“BTC-USDT”  
 is_tpsl | true | int | 是否设置止盈止损 | 1：是；0：否  
@@ -36848,7 +36848,7 @@ total_size | true | int | 总条数 |
 <orders> | true | object array | 订单信息 |  
 symbol | true | string | 合约品种 |  
 contract_code | true | string | 合约代码 |  
-trigger_type | true | string | 触发类型 | `ge`大于���于；`le`小于等于  
+trigger_type | true | string | 触发类型 | `ge`大于等于；`le`小于等于  
 volume | true | decimal | 委托数量 |  
 order_type | true | int | 订单类型 | 1、报单 2、撤单  
 direction | true | string | 订单方向 | [买(buy),卖(sell)]  
@@ -38864,7 +38864,7 @@ total_size | true | int | 总条数 |
 current_page | true | int | 当前页 |  
 <orders> | true | object array |  |  
 symbol | true | string | 品种代码 |  
-contract_code | true | string | 合约代��� | 永续：“BTC-USDT”... , 交割：“BTC-
+contract_code | true | string | 合约代码 | 永续：“BTC-USDT”... , 交割：“BTC-
 USDT-210625”...  
 volume | true | decimal | 委托数量 |  
 order_type | true | int | 订单类型：1、报单 2、撤单 |  
@@ -39326,7 +39326,7 @@ WebSocket API 返回的所有数据都进⾏了 GZIP 压缩，需要 client 在�
 
 ## 鉴权-Authentication
 
-用户自⼰在火币网⽣成Access Key和Secret Key，Secret Key由��户自⼰保存，⽤户需提供Access Key。目前关于 apikey
+用户自⼰在火币网⽣成Access Key和Secret Key，Secret Key由用户自⼰保存，⽤户需提供Access Key。目前关于 apikey
 申请和修改，请在“账户 - API 管理 ” 创建新API Key 填写备注(可选择绑定 ip)点击创建。其中 Access Key 为 API
 访问密钥，Secret Key 为用户对请求进⾏签名的密钥(仅申请时可见)。用户按规则生成签名(Signature)。
 
@@ -42005,7 +42005,7 @@ business_type | true | string | 业务类型 | futures：交割、swap：永续
 
   * 该接口仅支持全仓模式。
 
-成功建⽴和 WebSocket API 的连接之后，向 Server 发送如��格式的数据来取消订阅数据:
+成功建⽴和 WebSocket API 的连接之后，向 Server 发送如下格式的数据来取消订阅数据:
 
 ### 取消订阅请求数据格式
 
