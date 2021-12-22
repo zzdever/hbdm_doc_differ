@@ -11834,8 +11834,7 @@ shell
   * [v1](/docs/spot/v1/en/)
 
 [现货](/docs/spot/v1/en/) [交割合约](/docs/dm/v1/en/)
-[币本位永续合约](/docs/coin_margined_swap/v1/en/)
-[USDT本位永续合约](/docs/usdt_swap/v1/en/)
+[币本位永续合约](/docs/coin_margined_swap/v1/en/) [USDT本位合约](/docs/usdt_swap/v1/en/)
 
 [简体中文](/docs/spot/v1/cn/)
 
@@ -12042,7 +12041,7 @@ shell
 做市商项目不支持点卡抵扣、VIP、交易量相关活动以及任何形式的返佣活动。
 
 欢迎有优秀 maker 策略交易量大的用户参与长期合约做市商项目。如果您的火币交割合约账户中有折合大于 3 BTC
-资产，或火币币本位永续合约账户中有折合大于 3 BTC 资产，或火币USDT本位永续合约账户中有大于 100000 USDT 资产，请提供以下信息到
+资产，或火币币本位永续合约账户中有折合大于 3 BTC 资产，或火币USDT本位合约账户中有大于 100000 USDT 资产，请提供以下信息到
 Vip@global-hgroup.com（做市商项目不支持点卡抵扣、VIP、交易量相关活动以及任何形式的返佣活动）:
 
   1. 提供火币 UID （需不存在返佣关系的 UID）；
@@ -13197,7 +13196,7 @@ api/v1/swap_order?AccessKeyId=e2xxxxxx-99xxxxxx-84xxxxxx-7xxxx&SignatureMethod=H
 
 ## 访问次数限制
 
-  * 交割合约、币本位永续合约和USDT本位永续合约都分开限频
+  * 交割合约、币本位永续合约和USDT本位合约都分开限频
 
   * 公开行情接口和用户私有接口都有访问次数限制
 
@@ -13207,7 +13206,7 @@ api/v1/swap_order?AccessKeyId=e2xxxxxx-99xxxxxx-84xxxxxx-7xxxx&SignatureMethod=H
 
   * 行情类的公开接口，比如：获取K线数据、获取聚合行情、市场行情、获取行情深度数据、获取溢价指数K线、获取实时预测资金费率k线，获取基差数据、获取市场最近成交记录：
 
-（1） restful接口：同一个IP, 所有业务（交割合约、币本位永续合约和USDT本位永续合约）总共1秒最多800个请求
+（1） restful接口：同一个IP, 所有业务（交割合约、币本位永续合约和USDT本位合约）总共1秒最多800个请求
 
 （2） websocket：req请求，同一时刻最多请求50次；sub请求，无限制，服务器主动推送数据
 
@@ -13520,8 +13519,8 @@ heartbeat | int | 交割合约 1: 可用 0: 不可用(即停服维护)
 swap_heartbeat | int | 币本位永续 1: 可用 0: 不可用(即停服维护)  
 estimated_recovery_time | long | null: 正常. 交割合约预计恢复时间， 单位:毫秒  
 swap_estimated_recovery_time | long | null: 正常. 币本位永续合约预计恢复时间，单位：毫秒.  
-linear_swap_heartbeat | long | USDT本位永续 1: 可用 0: 不可用(即停服维护)  
-linear_swap_estimated_recovery_time | long | null: 正常. USDT本位永续合约预计恢复时间，单位：毫秒.  
+linear_swap_heartbeat | long | USDT本位合约 1: 可用 0: 不可用(即停服维护)  
+linear_swap_estimated_recovery_time | long | null: 正常. USDT本位合约预计恢复时间，单位：毫秒.  
 </data> |  |  
   
 > 返回数据
@@ -13919,7 +13918,7 @@ colo相当于是 创建一个VPC节点，直接连了火币合约的内网，会
 币本位永续签名过程和交割签名过程类似，除了参考以下注意事项外，请参照交割的demo代码来验证签名是否成功，demo代码验证通过后，再去核对您自己的签名代码。币本位永续的demo代码在
 [ 这里 ](https://docs.huobigroup.com/docs/coin_margined_swap/v1/cn/#2cff7db524)
 查看。交割的demo代码在[ 这里](https://docs.huobigroup.com/docs/dm/v1/cn/#2cff7db524)
-查看。USDT本位永续的demo代码在 [ 这里
+查看。USDT本位合约的demo代码在 [ 这里
 ](https://docs.huobigroup.com/docs/usdt_swap/v1/cn/#2cff7db524) 查看。
 
   1. 检查 API Key 是否有效，是否复制正确
@@ -14105,9 +14104,9 @@ api/v1/swap_historical_funding_rate）返回字段中“当期资金费率（fun
 
 ### Q15: 订阅多个合约代码同一主题时, 需要多个 ws 连接吗?
 
-对于交割合约、币永续、u永续之间, 由于是不同的接口地址, 需要不同的 ws 连接
+对于交割合约、币永续、USDT本位合约之间, 由于是不同的接口地址, 需要不同的 ws 连接
 
-对于交割合约、币永续、u永续各自里面, 只要接口地址是一样的, 一个 ws 连接即可.
+对于交割合约、币永续、USDT本位合约各自里面, 只要接口地址是一样的, 一个 ws 连接即可.
 
 ### Q16: 是否可以通过 ws 下单和撤单?
 
@@ -14331,7 +14330,7 @@ close 就是最新指数价
 
 币本位永续: https://status-swap.huobigroup.com/
 
-USDT本位永续: https://status-linear-swap.huobigroup.com/
+USDT本位合约: https://status-linear-swap.huobigroup.com/
 
 ### Q26: "获取用户账户信息（/api/v1/contract_account_info）"中 margin_balance 是指什么?
 
@@ -14372,7 +14371,7 @@ available. '}类似错误，说明此时可平仓量不足，您平仓时需查�
 
 ### Q3: API返回1032错误码是什么原因？
 
-1032代表您的访问次数超出限制，币本位永续合约、交割合约和USDT永续合约是分开限制频率，请查看合约交易接入说明中的访问次数限制，并且可以在api接口response中的header打印当前的频率限制次数来看是否超出限制频率。建议加大请求间隔延时避免超出限制频率。
+1032代表您的访问次数超出限制，币本位永续合约、交割合约和USDT本位合约是分开限制频率，请查看合约交易接入说明中的访问次数限制，并且可以在api接口response中的header打印当前的频率限制次数来看是否超出限制频率。建议加大请求间隔延时避免超出限制频率。
 
 ## 如何更有效的解决问题
 
@@ -20313,7 +20312,7 @@ Market Depth增量推送数据 | 否
 
   * 行情类的公开接口，比如：获取K线数据、获取聚合行情、市场行情、获取行情深度数据、获取溢价指数K线、获取实时预测资金费率k线，获取基差数据、获取市场最近成交记录：
 
-（1） restful接口：同一个IP, 所有业务（交割合约、币本位永续合约和USDT本位永续合约）总共1秒最多800个请求
+（1） restful接口：同一个IP, 所有业务（交割合约、币本位永续合约和USDT本位合约）总共1秒最多800个请求
 
 （2） websocket：req请求，同一时刻最多请求50次；sub请求，无限制，服务器主动推送数据
 
