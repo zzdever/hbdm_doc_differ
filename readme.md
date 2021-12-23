@@ -28364,7 +28364,7 @@ price | true | string | 成交价 |
 ts | true | long | 成交时间 |  
 quantity | true | string | 成交量（币） |  
 contract_code | true | string | 合约代码 |  
-business_type | false | string | 业务类型，不填默认永续 | futures：交割、swap：永续、all：全部  
+business_type | true | string | 业务类型 | futures：交割、swap：永续  
 trade_turnover | true | string | 成交额（计价币种） |  
 </data> |  |  |  |  
 </tick> |  |  |  |  
