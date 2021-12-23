@@ -27970,7 +27970,7 @@ status | true | string | 请求处理结果 | "ok" , "error"
 contract_code | true | string | 合约代码 或 合约标识 | 永续："BTC-USDT" ... ，交割：“BTC-
 USDT-210625”... 或 BTC-USDT-CW（当周合约标识）、BTC-USDT-NW（次周合约标识）、BTC-USDT-
 CQ（当季合约标识）、BTC-USDT-NQ（次季合约标识）  
-business_type | true | string | 业务类型 | futures：交割、swap：永续、all：全部  
+business_type | true | string | 业务类型 | futures：交割、swap：永续  
 mrid | true | long | 撮合ID，唯一标识 |  
 ask | false | array | [卖1价,卖1量(张)] |  
 bid | false | array | [买1价,买1量(张)] |  
@@ -28276,7 +28276,7 @@ status | true | string | 请求处理结果 | "ok" , "error"
 contract_code | true | string | 合约代码 或 合约标识 | 永续："BTC-USDT" ... ，交割：“BTC-
 USDT-210625”... 或 BTC-USDT-CW（当周合约标识）、BTC-USDT-NW（次周合约标识）、BTC-USDT-
 CQ（当季合约标识）、BTC-USDT-NQ（次季合约标识）  
-business_type | true | string | 业务类型，不填默认永续 | futures：交割、swap：永续、all：全部  
+business_type | true | string | 业务类型 | futures：交割、swap：永续  
 id | true | long | K线id |  
 amount | true | string | 成交量(币) （最近24（当前时间-24小时）小时成交量币）。 值是买卖双边之和 |  
 ask | true | array | [卖1价,卖1量(张)] |  
