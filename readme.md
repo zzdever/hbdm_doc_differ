@@ -13877,6 +13877,7 @@ ts | true | long | 当前系统时间戳 |
 ### 合约SDK
 
   * [Java SDK](https://github.com/hbdmapi/huobi_coin_swap_Java)
+  * [CSharp](https://github.com/hbdmapi/huobi_sdk_CSharp)
 
 ### 备注：币本位永续代码使用方式与交割合约类似，其他语言demo可以参考交割合约
 
