@@ -26859,7 +26859,7 @@ api/v1/swap_batchorder合约批量下单接口：
 
   * [Postman](https://github.com/hbdmapi/huobi_futures_Postman)
 
-  * [CSharp](https://github.com/hbdmapi/huobi_futures_CSharp)
+  * [CSharp](https://github.com/hbdmapi/huobi_sdk_CSharp)
 
   * [Golang](https://github.com/hbdmapi/huobi_futures_Golang)
 
