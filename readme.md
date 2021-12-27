@@ -2378,6 +2378,7 @@ ts | true | long | 当前系统时间戳 |
 **合约sdk**
 
   * [Java sdk](https://github.com/hbdmapi/huobi_future_Java)
+  * [CSharp](https://github.com/hbdmapi/huobi_futures_CSharp)
 
 **异步库**
 
