@@ -23655,7 +23655,7 @@ shell
 
   * [v1](/docs/spot/v1/en/)
 
-[现货](/docs/spot/v1/en/) [交割合约](/docs/dm/v1/en/)
+[现货](/docs/spot/v1/en/) [币本位交割合约](/docs/dm/v1/en/)
 [币本位永续合约](/docs/coin_margined_swap/v1/en/) [U本位合约](/docs/usdt_swap/v1/en/)
 
 [简体中文](/docs/spot/v1/cn/)
@@ -37334,7 +37334,7 @@ current_page | true | int | 当前页 |
 <orders> | true | object array |  |  
 symbol | true | string | 品种代码 |  
 contract_code | true | string | 合约代码 | "BTC-USDT" ...  
-margin_mode | true | string | 保证金模式 | cross：全仓模式；isolated：逐仓模式  
+margin_mode | true | string | 保证金模式 | isolated：逐仓模式  
 margin_account | true | string | 保证金账户 | 比如“USDT”，“BTC-USDT”  
 volume | true | decimal | 委托数量 |  
 order_type | true | int | 订单类型：1、报单 2、撤单 |  
@@ -42922,7 +42922,7 @@ futures | 不允许
 op | true | string | 订阅固定值为sub |  
 cid | false | string | Client 请求唯一 ID |  
 topic | true | string | 订阅主题名称，必填 (public.$contract_code.funding_rate)
-订阅某个品种下的强平订单信息；$contract_code为品种代码（BTC-USDT、ETH-USDT），如果值为 * 时代表订阅所有品种;
+订阅某个品种下的资金费率；$contract_code为品种代码（BTC-USDT、ETH-USDT），如果值为 * 时代表订阅所有品种;
 contract_code支持大小写; |  
   
 > 当资金费率有更新时，返回的参数示例如下
@@ -43001,7 +43001,7 @@ settlement_time | true | string | 结算时间 | 如"1490759594752"
 op | string | 必填;操作名称，订阅固定值为 unsub;  
 cid | string | 选填;Client 请求唯一 ID  
 topic | string | 必填;必填；必填；订阅主题名称，必填 (public.$contract_code.funding_rate)
-订阅、取消订阅某个合约代码下的资产变更信息，当 $contract_code值为 * 时代表订阅所有合约代码;  
+订阅、取消订阅某个合约代码下的资金费率，当 $contract_code值为 * 时代表订阅所有合约代码;  
   
 ### 订阅与取消订阅规则说明
 
