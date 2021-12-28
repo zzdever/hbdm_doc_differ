@@ -33232,7 +33232,7 @@ ts | true | long | 响应生成时间点，单位：毫秒 |
 
   * 该接口仅支持全仓模式。
   * 请求参数contract_code支持交割合约代码，格式为BTC-USDT-210625；
-  * （pair+contract_type）以及 contract_code 必填其一 （全不填报错1014），若同时填写，优先取contract_code。
+  * （pair+contract_type）以及 contract_code 必填其一（全不填报错1014），若同时填写，优先取contract_code。
 
 > Request
     
@@ -33493,7 +33493,7 @@ ts | true | long | 响应生成时间点，单位：毫秒 |
 
   * 该接口仅支持全仓模式。
   * 请求参数contract_code支持交割合约代码，格式为BTC-USDT-210625；
-  * （pair+contract_type）以及 contract_code 必填其一 （全不填报错1014），若同时填写，优先取contract_code。
+  * （pair+contract_type）以及 contract_code 必填其一（全不填报错1014），若同时填写，优先取contract_code。
 
 > Request
     
@@ -33817,16 +33817,15 @@ ts | true | long | 响应生成时间点，单位：毫秒 |
 
   * 该接口仅支持全仓模式。
   * 请求参数contract_code支持交割合约代码，格式为BTC-USDT-210625；
-  * contract_type、pair和contract_code全填则优先取合约代码。若只填写pair，则撤销该pair的所有挂单。若只填写contract_type，则撤销该contract_type的所有挂单。
-  * 支持请求参数全都不填，则表示撤销全仓下所有挂单。
+  * （pair+contract_type）以及 contract_code 必填其一（全不填报错1014），若同时填写，优先取contract_code
 
 ### 请求参数
 
 参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
 ---|---|---|---|---  
-contract_code | false | string | 合约代码 | 永续："BTC-USDT"... ， 交割："BTC-
+contract_code(请看备注) | false | string | 合约代码 | 永续："BTC-USDT"... ， 交割："BTC-
 USDT-210625"...  
-pair | false | string | 交易对 | BTC-USDT  
+pair(请看备注) | false | string | 交易对 | BTC-USDT  
 contract_type | false | string | 合约类型 |
 swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
 direction | false | string | 买卖方向（不填默认全部） | "buy":买 "sell":卖  
@@ -36392,16 +36391,15 @@ ts | true | long | 响应生成时间点，单位：毫秒 |
   * 该接口仅支持全仓模式。
   * 该接口的限频次数为1秒5次。
   * 请求参数contract_code支持交割合约代码，格式为BTC-USDT-210625；
-  * contract_type、pair和contract_code全填则优先取合约代码。若只填写pair，则撤销该pair的所有挂单。若只填写contract_type，则撤销该contract_type的所有挂单。
-  * 支持请求参数全部都不填，则表示撤销全仓下所有挂单。
+  * （pair+contract_type）以及 contract_code 必填其一（全不填报错1014），若同时填写，优先取contract_code
 
 ### 请求参数
 
 参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
 ---|---|---|---|---  
-contract_code | false | string | 合约代码 | 永续：“BTC-USDT”... ，交割：“BTC-
+contract_code(请看备注) | false | string | 合约代码 | 永续：“BTC-USDT”... ，交割：“BTC-
 USDT-210625”...  
-pair | false | string | 交易对 | BTC-USDT  
+pair(请看备注) | false | string | 交易对 | BTC-USDT  
 contract_type | false | string | 合约类型 |
 swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
 direction | false | string | 买卖方向（不填默认全部） | "buy":买 "sell":卖  
@@ -36976,7 +36974,7 @@ err_msg | false | string | 错误信息（下单失败才出现） |
   * 止盈止损订单都为平仓单。
   * 该接口的限频次数为1秒5次。
   * 请求参数contract_code支持交割合约代码，格式为BTC-USDT-210625；
-  * （pair+contract_type）以及 contract_code 必填其一 （全不填报错1014），若同时填写，优先取contract_code。
+  * （pair+contract_type）以及 contract_code 必填其一（全不填报错1014），若同时填写，优先取contract_code。
 
 > Request
     
@@ -37226,16 +37224,15 @@ ts | true | long | 响应生成时间点，单位：毫秒 |
   * 该接口仅支持全仓模式。
   * 该接口的限频次数为1秒5次。
   * 请求参数contract_code支持交割合约代码，格式为BTC-USDT-210625；
-  * contract_type、pair和contract_code全填则优先取contract_code。若只填写pair，则撤销该pair的所有止盈止损挂单。若只填写contract_type，则撤销该contract_type的所有止盈止损挂单。
-  * 支持请求参数全部都不填，则表示撤销全仓下所有止盈止损挂单。
+  * （pair+contract_type）以及 contract_code 必填其一（全不填报错1014），若同时填写，优先取contract_code
 
 ### 请求参数
 
 参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
 ---|---|---|---|---  
-contract_code | false | string | 合约代码 | 永续："BTC-USDT"... ，交割："BTC-
+contract_code(请看备注) | false | string | 合约代码 | 永续："BTC-USDT"... ，交割："BTC-
 USDT-210625"...  
-pair | false | string | 交易对 | BTC-USDT  
+pair(请看备注) | false | string | 交易对 | BTC-USDT  
 contract_type | false | string | 合约类型 |
 swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
 direction | false | string | 买卖方向（不填默认全部） | "buy":买 "sell":卖  
@@ -38306,16 +38303,15 @@ ts | true | long | 响应生成时间点，单位：毫秒 |
   * 该接口的限频次数为1秒5次。
   * direction与offset可只填其一，只填其一则按对应的条件去撤单。（如用户只传了direction=buy，则撤销所有买单，包括开仓和平仓）
   * 请求参数contract_code支持交割合约代码，格式为BTC-USDT-210625；
-  * contract_type、pair和contract_code全填，则优先取合约代码。若只填写pair，则撤销该pair的所有挂单。若只填写contract_type，则撤销该contract_type的所有挂单。
-  * 支持请求参数全都不填，则表示撤销全仓下所有挂单。
+  * （pair+contract_type）以及 contract_code 必填其一（全不填报错1014），若同时填写，优先取contract_code
 
 ### 请求参数
 
 参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
 ---|---|---|---|---  
-contract_code | false | string | 合约代码 | 永续：“BTC-USDT”... ,永续：“BTC-
+contract_code(请看备注) | false | string | 合约代码 | 永续：“BTC-USDT”... ,永续：“BTC-
 USDT-210625”...  
-pair | false | string | 交易对 | BTC-USDT  
+pair(请看备注) | false | string | 交易对 | BTC-USDT  
 contract_type | false | string | 合约类型 |
 swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
 direction | false | string | 买卖方向（不填默认全部） | "buy":买 "sell":卖  
@@ -38444,7 +38440,7 @@ ts | true | long | 响应生成时间点，单位：毫秒 |
 
   * 该接口仅支持全仓模式
   * 请求参数contract_code支持交割合约代码，格式为BTC-USDT-210625；
-  * pairt和contract_code同时填写，则优先取contract_code。如果同进不填，则表示查询全仓下所有跟踪委托当前委托。
+  * pairt和contract_code同时填写，则优先取contract_code。如果同时不填，则表示查询全仓下所有跟踪委托当前委托
 
 ### 请求参数
 
