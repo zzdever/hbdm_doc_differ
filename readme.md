@@ -33829,7 +33829,7 @@ ts | true | long | 响应生成时间点，单位：毫秒 |
 contract_code | false(请看备注) | string | 合约代码 | 永续："BTC-USDT"... ， 交割："BTC-
 USDT-210625"...  
 pair | false(请看备注) | string | 交易对 | BTC-USDT  
-contract_type | false | string | 合约类型 |
+contract_type | false(请看备注) | string | 合约类型 |
 swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
 direction | false | string | 买卖方向（不填默认全部） | "buy":买 "sell":卖  
 offset | false | string | 开平方向（不填默认全部） | "open":开 "close":平  
@@ -36403,7 +36403,7 @@ ts | true | long | 响应生成时间点，单位：毫秒 |
 contract_code | false(请看备注) | string | 合约代码 | 永续：“BTC-USDT”... ，交割：“BTC-
 USDT-210625”...  
 pair | false(请看备注) | string | 交易对 | BTC-USDT  
-contract_type | false | string | 合约类型 |
+contract_type | false(请看备注) | string | 合约类型 |
 swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
 direction | false | string | 买卖方向（不填默认全部） | "buy":买 "sell":卖  
 offset | false | string | 开平方向（不填默认全部） | "open":开 "close":平  
@@ -37236,7 +37236,7 @@ ts | true | long | 响应生成时间点，单位：毫秒 |
 contract_code | false(请看备注) | string | 合约代码 | 永续："BTC-USDT"... ，交割："BTC-
 USDT-210625"...  
 pair | false(请看备注) | string | 交易对 | BTC-USDT  
-contract_type | false | string | 合约类型 |
+contract_type | false(请看备注) | string | 合约类型 |
 swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
 direction | false | string | 买卖方向（不填默认全部） | "buy":买 "sell":卖  
   
@@ -38315,7 +38315,7 @@ ts | true | long | 响应生成时间点，单位：毫秒 |
 contract_code | false(请看备注) | string | 合约代码 | 永续：“BTC-USDT”... ,永续：“BTC-
 USDT-210625”...  
 pair | false(请看备注) | string | 交易对 | BTC-USDT  
-contract_type | false | string | 合约类型 |
+contract_type | false(请看备注) | string | 合约类型 |
 swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
 direction | false | string | 买卖方向（不填默认全部） | "buy":买 "sell":卖  
 offset | false | string | 开平方向（不填默认全部） | "open":开 "close":平  
