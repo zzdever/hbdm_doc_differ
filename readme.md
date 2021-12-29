@@ -73,7 +73,7 @@ shell
     * 获取合约信息
     * 获取合约指数信息
     * 获取合约最高限价和最低限价
-    * 获取当前可用合约总持仓量
+    * 获取当前合约总持仓量
     * 获取预估交割价
     * 获取预估结算价
     * 查询系统状态
@@ -88,7 +88,7 @@ shell
     * 查询合约风险准备金余额和预估分摊比例
     * 查询合约风险准备金余额历史数据
     * 查询平台阶梯调整系数
-    * 平台持仓量的查询
+    * 平台历史持仓量查询
     * 获取平台阶梯保证金
     * 精英账户多空持仓对比-账户数
     * 精英账户多空持仓对比-持仓量
@@ -620,10 +620,10 @@ offset，表示开平方向，不填默认撤销全部。参数可 选值为“o
   * 订阅主题: market.$symbol.kline.$period
 
 ###
-20、修改获取当前可用合约总持仓量（在返回参数data中新增trade_volume：最近24小时成交量（张），trade_amount：最近24小时成交量（币），trade_turnover：最近24小时成交额。这三个字段
+20、修改获取当前合约总持仓量（在返回参数data中新增trade_volume：最近24小时成交量（张），trade_amount：最近24小时成交量（币），trade_turnover：最近24小时成交额。这三个字段
 ）
 
-  * 接口名称: 获取当前可用合约总持仓量
+  * 接口名称: 获取当前合约总持仓量
   * 接口类型: 公共接口
   * 接口URL: /api/v1/contract_open_interest
 
@@ -1476,7 +1476,7 @@ WebSocket私有订单成交推送接口(需要API KEY验签)
 读取 | 基础信息接口 | /api/v1/contract_contract_info | GET | 获取合约信息 | 否  
 读取 | 基础信息接口 | /api/v1/contract_index | GET | 获取合约指数信息 | 否  
 读取 | 基础信息接口 | /api/v1/contract_price_limit | GET | 获取合约最高限价和最低限价 | 否  
-读取 | 基础信息接口 | /api/v1/contract_open_interest | GET | 获取当前可用合约总持仓量 | 否  
+读取 | 基础信息接口 | /api/v1/contract_open_interest | GET | 获取当前合约总持仓量 | 否  
 读取 | 基础信息接口 | /api/v1/contract_delivery_price | GET | 获取预估交割价 | 否  
 读取 | 基础信息接口 | /api/v1/contract_api_state | GET | 查询系统状态 | 否  
 读取 | 市场行情接口 | /market/depth | GET | 获取行情深度数据 | 否  
@@ -1490,7 +1490,7 @@ WebSocket私有订单成交推送接口(需要API KEY验签)
 读取 | 市场行情接口 | /api/v1/contract_risk_info | GET | 查询合约风险准备金余额和预估分摊比例 | 否  
 读取 | 市场行情接口 | /api/v1/contract_insurance_fund | GET | 查询合约风险准备金余额历史数据 | 否  
 读取 | 市场行情接口 | /api/v1/contract_adjustfactor | GET | 查询平台阶梯调整系数 | 否  
-读取 | 市场行情接口 | /api/v1/contract_his_open_interest | GET | 平台持仓量的查询 | 否  
+读取 | 市场行情接口 | /api/v1/contract_his_open_interest | GET | 平台历史持仓量查询 | 否  
 读取 | 市场行情接口 | /api/v1/contract_ladder_margin | GET | 获取平台阶梯保证金 | 否  
 读取 | 市场行情接口 | /api/v1/contract_elite_account_ratio | GET | 精英账户多空持仓对比-账户数 | 否  
 读取 | 市场行情接口 | /api/v1/contract_elite_position_ratio | GET | 精英账户多空持仓对比-持仓量 | 否  
@@ -3062,7 +3062,7 @@ contract_type | true | string | 合约类型 | 当周:"this_week", 次周:"next_
 <data> |  |  |  |  
 ts | true | long | 响应生成时间点，单位：毫秒 |  
   
-## 获取当前可用合约总持仓量
+## 获取当前合约总持仓量
 
 ### 示例
 
@@ -4097,7 +4097,7 @@ adjust_factor | true | decimal | 调整系数 |
 </list> |  |  |  |  
 </data> |  |  |  |  
   
-## 平台持仓量的查询
+## 平台历史持仓量查询
 
 ### 实例
 
@@ -11888,7 +11888,7 @@ shell
     * 获取合约信息
     * 获取合约指数信息
     * 获取合约最高限价和最低限价
-    * 获取当前可用合约总持仓量
+    * 获取当前合约总持仓量
     * 获取行情深度数据
     * 获取市场最优挂单
     * 获取K线数据
@@ -11900,7 +11900,7 @@ shell
     * 查询合约风险准备金余额和预估分摊比例
     * 查询合约风险准备金余额历史数据
     * 查询平台阶梯调整系数
-    * 平台持仓量的查询
+    * 平台历史持仓量查询
     * 获取平台阶梯保证金
     * 精英账户多空持仓对比-账户数
     * 精英账户多空持仓对比-持仓量
@@ -12436,10 +12436,10 @@ client_order_id
   * 接口URL: /swap-api/v1/swap_trigger_hisorders
 
 ###
-18、修改获取当前可用合约总持仓量（在返回参数data中新增trade_volume：最近24小时成交量（张），trade_amount：最近24小时成交量（币），trade_turnover：最近24小时成交额。这三个字段
+18、修改获取当前合约总持仓量（在返回参数data中新增trade_volume：最近24小时成交量（张），trade_amount：最近24小时成交量（币），trade_turnover：最近24小时成交额。这三个字段
 ）
 
-  * 接口名称: 获取当前可用合约总持仓量
+  * 接口名称: 获取当前合约总持仓量
   * 接口类型: 公共接口
   * 接口URL: /swap-api/v1/swap_open_interest
 
@@ -12986,7 +12986,7 @@ IOC下单），lightning_fok（闪电平仓-FOK下单），lightning(闪电平�
 读取 | 基础行情接口 | /swap-api/v1/swap_contract_info | GET | 获取合约信息 | 否  
 读取 | 基础行情接口 | /swap-api/v1/swap_index | GET | 获取合约指数信息 | 否  
 读取 | 基础行情接口 | /swap-api/v1/swap_price_limit | GET | 获取合约最高限价和最低限价 | 否  
-读取 | 基础行情接口 | /swap-api/v1/swap_open_interest | GET | 获取当前可用合约总持仓量 | 否  
+读取 | 基础行情接口 | /swap-api/v1/swap_open_interest | GET | 获取当前合约总持仓量 | 否  
 读取 | 市场行情接口 | /swap-ex/market/depth | GET | 获取行情深度数据 | 否  
 读取 | 市场行情接口 | /swap-ex/market/bbo | GET | 获取市场最优挂单 | 否  
 读取 | 市场行情接口 | /swap-ex/market/history/kline | GET | 获取K线数据 | 否  
@@ -12998,7 +12998,7 @@ IOC下单），lightning_fok（闪电平仓-FOK下单），lightning(闪电平�
 读取 | 市场行情接口 | /swap-api/v1/swap_risk_info | GET | 查询合约风险准备金余额和预估分摊比例 | 否  
 读取 | 市场行情接口 | /swap-api/v1/swap_insurance_fund | GET | 查询合约风险准备金余额历史数据 | 否  
 读取 | 市场行情接口 | /swap-api/v1/swap_adjustfactor | GET | 查询平台阶梯调整系数 | 否  
-读取 | 市场行情接口 | /swap-api/v1/swap_his_open_interest | GET | 平台持仓量的查询 | 否  
+读取 | 市场行情接口 | /swap-api/v1/swap_his_open_interest | GET | 平台历史持仓量查询 | 否  
 读取 | 市场行情接口 | /swap-api/v1/swap_ladder_margin | GET | 获取平台阶梯保证金 | 否  
 读取 | 市场行情接口 | /swap-api/v1/swap_elite_account_ratio | GET | 精英账户多空持仓对比-账户数 | 否  
 读取 | 市场行情接口 | /swap-api/v1/swap_elite_position_ratio | GET | 精英账户多空持仓对比-持仓量 |
@@ -14536,7 +14536,7 @@ contract_code | true | string | 合约代码 | "BTC-USD" ...
 </data> |  |  |  |  
 ts | true | long | 响应生成时间点，单位：毫秒 |  
   
-## 获取当前可用合约总持仓量
+## 获取当前合约总持仓量
 
 ### 示例
 
@@ -15376,7 +15376,7 @@ adjust_factor | true | decimal | 调整系数 |
 </list> |  |  |  |  
 </data> |  |  |  |  
   
-## 平台持仓量的查询
+## 平台历史持仓量查询
 
 ### 实例
 
@@ -23706,7 +23706,7 @@ shell
     * 【通用】获取合约信息
     * 【通用】获取合约指数信息
     * 【通用】获取合约最高限价和最低限价
-    * 【通用】获取当前可用合约总持仓量
+    * 【通用】获取当前合约总持仓量
     * 【通用】获取行情深度数据
     * 【通用】获取市场最优挂单
     * 【通用】获取K线数据
@@ -23720,7 +23720,7 @@ shell
     * 【逐仓】查询平台阶梯调整系数
     * 【全仓】查询平台阶梯调整系数
     * 【通用】获取预估结算价
-    * 【通用】平台持仓量的查询
+    * 【通用】平台历史持仓量查询
     * 【逐仓】获取平台阶梯保证金
     * 【全仓】获取平台阶梯保证金
     * 【通用】精英账户多空持仓对比-账户数
@@ -23941,9 +23941,9 @@ dm_mm@huobi.com（做市商项目不支持点卡抵扣、VIP、交易量相关�
   * 接口URL：/linear-swap-api/v1/swap_price_limit
 
 ###
-3、修改获取当前可用合约总持仓量接口（新增选填入参：business_type（业务类型）、contract_type（合约类型）、pair（交易对）。返回参数data下新增字段：business_type（业务类型）、contract_type（合约类型）、pair（交易对）。）
+3、修改获取当前合约总持仓量接口（新增选填入参：business_type（业务类型）、contract_type（合约类型）、pair（交易对）。返回参数data下新增字段：business_type（业务类型）、contract_type（合约类型）、pair（交易对）。）
 
-  * 接口名称：【通用】获取当前可用合约总持仓量
+  * 接口名称：【通用】获取当前合约总持仓量
   * 接口类型：公共接口
   * 接口URL：/linear-swap-api/v1/swap_open_interest
 
@@ -23968,9 +23968,9 @@ dm_mm@huobi.com（做市商项目不支持点卡抵扣、VIP、交易量相关�
   * 接口URL：/linear-swap-api/v1/swap_cross_adjustfactor
 
 ###
-7、修改获取平台持仓量接口（新增选填入参：contract_type（合约类型）、pair（交易对）。返回参数data下新增字段：business_type（业务类型）、contract_type（合约类型）、pair（交易对）。）
+7、修改获取平台历史持仓量接口（新增选填入参：contract_type（合约类型）、pair（交易对）。返回参数data下新增字段：business_type（业务类型）、contract_type（合约类型）、pair（交易对）。）
 
-  * 接口名称：【通用】获取平台持仓量
+  * 接口名称：【通用】获取平台历史持仓量
   * 接口类型：公共接口
   * 接口URL：/linear-swap-api/v1/swap_his_open_interest
 
@@ -25209,10 +25209,10 @@ trades 下新增每笔成交收益字段：profit（平仓盈亏））
   * 接口URL: /linear-swap-api/v1/swap_cross_trigger_hisorders
 
 ###
-32、修改获取当前可用合约总持仓量（在返回参数data中新增trade_volume：最近24小时成交量（张），trade_amount：最近24小时成交量（币）trade_turnover：最近24小时成交额、这三个字段
+32、修改获取当前合约总持仓量（在返回参数data中新增trade_volume：最近24小时成交量（张），trade_amount：最近24小时成交量（币）trade_turnover：最近24小时成交额、这三个字段
 ）
 
-  * 接口名称: 【通用】获取当前可用合约总持仓量
+  * 接口名称: 【通用】获取当前合约总持仓量
   * 接口类型: 公共接口
   * 接口URL: /linear-swap-api/v1/swap_open_interest
 
@@ -25821,7 +25821,7 @@ trades 下新增每笔成交收益字段：profit（平仓盈亏））
 读取 | 基础信息接口 | 通用 | /linear-swap-api/v1/swap_price_limit | GET |
 【通用】获取合约最高限价和最低限价 | 否  
 读取 | 基础信息接口 | 通用 | /linear-swap-api/v1/swap_open_interest | GET |
-【通用】获取当前可用合约总持仓量 | 否  
+【通用】获取当前合约总持仓量 | 否  
 读取 | 基础信息接口 | 通用 | /linear-swap-api/v1/swap_risk_info | GET |
 【通用】查询合约风险准备金和预估分摊比例 | 否  
 读取 | 基础信息接口 | 通用 | /linear-swap-api/v1/swap_insurance_fund | GET |
@@ -25829,7 +25829,7 @@ trades 下新增每笔成交收益字段：profit（平仓盈亏））
 读取 | 基础信息接口 | 逐仓 | /linear-swap-api/v1/swap_adjustfactor | GET |
 【逐仓】查询平台阶梯调整系数 | 否  
 读取 | 基础信息接口 | 通用 | /linear-swap-api/v1/swap_his_open_interest | GET |
-【通用】获取平台持仓量 | 否  
+【通用】获取平台历史持仓量 | 否  
 读取 | 基础信息接口 | 通用 | /linear-swap-api/v1/swap_elite_account_ratio | GET |
 【通用】精英账户多空持仓对比-账户数 | 否  
 读取 | 基础信息接口 | 通用 | /linear-swap-api/v1/swap_elite_position_ratio | GET |
@@ -27654,7 +27654,7 @@ business_type | true | string | 业务类型 | futures：交割、swap：永续
 <data> |  |  |  |  
 ts | true | long | 响应生成时间点，单位：毫秒 |  
   
-## 【通用】获取当前可用合约总持仓量
+## 【通用】获取当前合约总持仓量
 
 ### 示例
 
@@ -28887,7 +28887,7 @@ ts | true | long | 接口响应时间（毫秒） |
   * 结算类型为交割时，预估交割价字段（estimated_settlement_price）在交割前10分钟到交割开始才计算和更新展示，其他时间点（包括交割中）则estimated_settlement_price为空，其他字段正常展示。
   * 每6秒计算并更新一次预估结算价。
 
-## 【通用】平台持仓量的查询
+## 【通用】平台历史持仓量查询
 
 ### 实例
 
