@@ -27582,7 +27582,7 @@ support_margin_mode | false | string | 合约支持的保证金模式 |
 cross：仅支持全仓模式；isolated：仅支持逐仓模式；all：全逐仓都支持  
 pair | false | string | 交易对 | BTC-USDT  
 contract_type | false | string | 合约类型 |
-swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
+swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 business_type | false（请看备注） | string | 业务类型，不填默认永续 | futures：交割、swap：永续、all：全部  
   
 > Response:
@@ -27676,7 +27676,7 @@ contract_status | true | int | 合约状态 | 合约状态:
 support_margin_mode | true | string | 合约支持的保证金模式 |
 cross：全仓模式；isolated：逐仓模式；all：全逐仓都支持  
 contract_type | true | string | 合约类型 |
-swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
+swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 pair | true | string | 交易对 | 如：“BTC-USDT”  
 business_type | true | string | 业务类型 | futures：交割、swap：永续  
 delivery_date | true | string | 合约交割日期,永续无需交割时该字段为空字符串 | 如"20180720"  
@@ -27759,7 +27759,7 @@ contract_code | false | string | 合约代码 | 永续："BTC-USDT"... ，交割
 USDT-210625"...  
 pair | false | string | 交易对 | BTC-USDT  
 contract_type | false | string | 合约类型 |
-swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
+swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 business_type | false（请看备注） | string | 业务类型，不填默认永续 | futures：交割、swap：永续、all：全部  
   
 > Response:
@@ -27821,7 +27821,7 @@ USDT-210625"...
 high_limit | true | decimal | 最高买价 |  
 low_limit | true | decimal | 最低卖价 |  
 contract_type | true | string | 合约类型 |
-swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
+swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 pair | true | string | 交易对 | 如：“BTC-USDT”  
 business_type | true | string | 业务类型 | futures：交割、swap：永续  
 <data> |  |  |  |  
@@ -27853,7 +27853,7 @@ contract_code | false | string | 合约代码 | 永续："BTC-USDT"... ，交割
 USDT-210625"...  
 pair | false | string | 交易对 | BTC-USDT  
 contract_type | false | string | 合约类型 |
-swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
+swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 business_type | false（请看备注） | string | 业务类型，不填默认永续 | futures：交割、swap：永续、all：全部  
   
 > Response:
@@ -27935,7 +27935,7 @@ trade_amount | true | decimal | 最近24小时成交量（币）（当前时间-
 trade_volume | true | decimal | 最近24小时成交量（张）（当前时间-24小时）,值是买卖双边之和 |  
 trade_turnover | true | decimal | 最近24小时成交额 （当前时间-24小时）,值是买卖双边之和 |  
 contract_type | true | string | 合约类型 |
-swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
+swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 pair | true | string | 交易对 | 如：“BTC-USDT”  
 business_type | true | string | 业务类型 | futures：交割、swap：永续  
 </data> |  |  |  |  
@@ -28885,7 +28885,7 @@ contract_code | false | string | 合约代码 | 永续："BTC-USDT"... ，交割
 USDT-210625"...  
 pair | false | string | 交易对 | BTC-USDT  
 contract_type | false | string | 合约类型 |
-swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
+swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 business_type | false(请看备注) | string | 业务类型，不填默认永续 | futures：交割、swap：永续、all：全部  
   
 > Response:
@@ -28957,7 +28957,7 @@ contract_code | true | string | 合约代码 | 永续："BTC-USDT"... ，交割�
 USDT-210625"...  
 margin_mode | true | string | 保证金模式 | cross：全仓模式；  
 contract_type | true | string | 合约类型 |
-swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
+swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 pair | true | string | 交易对 | 如：“BTC-USDT”  
 business_type | true | string | 业务类型 | futures：交割、swap：永续  
 <list> | true | object array |  |  
@@ -28990,7 +28990,7 @@ contract_code | false | string | 合约代码 | 永续："BTC-USDT"... ，交割
 USDT-210625"...  
 pair | false | string | 交易对 | BTC-USDT  
 contract_type | false | string | 合约类型 |
-swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
+swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 business_type | false（请看备注） | string | 业务类型，不填默认永续 | futures：交割、swap：永续、all：全部  
   
 > Response
@@ -29048,7 +29048,7 @@ estimated_settlement_price | true | decimal |
 本期预估结算价/预估交割价（结算类型为交割时为预估交割价；结算时为预估结算价；） |  
 settlement_type | true | string | 本期结算类型 | “delivery”：交割，“settlement”：结算  
 contract_type | true | string | 合约类型 |
-swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
+swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 pair | true | string | 交易对 | 如：“BTC-USDT”  
 business_type | true | string | 业务类型 | futures：交割、swap：永续  
 </data> |  |  |  |  
@@ -29086,7 +29086,7 @@ contract_code | false（请看备注） | string | 合约代码 | 永续："BTC-
 USDT-210625"...  
 pair | false（请看备注） | string | 交易对 | BTC-USDT  
 contract_type | false（请看备注） | string | 合约类型 |
-swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
+swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 period | true | string | 时间周期类型 |
 1小时:"60min"，4小时:"4hour"，12小时:"12hour"，1天:"1day"  
 size | false | int | 获取数量,默认为：48 | [1,200]  
@@ -29127,7 +29127,7 @@ symbol | true | string | 品种代码 | "BTC","ETH"...
 contract_code | true | string | 合约代码 | 永续："BTC-USDT"... ，交割："BTC-
 USDT-210625"...  
 contract_type | true | string | 合约类型 |
-swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
+swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 pair | true | string | 交易对 | 如：“BTC-USDT”  
 business_type | true | string | 业务类型 | futures：交割、swap：永续  
 <tick> | true | object array |  |  
@@ -29254,7 +29254,7 @@ contract_code | false | string | 合约代码 | 永续：“BTC-USDT”... ，�
 USDT-210625”...  
 pair | false | string | 交易对 | BTC-USDT  
 contract_type | false | string | 合约类型 |
-swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
+swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 business_type | false（请看备注） | string | 业务类型，不填默认永续 | futures：交割、swap：永续、all：全部  
   
 > Response
@@ -29302,7 +29302,7 @@ USDT-210625”...
 margin_mode | true | string | 保证金模式 | cross：全仓模式  
 margin_account | true | string | 保证金账户 | 比如“USDT”  
 contract_type | true | string | 合约类型 |
-swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
+swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 pair | true | string | 交易对 | 如：“BTC-USDT”  
 business_type | true | string | 业务类型 | futures：交割、swap：永续  
 <list> | true | object array |  |  
@@ -29610,7 +29610,7 @@ contract_code | false | string | 合约代码 | 永续："BTC-USDT"... ，交割
 USDT-210625"...  
 pair | false | string | 交易对 | BTC-USDT  
 contract_type | false | string | 合约类型 |
-swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
+swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 business_type | false(请看备注) | string | 业务类型，不填默认永续 | futures：交割、swap：永续、all：全部  
   
 > Response
@@ -29685,7 +29685,7 @@ USDT-210625"...
 margin_mode | true | string | 保证金模式 | cross：全仓模式；  
 margin_account | true | string | 保证金账户 | 比如“USDT”  
 contract_type | true | string | 合约类型 |
-swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
+swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 pair | true | string | 交易对 | 如：“BTC-USDT”  
 business_type | true | string | 业务类型 | futures：交割、swap：永续  
 open | true | int | 开仓下单权限："1"表示可用，“0”表示不可用 |  
@@ -30493,7 +30493,7 @@ liquidation_price | true | decimal | 预估强平价 |
 lever_rate | true | decimal | 杠杠倍数 |  
 adjust_factor | true | decimal | 调整系数 |  
 contract_type | true | string | 合约类型 |
-swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
+swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 pair | true | string | 交易对 | 如：“BTC-USDT”  
 business_type | true | string | 业务类型 | futures：交割、swap：永续  
 </contract_detail> |  |  |  |  
@@ -30508,7 +30508,7 @@ liquidation_price | true | decimal | 预估强平价 |
 lever_rate | true | decimal | 杠杠倍数 |  
 adjust_factor | true | decimal | 调整系数 |  
 contract_type | true | string | 合约类型 |
-swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
+swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 pair | true | string | 交易对 | 如：“BTC-USDT”  
 business_type | true | string | 业务类型 | futures：交割、swap：永续  
 </futures_contract_detail> |  |  |  |  
@@ -30609,7 +30609,7 @@ contract_code | false | string | 合约代码 | 永续："BTC-USDT"... ， 交�
 USDT-210625” ...  
 pair | false | string | 交易对 | BTC-USDT  
 contract_type | false | string | 合约类型 |
-swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
+swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
   
 > Response:
     
@@ -30692,7 +30692,7 @@ lever_rate | true | int | 杠杠倍数 |
 direction | true | string | 仓位方向 | "buy":买，即多仓 "sell":卖，即空仓  
 last_price | true | decimal | 最新价 |  
 contract_type | true | string | 合约类型 |
-swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
+swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 pair | true | string | 交易对 | 如：“BTC-USDT”  
 business_type | true | string | 业务类型 | futures：交割、swap：永续  
 </data> |  |  |  |  
@@ -30983,7 +30983,7 @@ liquidation_price | true | decimal | 预估强平价 |
 lever_rate | true | decimal | 杠杠倍数 |  
 adjust_factor | true | decimal | 调整系数 |  
 contract_type | true | string | 合约类型 |
-swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
+swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 pair | true | string | 交易对 | 如：“BTC-USDT”  
 business_type | true | string | 业务类型 | futures：交割、swap：永续  
 </contract_detail> |  |  |  |  
@@ -30998,7 +30998,7 @@ liquidation_price | true | decimal | 预估强平价 |
 lever_rate | true | decimal | 杠杠倍数 |  
 adjust_factor | true | decimal | 调整系数 |  
 contract_type | true | string | 合约类型 |
-swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
+swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 pair | true | string | 交易对 | 如：“BTC-USDT”  
 business_type | true | string | 业务类型 | futures：交割、swap：永续  
 </futures_contract_detail> |  |  |  |  
@@ -31022,7 +31022,7 @@ lever_rate | true | int | 杠杠倍数 |
 direction | true | string | 仓位方向 | "buy":买，即多仓 "sell":卖，即空仓  
 last_price | true | decimal | 最新价 |  
 contract_type | true | string | 合约类型 |
-swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
+swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 pair | true | string | 交易对 | 如：“BTC-USDT”  
 business_type | true | string | 业务类型 | futures：交割、swap：永续  
 </positions> |  |  |  |  
@@ -31563,7 +31563,7 @@ liquidation_price | true | decimal | 预估强平价 |
 lever_rate | true | decimal | 杠杠倍数 |  
 adjust_factor | true | decimal | 调整系数 |  
 contract_type | true | string | 合约类型 |
-swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
+swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 pair | true | string | 交易对 | 如：“BTC-USDT”  
 business_type | true | string | 业务类型 | futures：交割、swap：永续  
 </contract_detail> |  |  |  |  
@@ -31578,7 +31578,7 @@ liquidation_price | true | decimal | 预估强平价 |
 lever_rate | true | decimal | 杠杠倍数 |  
 adjust_factor | true | decimal | 调整系数 |  
 contract_type | true | string | 合约类型 |
-swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
+swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 pair | true | string | 交易对 | 如：“BTC-USDT”  
 business_type | true | string | 业务类型 | futures：交割、swap：永续  
 </futures_contract_detail> |  |  |  |  
@@ -31679,7 +31679,7 @@ contract_code | false | string | 合约代码 | 永续："BTC-USDT"...，交割�
 sub_uid | true | long | 子账户的UID |  
 pair | false | string | 交易对 | BTC-USDT  
 contract_type | false | string | 合约类型 |
-swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
+swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
   
 > Response:
     
@@ -31739,7 +31739,7 @@ lever_rate | true | int | 杠杠倍数 |
 direction | true | string | 仓位方向 | "buy":买，即多仓 "sell":卖，即空仓  
 last_price | true | decimal | 最新价 |  
 contract_type | true | string | 合约类型 |
-swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
+swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 pair | true | string | 交易对 | 如：“BTC-USDT”  
 business_type | true | string | 业务类型 | futures：交割、swap：永续  
 </data> |  |  |  |  
@@ -32304,7 +32304,7 @@ contract_code | false | string | 合约代码 | 永续：“BTC-USDT”... ，�
 USDT-210625”...  
 pair | false | string | 交易对 | BTC-USDT  
 contract_type | false | string | 合约类型 |
-swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
+swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 business_type | false(请看备注) | string | 业务类型，不填默认永续 | futures：交割、swap：永续、all：全部  
   
 > Response
@@ -32362,7 +32362,7 @@ USDT-210625”...
 margin_mode | true | string | 保证金模式 | cross：全仓模式；  
 available_level_rate | true | string | 实际可用杠杆倍数，多个以英文逗号隔开 | 比如："1,5,10"  
 contract_type | true | string | 合约类型 |
-swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
+swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 pair | true | string | 交易对 | 如：“BTC-USDT”  
 business_type | true | string | 业务类型 | futures：交割、swap：永续  
 </data> |  |  |  |  
@@ -32393,7 +32393,7 @@ IOC下单，"optimal_5_ioc"：最优5档-IOC下单，"optimal_10_ioc"：最优10
 FOK下单，"optimal_5_fok"：最优5档-FOK下单，"optimal_10_fok"：最优10档-FOK下单，"optimal_20_fok"：最优20档-FOK下单  
 pair | false | string | 交易对 | BTC-USDT  
 contract_type | false | string | 合约类型 |
-swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
+swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 business_type | false（请看备注） | string | 业务类型，不填默认永续 | futures：交割、swap：永续、all：全部  
   
 > Response:
@@ -32466,7 +32466,7 @@ USDT-220325"...
 open_limit | true | decimal | 合约开仓单笔下单量最大值 |  
 close_limit | true | decimal | 合约平仓单笔下单量最大值 |  
 contract_type | true | string | 合约类型 |
-swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
+swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 pair | true | string | 交易对 | 如：“BTC-USDT”  
 business_type | true | string | 业务类型 | futures：交割、swap：永续  
 </list> |  |  |  |  
@@ -32491,7 +32491,7 @@ contract_code | false | string | 合约代码 | 永续："BTC-USDT"... ，交割
 ...  
 pair | false | string | 交易对 | BTC-USDT  
 contract_type | false | string | 合约类型 |
-swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
+swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 business_type | false（请看备注） | string | 业务类型，不填默认永续 | futures：交割、swap：永续、all：全部  
   
 > Response:
@@ -32573,7 +32573,7 @@ close_maker_fee | true | string | 平仓挂单的手续费费率，小数形式 
 close_taker_fee | true | string | 平仓吃单的手续费费率，小数形式 |  
 fee_asset | true | string | 手续费币种 | "USDT"...  
 contract_type | true | string | 合约类型 |
-swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
+swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 pair | true | string | 交易对 | 如：“BTC-USDT”  
 business_type | true | string | 业务类型 | futures：交割、swap：永续  
 delivery_fee | true | string | 交割的手续费费率，小数形式 |  
@@ -32771,7 +32771,7 @@ mark_price | true | decimal | 当前品种标记价格（以该价格用于计�
 contract_code | false | string | 合约代码 | 永续："BTC-USDT"... ，交割：”BTC-USDT-210625“  
 pair | false | string | 交易对 | BTC-USDT  
 contract_type | false | string | 合约类型 |
-swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
+swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 business_type | false（请看备注） | string | 业务类型，不填默认永续 | futures：交割、swap：永续、all：全部  
   
 > Response
@@ -32854,7 +32854,7 @@ margin_mode | true | string | 保证金模式 | cross：全仓模式；
 buy_limit | true | decimal | 合约多仓持仓的最大值，单位为张 |  
 sell_limit | true | decimal | 合约空仓持仓的最大值，单位为张 |  
 contract_type | true | string | 合约类型 |
-swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
+swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 pair | true | string | 交易对 | 如：“BTC-USDT”  
 business_type | true | string | 业务类型 | futures：交割、swap：永续  
 lever_rate | true | int | 用户当前品种杠杆倍数 |  
@@ -32930,7 +32930,7 @@ ts | true | long | 响应生成时间点，单位：毫秒 |
 ---|---|---|---|---  
 business_type | false（请看备注） | string | 业务类型，不填默认永续 | futures：交割、swap：永续、all：全部  
 contract_type | false | string | 合约类型，不填返回全部 |
-swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
+swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 pair | false | string | 交易对，不填返回全部 | 如：“BTC-USDT”  
 contract_code | false | string | 合约代码，不填返回全部 | 永续："BTC-USDT"... 交割："BTC-
 USDT-211231"...  
@@ -33027,7 +33027,7 @@ USDT-211231"...
 margin_mode | true | string | 保证金模式 | cross：全仓模式  
 business_type | true | string | 业务类型 | futures：交割、swap：永续  
 contract_type | true | string | 合约类型 |
-swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
+swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 pair | true | string | 交易对 | 如：“BTC-USDT”  
 <list> | true | object array |  |  
 lever_rate | true | int | 品种杠杆倍数 |  
@@ -33435,7 +33435,7 @@ contract_code | false（请看备注） | string | 合约代码 | 永续："BTC-
 USDT-210625"...  
 pair | false（请看备注） | string | 交易对 | BTC-USDT  
 contract_type | false（请看备注） | string | 合约类型 |
-swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
+swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 client_order_id | false | long | 客户自己填写和维护，必须为数字 | [1-9223372036854775807]  
 price | false | decimal | 价格 |  
 volume | true | long | 委托数量(张) |  
@@ -33714,7 +33714,7 @@ contract_code | false（请看备注） | string | 合约代码 | 永续："BTC-
 USDT-210625"...  
 pair | false（请看备注） | string | 交易对 | BTC-USDT  
 contract_type | false（请看备注） | string | 合约类型 |
-swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
+swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 client_order_id | false | long | 客户自己填写和维护，必须为数字 | [1-9223372036854775807]  
 price | false | decimal | 价格 |  
 volume | true | long | 委托数量(张) |  
@@ -33884,7 +33884,7 @@ contract_code | false (请看备注) | string | 合约代码 | 永续："BTC-USD
 USDT-210625" ...  
 pair | false (请看备注) | string | 交易对 | BTC-USDT  
 contract_type | false (请看备注) | string | 合约类型 |
-swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
+swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
   
 ### 备注：
 
@@ -33997,7 +33997,7 @@ contract_code | false(请看备注) | string | 合约代码 | 永续："BTC-USDT
 USDT-210625"...  
 pair | false(请看备注) | string | 交易对 | BTC-USDT  
 contract_type | false(请看备注) | string | 合约类型 |
-swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
+swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 direction | false | string | 买卖方向（不填默认全部） | "buy":买 "sell":卖  
 offset | false | string | 开平方向（不填默认全部） | "open":开 "close":平  
   
@@ -34113,7 +34113,7 @@ contract_code | false(请看备注) | string | 合约代码 | 永续："BTC-USDT
 USDT-210625"...  
 pair | false(请看备注) | string | 交易对 | BTC-USDT  
 contract_type | false(请看备注) | string | 合约类型 |
-swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
+swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 lever_rate | true | int |
 要切换的杠杆倍数；首次使用高倍杠杆(>20倍)，请使用主账号登录web端同意高倍杠杆协议后，才能使用接口下高倍杠杆(>20倍) |  
   
@@ -34145,7 +34145,7 @@ USDT-210625"...
 margin_mode | false | string | 保证金模式 | cross：全仓模式；  
 lever_rate | false | int | 切换成功后的杠杆倍数 |  
 contract_type | true | string | 合约类型 |
-swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
+swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 pair | true | string | 交易对 | 如：“BTC-USDT”  
 business_type | true | string | 业务类型 | futures：交割、swap：永续  
 </data> |  |  |  |  
@@ -34400,7 +34400,7 @@ canceled_at | true | long | 撤单时间 |
 is_tpsl | true | int | 是否设置止盈止损 | 1：是；0：否  
 real_profit | true | decimal | 真实收益（使用开仓均价计算，包含仓位跨结算的已实现盈亏。） |  
 contract_type | true | string | 合约类型 |
-swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
+swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 pair | true | string | 交易对 | 如：“BTC-USDT”  
 business_type | true | string | 业务类型 | futures：交割、swap：永续  
 </data> |  |  |  |  
@@ -34727,7 +34727,7 @@ trade_volume | true | decimal | 成交总数量 |
 is_tpsl | true | int | 是否设置止盈止损 | 1：是；0：否  
 real_profit | true | decimal | 订单总真实收益（使用开仓均价计算，包含仓位跨结算的已实现盈亏。） |  
 contract_type | true | string | 合约类型 |
-swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
+swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 pair | true | string | 交易对 | 如：“BTC-USDT”  
 business_type | true | string | 业务类型 | futures：交割、swap：永续  
 total_page | true | int | 总共页数 |  
@@ -35005,7 +35005,7 @@ is_tpsl | true | int | 是否设置止盈止损 | 1：是；0：否
 update_time | true | Long | 订单更新时间，单位：毫秒 |  
 real_profit | true | decimal | 真实收益（使用开仓均价计算，包含仓位跨结算的已实现盈亏。） |  
 contract_type | true | string | 合约类型 |
-swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
+swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 pair | true | string | 交易对 | 如：“BTC-USDT”  
 business_type | true | string | 业务类型 | futures：交割、swap：永续  
 </orders> |  |  |  |  
@@ -35267,7 +35267,7 @@ liquidation_type | true | string | 强平类型 | 0:非强平类型，1：多空
 is_tpls | true | int | 是否设置止盈止损 | 1：是；0：否  
 real_profit | true | decimal | 真实收益（使用开仓均价计算，包含仓位跨结算的已实现盈亏。） |  
 contract_type | true | string | 合约类型 |
-swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
+swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 pair | true | string | 交易对 | 如：“BTC-USDT”  
 business_type | true | string | 业务类型 | futures：交割、swap：永续  
 </orders> |  |  |  |  
@@ -35605,7 +35605,7 @@ fee_asset | true | string | 手续费币种 | （"USDT"...）
 liquidation_type | true | string | 强平类型 | 0:非强平类型，1：多空轧差， 2:部分接管，3：全部接管  
 is_tpsl | true | int | 是否设置止盈止损 | 1：是；0：否  
 contract_type | true | string | 合约类型 |
-swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
+swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 pair | true | string | 交易对 | 如：“BTC-USDT”  
 business_type | true | string | 业务类型 | futures：交割、swap：永续  
 </orders> |  |  |  |  
@@ -35814,7 +35814,7 @@ role | true | string | taker或maker |
 fee_asset | true | string | 手续费币种 | （"USDT"...）  
 real_profit | true | decimal | 真实收益（使用开仓均价计算，包含仓位跨结算的已实现盈亏。） |  
 contract_type | true | string | 合约类型 |
-swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
+swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 pair | true | string | 交易对 | 如：“BTC-USDT”  
 business_type | true | string | 业务类型 | futures：交割、swap：永续  
 </trades> |  |  |  |  
@@ -36098,7 +36098,7 @@ fee_asset | true | string | 手续费币种 | （"USDT"...）
 order_source | true | string | 订单来源 |
 system:系统、web:用户网页、api:用户API、m:用户M站、risk:风控系统、settlement:交割结算、ios：ios客户端、android：安卓客户端、windows：windows客户端、mac：mac客户端、trigger：计划委托触发、tpsl:止盈止损触发  
 contract_type | true | string | 合约类型 |
-swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
+swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 pair | true | string | 交易对 | 如：“BTC-USDT”  
 business_type | true | string | 业务类型 | futures：交割、swap：永续  
 </trades> |  |  |  |  
@@ -36193,7 +36193,7 @@ contract_code | false（请看备注） | string | 合约代码 | 永续："BTC-
 USDT-210625"...  
 pair | false（请看备注） | string | 交易对 | BTC-USDT  
 contract_type | false（请看备注） | string | 合约类型 |
-swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
+swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 volume | true | decimal | 委托数量（张） |  
 direction | true | string | 买卖方向 | “buy”:买，“sell”:卖  
 client_order_id | false | long | （API）客户自己填写和维护，必须为数字 |
@@ -36337,7 +36337,7 @@ contract_code | false（请看备注） | string | 合约代码 | 永续：“BT
 USDT-210625”...  
 pair | false（请看备注） | string | 交易对 | BTC-USDT  
 contract_type | false（请看备注） | string | 合约类型 |
-swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
+swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 trigger_type | true | string | 触发类型： ge大于等于(触发价比最新价大)；le小于(触发价比最新价小) |  
 trigger_price | true | decimal | 触发价，精度超过最小变动单位会报错 |  
 order_price | false | decimal | 委托价，精度超过最小变动单位会报错 |  
@@ -36453,7 +36453,7 @@ contract_code | false（请看备注） | string | 合约代码 | 永续：“BT
 USDT-210625”...  
 pair | false（请看备注） | string | 交易对 | BTC-USDT  
 contract_type | false（请看备注） | string | 合约类型 |
-swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
+swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 order_id | true | string | 用户订单ID（多个订单ID中间以","分隔,一次最多允许撤消10个订单 ） |  
   
 > Response
@@ -36571,7 +36571,7 @@ contract_code | false(请看备注) | string | 合约代码 | 永续：“BTC-US
 USDT-210625”...  
 pair | false(请看备注) | string | 交易对 | BTC-USDT  
 contract_type | false(请看备注) | string | 合约类型 |
-swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
+swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 direction | false | string | 买卖方向（不填默认全部） | "buy":买 "sell":卖  
 offset | false | string | 开平方向（不填默认全部） | "open":开 "close":平  
   
@@ -36790,7 +36790,7 @@ order_price_type | true | string | 订单报价类型 | 限价：limit
 ，最优5档：optimal_5，最优10档：optimal_10，最优20档：optimal_20  
 status | true | int | 订单状态 | 1:准备提交、2:已提交、3:报单中、8：撤单未找到、9：撤单中、10：失败'  
 contract_type | true | string | 合约类型 |
-swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
+swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 pair | true | string | 交易对 | 如：“BTC-USDT”  
 business_type | true | string | 业务类型 | futures：交割、swap：永续  
 </orders> |  |  |  |  
@@ -37030,7 +37030,7 @@ canceled_at | true | long | 撤单时间 |
 fail_code | true | int | 被触发时下order单失败错误码 |  
 fail_reason | true | string | 被触发时下order单失败原因 |  
 contract_type | true | string | 合约类型 |
-swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
+swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 pair | true | string | 交易对 | 如：“BTC-USDT”  
 business_type | true | string | 业务类型 | futures：交割、swap：永续  
 </orders> |  |  |  |  
@@ -37170,7 +37170,7 @@ contract_code | false（请看备注） | string | 合约代码 | 永续：“BT
 USDT210625”...  
 pair | false（请看备注） | string | 交易对 | BTC-USDT  
 contract_type | false（请看备注） | string | 合约类型 |
-swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
+swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 direction | true | string | 买卖方向 | buy:买入平空 sell:卖出平多  
 volume | true | decimal | 委托数量(张) |  
 tp_trigger_price | false | decimal | 止盈触发价格 |  
@@ -37304,7 +37304,7 @@ contract_code | false（请看备注） | string | 合约代码 | 永续："BTC-
 USDT-210625"...  
 pair | false（请看备注） | string | 交易对 | BTC-USDT  
 contract_type | false（请看备注） | string | 合约类型 |
-swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
+swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 order_id | true | string | 止盈止损订单ID（多个订单ID中间以","分隔,一次最多允许撤消10个订单 ） |  
   
 > Response
@@ -37404,7 +37404,7 @@ contract_code | false(请看备注) | string | 合约代码 | 永续："BTC-USDT
 USDT-210625"...  
 pair | false(请看备注) | string | 交易对 | BTC-USDT  
 contract_type | false(请看备注) | string | 合约类型 |
-swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
+swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 direction | false | string | 买卖方向（不填默认全部） | "buy":买 "sell":卖  
   
 > Response
@@ -37646,7 +37646,7 @@ source_order_id | true | string |
 relation_tpsl_order_id | true | string |
 关联的止盈止损单id（用户同时设置止盈止损单时，该字段才有值，否则数值为-1） |  
 contract_type | true | string | 合约类型 |
-swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
+swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 pair | true | string | 交易对 | 如：“BTC-USDT”  
 business_type | true | string | 业务类型 | futures：交割、swap：永续  
 </orders> |  |  |  |  
@@ -37872,7 +37872,7 @@ triggered_price | true | decimal | 被触发时的价格 |
 relation_order_id | true | string | 该字段为关联限价单的关联字段，未触发前数值为-1 |  
 update_time | true | long | 订单更新时间，单位：毫秒 |  
 contract_type | true | string | 合约类型 |
-swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
+swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 pair | true | string | 交易对 | 如：“BTC-USDT”  
 business_type | true | string | 业务类型 | futures：交割、swap：永续  
 </orders> |  |  |  |  
@@ -38175,7 +38175,7 @@ order_source | true | string | 订单来源 |
 fee_asset | true | string | 手续费币种 | （"BTC","ETH"...）  
 canceled_at | true | long | 撤单时间 |  
 contract_type | true | string | 合约类型 |
-swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
+swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 pair | true | string | 交易对 | 如：“BTC-USDT”  
 business_type | true | string | 业务类型 | futures：交割、swap：永续  
 <tpsl_order_info> | true | object array | 关联的止盈止损单信息 |  
@@ -38274,7 +38274,7 @@ contract_code | false（请看备注） | string | 合约代码 | 永续："BTC-
 USDT-210625"...  
 pair | false（请看备注） | string | 交易对 | BTC-USDT  
 contract_type | false（请看备注） | string | 合约类型 |
-swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
+swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 direction | true | string | 买卖方向 | buy:买 sell:卖  
 offset | true | string | 开平方向 | open:开 close:平  
 lever_rate | false | int | 杠杆倍数，开仓操作为必填，平仓操作为非必填 |  
@@ -38380,7 +38380,7 @@ contract_code | false (请看备注) | string | 合约代码 | 永续：“BTC-U
 USDT-210625”...  
 pair | false (请看备注) | string | 交易对 | BTC-USDT  
 contract_type | false (请看备注) | string | 合约类型 |
-swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
+swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 order_id | true | string | 用户跟踪委托订单ID（多个订单ID中间以","分隔,一次最多允许撤消10个订单 ） |  
   
 > Response:
@@ -38483,7 +38483,7 @@ contract_code | false(请看备注) | string | 合约代码 | 永续：“BTC-US
 USDT-210625”...  
 pair | false(请看备注) | string | 交易对 | BTC-USDT  
 contract_type | false(请看备注) | string | 合约类型 |
-swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
+swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 direction | false | string | 买卖方向（不填默认全部） | "buy":买 "sell":卖  
 offset | false | string | 开平方向（不填默认全部） | "open":开 "close":平  
   
@@ -38694,7 +38694,7 @@ is_active | true | int | 激活价格是否已激活 | 1：已激活；0：未�
 margin_mode | true | string | 保证金模式 | cross：全仓模式  
 margin_account | true | string | 保证金账户 | 比如：“BTC-USDT”  
 contract_type | true | string | 合约类型 |
-swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
+swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 pair | true | string | 交易对 | 如：“BTC-USDT”  
 business_type | true | string | 业务类型 | futures：交割、swap：永续  
 </orders> |  |  |  |  
@@ -38924,7 +38924,7 @@ relation_order_id | true | string | 该字段为关联限价单的关联字段�
 margin_mode | true | string | 保证金模式 | cross：全仓模式  
 margin_account | true | string | 保证金账户 | 比如：“BTC-USDT”  
 contract_type | true | string | 合约类型 |
-swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
+swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 pair | true | string | 交易对 | 如：“BTC-USDT”  
 business_type | true | string | 业务类型 | futures：交割、swap：永续  
 </orders> |  |  |  |  
@@ -41646,7 +41646,7 @@ fee_asset | true | string | 手续费币种 | “USDT”
 is_tpsl | true | int | 是否设置止盈止损 | 1：是；0：否  
 real_profit | true | decimal | 订单总真实收益（使用开仓均价计算，包含仓位跨结算的已实现盈亏。） |  
 contract_type | true | string | 合约类型 |
-swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
+swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 pair | true | string | 交易对 | 如：“BTC-USDT”  
 business_type | true | string | 业务类型 | futures：交割、swap：永续  
 <trade> | true | object array |  |  
@@ -42027,7 +42027,7 @@ liquidation_price | true | decimal | 预估强平价 |
 lever_rate | true | decimal | 杠杠倍数 |  
 adjust_factor | true | decimal | 调整系数 |  
 contract_type | true | string | 合约类型 |
-swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
+swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 pair | true | string | 交易对 | 如：“BTC-USDT”  
 business_type | true | string | 业务类型 | futures：交割、swap：永续  
 </contract_detail> |  |  |  |  
@@ -42042,7 +42042,7 @@ liquidation_price | true | decimal | 预估强平价 |
 lever_rate | true | decimal | 杠杠倍数 |  
 adjust_factor | true | decimal | 调整系数 |  
 contract_type | true | string | 合约类型 |
-swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
+swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 pair | true | string | 交易对 | 如：“BTC-USDT”  
 business_type | true | string | 业务类型 | futures：交割、swap：永续  
 </futures_contract_detail> |  |  |  |  
@@ -42374,7 +42374,7 @@ lever_rate | true | int | 杠杆倍数 |
 direction | true | string | 仓位方向 | "buy":买，即多仓 "sell":卖，即空仓  
 last_price | true | decimal | 最新成交价 |  
 contract_type | true | string | 合约类型 |
-swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
+swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 pair | true | string | 交易对 | 如：“BTC-USDT”  
 business_type | true | string | 业务类型 | futures：交割、swap：永续  
 </data> |  |  |  |  
@@ -42766,7 +42766,7 @@ only下单只受用户持仓数量限制，"lightning":闪电平仓，"optimal_5
 FOK下单，"lightning_fok"：闪电平仓-
 FOK下单，"optimal_5_fok"：最优5档-FOK下单，"optimal_10_fok"：最优10档-FOK下单，"optimal_20_fok"：最优20档-FOK下单  
 contract_type | true | string | 合约类型 |
-swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
+swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 pair | true | string | 交易对 | 如：“BTC-USDT”  
 business_type | true | string | 业务类型 | futures：交割、swap：永续  
 <trade> | true | object array |  |  
@@ -42936,7 +42936,7 @@ trade_turnover | true | decimal | 强平金额（计价币种） |
 price | true | decimal | 破产价格 |  
 created_at | true | long | 订单创建时间 |  
 contract_type | true | string | 合约类型 |
-swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
+swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 pair | true | string | 交易对 | 如：“BTC-USDT”  
 business_type | true | string | 业务类型 | futures：交割、swap：永续  
 </data> |  |  |  |  
@@ -43326,7 +43326,7 @@ contract_status | true | int | 合约状态 | 合约状态:
 support_margin_mode | true | string | 合约支持的保证金模式 |
 cross：全仓模式；isolated：逐仓模式；all：全逐仓都支持  
 contract_type | true | string | 合约类型 |
-swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
+swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 pair | true | string | 交易对 | 如：“BTC-USDT”  
 business_type | true | string | 业务类型 | futures：交割、swap：永续  
 delivery_date | true | string | 合约交割日期 | 如"20180720"  
@@ -43773,7 +43773,7 @@ canceled_at | true | long | 撤单时间 |
 fail_code | true | int | 被触发时下order单失败错误码 |  
 fail_reason | true | string | 被触发时下order单失败原因（英文） |  
 contract_type | true | string | 合约类型 |
-swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_ quarter（次季）  
+swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 pair | true | string | 交易对 | 如：“BTC-USDT”  
 business_type | true | string | 业务类型 | futures：交割、swap：永续  
 </data> |  |  |  |  
