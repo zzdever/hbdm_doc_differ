@@ -20,6 +20,7 @@ shell
     * 风险机制说明
     * 撮合机制说明
   * 更新日志
+    * 1.3.0 2022年01月17日 【历史委托接口的返回数据不在支持状态为（3:未成交, 4: 部分成交）的订单】
     * 1.2.9 2021年5月17日 【修改：母子账户划转（新增选填入参：client_order_id）】
     * 1.2.8 2021年5月12日 【新增：跟踪委托订单接口】
     * 1.2.7 2021年4月28日 【新增:获取市场最优挂单接口。修改：获取标记价格K线接口（支持symbol入参直接使用合约代码请求，例于：BTC210326）、订阅标记价格K线数据接口（支持symbol入参直接使用合约代码请求，例于：BTC210326）、请求标记价格K线数据接口（支持symbol入参直接使用合约代码请求，例于：BTC210326）】
@@ -278,6 +279,20 @@ cn/detail/360000293121) 来了解。
 6、卖出申报价格低于即时揭示的最高买入申报价格时，以即时揭示的最高买入申报价格为成交价
 
 # 更新日志
+
+## 1.3.0 2022年01月17日 【历史委托接口的返回数据不在支持状态为（3:未成交, 4: 部分成交）的订单】
+
+### 1、修改获取合约历史委托接口（返回数据中将不在支持状态为（ 3:未成交, 4: 部分成交）的订单）
+
+  * 接口名称：获取合约历史委托
+  * 接口类型：私有接口
+  * 接口URL：/api/v1/contract_hisorders
+
+### 2、修改组合查询合约历史委托接口（返回数据中将不在支持状态为（ 3:未成交, 4: 部分成交）的订单）
+
+  * 接口名称：组合查询合约历史委托
+  * 接口类型：私有接口
+  * 接口URL：/api/v1/contract_hisorders_exact
 
 ## 1.2.9 2021年5月17日 【修改：母子账户划转（新增选填入参：client_order_id）】
 
@@ -6946,8 +6961,8 @@ symbol | true | string | 品种代码 |  | 支持大小写,"BTC","ETH"...
 trade_type | true | int | 交易类型 |  | 0:全部,1:买入开多,2: 卖出开空,3: 买入平空,4: 卖出平多,5:
 卖出强平,6: 买入强平,7:交割平多,8: 交割平空, 11:减仓平多，12:减仓平空  
 type | true | int | 类型 |  | 1:所有订单,2:结束状态的订单  
-status | true | string | 订单状态 |  | 可查询多个状态，"3,4,5" , 0:全部,3:未成交, 4: 部分成交,5:
-部分成交已撤单,6: 全部成交,7:已撤单  
+status | true | string | 订单状态 |  | 可查询多个状态，"5,6,7" , 0:全部,5: 部分成交已撤单,6:
+全部成交,7:已撤单  
 create_date | true | int | 日期 |  | 可随意输入正整数, ，如果参数超过90则默认查询90天的数据  
 page_index | false | int | 页码，不填默认第1页 | 1 |  
 page_size | false | int | 每页条数，不填默认20,不得多于50 | 20 | [1-50]  
@@ -7037,7 +7052,7 @@ trade_volume | true | decimal | 成交数量 |
 trade_turnover | true | decimal | 成交总金额 |  
 fee | true | decimal | 手续费 |  
 trade_avg_price | true | decimal | 成交均价 |  
-status | true | int | 订单状态 | 3:未成交, 4: 部分成交,5: 部分成交已撤单,6: 全部成交,7:已撤单  
+status | true | int | 订单状态 | 5: 部分成交已撤单,6: 全部成交,7:已撤单  
 order_type | true | int | 订单类型 | 1:报单 、 2:撤单 、 3:强平、4:交割  
 fee_asset | true | string | 手续费币种 | （"BTC","ETH"...）  
 liquidation_type | true | string | 强平类型 | 0:非强平类型，1：多空轧差， 2:部分接管，3：全部接管  
@@ -7068,8 +7083,8 @@ symbol  | true  | string | 品种代码  | "BTC","ETH"...
 trade_type | true | int | 交易类型 | 0:全部,1:买入开多,2: 卖出开空,3: 买入平空,4: 卖出平多,5:
 卖出强平,6: 买入强平,7:交割平多,8: 交割平空, 11:减仓平多，12:减仓平空  
 type | true | int | 类型 | 1:所有订单,2:结束状态的订单  
-status | true | string | 订单状态 | 可查询多个状态，"3,4,5" , 0:全部,3:未成交, 4: 部分成交,5:
-部分成交已撤单,6: 全部成交,7:已撤单  
+status | true | string | 订单状态 | 可查询多个状态，"5,6,7" , 0:全部, 5: 部分成交已撤单,6:
+全部成交,7:已撤单  
 contract_code | false | string | 合约代码 |  
 order_price_type | false | string | 订单报价类型 | 订单报价类型 "limit":限价，"opponent":对手价
 ，"post_only":只做maker单,post
@@ -7198,7 +7213,7 @@ trade_volume | true | decimal | 成交数量 |
 trade_turnover | true | decimal | 成交总金额 |  
 fee | true | decimal | 手续费 |  
 trade_avg_price | true | decimal | 成交均价 |  
-status | true | int | 订单状态 | 1准备提交 2准备提交 3已提交 4部分成交 5部分成交已撤单 6全部成交 7已撤单 11撤单中  
+status | true | int | 订单状态 | 5部分成交已撤单 6全部成交 7已撤单 11撤单中  
 order_type | true | int | 订单类型 | 1:报单 、 2:撤单 、 3:强平、4:交割  
 fee_asset | true | string | 手续费币种 | （"BTC","ETH"...）  
 liquidation_type | true | string | 强平类型 | 0:非强平类型，1：多空轧差， 2:部分接管，3：全部接管  
