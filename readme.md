@@ -246,6 +246,10 @@ cn/detail/360000224641) 来了解。
 
 直连专线仅适用于更高级别的做市商。要确认您的帐户是否符合条件，请咨询您的专属客户经理。
 
+### 配置说明
+
+具体配置可以通过：[火币合约直连专线部署](https://github.com/hbdmapi/huobi_colocation/blob/main/%E7%81%AB%E5%B8%81%E5%90%88%E7%BA%A6%E7%9B%B4%E8%BF%9E%E4%B8%93%E7%BA%BF%E9%83%A8%E7%BD%B2.pdf)来了解。
+
 ## 风险机制说明
 
 ### 阶梯强制平仓
@@ -9062,7 +9066,7 @@ Client发送最近2次心跳message中的其中一个`ping`的值，WebSocket Se
 
 `{`
 
-`"op": "pong"`
+`"op": "error"`
 
 `"ts": "1492420473027",`
 
