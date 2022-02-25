@@ -23797,6 +23797,7 @@ shell
     * 风险机制说明
     * 撮合机制说明
   * 更新日志
+    * 1.1.5 2022年02月25日 【新增单向持仓接口的相关内容】
     * 1.1.4 2021年12月22日 【新增USDT交割合约接口内容】
     * 1.1.3 2021年5月17日 【修改：母子账户划转（新增选填入参：client_order_id）。同账号不同保证金账户的划转（新增选填入参：client_order_id）】
     * 1.1.2 2021年05月12日 【新增：跟踪委托订单接口。】
@@ -23903,6 +23904,8 @@ shell
     * 【通用】同账号不同保证金账户的划转
     * 【通用】获取用户的API指标禁用信息
   * 合约交易接口
+    * 【逐仓】切换持仓模式
+    * 【全仓】切换持仓模式
     * 【逐仓】合约下单
     * 【全仓】合约下单
     * 【逐仓】合约批量下单
@@ -24108,6 +24111,354 @@ cn/detail/900001326606) 来了解。
 6、卖出申报价格低于即时揭示的最高买入申报价格时，以即时揭示的最高买入申报价格为成交价
 
 # 更新日志
+
+## 1.1.5 2022年02月25日 【新增单向持仓接口的相关内容】
+
+### 1、新增切换持仓模式（逐仓）接口
+
+  * 接口名称：【逐仓】切换持仓模式
+  * 接口类型：私有接口
+  * 接口URL：/linear-swap-api/v1/swap_switch_position_mode
+
+### 2、新增切换持仓模式（全仓）接口
+
+  * 接口名称：【全仓】切换持仓模式
+  * 接口类型：私有接口
+  * 接口URL：/linear-swap-api/v1/swap_cross_switch_position_mode
+
+### 3、修改获取用户账户信息（逐仓）接口（返回参数data中，新增position_mode字段，表示当前合约的持仓模式。）
+
+  * 接口名称：【逐仓】获取用户账户信息
+  * 接口类型：私有接口
+  * 接口URL：/linear-swap-api/v1/swap_account_info
+
+### 4、修改获取用户账户信息（全仓）接口（返回参数data中，新增position_mode字段，表示当前合约的持仓模式。）
+
+  * 接口名称：【全仓】获取用户账户信息
+  * 接口类型：私有接口
+  * 接口URL：/linear-swap-api/v1/swap_cross_account_info
+
+### 5、修改获取单个子账户资产信息（逐仓）接口（返回参数data中，新增position_mode字段，表示当前合约的持仓模式。）
+
+  * 接口名称：【逐仓】获取单个子账户资产信息
+  * 接口类型：私有接口
+  * 接口URL：/linear-swap-api/v1/swap_sub_account_info
+
+### 6、修改获取单个子账户资产信息（全仓）接口（返回参数data中，新增position_mode字段，表示当前合约的持仓模式。）
+
+  * 接口名称：【全仓】获取单个子账户资产信息
+  * 接口类型：私有接口
+  * 接口URL：/linear-swap-api/v1/swap_cross_sub_account_info
+
+### 7、修改查询用户账户和持仓信息（逐仓）接口（返回参数data中，新增position_mode字段，表示当前合约的持仓模式。）
+
+  * 接口名称：【逐仓】查询用户账户和持仓信息
+  * 接口类型：私有接口
+  * 接口URL：/linear-swap-api/v1/swap_account_position_info
+
+### 8、修改查询用户账户和持仓信息（全仓）接口（返回参数data中，新增position_mode字段，表示当前合约的持仓模式。）
+
+  * 接口名称：【全仓】查询用户账户和持仓信息
+  * 接口类型：私有接口
+  * 接口URL：/linear-swap-api/v1/swap_cross_account_position_info
+
+### 9、修改订阅资产变动（逐仓）接口（返回参数data中，新增position_mode字段，表示当前合约的持仓模式。）
+
+  * 接口名称：【逐仓】订阅资产变动
+  * 接口类型：私有接口
+  * 订阅地址：accounts.$contract_code
+
+### 10、修改订阅资产变动（全仓）接口（返回参数data中，新增position_mode字段，表示当前合约的持仓模式。）
+
+  * 接口名称：【全仓】订阅资产变动
+  * 接口类型：私有接口
+  * 订阅地址：accounts_cross.$margin_account
+
+### 11、修改获取用户持仓信息（逐仓）接口（返回参数data中，新增position_mode字段，表示当前合约的持仓模式。）
+
+  * 接口名称：【逐仓】获取用户持仓信息
+  * 接口类型：私有接口
+  * 接口URL：/linear-swap-api/v1/swap_position_info
+
+### 12、修改获取用户持仓信息（全仓）接口（返回参数data中，新增position_mode字段，表示当前合约的持仓模式。）
+
+  * 接口名称：【全仓】获取用户持仓信息
+  * 接口类型：私有接口
+  * 接口URL：/linear-swap-api/v1/swap_cross_position_info
+
+### 13、修改获取单个子账户持仓信息（逐仓）接口（返回参数data中，新增position_mode字段，表示当前合约的持仓模式。）
+
+  * 接口名称：【逐仓】获取单个子账户持仓信息
+  * 接口类型：私有接口
+  * 接口URL：/linear-swap-api/v1/swap_sub_position_info
+
+### 14、修改获取单个子账户持仓信息（全仓）接口（返回参数data中，新增position_mode字段，表示当前合约的持仓模式。）
+
+  * 接口名称：【全仓】获取单个子账户持仓信息
+  * 接口类型：私有接口
+  * 接口URL：/linear-swap-api/v1/swap_cross_sub_position_info
+
+### 15、修改订阅持仓变动（逐仓）接口（返回参数data中，新增position_mode字段，表示当前合约的持仓模式。）
+
+  * 接口名称：【逐仓】订阅持仓变动
+  * 接口类型：私有接口
+  * 订阅地址：positions.$contract_code
+
+### 16、修改订阅持仓变动（全仓）接口（返回参数data中，新增position_mode字段，表示当前合约的持仓模式。）
+
+  * 接口名称：【全仓】订阅持仓变动
+  * 接口类型：私有接口
+  * 订阅地址：positions_cross.$contract_code
+
+###
+17、修改合约下单（逐仓）接口（新增选填入参reduce_only，表示是否为只减仓订单，1表示为只减仓订单，0表示为非只减仓订单。该参数在双向持仓模式下无效，在单向持仓模式下不填默认为0。入参offset（开平方向）字段改为非必填，在双向持仓模式下为必填字段，在单向持仓模式下为非必填，填仅可填“both”。）
+
+  * 接口名称：【逐仓】合约下单
+  * 接口类型：私有接口
+  * 接口URL：/linear-swap-api/v1/swap_order
+
+###
+18、修改合约下单（全仓）接口（新增选填入参reduce_only，表示是否为只减仓订单，1表示为只减仓订单，0表示为非只减仓订单。该参数在双向持仓模式下无效，在单向持仓模式下不填默认为0。入参offset（开平方向）字段改为非必填，在双向持仓模式下为必填字段，在单向持仓模式下为非必填，填仅可填“both”。）
+
+  * 接口名称：【全仓】合约下单
+  * 接口类型：私有接口
+  * 接口URL：/linear-swap-api/v1/swap_cross_order
+
+###
+19、修改合约批量下单（逐仓）接口（新增选填入参reduce_only，表示是否为只减仓订单，1表示为只减仓订单，0表示为非只减仓订单。该参数在双向持仓模式下无效，在单向持仓模式下不填默认为0。入参offset（开平方向）字段改为非必填，在双向持仓模式下为必填字段，在单向持仓模式下为非必填，填仅可填“both”。）
+
+  * 接口名称：【逐仓】合约批量下单
+  * 接口类型：私有接口
+  * 接口URL：/linear-swap-api/v1/swap_batchorder
+
+###
+20、修改合约批量下单（全仓）接口（新增选填入参reduce_only，表示是否为只减仓订单，1表示为只减仓订单，0表示为非只减仓订单。该参数在双向持仓模式下无效，在单向持仓模式下不填默认为0。入参offset（开平方向）字段改为非必填，在双向持仓模式下为必填字段，在单向持仓模式下为非必填，填仅可填“both”。）
+
+  * 接口名称：【全仓】合约批量下单
+  * 接口类型：私有接口
+  * 接口URL：/linear-swap-api/v1/swap_cross_batchorder
+
+###
+21、修改合约计划委托下单（逐仓）接口（新增选填入参reduce_only，表示是否为只减仓订单，1表示为只减仓订单，0表示为非只减仓订单。该参数在双向持仓模式下无效，在单向持仓模式下不填默认为0。入参offset（开平方向）字段改为非必填，在双向持仓模式下为必填字段，在单向持仓模式下为非必填，填仅可填“both”。）
+
+  * 接口名称：【逐仓】合约计划委托下单
+  * 接口类型：私有接口
+  * 接口URL：/linear-swap-api/v1/swap_trigger_order
+
+###
+22、修改合约计划委托下单（全仓）接口（新增选填入参reduce_only，表示是否为只减仓订单，1表示为只减仓订单，0表示为非只减仓订单。该参数在双向持仓模式下无效，在单向持仓模式下不填默认为0。入参offset（开平方向）字段改为非必填，在双向持仓模式下为必填字段，在单向持仓模式下为非必填，填仅可填“both”。）
+
+  * 接口名称：【全仓】合约计划委托下单
+  * 接口类型：私有接口
+  * 接口URL：/linear-swap-api/v1/swap_cross_trigger_order
+
+###
+23、修改跟踪委托下单（逐仓）接口（新增选填入参reduce_only，表示是否为只减仓订单，1表示为只减仓订单，0表示为非只减仓订单。该参数在双向持仓模式下无效，在单向持仓模式下不填默认为0。入参offset（开平方向）字段改为非必填，在双向持仓模式下为必填字段，在单向持仓模式下为非必填，填仅可填“both”。）
+
+  * 接口名称：【逐仓】跟踪委托下单
+  * 接口类型：私有接口
+  * 接口URL：/linear-swap-api/v1/swap_track_order
+
+###
+24、修改跟踪委托下单（全仓）接口（新增选填入参reduce_only，表示是否为只减仓订单，1表示为只减仓订单，0表示为非只减仓订单。该参数在双向持仓模式下无效，在单向持仓模式下不填默认为0。入参offset（开平方向）字段改为非必填，在双向持仓模式下为必填字段，在单向持仓模式下为非必填，填仅可填“both”。）
+
+  * 接口名称：【全仓】跟踪委托下单
+  * 接口类型：私有接口
+  * 接口URL：/linear-swap-api/v1/swap_cross_track_order
+
+### 25、修改获取用户的合约订单信息（逐仓）接口（返回参数data中，新增reduce_only字段，表示是否为只减仓。）
+
+  * 接口名称：【逐仓】获取用户的合约订单信息
+  * 接口类型：私有接口
+  * 接口URL：/linear-swap-api/v1/swap_order_info
+
+### 26、修改获取用户的合约订单信息（全仓）接口（返回参数data中，新增reduce_only字段，表示是否为只减仓。）
+
+  * 接口名称：【全仓】获取用户的合约订单信息
+  * 接口类型：私有接口
+  * 接口URL：/linear-swap-api/v1/swap_cross_order_info
+
+### 27、修改获取用户的合约订单明细信息（逐仓）接口（返回参数data中，新增reduce_only字段，表示是否为只减仓。）
+
+  * 接口名称：【逐仓】获取用户的合约订单明细信息
+  * 接口类型：私有接口
+  * 接口URL：/linear-swap-api/v1/swap_order_detail
+
+### 28、修改获取用户的合约订单明细信息（全仓）接口（返回参数data中，新增reduce_only字段，表示是否为只减仓。）
+
+  * 接口名称：【全仓】获取用户的合约订单明细信息
+  * 接口类型：私有接口
+  * 接口URL：/linear-swap-api/v1/swap_cross_order_detail
+
+###
+29、修改获取用户的合约当前未成交委托（逐仓）接口（trade_type入参新增17买入（单向持仓）和18卖出（单向持仓）枚举值，同时返回参数orders中，新增reduce_only字段，表示是否为只减仓。）
+
+  * 接口名称：【逐仓】获取用户的合约当前未成交委托
+  * 接口类型：私有接口
+  * 接口URL：/linear-swap-api/v1/swap_openorders
+
+###
+30、修改获取用户的合约当前未成交委托（全仓）接口（trade_type入参新增17买入（单向持仓）和18卖出（单向持仓）枚举值，同时返回参数orders中，新增reduce_only字段，表示是否为只减仓。）
+
+  * 接口名称：【全仓】获取用户的合约当前未成交委托
+  * 接口类型：私有接口
+  * 接口URL：/linear-swap-api/v1/swap_cross_openorders
+
+###
+31、修改获取用户的合约历史委托（逐仓）接口（trade_type入参新增17买入（单向持仓）和18卖出（单向持仓）枚举值，同时返回参数orders中，新增reduce_only字段，表示是否为只减仓。）
+
+  * 接口名称：【逐仓】获取用户的合约历史委托
+  * 接口类型：私有接口
+  * 接口URL：/linear-swap-api/v1/swap_hisorders
+
+###
+32、修改获取用户的合约历史委托（全仓）接口（trade_type入参新增17买入（单向持仓）和18卖出（单向持仓）枚举值，同时返回参数orders中，新增reduce_only字段，表示是否为只减仓。）
+
+  * 接口名称：【全仓】获取用户的合约历史委托
+  * 接口类型：私有接口
+  * 接口URL：/linear-swap-api/v1/swap_cross_hisorders
+
+###
+33、修改组合查询用户历史委托（逐仓）接口（trade_type入参新增17买入（单向持仓）和18卖出（单向持仓）枚举值，同时返回参数orders中，新增reduce_only字段，表示是否为只减仓。）
+
+  * 接口名称：【逐仓】组合查询用户历史委托
+  * 接口类型：私有接口
+  * 接口URL：/linear-swap-api/v1/swap_hisorders_exact
+
+###
+34、修改组合查询用户历史委托（全仓）接口（trade_type入参新增17买入（单向持仓）和18卖出（单向持仓）枚举值，同时返回参数orders中，新增reduce_only字段，表示是否为只减仓。）
+
+  * 接口名称：【全仓】组合查询用户历史委托
+  * 接口类型：私有接口
+  * 接口URL：/linear-swap-api/v1/swap_cross_hisorders_exact
+
+###
+35、修改获取用户的成交记录（逐仓）接口（trade_type入参新增17买入（单向持仓）和18卖出（单向持仓）枚举值，同时返回参数trades中，新增reduce_only字段，表示是否为只减仓。）
+
+  * 接口名称：【逐仓】获取用户的成交记录
+  * 接口类型：私有接口
+  * 接口URL：/linear-swap-api/v1/swap_matchresults
+
+###
+36、修改获取用户的成交记录（全仓）接口（trade_type入参新增17买入（单向持仓）和18卖出（单向持仓）枚举值，同时返回参数trades中，新增reduce_only字段，表示是否为只减仓。）
+
+  * 接口名称：【全仓】获取用户的成交记录
+  * 接口类型：私有接口
+  * 接口URL：/linear-swap-api/v1/swap_cross_matchresults
+
+###
+37、修改组合查询用户成交记录（逐仓）接口（trade_type入参新增17买入（单向持仓）和18卖出（单向持仓）枚举值，同时返回参数trades中，新增reduce_only字段，表示是否为只减仓。）
+
+  * 接口名称：【逐仓】组合查询用户成交记录
+  * 接口类型：私有接口
+  * 接口URL：/linear-swap-api/v1/swap_matchresults_exact
+
+###
+38、修改组合查询用户成交记录（全仓）接口（trade_type入参新增17买入（单向持仓）和18卖出（单向持仓）枚举值，同时返回参数trades中，新增reduce_only字段，表示是否为只减仓。）
+
+  * 接口名称：【全仓】组合查询用户成交记录
+  * 接口类型：私有接口
+  * 接口URL：/linear-swap-api/v1/swap_cross_matchresults_exact
+
+###
+39、修改获取计划委托当前委托（逐仓）接口（trade_type入参新增17买入（单向持仓）和18卖出（单向持仓）枚举值，同时返回参数orders中，新增reduce_only字段，表示是否为只减仓。）
+
+  * 接口名称：【逐仓】获取计划委托当前委托
+  * 接口类型：私有接口
+  * 接口URL：/linear-swap-api/v1/swap_trigger_openorders
+
+###
+40、修改获取计划委托当前委托（全仓）接口（trade_type入参新增17买入（单向持仓）和18卖出（单向持仓）枚举值，同时返回参数orders中，新增reduce_only字段，表示是否为只减仓。）
+
+  * 接口名称：【全仓】获取计划委托当前委托  
+
+  * 接口类型：私有接口
+  * 接口URL：/linear-swap-api/v1/swap_cross_trigger_openorders
+
+###
+41、修改获取计划委托历史委托（逐仓）接口（trade_type入参新增17买入（单向持仓）和18卖出（单向持仓）枚举值，同时返回参数orders中，新增reduce_only字段，表示是否为只减仓。）
+
+  * 接口名称：【逐仓】获取计划委托历史委托  
+
+  * 接口类型：私有接口
+  * 接口URL：/linear-swap-api/v1/swap_trigger_hisorders
+
+###
+42、修改获取计划委托历史委托（全仓）接口（trade_type入参新增17买入（单向持仓）和18卖出（单向持仓）枚举值，同时返回参数orders中，新增reduce_only字段，表示是否为只减仓。）
+
+  * 接口名称：【全仓】获取计划委托历史委托  
+
+  * 接口类型：私有接口
+  * 接口URL：/linear-swap-api/v1/swap_cross_trigger_hisorders 
+
+###
+43、修改获取跟踪委托当前委托（逐仓）接口（trade_type入参新增17买入（单向持仓）和18卖出（单向持仓）枚举值，同时返回参数orders中，新增reduce_only字段，表示是否为只减仓。）
+
+  * 接口名称：【逐仓】获取跟踪委托当前委托
+  * 接口类型：私有接口
+  * 接口URL：/linear-swap-api/v1/swap_track_openorders
+
+###
+44、修改获取跟踪委托当前委托（全仓）接口（trade_type入参新增17买入（单向持仓）和18卖出（单向持仓）枚举值，同时返回参数orders中，新增reduce_only字段，表示是否为只减仓。）
+
+  * 接口名称：【全仓】获取跟踪委托当前委托  
+
+  * 接口类型：私有接口
+  * 接口URL：/linear-swap-api/v1/swap_cross_track_openorders
+
+###
+45、修改获取跟踪委托历史委托（逐仓）接口（trade_type入参新增17买入（单向持仓）和18卖出（单向持仓）枚举值，同时返回参数orders中，新增reduce_only字段，表示是否为只减仓。）
+
+  * 接口名称：【逐仓】获取跟踪委托历史委托
+  * 接口类型：私有接口
+  * 接口URL：/linear-swap-api/v1/swap_track_hisorders
+
+###
+46、修改获取跟踪委托历史委托（全仓）接口（trade_type入参新增17买入（单向持仓）和18卖出（单向持仓）枚举值，同时返回参数orders中，新增reduce_only字段，表示是否为只减仓。）
+
+  * 接口名称：【全仓】获取跟踪委托历史委托  
+
+  * 接口类型：私有接口
+  * 接口URL：/linear-swap-api/v1/swap_cross_track_hisorders
+
+### 47、修改订阅订单成交数据（逐仓）接口（返回参数新增reduce_only字段，表示是否为只减仓。）
+
+  * 接口名称：【逐仓】订阅订单成交数据
+  * 接口类型：私有接口
+  * 订阅地址：orders.$contract_code
+
+### 48、修改订阅订单成交数据（全仓）接口（返回参数新增reduce_only字段，表示是否为只减仓。）
+
+  * 接口名称：【全仓】订阅订单成交数据  
+
+  * 接口类型：私有接口
+  * 订阅地址：orders_cross.$contract_code
+
+### 49、修改订阅撮合订单成交数据（逐仓）接口（返回参数新增reduce_only字段，表示是否为只减仓。）
+
+  * 接口名称：【逐仓】订阅撮合订单成交数据
+  * 接口类型：私有接口
+  * 订阅地址：matchOrders.$contract_code
+
+### 50、修改订阅撮合订单成交数据（全仓）接口（返回参数新增reduce_only字段，表示是否为只减仓。）
+
+  * 接口名称：【全仓】订阅撮合订单成交数据  
+
+  * 接口类型：私有接口
+  * 订阅地址：matchOrders_cross.$contract_code
+
+### 51、修改订阅计划委托订单变动（逐仓）接口（返回参数data中，新增reduce_only字段，表示是否为只减仓。）
+
+  * 接口名称：【逐仓】订阅计划委托订单变动
+  * 接口类型：私有接口
+  * 订阅地址：trigger_order.$contract_code
+
+### 52、修改订阅计划委托订单变动（全仓）接口（返回参数data中，新增reduce_only字段，表示是否为只减仓。）
+
+  * 接口名称：【全仓】订阅计划委托订单变动  
+
+  * 接口类型：私有接口
+  * 订阅地址：trigger_order_cross.$contract_code
 
 ## 1.1.4 2021年12月22日 【新增USDT交割合约接口内容】
 
@@ -26126,6 +26477,10 @@ GET | 【通用】获取预测资金费率的K线数据 | 否
 【全仓】获取用户资产和持仓信息 | 是  
 读取 | 账户接口 | 全仓 | /linear-swap-api/v1/swap_cross_available_level_rate | POST |
 【全仓】获取用户当前合约杠杆倍数 | 是  
+交易 | 交易接口 | 逐仓 | /linear-swap-api/v1/swap_switch_position_mode | POST |
+【逐仓】切换持仓模式 | 是  
+交易 | 交易接口 | 全仓 | /linear-swap-api/v1/swap_cross_switch_position_mode | POST |
+【全仓】切换持仓模式 | 是  
 交易 | 交易接口 | 逐仓 | /linear-swap-api/v1/swap_order | POST | 【逐仓】合约下单 | 是  
 交易 | 交易接口 | 逐仓 | /linear-swap-api/v1/swap_batchorder | POST | 【逐仓】合约批量下单 | 是  
 交易 | 交易接口 | 逐仓 | /linear-swap-api/v1/swap_switch_lever_rate | POST | 【逐仓】切换杠杆
@@ -26967,6 +27322,23 @@ ts | true | long | 当前系统时间戳 |
 1453 | 计划委托订单数量超出平台数量限制, 暂时无法下单  
 1454 | 止盈止损订单数量超出平台数量限制, 暂时无法下单  
 1455 | 跟踪委托订单数量超出平台数量限制, 暂时无法下单  
+1484 | 反向开仓单中存在只减仓单  
+1485 | 网格交易不支持单向持仓模式下单  
+1486 | 暂不支持单向持仓模式  
+1487 | 您暂无单向持仓模式权限  
+1488 | 暂不支持在单向持仓模式下开仓  
+1489 | 暂不支持在单向持仓模式下平仓  
+1490 | 先平后开超过张数限制  
+1491 | 只减仓参数错误  
+1492 | 只减仓订单数量超过可平量  
+1493 | 当前有挂单，不能调整持仓模式  
+1494 | 当前有持仓，不能调整持仓模式  
+1495 | 当前有网格订单，不能调整持仓模式  
+1496 | 当前品种非交易中，不能调整持仓模式  
+1497 | 持仓模式传参有误  
+1498 | 保证金账号有误  
+1499 | 当前为双向持仓模式，不支持单向持仓模式下单  
+1500 | 当前为单向持仓模式，不支持双向持仓模式下单  
 12001 | 无效的提交时间  
 12002 | 错误的签名版本  
 12003 | 错误的签名方法  
@@ -29970,7 +30342,7 @@ symbol | true | string | 品种代码 |
 contract_code | true | string | 合约代码 | 永续："BTC-USDT", 交割："BTC-USDT-210625" ...  
 created_at | true | long | 强平时间 |  
 direction | true | string | "buy":买 "sell":卖 |  
-offset | true | string | "open":开 "close":平 |  
+offset | true | string | "open":开 "close":平 "both":单向持仓 |  
 price | true | decimal | 破产价格 |  
 volume | true | decimal | 强平数量（张） |  
 amount | true | decimal | 强平数量（币） |  
@@ -30342,7 +30714,8 @@ contract_code | false | string | 合约代码 | "BTC-USDT"... ,如果缺省，�
                 "contract_code": "BTC-USDT",
                 "margin_asset": "USDT",
                 "margin_mode": "isolated",
-                "margin_account": "BTC-USDT"
+                "margin_account": "BTC-USDT",
+                "position_mode": "dual_side"
             }
         ],
         "ts": 1603697381238
@@ -30374,6 +30747,7 @@ lever_rate | true | decimal | 杠杠倍数 |
 adjust_factor | true | decimal | 调整系数 |  
 margin_mode | true | string | 保证金模式 | isolated：逐仓模式  
 margin_account | true | string | 保证金账户 | 比如“BTC-USDT”  
+position_mode | true | string | 持仓模式 | single_side：单向持仓；dual_side：双向持仓  
 </data> |  |  |  |  
   
 ## 【全仓】获取用户账户信息
@@ -30453,6 +30827,7 @@ margin_account | false | string | 保证金账户，不填则返回所有全仓�
                 "profit_unreal": 0,
                 "withdraw_available": 1E+4,
                 "risk_rate": null,
+                "position_mode": "dual_side",
                 "contract_detail": [
                     {
                         "symbol": "BTC",
@@ -30494,6 +30869,7 @@ profit_real | true | decimal | 已实现盈亏 |
 profit_unreal | true | decimal | 未实现盈亏（所有全仓仓位汇总） |  
 withdraw_available | true | decimal | 可划转数量 |  
 risk_rate | true | decimal | 保证金率 |  
+position_mode | true | string | 持仓模式 | single_side：单向持仓；dual_side：双向持仓  
 <contract_detail> | true | object array | 支持永续的所有合约的相关字段 |  
 symbol | true | string | 品种代码 | "BTC","ETH"...  
 contract_code | true | string | 合约代码 | 永续："BTC-USDT" ...  
@@ -30565,7 +30941,9 @@ contract_code | false | string | 合约代码 | "BTC-USDT"... ,如果缺省，�
                 "last_price": 13068,
                 "margin_asset": "USDT",
                 "margin_mode": "isolated",
-                "margin_account": "BTC-USDT"
+                "margin_account": "BTC-USDT",
+                "position_mode": "dual_side"
+    
             }
         ],
         "ts": 1603697821846
@@ -30597,6 +30975,7 @@ direction | true | string | 仓位方向 | "buy":买，即多仓 "sell":卖，�
 last_price | true | decimal | 最新价 |  
 margin_mode | true | string | 保证金模式 | isolated：逐仓模式  
 margin_account | true | string | 保证金账户 | 比如“BTC-USDT”  
+position_mode | true | string | 持仓模式 | single_side：单向持仓；dual_side：双向持仓  
 </data> |  |  |  |  
   
 #### 备注
@@ -30649,7 +31028,8 @@ swap（永续）、this_week（当周）、next_week（次周）、quarter（当
                 "margin_account": "USDT",
                 "contract_type": "swap",
                 "pair": "BTC-USDT",
-                "business_type": "swap"
+                "business_type": "swap",
+                "position_mode": "dual_side"
             },
             {
                 "symbol": "BTC",
@@ -30671,7 +31051,8 @@ swap（永续）、this_week（当周）、next_week（次周）、quarter（当
                 "margin_account": "USDT",
                 "contract_type": "this_week",
                 "pair": "BTC-USDT",
-                "business_type": "futures"
+                "business_type": "futures",
+                "position_mode": "dual_side"
             }
         ],
         "ts": 1638758525147
@@ -30707,6 +31088,7 @@ contract_type | true | string | 合约类型 |
 swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 pair | true | string | 交易对 | 如：“BTC-USDT”  
 business_type | true | string | 业务类型 | futures：交割、swap：永续  
+position_mode | true | string | 持仓模式 | single_side：单向持仓；dual_side：双向持仓  
 </data> |  |  |  |  
   
 ## 【逐仓】查询用户账户和持仓信息
@@ -30766,12 +31148,14 @@ contract_code | true | string | 合约代码 | "BTC-USDT"...
                         "last_price": 13069.9,
                         "margin_asset": "USDT",
                         "margin_mode": "isolated",
-                        "margin_account": "BTC-USDT"
+                        "margin_account": "BTC-USDT",
+                        "position_mode": "dual_side"
                     }
                 ],
                 "margin_asset": "USDT",
                 "margin_mode": "isolated",
-                "margin_account": "BTC-USDT"
+                "margin_account": "BTC-USDT",
+                "position_mode": "dual_side"
             }
         ],
         "ts": 1603697944138
@@ -30802,6 +31186,7 @@ lever_rate | true | decimal | 杠杠倍数 |
 adjust_factor | true | decimal | 调整系数 |  
 margin_mode | true | string | 保证金模式 | isolated：逐仓模式  
 margin_account | true | string | 保证金账户 | 比如“BTC-USDT”  
+position_mode | true | string | 持仓模式 | single_side：单向持仓；dual_side：双向持仓  
 <positions> | true | object array |  |  
 symbol | true | string | 品种代码 | "BTC","ETH"...  
 contract_code | true | string | 合约代码 | "BTC-USDT" ...  
@@ -30820,6 +31205,7 @@ direction | true | string | 仓位方向 | "buy":买，即多仓 "sell":卖，�
 last_price | true | decimal | 最新价 |  
 margin_mode | true | string | 保证金模式 | isolated：逐仓模式  
 margin_account | true | string | 保证金账户 | 比如“BTC-USDT”  
+position_mode | true | string | 持仓模式 | single_side：单向持仓；dual_side：双向持仓  
 </positions> |  |  |  |  
 </data> |  |  |  |  
   
@@ -30864,7 +31250,8 @@ margin_account | true | string | 保证金账户 | "USDT"，目前只有一个�
                     "margin_account": "USDT",
                     "contract_type": "swap",
                     "pair": "BTC-USDT",
-                    "business_type": "swap"
+                    "business_type": "swap",
+                    "position_mode": "dual_side"
                 },
                 {
                     "symbol": "BTC",
@@ -30886,7 +31273,8 @@ margin_account | true | string | 保证金账户 | "USDT"，目前只有一个�
                     "margin_account": "USDT",
                     "contract_type": "this_week",
                     "pair": "BTC-USDT",
-                    "business_type": "futures"
+                    "business_type": "futures",
+                    "position_mode": "dual_side"
                 }
             ],
             "futures_contract_detail": [
@@ -30944,6 +31332,7 @@ margin_account | true | string | 保证金账户 | "USDT"，目前只有一个�
             "profit_unreal": 0.071100000000000000,
             "withdraw_available": 9716.36661679,
             "risk_rate": 4752.827989089613978802,
+            "position_mode": "dual_side",
             "contract_detail": [
                 {
                     "symbol": "BTC",
@@ -30984,6 +31373,7 @@ profit_real | true | decimal | 已实现盈亏 |
 profit_unreal | true | decimal | 未实现盈亏（所有全仓仓位汇总） |  
 withdraw_available | true | decimal | 可划转数量 |  
 risk_rate | true | decimal | 保证金率 |  
+position_mode | true | string | 持仓模式 | single_side：单向持仓；dual_side：双向持仓  
 <contract_detail> | true | object array | 支持全仓的永续合约的相关字段 |  
 symbol | true | string | 品种代码 | "BTC","ETH"...  
 contract_code | true | string | 合约代码 | 永续："BTC-USDT" ...  
@@ -31037,6 +31427,7 @@ contract_type | true | string | 合约类型 |
 swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 pair | true | string | 交易对 | 如：“BTC-USDT”  
 business_type | true | string | 业务类型 | futures：交割、swap：永续  
+position_mode | true | string | 持仓模式 | single_side：单向持仓；dual_side：双向持仓  
 </positions> |  |  |  |  
 </data> |  |  |  |  
   
@@ -31407,7 +31798,8 @@ sub_uid | true | long | 子账户的UID |
                 "contract_code": "BTC-USDT",
                 "margin_asset": "USDT",
                 "margin_mode": "isolated",
-                "margin_account": "BTC-USDT"
+                "margin_account": "BTC-USDT",
+                "position_mode": "dual_side"
             }
         ],
         "ts": 1603698523200
@@ -31439,6 +31831,7 @@ adjust_factor | true | decimal | 调整系数 |
 margin_static | true | decimal | 静态权益 |  
 margin_mode | true | string | 保证金模式 | isolated：逐仓模式  
 margin_account | true | string | 保证金账户 | 比如“BTC-USDT”  
+position_mode | true | string | 持仓模式 | single_side：单向持仓；dual_side：双向持仓  
 </data> |  |  |  |  
   
 #### 备注
@@ -31523,6 +31916,7 @@ margin_account | false | string | 保证金账户，不填则返回所有全仓�
                 "profit_unreal": 0,
                 "withdraw_available": 5E+2,
                 "risk_rate": null,
+                "position_mode": "dual_side",
                 "contract_detail": [
                     {
                         "symbol": "BTC",
@@ -31564,6 +31958,7 @@ profit_real | true | decimal | 已实现盈亏 |
 profit_unreal | true | decimal | 未实现盈亏 |  
 withdraw_available | true | decimal | 可划转数量 |  
 risk_rate | true | decimal | 保证金率 |  
+position_mode | true | string | 持仓模式 | single_side：单向持仓；dual_side：双向持仓  
 <contract_detail> | true | object array | 支持全仓的所有合约的相关字段 |  
 symbol | true | string | 品种代码 | "BTC","ETH"...  
 contract_code | true | string | 合约代码 | "BTC-USDT" ...  
@@ -31640,7 +32035,8 @@ sub_uid | true | long | 子账户的UID |
                 "last_price": 13038.7,
                 "margin_asset": "USDT",
                 "margin_mode": "isolated",
-                "margin_account": "BTC-USDT"
+                "margin_account": "BTC-USDT",
+                "position_mode": "dual_side"
             }
         ],
         "ts": 1603699081114
@@ -31671,6 +32067,7 @@ direction | true | string | 仓位方向 | "buy":买，即多仓 "sell":卖，�
 last_price | true | decimal | 最新价 |  
 margin_mode | true | string | 保证金模式 | isolated：逐仓模式  
 margin_account | true | string | 保证金账户 | 比如“BTC-USDT”  
+position_mode | true | string | 持仓模式 | single_side：单向持仓；dual_side：双向持仓  
 </data> |  |  |  |  
   
 ## 【全仓】查询单个子账户持仓信息
@@ -31719,7 +32116,8 @@ swap（永续）、this_week（当周）、next_week（次周）、quarter（当
                 "margin_account": "USDT",
                 "contract_type": "quarter",
                 "pair": "BTC-USDT",
-                "business_type": "futures"
+                "business_type": "futures",
+                "position_mode": "dual_side"
             }
         ],
         "ts": 1638759509329
@@ -31754,6 +32152,7 @@ contract_type | true | string | 合约类型 |
 swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 pair | true | string | 交易对 | 如：“BTC-USDT”  
 business_type | true | string | 业务类型 | futures：交割、swap：永续  
+position_mode | true | string | 持仓模式 | single_side：单向持仓；dual_side：双向持仓  
 </data> |  |  |  |  
   
 ## 【通用】查询用户财务记录
@@ -33300,6 +33699,88 @@ is_active | true | int | 该指标是否开启 |
   
 # 合约交易接口
 
+## 【逐仓】切换持仓模式
+
+  * POST `/linear-swap-api/v1/swap_switch_position_mode`
+
+#### 备注
+
+  * 该接口仅支持逐仓模式
+
+### 请求参数
+
+**参数名称** | **是否必须** | **类型** | **描述** | **取值范围**  
+---|---|---|---|---  
+margin_account | true | string | 保证金账户 | 比如： "BTC-USDT"，"ETH-USDT" ...  
+position_mode | true | string | 持仓模式 | single_side：单向持仓；dual_side：双向持仓  
+  
+> response
+    
+    
+    {
+        "status":"ok",
+        "data":[
+            {
+                "margin_account":"BTC-USDT",
+                "position_mode":"single_side"
+            }
+        ],
+        "ts":1566899973811
+    }
+    
+
+### 返回参数
+
+**参数名称** | **是否必须** | **类型** | **描述** | **取值范围**  
+---|---|---|---|---  
+status | true | string | 请求处理结果 | "ok" , "error"  
+<data> | true | object array |  | 字典数据  
+margin_account | true | string | 保证金账户 | 比如： "BTC-USDT"，"ETH-USDT" ...  
+position_mode | true | string | 持仓模式 | single_side：单向持仓；dual_side：双向持仓  
+</data> |  |  |  |  
+ts | true | long | 响应生成时间点，单位：毫秒 |  
+  
+## 【全仓】切换持仓模式
+
+  * POST `/linear-swap-api/v1/swap_cross_switch_position_mode`
+
+#### 备注
+
+  * 该接口仅支持全仓模式
+
+### 请求参数
+
+**参数名称** | **是否必须** | **类型** | **描述** | **取值范围**  
+---|---|---|---|---  
+margin_account | true | string | 保证金账户 | 比如： "USDT"  
+position_mode | true | string | 持仓模式 | single_side：单向持仓；dual_side：双向持仓  
+  
+> response
+    
+    
+    {
+        "status":"ok",
+        "data":[
+            {
+                "margin_account":"USDT",
+                "position_mode":"single_side"
+            }
+        ],
+        "ts":1566899973811
+    }
+    
+
+### 返回参数
+
+**参数名称** | **是否必须** | **类型** | **描述** | **取值范围**  
+---|---|---|---|---  
+status | true | string | 请求处理结果 | "ok" , "error"  
+<data> | true | object array |  | 字典数据  
+margin_account | true | string | 保证金账户 | 比如："USDT"  
+position_mode | true | string | 持仓模式 | single_side：单向持仓；dual_side：双向持仓  
+</data> |  |  |  |  
+ts | true | long | 响应生成时间点，单位：毫秒 |  
+  
 ## 【逐仓】合约下单
 
 ### 示例
@@ -33335,11 +33816,13 @@ is_active | true | int | 该指标是否开启 |
 参数名 | 参数类型 | 必填 | 描述 | 取值范围  
 ---|---|---|---|---  
 contract_code | string  | true  | 合约代码  | "BTC-USDT"...  
+reduce_only | int | false | 是否为只减仓订单（该字段在双向持仓模式下无效，在单向持仓模式下不填默认为0。） |
+0:表示为非只减仓订单，1:表示为只减仓订单  
 client_order_id | long | false | 客户自己填写和维护，必须为数字 | [1-9223372036854775807]  
 price | decimal | false | 价格 |  
 volume | long | true | 委托数量(张) |  
 direction | string | true | 仓位方向 | "buy":买 "sell":卖  
-offset | string | true | 开平方向 | "open":开 "close":平  
+offset | string | false(请看备注) | 开平方向 | "open":开 "close":平 “both”:单向持仓  
 lever_rate | int | true |
 杠杆倍数[“开仓”若有10倍多单，就不能再下20倍多单;首次使用高倍杠杆(>20倍)，请使用主账号登录web端同意高倍杠杆协议后，才能使用接口下高倍杠杆(>20倍)]
 |  
@@ -33367,6 +33850,8 @@ sl_order_price_type | string | false | 止损委托类型 | 不填默认为limit
   * 只有开仓订单才支持设置止盈止损。
 
   * 止盈触发价格为设置止盈单必填字段，止损触发价格为设置止损单必填字段；若缺省触发价格字段则不会设置对应的止盈单或止损单。
+
+  * offset 在双向持仓模式下为必填字段。在单向持仓模式下为非必填，填仅可填“both”。
 
 ### 开平方向
 
@@ -33448,11 +33933,13 @@ USDT-210625"...
 pair | false（请看备注） | string | 交易对 | BTC-USDT  
 contract_type | false（请看备注） | string | 合约类型 |
 swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
+reduce_only | false | int | 是否为只减仓订单（该字段在双向持仓模式下无效，在单向持仓模式下不填默认为0。） |
+0:表示为非只减仓订单，1:表示为只减仓订单  
 client_order_id | false | long | 客户自己填写和维护，必须为数字 | [1-9223372036854775807]  
 price | false | decimal | 价格 |  
 volume | true | long | 委托数量(张) |  
 direction | true | string | 仓位方向 | "buy":买 "sell":卖  
-offset | true | string | 开平方向 | "open":开 "close":平  
+offset | false（请看备注） | string | 开平方向 | "open":开 "close":平 “both”:单向持仓  
 lever_rate | true | int |
 杠杆倍数,“开仓”若有10倍多单，就不能再下20倍多单;首次使用高倍杠杆(>20倍)，请使用主账号登录web端同意高倍杠杆协议后，才能使用接口下高倍杠杆(>20倍)]
 |  
@@ -33480,6 +33967,8 @@ sl_order_price_type | string | false | 止损委托类型 | 不填默认为limit
   * 只有开仓订单才支持设置止盈止损。
 
   * 止盈触发价格为设置止盈单必填字段，止损触发价格为设置止损单必填字段；若缺省触发价格字段则不会设置对应的止盈单或止损单。
+
+  * offset 在双向持仓模式下为必填字段。在单向持仓模式下为非必填，填仅可填“both”。
 
 ### 开平方向
 
@@ -33582,11 +34071,13 @@ orders_data | List<Object> |  |
 参数名 | 参数类型 | 必填 | 描述 | 取值范围  
 ---|---|---|---|---  
 contract_code | true  | string  | 合约代码  | "BTC-USDT"...  
+reduce_only | false | int | 是否为只减仓订单（该字段在双向持仓模式下无效，在单向持仓模式下不填默认为0。） |
+0:表示为非只减仓订单，1:表示为只减仓订单  
 client_order_id | false | long | 客户自己填写和维护，必须为数字 | [1-9223372036854775807]  
 price | false | decimal | 价格 |  
 volume | true | long | 委托数量(张) |  
 direction | true | string | 仓位方向 | "buy":买 "sell":卖  
-offset | true | string | 开平方向 | "open":开 "close":平  
+offset | false(请看备注) | string | 开平方向 | "open":开 "close":平 “both”:单向持仓  
 lever_rate | true | int |
 杠杆倍数[“开仓”若有10倍多单，就不能再下20倍多单;首次使用高倍杠杆(>20倍)，请使用主账号登录web端同意高倍杠杆协议后，才能使用接口下高倍杠杆(>20倍)]
 |  
@@ -33614,6 +34105,8 @@ sl_order_price_type | string | false | 止损委托类型 | 不填默认为limit
   * 只有开仓订单才支持设置止盈止损。
 
   * 止盈触发价格为设置止盈单必填字段，止损触发价格为设置止损单必填字段；若缺省触发价格字段则不会设置对应的止盈单或止损单。
+
+  * offset 在双向持仓模式下为必填字段。在单向持仓模式下为非必填，填仅可填“both”。
 
 一次最多允许10个订单。
 
@@ -33727,11 +34220,13 @@ USDT-210625"...
 pair | false（请看备注） | string | 交易对 | BTC-USDT  
 contract_type | false（请看备注） | string | 合约类型 |
 swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
+reduce_only | false | int | 是否为只减仓订单（该字段在双向持仓模式下无效，在单向持仓模式下不填默认为0。） |
+0:表示为非只减仓订单，1:表示为只减仓订单  
 client_order_id | false | long | 客户自己填写和维护，必须为数字 | [1-9223372036854775807]  
 price | false | decimal | 价格 |  
 volume | true | long | 委托数量(张) |  
 direction | true | string | 仓位方向 | "buy":买 "sell":卖  
-offset | true | string | 开平方向 | "open":开 "close":平  
+offset | false（请看备注） | string | 开平方向 | "open":开 "close":平 “both”:单向持仓  
 lever_rate | true | int |
 杠杆倍数,“开仓”若有10倍多单，就不能再下20倍多单;首次使用高倍杠杆(>20倍)，请使用主账号登录web端同意高倍杠杆协议后，才能使用接口下高倍杠杆(>20倍)]
 |  
@@ -33760,6 +34255,8 @@ sl_order_price_type | string | false | 止损委托类型 | 不填默认为limit
   * 只有开仓订单才支持设置止盈止损。
 
   * 止盈触发价格为设置止盈单必填字段，止损触发价格为设置止损单必填字段；若缺省触发价格字段则不会设置对应的止盈单或止损单。
+
+  * offset 在双向持仓模式下为必填字段。在单向持仓模式下为非必填，填仅可填“both”。
 
   * 一次最多允许25个订单。
 
@@ -34229,7 +34726,8 @@ contract_code | true | string | 合约代码 | "BTC-USDT"...
                 "margin_mode": "isolated",
                 "margin_account": "BTC-USDT",
                 "is_tpsl": 0,
-                "real_profit": 0
+                "real_profit": 0,
+                "reduce_only": 0
             }
         ],
         "ts": 1603703631815
@@ -34256,7 +34754,7 @@ only下单只受用户持仓数量限制，"lightning":闪电平仓，"optimal_5
 FOK下单，"lightning_fok"：闪电平仓-
 FOK下单，"optimal_5_fok"：最优5档-FOK下单，"optimal_10_fok"：最优10档-FOK下单，"optimal_20_fok"：最优20档-FOK下单  
 direction | true | string | 买卖方向 | "buy":买 "sell":卖  
-offset | true | string | 开平方向 | "open":开 "close":平  
+offset | true | string | 开平方向 | "open":开 "close":平 "both":单向持仓  
 lever_rate | true | int | 杠杆倍数 |  
 order_id | true | long | 订单ID |  
 order_id_str | true | string | String类型订单ID |  
@@ -34282,6 +34780,7 @@ margin_account | true | string | 保证金账户 | 比如“BTC-USDT”
 margin_mode | true | string | 保证金模式 | isolated：逐仓模式  
 is_tpsl | true | int | 是否设置止盈止损 | 1：是；0：否  
 real_profit | true | decimal | 真实收益（使用开仓均价计算，包含仓位跨结算的已实现盈亏。） |  
+reduce_only | true | int | 是否为只减仓订单 | 0:表示为非只减仓订单，1:表示为只减仓订单  
 </data> |  |  |  |  
 ts | true | long | 时间戳 |  
   
@@ -34359,7 +34858,8 @@ pair | false（请看备注） | string | 交易对 | BTC-USDT
                 "margin_account": "USDT",
                 "margin_mode": "cross",
                 "is_tpsl": 0,
-                "real_profit": 0
+                "real_profit": 0,
+                "reduce_only": 0
             }
         ],
         "ts": 1639099755552
@@ -34388,7 +34888,7 @@ only下单只受用户持仓数量限制，"lightning":闪电平仓，"optimal_5
 FOK下单，"lightning_fok"：闪电平仓-
 FOK下单，"optimal_5_fok"：最优5档-FOK下单，"optimal_10_fok"：最优10档-FOK下单，"optimal_20_fok"：最优20档-FOK下单  
 direction | true | string | 买卖方向 | "buy":买 "sell":卖  
-offset | true | string | 开平方向 | "open":开 "close":平  
+offset | true | string | 开平方向 | "open":开 "close":平 "both":单向持仓  
 lever_rate | true | int | 杠杆倍数 |  
 order_id | true | long | 订单ID |  
 order_id_str | true | string | String类型订单ID |  
@@ -34415,6 +34915,7 @@ contract_type | true | string | 合约类型 |
 swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 pair | true | string | 交易对 | 如：“BTC-USDT”  
 business_type | true | string | 业务类型 | futures：交割、swap：永续  
+reduce_only | true | int | 是否为只减仓订单 | 0:表示为非只减仓订单，1:表示为只减仓订单  
 </data> |  |  |  |  
 ts | true | long | 时间戳 |  
   
@@ -34511,7 +35012,8 @@ created_at禁止传0。
             "margin_mode": "isolated",
             "margin_account": "BTC-USDT",
             "is_tpsl": 0,
-            "real_profit": 0
+            "real_profit": 0,
+            "reduce_only": 0
         },
         "ts": 1603703678477
     }
@@ -34528,7 +35030,7 @@ symbol | true | string | 品种代码 |
 contract_code | true | string | 合约代码 | "BTC-USDT"  
 lever_rate | true | int | 杠杆倍数 |  
 direction | true | string | 买卖方向 | "buy":买 "sell":卖  
-offset | true | string | 开平方向 | "open":开 "close":平  
+offset | true | string | 开平方向 | "open":开 "close":平 "both":单向持仓  
 volume | true | decimal | 委托数量 |  
 price | true | decimal | 委托价格 |  
 created_at | true | long | 创建时间 |  
@@ -34568,6 +35070,7 @@ margin_account | true | string | 保证金账户 | 比如“BTC-USDT”
 margin_mode | true | string | 保证金模式 | isolated：逐仓模式  
 is_tpsl | true | int | 是否设置止盈止损 | 1：是；0：否  
 real_profit | true | decimal | 订单总真实收益（使用开仓均价计算，包含仓位跨结算的已实现盈亏。） |  
+reduce_only | true | int | 是否为只减仓订单 | 0:表示为非只减仓订单，1:表示为只减仓订单  
 <trades> | true | object array |  |  
 id | true | string | 全局唯一的交易标识 |  
 trade_id | true | long | 与linear-swap-
@@ -34684,7 +35187,8 @@ created_at禁止传0。
             "margin_account": "USDT",
             "margin_mode": "cross",
             "is_tpsl": 0,
-            "real_profit": 0
+            "real_profit": 0,
+            "reduce_only": 0
         },
         "ts": 1639100665681
     }
@@ -34703,7 +35207,7 @@ margin_mode | true | string | 保证金模式 | cross：全仓模式；
 margin_account | true | string | 保证金账户 | 比如“USDT”  
 lever_rate | true | int | 杠杆倍数 |  
 direction | true | string | 买卖方向 | "buy":买 "sell":卖  
-offset | true | string | 开平方向 | "open":开 "close":平  
+offset | true | string | 开平方向 | "open":开 "close":平 "both":单向持仓  
 volume | true | decimal | 委托数量 |  
 price | true | decimal | 委托价格 |  
 created_at | true | long | 创建时间 |  
@@ -34745,6 +35249,7 @@ business_type | true | string | 业务类型 | futures：交割、swap：永续
 total_page | true | int | 总共页数 |  
 current_page | true | int | 当前页数 |  
 total_size | true | int | 总条数 |  
+reduce_only | true | int | 是否为只减仓订单 | 0:表示为非只减仓订单，1:表示为只减仓订单  
 <trades> | true | object array |  |  
 id | true | string | 全局唯一的交易标识 |  
 trade_id | true | long | 与linear-swap-
@@ -34787,8 +35292,8 @@ page_index | false | int | 页码，不填默认第1页 |
 page_size | false | int | 页长，不填默认20，不得多于50 |  
 sort_by | false | string | 排序字段，不填默认按创建时间倒序 |
 “created_at”(按照创建时间倒序)，“update_time”(按照更新时间倒序)  
-trade_type | false | int | 交易类型，不填默认查询全部 | 0:全部,1:买入 开多,2: 卖出开空,3: 买入平空,4:
-卖出平多。  
+trade_type | false | int | 交易类型，不填默认查询全部 | 0:全部, 1:买入开多, 2: 卖出开空, 3: 买入平空, 4:
+卖出平多, 17：买入（单向持仓）, 18：卖出（单向持仓）  
   
 > Response:
     
@@ -34827,7 +35332,8 @@ trade_type | false | int | 交易类型，不填默认查询全部 | 0:全部,1:
                     "margin_account": "BTC-USDT",
                     "is_tpsl": 0,
                     "update_time": 1606975980467,
-                    "real_profit": 0
+                    "real_profit": 0,
+                    "reduce_only": 0
                 }
             ],
             "total_page": 2,
@@ -34858,8 +35364,8 @@ only下单只受用户持仓数量限制，"lightning":闪电平仓，"optimal_5
 FOK下单，"lightning_fok"：闪电平仓-
 FOK下单，"optimal_5_fok"：最优5档-FOK下单，"optimal_10_fok"：最优10档-FOK下单，"optimal_20_fok"：最优20档-FOK下单  
 order_type | true | int | 订单类型 | 1:报单 、 2:撤单 、 3:强平、4:交割  
-direction | true | string | "buy":买 "sell":卖 |  
-offset | true | string | "open":开 "close":平 |  
+direction | true | string | 买卖方向 | "buy":买 "sell":卖  
+offset | true | string | 开平方向 | "open":开 "close":平 "both":单向持仓  
 lever_rate | true | int | 杠杆倍数 |  
 order_id | true | long | 订单ID |  
 order_id_str | true | string | 订单ID，字符串类型 |  
@@ -34883,6 +35389,7 @@ margin_account | true | string | 保证金账户 | 比如“BTC-USDT”
 is_tpsl | true | int | 是否设置止盈止损 | 1：是；0：否  
 update_time | true | Long | 订单更新时间，单位：毫秒 |  
 real_profit | true | decimal | 真实收益（使用开仓均价计算，包含仓位跨结算的已实现盈亏。） |  
+reduce_only | true | int | 是否为只减仓订单 | 0:表示为非只减仓订单，1:表示为只减仓订单  
 </orders> |  |  |  |  
 total_page | true | int | 总页数 |  
 current_page | true | int | 当前页 |  
@@ -34916,8 +35423,8 @@ page_index | false | int | 页码，不填默认第1页 |
 page_size | false | int | 页长，不填默认20，不得多于50 |  
 sort_by | false | string | 排序字段，不填默认按创建时间倒序 |
 “created_at”(按照创建时间倒序)，“update_time”(按照更新时间倒序)  
-trade_type | false | int | 交易类型，不填默认查询全部 | 0:全部,1:买入 开多,2: 卖出开空,3: 买入平空,4:
-卖出平多。  
+trade_type | false | int | 交易类型，不填默认查询全部 | 0:全部, 1: 买入开多, 2: 卖出开空, 3: 买入平空, 4:
+卖出平多, 17：买入（单向持仓）, 18：卖出（单向持仓）  
   
 > Response
     
@@ -34959,7 +35466,8 @@ trade_type | false | int | 交易类型，不填默认查询全部 | 0:全部,1:
                     "margin_account": "USDT",
                     "margin_mode": "cross",
                     "is_tpsl": 0,
-                    "real_profit": 0
+                    "real_profit": 0,
+                    "reduce_only": 0
                 }
             ],
             "total_page": 1,
@@ -34994,7 +35502,7 @@ FOK下单，"lightning_fok"：闪电平仓-
 FOK下单，"optimal_5_fok"：最优5档-FOK下单，"optimal_10_fok"：最优10档-FOK下单，"optimal_20_fok"：最优20档-FOK下单  
 order_type | true | int | 订单类型 | 1:报单 、 2:撤单 、 3:强平、4:交割  
 direction | true | string | 买卖方向 | "buy":买 "sell":卖  
-offset | true | string | 开平方向 | "open":开 "close":平  
+offset | true | string | 开平方向 | "open":开 "close":平 "both":单向持仓  
 lever_rate | true | int | 杠杆倍数 |  
 order_id | true | long | 订单ID |  
 order_id_str | true | string | string格式的订单ID |  
@@ -35020,6 +35528,7 @@ contract_type | true | string | 合约类型 |
 swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 pair | true | string | 交易对 | 如：“BTC-USDT”  
 business_type | true | string | 业务类型 | futures：交割、swap：永续  
+reduce_only | true | int | 是否为只减仓订单 | 0:表示为非只减仓订单，1:表示为只减仓订单  
 </orders> |  |  |  |  
 total_page | true | int | 总页数 |  
 current_page | true | int | 当前页 |  
@@ -35045,8 +35554,8 @@ ts | true | long | 时间戳 |
 参数名称 | 是否必须 | 类型 | 描述 | 默认值 | 取值范围  
 ---|---|---|---|---|---  
 contract_code | true | string | 合约代码 | 支持大小写,"BTC-USDT" ... |  
-trade_type | true | int | 交易类型 | 0:全部,1:买入开多,2: 卖出开空,3: 买入平空,4: 卖出平多,5:
-卖出强平,6: 买入强平,7:交割平多,8: 交割平空, 11:减仓平多，12:减仓平空 |  
+trade_type | true | int | 交易类型 | 0:全部, 1:买入开多, 2:卖出开空, 3:买入平空, 4:卖出平多, 5:卖出强平,
+6:买入强平, 7:交割平多, 8:交割平空, 11:减仓平多, 12:减仓平空, 17：买入（单向持仓）, 18：卖出（单向持仓） |  
 type | true | int | 类型 | 1:所有订单,2:结束状态的订单 |  
 status | true | string | 订单状态 | 可查询多个状态，"3,4,5" , 0:全部,3:未成交, 4: 部分成交,5:
 部分成交已撤单,6: 全部成交,7:已撤单 |  
@@ -35095,7 +35604,8 @@ sort_by | false | string | 排序字段（降序），不填默认按照create_d
                     "margin_mode": "isolated",
                     "margin_account": "BTC-USDT",
                     "is_tpsl": 0,
-                    "real_profit": 0
+                    "real_profit": 0,
+                    "reduce_only": 0
                 }
             ],
             "total_page": 10,
@@ -35119,7 +35629,7 @@ symbol | true | string | 品种代码 |
 contract_code | true | string | 合约代码 | "BTC-USDT" ...  
 lever_rate | true | int | 杠杆倍数 |  
 direction | true | string | 买卖方向 | "buy":买 "sell":卖  
-offset | true | string | 开平方向 | "open":开 "close":平  
+offset | true | string | 开平方向 | "open":开 "close":平 "both":单向持仓  
 volume | true | decimal | 委托数量 |  
 price | true | decimal | 委托价格 |  
 create_date | true | long | 创建时间 |  
@@ -35145,6 +35655,7 @@ margin_mode | true | string | 保证金模式 | isolated：逐仓模式
 margin_account | true | string | 保证金账户 | 比如“BTC-USDT”  
 is_tpsl | true | int | 是否设置止盈止损 | 1：是；0：否  
 real_profit | true | decimal | 真实收益（使用开仓均价计算，包含仓位跨结算的已实现盈亏。） |  
+reduce_only | true | int | 是否为只减仓订单 | 0:表示为非只减仓订单，1:表示为只减仓订单  
 </orders> |  |  |  |  
 current_page | true | int | 当前页 |  
 total_page | true | int | 总页数 |  
@@ -35174,8 +35685,8 @@ ts | true | long | 时间戳 |
 contract_code | false（请看备注） | string | 合约代码 | 永续："BTC-USDT" ... ，交割："BTC-
 USDT-210625" ...  
 pair | false（请看备注） | string | 交易对 | BTC-USDT  
-trade_type | true | int | 交易类型 | 0:全部,1:买入开多,2: 卖出开空,3: 买入平空,4: 卖出平多,5:
-卖出强平,6: 买入强平,7:交割平多,8: 交割平空, 11:减仓平多，12:减仓平空  
+trade_type | true | int | 交易类型 | 0:全部, 1:买入开多, 2:卖出开空, 3:买入平空, 4:卖出平多, 5:卖出强平,
+6:买入强平, 7:交割平多, 8:交割平空, 11:减仓平多, 12:减仓平空, 17：买入（单向持仓）, 18：卖出（单向持仓）  
 type | true | int | 类型 | 1:所有订单,2:结束状态的订单  
 status | true | string | 订单状态 | 可查询多个状态，"3,4,5" , 0:全部,3:未成交, 4: 部分成交,5:
 部分成交已撤单,6: 全部成交,7:已撤单  
@@ -35227,7 +35738,8 @@ sort_by | false | string | 排序字段（降序），不填默认按照create_d
                     "margin_account": "USDT",
                     "update_time": 1639100651000,
                     "is_tpsl": 0,
-                    "real_profit": 0
+                    "real_profit": 0,
+                    "reduce_only": 0
                 }
             ],
             "total_page": 1,
@@ -35254,7 +35766,7 @@ margin_mode | true | string | 保证金模式 | cross：全仓模式；
 margin_account | true | string | 保证金账户 | 比如“USDT”  
 lever_rate | true | int | 杠杆倍数 |  
 direction | true | string | 买卖方向 | "buy":买 "sell":卖  
-offset | true | string | 开平方向 | "open":开 "close":平  
+offset | true | string | 开平方向 | "open":开 "close":平 "both":单向持仓  
 volume | true | decimal | 委托数量 |  
 price | true | decimal | 委托价格 |  
 create_date | true | long | 创建时间 |  
@@ -35282,6 +35794,7 @@ contract_type | true | string | 合约类型 |
 swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 pair | true | string | 交易对 | 如：“BTC-USDT”  
 business_type | true | string | 业务类型 | futures：交割、swap：永续  
+reduce_only | true | int | 是否为只减仓订单 | 0:表示为非只减仓订单，1:表示为只减仓订单  
 </orders> |  |  |  |  
 current_page | true | int | 当前页 |  
 total_page | true | int | 总页数 |  
@@ -35308,7 +35821,7 @@ ts | true | long | 时间戳 |
 ---|---|---|---|---  
 contract_code | true | string | 合约代码 | "BTC-USDT" ...  
 trade_type | true | int | 交易类型 | 0:全部,1:买入开多,2: 卖出开空,3: 买入平空,4: 卖出平多,5:
-卖出强平,6: 买入强平,7:交割平多,8: 交割平空, 11:减仓平多，12:减仓平空  
+卖出强平,6: 买入强平,7:交割平多,8: 交割平空, 11:减仓平多, 12:减仓平空, 17：买入（单向持仓）, 18：卖出（单向持仓）  
 type | true | int | 类型 | 1:所有订单,2:结束状态的订单  
 status | true | string | 订单状态 | 可查询多个状态，"3,4,5" , 0:全部,3:未成交, 4: 部分成交,5:
 部分成交已撤单,6: 全部成交,7:已撤单  
@@ -35395,7 +35908,8 @@ start_time | end_time | from_id | size | direct | 查询结果
                     "is_tpsl": 0,
                     "real_profit": 0.2394,
                     "margin_mode": "isolated",
-                    "margin_account": "BTC-USDT"
+                    "margin_account": "BTC-USDT",
+                    "reduce_only": 0
                 }
             ],
             "remain_size": 0,
@@ -35421,7 +35935,7 @@ margin_mode | true | string | 保证金模式 | isolated：逐仓模式
 margin_account | true | string | 保证金账户 | 比如“BTC-USDT”  
 lever_rate | true | int | 杠杆倍数 |  
 direction | true | string | 买卖方向 | "buy":买 "sell":卖  
-offset | true | string | 开平方向 | "open":开 "close":平  
+offset | true | string | 开平方向 | "open":开 "close":平 "both":单向持仓  
 volume | true | decimal | 委托数量 |  
 price | true | decimal | 委托价格 |  
 create_date | true | long | 创建时间 |  
@@ -35446,6 +35960,7 @@ order_type | true | int | 订单类型 | 1:报单 、 2:撤单 、 3:强平、4:
 fee_asset | true | string | 手续费币种 | （"USDT"...）  
 liquidation_type | true | string | 强平类型 | 0:非强平类型，1：多空轧差， 2:部分接管，3：全部接管  
 is_tpsl | true | int | 是否设置止盈止损 | 1：是；0：否  
+reduce_only | true | int | 是否为只减仓订单 | 0:表示为非只减仓订单，1:表示为只减仓订单  
 </orders> |  |  |  |  
 remain_size | true | int | 剩余数据条数（在时间范围内，因受到数据条数限制而未查询到的数据条数） |  
 next_id | true | long | 下一条数据的query_id（仅在查询结果超过数据条数限制时才有值） |  
@@ -35474,7 +35989,7 @@ contract_code | false（请看备注） | string | 合约代码 | 永续："BTC-
 USDT-210625" ...  
 pair | false（请看备注） | string | 交易对 | "BTC-USDT" ...  
 trade_type | true | int | 交易类型 | 0:全部,1:买入开多,2: 卖出开空,3: 买入平空,4: 卖出平多,5:
-卖出强平,6: 买入强平,7:交割平多,8: 交割平空, 11:减仓平多，12:减仓平空  
+卖出强平,6: 买入强平,7:交割平多,8: 交割平空, 11:减仓平多, 12:减仓平空, 17：买入（单向持仓）, 18：卖出（单向持仓）  
 type | true | int | 类型 | 1:所有订单,2:结束状态的订单  
 status | true | string | 订单状态 | 可查询多个状态，"3,4,5" , 0:全部,3:未成交, 4: 部分成交,5:
 部分成交已撤单,6: 全部成交,7:已撤单  
@@ -35564,7 +36079,8 @@ start_time | end_time | from_id | size | direct | 查询结果
                     "is_tpsl": 0,
                     "real_profit": 0,
                     "margin_mode": "cross",
-                    "margin_account": "USDT"
+                    "margin_account": "USDT",
+                    "reduce_only": 0
                 }
             ],
             "remain_size": 0,
@@ -35591,7 +36107,7 @@ margin_mode | true | string | 保证金模式 | cross：全仓模式；
 margin_account | true | string | 保证金账户 | 比如“USDT”  
 lever_rate | true | int | 杠杆倍数 |  
 direction | true | string | 买卖方向 | "buy":买 "sell":卖  
-offset | true | string | 开平方向 | "open":开 "close":平  
+offset | true | string | 开平方向 | "open":开 "close":平 "both":单向持仓  
 volume | true | decimal | 委托数量 |  
 price | true | decimal | 委托价格 |  
 create_date | true | long | 创建时间 |  
@@ -35620,6 +36136,7 @@ contract_type | true | string | 合约类型 |
 swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 pair | true | string | 交易对 | 如：“BTC-USDT”  
 business_type | true | string | 业务类型 | futures：交割、swap：永续  
+reduce_only | true | int | 是否为只减仓订单 | 0:表示为非只减仓订单，1:表示为只减仓订单  
 </orders> |  |  |  |  
 remain_size | true | int | 剩余数据条数（在时间范围内，因受到数据条数限制而未查询到的数据条数） |  
 next_id | true | long | 下一条数据的query_id（仅在查询结果超过数据条数限制时才有值） |  
@@ -35643,8 +36160,8 @@ ts | true | long | 时间戳 |
 参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
 ---|---|---|---|---  
 contract_code | true | string | 合约代码 | "BTC-USDT"...  
-trade_type | true | int | 交易类型 | 0:全部,1:买入开多,2: 卖出开空,3: 买入平空,4: 卖出平多,5:
-卖出强平,6: 买入强平  
+trade_type | true | int | 交易类型 | 0:全部, 1:买入开多, 2:卖出开空, 3:买入平空, 4:卖出平多, 5:卖出强平,
+6:买入强平, 17：买入（单向持仓）, 18：卖出（单向持仓）  
 create_date | true | int | 日期 | 可随意输入正整数，如果参数超过90则默认查询90天的数据  
 page_index | false | int | 页码，不填默认第1页 |  
 page_size | false | int | 不填默认20，不得多于50 |  
@@ -35676,7 +36193,8 @@ page_size | false | int | 不填默认20，不得多于50 |
                     "fee_asset": "USDT",
                     "margin_mode": "isolated",
                     "margin_account": "BTC-USDT",
-                    "real_profit": 0
+                    "real_profit": 0,
+                    "reduce_only": 0
                 }
             ],
             "total_page": 2,
@@ -35706,7 +36224,7 @@ order_source | true | string | 订单来源 |
 （system:系统、web:用户网页、api:用户API、m:用户M站、risk:风控系统、settlement:交割结算、ios：ios客户端、android：安卓客户端、windows：windows客户端、mac：mac客户端、trigger：计划委托触发、tpsl:止盈止损触发）  
 contract_code | true | string | 合约代码 | "BTC-USDT" ...  
 direction | true | string | 买卖方向 | "buy":买 "sell":卖  
-offset | true | string | 开平方向 | "open":开 "close":平  
+offset | true | string | 开平方向 | "open":开 "close":平 "both":单向持仓  
 trade_volume | true | decimal | 成交数量 |  
 trade_price | true | decimal | 成交价格 |  
 trade_turnover | true | decimal | 成交金额（成交数量 * 合约面值 * 成交价格） |  
@@ -35718,6 +36236,7 @@ fee_asset | true | string | 手续费币种 | （"USDT"...）
 margin_mode | true | string | 保证金模式 | isolated：逐仓模式  
 margin_account | true | string | 保证金账户 | 比如“BTC-USDT”  
 real_profit | true | decimal | 真实收益（使用开仓均价计算，包含仓位跨结算的已实现盈亏。） |  
+reduce_only | true | int | 是否为只减仓订单 | 0:表示为非只减仓订单，1:表示为只减仓订单  
 </trades> |  |  |  |  
 current_page | true | int | 当前页 |  
 total_page | true | int | 总页数 |  
@@ -35747,8 +36266,8 @@ ts | true | long | 时间戳 |
 contract_code | false（请看备注） | string | 合约代码 | 永续："BTC-USDT"... ，交割："BTC-
 USDT-210625"...  
 pair | false（请看备注） | string | 交易对 | BTC-USDT  
-trade_type | true | int | 交易类型 | 0:全部,1:买入开多,2: 卖出开空,3: 买入平空,4: 卖出平多,5:
-卖出强平,6: 买入强平  
+trade_type | true | int | 交易类型 | 0:全部, 1:买入开多, 2:卖出开空, 3:买入平空, 4:卖出平多, 5:卖出强平,
+6:买入强平, 17：买入（单向持仓）, 18：卖出（单向持仓）  
 create_date | true | int | 日期 | 可随意输入正整数，如果参数超过90则默认查询90天的数据  
 page_index | false | int | 页码，不填默认第1页 |  
 page_size | false | int | 不填默认20，不得多于50 | [1-50]  
@@ -35783,7 +36302,8 @@ page_size | false | int | 不填默认20，不得多于50 | [1-50]
                     "fee_asset": "USDT",
                     "margin_mode": "cross",
                     "margin_account": "USDT",
-                    "real_profit": 0E-18
+                    "real_profit": 0E-18,
+                    "reduce_only": 0
                 }
             ],
             "total_page": 1,
@@ -35815,7 +36335,7 @@ order_source | true | string | 订单来源 |
 contract_code | true | string | 合约代码 | 永续："BTC-USDT"... ，交割："BTC-
 USDT-210625"...  
 direction | true | string | 买卖方向 | "buy":买 "sell":卖  
-offset | true | string | 开平方向 | "open":开 "close":平  
+offset | true | string | 开平方向 | "open":开 "close":平 "both":单向持仓  
 trade_volume | true | decimal | 成交数量 |  
 trade_price | true | decimal | 成交价格 |  
 trade_turnover | true | decimal | 成交金额（成交数量 * 合约面值 * 成交价格） |  
@@ -35829,6 +36349,7 @@ contract_type | true | string | 合约类型 |
 swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 pair | true | string | 交易对 | 如：“BTC-USDT”  
 business_type | true | string | 业务类型 | futures：交割、swap：永续  
+reduce_only | true | int | 是否为只减仓订单 | 0:表示为非只减仓订单，1:表示为只减仓订单  
 </trades> |  |  |  |  
 current_page | true | int | 当前页 |  
 total_page | true | int | 总页数 |  
@@ -35854,8 +36375,8 @@ ts | true | long | 时间戳 |
 参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
 ---|---|---|---|---  
 contract_code | true | string | 合约代码 |  
-trade_type | true | int | 交易类型 | 0:全部,1:买入开多,2: 卖出开空,3: 买入平空,4: 卖出平多,5:
-卖出强平,6: 买入强平  
+trade_type | true | int | 交易类型 | 0:全部, 1:买入开多, 2:卖出开空, 3:买入平空, 4:卖出平多, 5:卖出强平,
+6:买入强平, 17：买入（单向持仓）, 18：卖出（单向持仓）  
 start_time | false | long | 起始时间（时间戳，单位毫秒） | 详见备注  
 end_time | false | long | 结束时间（时间戳，单位毫秒） | 详见备注  
 from_id | false | long | 查询起始id（取返回数据的query_id字段） |  
@@ -35925,7 +36446,8 @@ start_time | end_time | from_id | size | direct | 查询结果
                     "fee_asset": "USDT",
                     "margin_mode": "isolated",
                     "margin_account": "BTC-USDT",
-                    "real_profit": 0.2394
+                    "real_profit": 0.2394,
+                    "reduce_only": 0
                 }
             ],
             "remain_size": 0,
@@ -35954,7 +36476,7 @@ contract_code | true | string | 合约代码 | "BTC-USDT" ...
 margin_mode | true | string | 保证金模式 | isolated：逐仓模式  
 margin_account | true | string | 保证金账户 | 比如“BTC-USDT”  
 direction | true | string | 买卖方向 | "buy":买 "sell":卖  
-offset | true | string | 开平方向 | "open":开 "close":平  
+offset | true | string | 开平方向 | "open":开 "close":平 "both":单向持仓  
 trade_volume | true | decimal | 成交数量 |  
 trade_price | true | decimal | 成交价格 |  
 trade_turnover | true | decimal | 成交总金额 |  
@@ -35966,6 +36488,7 @@ role | true | string | taker或maker |
 fee_asset | true | string | 手续费币种 | （"USDT"...）  
 order_source | true | string | 订单来源 |
 system:系统、web:用户网页、api:用户API、m:用户M站、risk:风控系统、settlement:交割结算、ios：ios客户端、android：安卓客户端、windows：windows客户端、mac：mac客户端、trigger：计划委托触发、tpsl:止盈止损触发  
+reduce_only | true | int | 是否为只减仓订单 | 0:表示为非只减仓订单，1:表示为只减仓订单  
 </trades> |  |  |  |  
 remain_size | true | int | 剩余数据条数（在时间范围内，因受到数据条数限制而未查询到的数据条数） |  
 next_id | true | long | 下一条数据的query_id（仅在查询结果超过数据条数限制时才有值） |  
@@ -35993,8 +36516,8 @@ ts | true | long | 时间戳 |
 contract_code | false(请看备注) | string | 合约代码 | 永续："BTC-USDT"... ，交割："BTC-
 USDT-210625"...  
 pair | false(请看备注) | string | 交易对 | “BTC-USDT”...  
-trade_type | true | int | 交易类型 | 0:全部,1:买入开多,2: 卖出开空,3: 买入平空,4: 卖出平多,5:
-卖出强平,6: 买入强平  
+trade_type | true | int | 交易类型 | 0:全部, 1:买入开多, 2:卖出开空, 3:买入平空, 4:卖出平多, 5:卖出强平,
+6:买入强平, 17：买入（单向持仓）, 18：卖出（单向持仓）  
 start_time | false | long | 起始时间（时间戳，单位毫秒） | 详见备注  
 end_time | false | long | 结束时间（时间戳，单位毫秒） | 详见备注  
 from_id | false | long | 查询起始id（取返回数据的query_id字段） |  
@@ -36067,7 +36590,8 @@ start_time | end_time | from_id | size | direct | 查询结果
                     "fee_asset": "USDT",
                     "margin_mode": "cross",
                     "margin_account": "USDT",
-                    "real_profit": 0E-18
+                    "real_profit": 0E-18,
+                    "reduce_only": 0
                 }
             ],
             "remain_size": 0,
@@ -36097,7 +36621,7 @@ USDT-210625"...
 margin_mode | true | string | 保证金模式 | cross：全仓模式；  
 margin_account | true | string | 保证金账户 | 比如“USDT”  
 direction | true | string | 买卖方向 | "buy":买 "sell":卖  
-offset | true | string | 开平方向 | "open":开 "close":平  
+offset | true | string | 开平方向 | "open":开 "close":平 "both":单向持仓  
 trade_volume | true | decimal | 成交数量 |  
 trade_price | true | decimal | 成交价格 |  
 trade_turnover | true | decimal | 成交总金额 |  
@@ -36113,6 +36637,7 @@ contract_type | true | string | 合约类型 |
 swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 pair | true | string | 交易对 | 如：“BTC-USDT”  
 business_type | true | string | 业务类型 | futures：交割、swap：永续  
+reduce_only | true | int | 是否为只减仓订单 | 0:表示为非只减仓订单，1:表示为只减仓订单  
 </trades> |  |  |  |  
 remain_size | true | int | 剩余数据条数（在时间范围内，因受到数据条数限制而未查询到的数据条数） |  
 next_id | true | long | 下一条数据的query_id（仅在查询结果超过数据条数限制时才有值） |  
@@ -36275,14 +36800,16 @@ client_order_id | false | int | 用户自己的订单id |
 参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
 ---|---|---|---|---  
 contract_code | true | string | 合约代码 | BTC-USDT  
-trigger_type | true | string | 触发类型： ge大于等于(触发价比最新价大)；le小于(触发价比最新价小) |  
+reduce_only | false | int | 是否为只减仓订单（该字段在双向持仓模式下无效，在单向持仓模式下不填默认为0。） |
+0:表示为非只减仓订单，1:表示为只减仓订单  
+trigger_type | true | string | 触发类型 | ge大于等于(触发价比最新价大)；le小于(触发价比最新价小)  
 trigger_price | true | decimal | 触发价，精度超过最小变动单位会报错 |  
 order_price | false | decimal | 委托价，精度超过最小变动单位会报错 |  
-order_price_type | false | string | 委托类型： 不填默认为limit; 限价：limit
-，最优5档：optimal_5，最优10档：optimal_10，最优20档：optimal_20 |  
+order_price_type | false | string | 委托类型，不填默认为limit; | 限价：limit
+，最优5档：optimal_5，最优10档：optimal_10，最优20档：optimal_20  
 volume | true | long | 委托数量(张) |  
-direction | true | string | buy:买 sell:卖 |  
-offset | true | string | open:开 close:平 |  
+direction | true | string | 买卖方向 | buy:买 sell:卖  
+offset | false(请看备注) | string | 开平方向 | open:开 close:平 both:单向持仓  
 lever_rate | false | int |
 开仓必须填写，平仓可以不填。杠杆倍数[开仓若有10倍多单，就不能再下20倍多单;首次使用高倍杠杆(>20倍)，请使用主账号登录web端同意高倍杠杆协议后，才能使用接口下高倍杠杆(>20倍)]
 |  
@@ -36292,6 +36819,10 @@ lever_rate | false | int |
   * optimal_5：最优5档、optimal_10：最优10档、optimal_20：最优20档下单order_price价格参数不用传，"limit":限价需要传价格。
 
   * 若存在持仓，那么下单时杠杆倍数必须与持仓杠杆相同，否则下单失败。若需使用新杠杆下单，则必须先使用切换杠杆接口将持仓杠杆切换成功后再下单。
+
+  * offset 在双向持仓模式下为必填字段。在单向持仓模式下为非必填，填仅可填“both”。
+
+  * 请注意在单向持仓模式下，使用只减仓去开仓，在订单被触发后，系统会报：1492 只减仓订单数量超过可平量。导致委托失败。
 
 > Response:
     
@@ -36340,6 +36871,8 @@ order_id_str | true | string | 字符串类型的订单ID |
   * 该接口的限频次数为1秒5次。
   * 请求参数contract_code支持交割合约代码，格式为BTC-USDT-210625；
   * （pair+contract_type）以及 contract_code 必填其一（全不填报错1014），若同时填写，优先取contract_code。
+  * offset 在双向持仓模式下为必填字段。在单向持仓模式下为非必填，填仅可填“both”。
+  * 请注意在单向持仓模式下，使用只减仓去开仓，在订单被触发后，系统会报：1492 只减仓订单数量超过可平量。导致委托失败。
 
 ### 请求参数
 
@@ -36350,14 +36883,16 @@ USDT-210625”...
 pair | false（请看备注） | string | 交易对 | BTC-USDT  
 contract_type | false（请看备注） | string | 合约类型 |
 swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
-trigger_type | true | string | 触发类型： ge大于等于(触发价比最新价大)；le小于(触发价比最新价小) |  
+reduce_only | false | int | 是否为只减仓订单（该字段在双向持仓模式下无效，在单向持仓模式下不填默认为0。） |
+0:表示为非只减仓订单，1:表示为只减仓订单  
+trigger_type | true | string | 触发类型 | ge大于等于(触发价比最新价大)；le小于(触发价比最新价小)  
 trigger_price | true | decimal | 触发价，精度超过最小变动单位会报错 |  
 order_price | false | decimal | 委托价，精度超过最小变动单位会报错 |  
-order_price_type | false | string | 委托类型： 不填默认为limit; 限价：limit
-，最优5档：optimal_5，最优10档：optimal_10，最优20档：optimal_20 |  
+order_price_type | false | string | 委托类型，不填默认为limit; | 限价：limit
+，最优5档：optimal_5，最优10档：optimal_10，最优20档：optimal_20  
 volume | true | long | 委托数量(张) |  
-direction | true | string | buy:买 sell:卖 |  
-offset | true | string | open:开 close:平 |  
+direction | true | string | 买卖方向 | buy:买 sell:卖  
+offset | false(请看备注) | string | 开平方向 | open:开, close:平, both:单向持仓  
 lever_rate | false | int |
 开仓必须填写，平仓可以不填。杠杆倍数[开仓若有10倍多单，就不能再下20倍多单;首次使用高倍杠杆(>20倍)，请使用主账号登录web端同意高倍杠杆协议后，才能使用接口下高倍杠杆(>20倍)]
 |  
@@ -36635,8 +37170,8 @@ ts | true | long | 响应生成时间点，单位：毫秒 |
 contract_code | true | string | 合约代码 | BTC-USDT  
 page_index | false | int | 第几页，不填默认第一页 |  
 page_size | false | int | 不填默认20，不得多于50 |  
-trade_type | false | int | 交易类型，不填默认查询全部 | 0:全部,1:买入 开多,2: 卖出开空,3: 买入平空,4:
-卖出平多。  
+trade_type | false | int | 交易类型，不填默认查询全部 | 0:全部, 1:买入开多, 2:卖出开空, 3:买入平空,
+4:卖出平多, 17：买入（单向持仓）, 18：卖出（单向持仓）  
   
 > Response:
     
@@ -36663,7 +37198,8 @@ trade_type | false | int | 交易类型，不填默认查询全部 | 0:全部,1:
                     "order_price_type": "limit",
                     "status": 2,
                     "margin_mode": "isolated",
-                    "margin_account": "BTC-USDT"
+                    "margin_account": "BTC-USDT",
+                    "reduce_only": 0
                 }
             ],
             "total_page": 1,
@@ -36691,7 +37227,7 @@ trigger_type | true | string | 触发类型 | `ge`大于等于；`le`小于等�
 volume | true | decimal | 委托数量 |  
 order_type | true | int | 订单类型 | 1、报单 2、撤单  
 direction | true | string | 订单方向 | [买(buy),卖(sell)]  
-offset | true | string | 开平标志 | [开(open),平(close)]  
+offset | true | string | 开平标志 | [开(open),平(close),单向持仓(both)]  
 lever_rate | true | int | 杠杆倍数 |  
 order_id | true | long | 计划委托单订单ID |  
 order_id_str | true | string | 字符串类型的订单ID |  
@@ -36705,6 +37241,7 @@ order_price_type | true | string | 订单报价类型 | 限价：limit
 status | true | int | 订单状态 | 1:准备提交、2:已提交、3:报单中、8：撤单未找到、9：撤单中、10：失败'  
 margin_mode | true | string | 保证金模式 | isolated：逐仓模式  
 margin_account | true | string | 保证金账户 | 比如“BTC-USDT”  
+reduce_only | true | int | 是否为只减仓订单 | 0:表示为非只减仓订单，1:表示为只减仓订单  
 </orders> |  |  |  |  
 </data> |  |  |  |  
 ts | true | long | 响应生成时间点，单位：毫秒 |  
@@ -36728,8 +37265,8 @@ USDT-210625”...
 pair | false | string | 交易对 | BTC-USDT  
 page_index | false | int | 第几页，不填默认第一页 |  
 page_size | false | int | 不填默认20，不得多于50 |  
-trade_type | false | int | 交易类型，不填默认查询全部 | 0:全部,1:买入 开多,2: 卖出开空,3: 买入平空,4:
-卖出平多。  
+trade_type | false | int | 交易类型，不填默认查询全部 | 0:全部, 1:买入开多, 2:卖出开空, 3:买入平空,
+4:卖出平多, 17：买入（单向持仓）, 18：卖出（单向持仓）  
   
 > Response
     
@@ -36759,7 +37296,8 @@ trade_type | false | int | 交易类型，不填默认查询全部 | 0:全部,1:
                     "order_price_type": "limit",
                     "status": 2,
                     "margin_mode": "cross",
-                    "margin_account": "USDT"
+                    "margin_account": "USDT",
+                    "reduce_only": 0
                 }
             ],
             "total_page": 1,
@@ -36789,7 +37327,7 @@ trigger_type | true | string | 触发类型 | `ge`大于等于；`le`小于等�
 volume | true | decimal | 委托数量 |  
 order_type | true | int | 订单类型 | 1、报单 2、撤单  
 direction | true | string | 订单方向 | [买(buy),卖(sell)]  
-offset | true | string | 开平标志 | [开(open),平(close)]  
+offset | true | string | 开平标志 | [开(open),平(close),单向持仓(both)]  
 lever_rate | true | int | 杠杆倍数 |  
 order_id | true | long | 计划委托单订单ID |  
 order_id_str | true | string | 字符串类型的订单ID |  
@@ -36805,6 +37343,7 @@ contract_type | true | string | 合约类型 |
 swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 pair | true | string | 交易对 | 如：“BTC-USDT”  
 business_type | true | string | 业务类型 | futures：交割、swap：永续  
+reduce_only | true | int | 是否为只减仓订单 | 0:表示为非只减仓订单，1:表示为只减仓订单  
 </orders> |  |  |  |  
 </data> |  |  |  |  
 ts | true | long | 响应生成时间点，单位：毫秒 |  
@@ -36822,8 +37361,8 @@ ts | true | long | 响应生成时间点，单位：毫秒 |
 **参数名称** | **是否必须** | **类型** | **描述** | **默认值** | **取值范围**  
 ---|---|---|---|---|---  
 contract_code | true | string | 合约代码 |  | BTC-USDT  
-trade_type | true | int | 交易类型 |  | 0:全部,1:买入开多,2: 卖出开空,3: 买入平空,4:
-卖出平多；后台是根据该值转换为offset和direction，然后去查询的； 其他值无法查询出结果  
+trade_type | true | int | 交易类型 |  | 0:全部, 1:买入开多, 2:卖出开空, 3:买入平空, 4:卖出平多,
+17:买入（单向持仓）, 18:卖出（单向持仓）;后台是根据该值转换为offset和direction，然后去查询的； 其他值无法查询出结果  
 status | true | string | 订单状态 |  |
 多个以英文逗号隔开，计划委托单状态：0:全部（表示全部结束状态的订单）、4:已委托、5:委托失败、6:已撤单  
 create_date | true | int | 日期 |  | 可随意输入正整数，如果参数超过90则默认查询90天的数据  
@@ -36869,7 +37408,8 @@ sort_by | false | string | 排序字段（降序），不填默认按照created_
                     "fail_code": null,
                     "fail_reason": null,
                     "margin_mode": "isolated",
-                    "margin_account": "BTC-USDT"
+                    "margin_account": "BTC-USDT",
+                    "reduce_only": 0
                 }
             ],
             "total_page": 3,
@@ -36897,7 +37437,7 @@ trigger_type | true | string | 触发类型 | `ge`大于等于；`le`小于等�
 volume | true | decimal | 委托数量 |  
 order_type | true | int | 订单类型 | 1、报单 2、撤单  
 direction | true | string | 订单方向 | [买(buy),卖(sell)]  
-offset | true | string | 开平标志 | [开(open),平(close)]  
+offset | true | string | 开平标志 | [开(open),平(close),单向持仓(both)]  
 lever_rate | true | int | 杠杆倍数 |  
 order_id | true | long | 计划委托单订单ID |  
 order_id_str | true | string | 字符串类型的订单ID |  
@@ -36919,6 +37459,7 @@ fail_code | true | int | 被触发时下order单失败错误码 |
 fail_reason | true | string | 被触发时下order单失败原因 |  
 margin_mode | true | string | 保证金模式 | isolated：逐仓模式  
 margin_account | true | string | 保证金账户 | 比如“BTC-USDT”  
+reduce_only | true | int | 是否为只减仓订单 | 0:表示为非只减仓订单，1:表示为只减仓订单  
 </orders> |  |  |  |  
 </data> |  |  |  |  
 ts | true | long | 响应生成时间点，单位：毫秒 |  
@@ -36940,8 +37481,8 @@ ts | true | long | 响应生成时间点，单位：毫秒 |
 contract_code | false（请看备注） | string | 合约代码 |  | 永续：“BTC-USDT”... ，交割：“BTC-
 USDT-210625”...  
 pair | false（请看备注） | string | 交易对 | BTC-USDT |  
-trade_type | true | int | 交易类型 |  | 0:全部,1:买入开多,2: 卖出开空,3: 买入平空,4:
-卖出平多；后台是根据该值转换为offset和direction，然后去查询的； 其他值无法查询出结果  
+trade_type | true | int | 交易类型 |  | 0:全部, 1:买入开多, 2:卖出开空, 3:买入平空, 4:卖出平多,
+17:买入（单向持仓）, 18:卖出（单向持仓）;后台是根据该值转换为offset和direction，然后去查询的； 其他值无法查询出结果  
 status | true | string | 订单状态 |  |
 多个以英文逗号隔开，计划委托单状态：0:全部（表示全部结束状态的订单）、4:已委托、5:委托失败、6:已撤单  
 create_date | true | int | 日期 |  | 可随意输入正整数，如果参数超过90则默认查询90天的数据  
@@ -36990,7 +37531,8 @@ sort_by | false | string | 排序字段（降序），不填默认按照created_
                     "fail_reason": null,
                     "margin_mode": "cross",
                     "margin_account": "USDT",
-                    "update_time": 1639103206083
+                    "update_time": 1639103206083,
+                    "reduce_only": 0
                 }
             ],
             "total_page": 1,
@@ -37021,7 +37563,7 @@ trigger_type | true | string | 触发类型 | `ge`大于等于；`le`小于等�
 volume | true | decimal | 委托数量 |  
 order_type | true | int | 订单类型 | 1、报单 2、撤单  
 direction | true | string | 订单方向 | [买(buy),卖(sell)]  
-offset | true | string | 开平标志 | [开(open),平(close)]  
+offset | true | string | 开平标志 | [开(open),平(close),单向持仓(both)]  
 lever_rate | true | int | 杠杆倍数 |  
 order_id | true | long | 计划委托单订单ID |  
 order_id_str | true | string | 字符串类型的订单ID |  
@@ -37045,6 +37587,7 @@ contract_type | true | string | 合约类型 |
 swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 pair | true | string | 交易对 | 如：“BTC-USDT”  
 business_type | true | string | 业务类型 | futures：交割、swap：永续  
+reduce_only | true | int | 是否为只减仓订单 | 0:表示为非只减仓订单，1:表示为只减仓订单  
 </orders> |  |  |  |  
 </data> |  |  |  |  
 ts | true | long | 响应生成时间点，单位：毫秒 |  
@@ -38002,8 +38545,8 @@ only下单只受用户持仓数量限制，"lightning":闪电平仓，"optimal_5
 最优10档-IOC下单，"optimal_20_ioc"：最优20档-IOC下单，"opponent_fok"： 对手价-
 FOK下单，"lightning_fok"：闪电平仓-
 FOK下单，"optimal_5_fok"：最优5档-FOK下单，"optimal_10_fok"：最优10档-FOK下单，"optimal_20_fok"：最优20档-FOK下单  
-direction | true | string | 买卖方向 | "buy":买 "sell":卖  
-offset | true | string | 开平方向 | "open":开 "close":平  
+direction | true | string | 买卖方向 | "buy":买, "sell":卖  
+offset | true | string | 开平方向 | "open":开, "close":平, "both"：单向持仓  
 lever_rate | true | int | 杠杆倍数 |  
 order_id | true | long | 订单ID |  
 order_id_str | true | string | String类型订单ID |  
@@ -38166,8 +38709,8 @@ only下单只受用户持仓数量限制，"lightning":闪电平仓，"optimal_5
 最优10档-IOC下单，"optimal_20_ioc"：最优20档-IOC下单，"opponent_fok"： 对手价-
 FOK下单，"lightning_fok"：闪电平仓-
 FOK下单，"optimal_5_fok"：最优5档-FOK下单，"optimal_10_fok"：最优10档-FOK下单，"optimal_20_fok"：最优20档-FOK下单  
-direction | true | string | 买卖方向 | "buy":买 "sell":卖  
-offset | true | string | 开平方向 | "open":开 "close":平  
+direction | true | string | 买卖方向 | "buy":买, "sell":卖  
+offset | true | string | 开平方向 | "open":开, "close":平, "both"：单向持仓  
 lever_rate | true | int | 杠杆倍数 |  
 order_id | true | long | 订单ID |  
 order_id_str | true | string | String类型订单ID |  
@@ -38229,8 +38772,10 @@ ts | true | long | 响应生成时间点，单位：毫秒 |
 参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
 ---|---|---|---|---  
 contract_code | true | string | 合约代码 | BTC-USDT  
+reduce_only | false | int | 是否为只减仓订单（该字段在双向持仓模式下无效，在单向持仓模式下不填默认为0。） |
+0:表示为非只减仓订单，1:表示为只减仓订单  
 direction | true | string | 买卖方向 | buy:买 sell:卖  
-offset | true | string | 开平方向 | open:开 close:平  
+offset | false(请看备注) | string | 开平方向 | open:开 close:平 both:单向持仓  
 lever_rate | false | int | 杠杆倍数，开仓操作为必填，平仓操作为非必填 |  
 volume | true | decimal | 委托数量(张) |  
 callback_rate | true | decimal | 回调幅度 | 如：0.01 表示1%，不可小于0.001（0.1%）  
@@ -38242,6 +38787,8 @@ order_price_type | true | string | 委托类型 |
 
   * 委托类型为理论价格，表示跟踪委托触发成功后，以下单以来市场最低（最高）价的（1 ± 回调幅度）作为委托价（精度为币种最小变动单位，截断）向市场下委托类型为limit的订单。
   * 无论是最优N档还是理论价格下单，都不能保证订单能完全成交，主要取决于市场情况。
+  * offset 在双向持仓模式下为必填字段。在单向持仓模式下为非必填，填仅可填“both”。
+  * 请注意在单向持仓模式下，使用只减仓去开仓，在订单被触发后，系统会报：1492 只减仓订单数量超过可平量。导致委托失败。
 
 > Response:
     
@@ -38287,8 +38834,10 @@ USDT-210625"...
 pair | false（请看备注） | string | 交易对 | BTC-USDT  
 contract_type | false（请看备注） | string | 合约类型 |
 swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
+reduce_only | false | int | 是否为只减仓订单（该字段在双向持仓模式下无效，在单向持仓模式下不填默认为0。） |
+0:表示为非只减仓订单，1:表示为只减仓订单  
 direction | true | string | 买卖方向 | buy:买 sell:卖  
-offset | true | string | 开平方向 | open:开 close:平  
+offset | false(请看备注) | string | 开平方向 | open:开 close:平 both:单向持仓  
 lever_rate | false | int | 杠杆倍数，开仓操作为必填，平仓操作为非必填 |  
 volume | true | decimal | 委托数量(张) |  
 callback_rate | true | decimal | 回调幅度 | 如：0.01 表示1%，不可小于0.001（0.1%）  
@@ -38300,6 +38849,8 @@ order_price_type | true | string | 委托类型 |
 
   * 委托类型为理论价格，表示跟踪委托触发成功后，以下单以来市场最低（最高）价的（1 ± 回调幅度）作为委托价（精度为币种最小变动单位，截断）向市场下委托类型为limit的订单。
   * 无论是最优N档还是理论价格下单，都不能保证订单能完全成交，主要取决于市场情况。
+  * offset 在双向持仓模式下为必填字段。在单向持仓模式下为非必填，填仅可填“both”。
+  * 请注意在单向持仓模式下，使用只减仓去开仓，在订单被触发后，系统会报：1492 只减仓订单数量超过可平量。导致委托失败。
 
 > Response:
     
@@ -38540,8 +39091,8 @@ ts | true | long | 响应生成时间点，单位：毫秒 |
 参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
 ---|---|---|---|---  
 contract_code | true | string | 合约代码 | BTC-USDT  
-trade_type | false | int | 交易类型（不填默认查询全部） | 0:全部,1:买入开多,2: 卖出开空,3: 买入平空,4:
-卖出平多  
+trade_type | false | int | 交易类型（不填默认查询全部） | 0:全部, 1:买入开多, 2: 卖出开空, 3:买入平空,
+4:卖出平多, 17：买入（单向持仓）, 18：卖出（单向持仓）  
 page_index | false | int | 第几页，不填默认第一页 |  
 page_size | false | int | 不填默认20，不得多于50 |  
   
@@ -38570,7 +39121,8 @@ page_size | false | int | 不填默认20，不得多于50 |
                     "active_price": 48888.000000000000000000,
                     "is_active": 0,
                     "margin_mode": "isolated",
-                    "margin_account": "BTC-USDT"
+                    "margin_account": "BTC-USDT",
+                    "reduce_only": 0
                 }
             ],
             "total_page": 1,
@@ -38596,7 +39148,7 @@ contract_code | true | string | 合约代码 | BTC-USDT
 volume | true | decimal | 委托数量 |  
 order_type | true | int | 订单类型：1、报单 2、撤单 |  
 direction | true | string | 买卖方向 | 买："buy",卖："sell"  
-offset | true | string | 开平方向 | 开："open",平："close"  
+offset | true | string | 开平方向 | 开："open", 平："close", "both"：单向持仓  
 lever_rate | true | int | 杠杆倍数 |  
 order_id | true | long | 跟踪委托订单ID |  
 order_id_str | true | string | 字符串类型的跟踪委托订单ID |  
@@ -38610,6 +39162,7 @@ active_price | true | decimal | 激活价格 |
 is_active | true | int | 激活价格是否已激活 | 1：已激活；0：未激活  
 margin_mode | true | string | 保证金模式 | isolated：逐仓模式  
 margin_account | true | string | 保证金账户 | 比如：“BTC-USDT”  
+reduce_only | true | int | 是否为只减仓订单 | 0:表示为非只减仓订单，1:表示为只减仓订单  
 </orders> |  |  |  |  
 </data> |  |  |  |  
 ts | true | long | 响应生成时间点，单位：毫秒 |  
@@ -38631,8 +39184,8 @@ ts | true | long | 响应生成时间点，单位：毫秒 |
 contract_code | false | string | 合约代码 | 永续：“BTC-USDT”... , 交割：“BTC-
 USDT-210625”...  
 pair | false | string | 交易对 | BTC-USDT  
-trade_type | false | int | 交易类型（不填默认查询全部） | 0:全部,1:买入开多,2: 卖出开空,3: 买入平空,4:
-卖出平多  
+trade_type | false | int | 交易类型（不填默认查询全部） | 0:全部, 1:买入开多, 2:卖出开空, 3:买入平空,
+4:卖出平多, 17：买入（单向持仓）, 18：卖出（单向持仓）  
 page_index | false | int | 第几页，不填默认第一页 |  
 page_size | false | int | 不填默认20，不得多于50 |  
   
@@ -38664,7 +39217,8 @@ page_size | false | int | 不填默认20，不得多于50 |
                     "active_price": 41111.000000000000000000,
                     "is_active": 0,
                     "margin_mode": "cross",
-                    "margin_account": "USDT"
+                    "margin_account": "USDT",
+                    "reduce_only": 0
                 }
             ],
             "total_page": 1,
@@ -38691,7 +39245,7 @@ USDT-210625”...
 volume | true | decimal | 委托数量 |  
 order_type | true | int | 订单类型：1、报单 2、撤单 |  
 direction | true | string | 买卖方向 | 买："buy",卖："sell"  
-offset | true | string | 开平方向 | 开："open",平："close"  
+offset | true | string | 开平方向 | 开："open",平："close", "both"：单向持仓  
 lever_rate | true | int | 杠杆倍数 |  
 order_id | true | long | 跟踪委托订单ID |  
 order_id_str | true | string | 字符串类型的跟踪委托订单ID |  
@@ -38709,6 +39263,7 @@ contract_type | true | string | 合约类型 |
 swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 pair | true | string | 交易对 | 如：“BTC-USDT”  
 business_type | true | string | 业务类型 | futures：交割、swap：永续  
+reduce_only | true | int | 是否为只减仓订单 | 0:表示为非只减仓订单，1:表示为只减仓订单  
 </orders> |  |  |  |  
 </data> |  |  |  |  
 ts | true | long | 响应生成时间点，单位：毫秒 |  
@@ -38728,7 +39283,8 @@ ts | true | long | 响应生成时间点，单位：毫秒 |
 contract_code | true | string | 合约代码 | BTC-USDT  
 status | true | string | 订单状态 |
 多个以英文逗号隔开，跟踪委托订单状态：0:全部（表示全部结束状态的订单）、4:已委托、5:委托失败、6:已撤单  
-trade_type | true | int | 交易类型 | 0:全部,1:买入开多,2: 卖出开空,3: 买入平空,4: 卖出平多  
+trade_type | true | int | 交易类型 | 0:全部, 1:买入开多, 2:卖出开空, 3:买入平空, 4:卖出平多,
+17：买入（单向持仓）, 18：卖出（单向持仓）  
 create_date | true | long | 日期 | 可随意输入正整数，如果参数超过90则默认查询90天的数据  
 page_index | false | int | 第几页，不填默认第一页 |  
 page_size | false | int | 不填默认20，不得多于50 |  
@@ -38769,7 +39325,8 @@ sort_by | false | string | 排序字段（降序），不填默认按照created_
                     "real_volume":0,
                     "relation_order_id":"-1",
                     "margin_mode":"isolated",
-                    "margin_account":"BTC-USDT"
+                    "margin_account":"BTC-USDT",
+                    "reduce_only": 0
                 }
             ],
             "total_page":1,
@@ -38795,7 +39352,7 @@ contract_code | true | string | 合约代码 | BTC-USDT
 volume | true | decimal | 委托数量 |  
 order_type | true | int | 订单类型：1、报单 2、撤单 |  
 direction | true | string | 买卖方向 | 买："buy",卖："sell"  
-offset | true | string | 开平方向 | 开："open",平："close"  
+offset | true | string | 开平方向 | 开："open", 平："close", "both"：单向持仓  
 lever_rate | true | int | 杠杆倍数 |  
 order_id | true | long | 跟踪委托订单ID |  
 order_id_str | true | string | 字符串类型的跟踪委托订单ID |  
@@ -38818,6 +39375,7 @@ triggered_price | true | decimal | 被触发时的价格 |
 relation_order_id | true | string | 该字段为关联限价单的关联字段，未触发前数值为-1 |  
 margin_mode | true | string | 保证金模式 | isolated：逐仓模式  
 margin_account | true | string | 保证金账户 | 比如：“BTC-USDT”  
+reduce_only | true | int | 是否为只减仓订单 | 0:表示为非只减仓订单，1:表示为只减仓订单  
 </orders> |  |  |  |  
 </data> |  |  |  |  
 ts | true | long | 响应生成时间点，单位：毫秒 |  
@@ -38841,7 +39399,8 @@ USDT-210625”...
 pair | false（请看备注） | string | 交易对 | BTC-USDT  
 status | true | string | 订单状态 |
 多个以英文逗号隔开，跟踪委托订单状态：0:全部（表示全部结束状态的订单）、4:已委托、5:委托失败、6:已撤单  
-trade_type | true | int | 交易类型（不填默认查询全部） | 0:全部,1:买入开多,2: 卖出开空,3: 买入平空,4: 卖出平多  
+trade_type | true | int | 交易类型（不填默认查询全部） | 0:全部, 1:买入开多, 2:卖出开空, 3:买入平空,
+4:卖出平多, 17：买入（单向持仓）, 18：卖出（单向持仓）  
 create_date | true | long | 日期 | 可随意输入正整数，如果参数超过90则默认查询90天的数据  
 page_index | false | int | 第几页，不填默认第一页 |  
 page_size | false | int | 不填默认20，不得多于50 |  
@@ -38885,7 +39444,8 @@ sort_by | false | string | 排序字段（降序），不填默认按照created_
                     "real_volume": 0,
                     "relation_order_id": "-1",
                     "margin_mode": "cross",
-                    "margin_account": "USDT"
+                    "margin_account": "USDT",
+                    "reduce_only": 0
                 }
             ],
             "total_page": 1,
@@ -38911,8 +39471,8 @@ contract_code | true | string | 合约代码 | 永续：“BTC-USDT”... , 交�
 USDT-210625”...  
 volume | true | decimal | 委托数量 |  
 order_type | true | int | 订单类型：1、报单 2、撤单 |  
-direction | true | string | 买卖方向 | 买："buy",卖："sell"  
-offset | true | string | 开平方向 | 开："open",平："close"  
+direction | true | string | 买卖方向 | 买："buy", 卖："sell"  
+offset | true | string | 开平方向 | 开："open", 平："close", "both"：单向持仓  
 lever_rate | true | int | 杠杆倍数 |  
 order_id | true | long | 跟踪委托订单ID |  
 order_id_str | true | string | 字符串类型的跟踪委托订单ID |  
@@ -38939,6 +39499,7 @@ contract_type | true | string | 合约类型 |
 swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 pair | true | string | 交易对 | 如：“BTC-USDT”  
 business_type | true | string | 业务类型 | futures：交割、swap：永续  
+reduce_only | true | int | 是否为只减仓订单 | 0:表示为非只减仓订单，1:表示为只减仓订单  
 </orders> |  |  |  |  
 </data> |  |  |  |  
 ts | true | long | 响应生成时间点，单位：毫秒 |  
@@ -41370,6 +41931,7 @@ $contract_code为合约代码（BTC-USDT、ETH-USDT...），如果值为 * 时�
         "margin_account": "BTC-USDT",
         "is_tpsl": 0,
         "real_profit": 0,
+        "reduce_only": 0,
         "trade": [{
             "trade_id":14469,
             "id":"14469-758684042347171840-1", 
@@ -41407,7 +41969,7 @@ only下单只受用户持仓数量限制，"lightning":闪电平仓，"optimal_5
 FOK下单，"lightning_fok"：闪电平仓-
 FOK下单，"optimal_5_fok"：最优5档-FOK下单，"optimal_10_fok"：最优10档-FOK下单，"optimal_20_fok"：最优20档-FOK下单  
 direction | true | string | 买卖方向 | "buy":买 "sell":卖  
-offset | true | string | 开平方向 | "open":开 "close":平  
+offset | true | string | 开平方向 | "open":开 "close":平, "both"：单向持仓  
 status | true | int | 订单状态 | 1准备提交 2准备提交 3已提交 4部分成交 5部分成交已撤单 6全部成交 7已撤单  
 lever_rate | true | int | 杠杆倍数 |  
 order_id | true | long | 订单ID |  
@@ -41431,6 +41993,7 @@ margin_account | true | string | 保证金账户 | 比如“BTC-USDT”
 margin_mode | true | string | 保证金模式 | isolated：逐仓模式  
 is_tpsl | true | int | 是否设置止盈止损 | 1：是；0：否  
 real_profit | true | decimal | 订单总真实收益（使用开仓均价计算，包含仓位跨结算的已实现盈亏。） |  
+reduce_only | true | int | 是否为只减仓订单 | 0:表示为非只减仓订单，1:表示为只减仓订单  
 <trade> | true | object array |  |  
 id | true | string | 全局唯一的交易标识 |  
 trade_id | true | long | 与linear-swap-
@@ -41607,7 +42170,8 @@ contract_code | true | string | 合约代码，支持大小写 | 全部：*（�
         "margin_mode":"cross",
         "margin_account":"USDT",
         "is_tpsl":1,
-        "real_profit":0
+        "real_profit":0,
+        "reduce_only": 0
     }
     
 
@@ -41635,7 +42199,7 @@ only下单只受用户持仓数量限制，"lightning":闪电平仓，"optimal_5
 FOK下单，"lightning_fok"：闪电平仓-
 FOK下单，"optimal_5_fok"：最优5档-FOK下单，"optimal_10_fok"：最优10档-FOK下单，"optimal_20_fok"：最优20档-FOK下单  
 direction | true | string | 买卖方向 | "buy":买 "sell":卖  
-offset | true | string | 开平方向 | "open":开 "close":平  
+offset | true | string | 开平方向 | "open":开 "close":平, "both"：单向持仓  
 status | true | int | 订单状态 | 1准备提交 2准备提交 3已提交 4部分成交 5部分成交已撤单 6全部成交 7已撤单  
 lever_rate | true | int | 杠杆倍数 |  
 order_id | true | long | 订单ID |  
@@ -41661,6 +42225,7 @@ contract_type | true | string | 合约类型 |
 swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 pair | true | string | 交易对 | 如：“BTC-USDT”  
 business_type | true | string | 业务类型 | futures：交割、swap：永续  
+reduce_only | true | int | 是否为只减仓订单 | 0:表示为非只减仓订单，1:表示为只减仓订单  
 <trade> | true | object array |  |  
 id | true | string | 全局唯一的交易标识 |  
 trade_id | true | long | 与linear-swap-
@@ -41811,7 +42376,8 @@ contract_code支持大小写，比如BTC-USDT
                 "adjust_factor":0.075,
                 "margin_asset":"USDT",
                 "margin_mode": "isolated",
-                "margin_account": "BTC-USDT"
+                "margin_account": "BTC-USDT",
+                "position_mode": "dual_side"
             }
         ],
         "uid":"123456789"
@@ -41848,6 +42414,7 @@ lever_rate | true | int | 杠杆倍数 |
 adjust_factor | true | decimal | 调整系数 |  
 margin_account | true | string | 保证金账户 | 比如“BTC-USDT”  
 margin_mode | true | string | 保证金模式 | isolated：逐仓模式  
+position_mode | true | string | 持仓模式 | single_side：单向持仓；dual_side：双向持仓  
 </data> |  |  |  |  
   
 ## 【逐仓】取消订阅资产变动数据（unsub）
@@ -41965,6 +42532,7 @@ topic | string | 必填；订阅主题名称，必填 (accounts_cross.$margin_ac
                 "profit_unreal":0.1277,
                 "withdraw_available":1.17218161555383535,
                 "risk_rate":25.683477437733940947,
+                "position_mode": "dual_side",
                 "contract_detail":[
                     {
                         "symbol":"BTC",
@@ -42028,6 +42596,7 @@ profit_real | true | decimal | 已实现盈亏 |
 profit_unreal | true | decimal | 未实现盈亏 |  
 withdraw_available | true | decimal | 可划转数量 |  
 risk_rate | true | decimal | 保证金率 |  
+position_mode | true | string | 持仓模式 | single_side：单向持仓；dual_side：双向持仓  
 <contract_detail> | true | object array | 支持永续的合约相关字段 |  
 symbol | true | string | 品种代码 | "BTC","ETH"...  
 contract_code | true | string | 合约代码 | 永续："BTC-USDT" ...  
@@ -42176,7 +42745,8 @@ topic | string | 必填；订阅主题名称，必填 (positions.$contract_code)
                 "last_price":13130.3,
                 "margin_asset":"USDT",
                 "margin_mode": "isolated",
-                "margin_account": "BTC-USDT"
+                "margin_account": "BTC-USDT",
+                "position_mode": "dual_side"
             }
         ],
         "uid":"123456789"
@@ -42213,6 +42783,7 @@ last_price | decimal | 最新价
 margin_asset | string | 保证金币种（计价币种）  
 margin_account | string | 保证金账户 比如“BTC-USDT”  
 margin_mode | string | 保证金模式 isolated：逐仓模式  
+position_mode | string | 持仓模式 single_side：单向持仓；dual_side：双向持仓  
 </data> |  |  
   
 #### 备注：
@@ -42220,6 +42791,8 @@ margin_mode | string | 保证金模式 isolated：逐仓模式
   * 推送接口新增定期推送逻辑：每 5 秒进行一次定期推送，由定期推送触发的数据中 event 参数值为“snapshot”，表示由系统定期推送触发。 如果5秒内某仓位已触发过推送，则该仓位跳过此次推送。
 
   * 当用户持仓量为0时使用切换杠杆的接口，持仓推送接口不会推送"switch_lever_rate"。
+
+  * 单向持仓模式下：只推送有仓位的持仓信息(即只推送单向非空仓的数据)，如没有持仓则不推送
 
 ## 【逐仓】取消订阅持仓变动数据（unsub）
 
@@ -42348,7 +42921,8 @@ contract_code | true | string | 合约代码，支持大小写 | 全部：*（�
                 "direction":"buy",
                 "last_price":48284.8,
                 "margin_mode":"cross",
-                "margin_account":"USDT"
+                "margin_account":"USDT",
+                "position_mode": "dual_side"
             }
         ],
         "uid":"123456789"
@@ -42389,6 +42963,7 @@ contract_type | true | string | 合约类型 |
 swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 pair | true | string | 交易对 | 如：“BTC-USDT”  
 business_type | true | string | 业务类型 | futures：交割、swap：永续  
+position_mode | true | string | 持仓模式 single_side：单向持仓；dual_side：双向持仓 |  
 </data> |  |  |  |  
   
 #### 备注：
@@ -42396,6 +42971,8 @@ business_type | true | string | 业务类型 | futures：交割、swap：永续
   * 推送接口新增定期推送逻辑：每 5 秒进行一次定期推送，由定期推送触发的数据中 event 参数值为“snapshot”，表示由系统定期推送触发。 如果5秒内某仓位已触发过推送，则该仓位跳过此次推送。
 
   * 当用户持仓量为0时使用切换杠杆的接口，持仓推送接口不会推送"switch_lever_rate"。
+
+  * 单向持仓模式下：只推送有仓位的持仓信息(即只推送单向非空仓的数据)，如没有持仓则不推送
 
 ## 【全仓】取消订阅持仓变动数据（unsub）
 
@@ -42539,7 +43116,8 @@ contract_code支持大小写; |
         "order_price_type":"opponent",
         "margin_mode": "isolated",
         "margin_account": "BTC-USDT",
-        "is_tpsl": 0
+        "is_tpsl": 0,
+        "reduce_only": 0
     }
     
     
@@ -42562,7 +43140,7 @@ order_type | true | int | 订单类型 | 1:报单 、 2:撤单 、 3:强平、4:
 trade_volume | true | decimal | 订单已成交数量 |  
 volume | true | decimal | 订单总委托数量 |  
 direction | true | string | 买卖方向 | "buy":买 "sell":卖  
-offset | true | string | 开平方向 | "open":开 "close":平  
+offset | true | string | 开平方向 | "open":开 "close":平, "both"：单向持仓  
 lever_rate | true | int | 杠杆倍数 |  
 price | true | decimal | 委托价格 |  
 created_at | true | long | 创建时间 |  
@@ -42579,6 +43157,7 @@ FOK下单，"optimal_5_fok"：最优5档-FOK下单，"optimal_10_fok"：最优10
 margin_account | true | string | 保证金账户 | 比如“BTC-USDT”  
 margin_mode | true | string | 保证金模式 | isolated：逐仓模式  
 is_tpsl | true | int | 是否设置止盈止损 | 1：是；0：否  
+reduce_only | true | int | 是否为只减仓订单 | 0:表示为非只减仓订单，1:表示为只减仓订单  
 <trade> | true | object array |  |  
 id | true | string | 全局唯一的交易标识 |  
 trade_id | true | long | 与linear-swap-
@@ -42736,7 +43315,8 @@ contract_code | true | string | 合约代码，支持大小写 | 全部：*（�
         ],
         "margin_mode":"cross",
         "margin_account":"USDT",
-        "is_tpsl":1
+        "is_tpsl":1,
+        "reduce_only": 0
     }
     
     
@@ -42762,7 +43342,7 @@ order_type | true | int | 订单类型 | 1:报单 、 2:撤单 、 3:强平、4:
 trade_volume | true | decimal | 订单已成交数量 |  
 volume | true | decimal | 订单总委托数量 |  
 direction | true | string | 买卖方向 | "buy":买 "sell":卖  
-offset | true | string | 开平方向 | "open":开 "close":平  
+offset | true | string | 开平方向 | "open":开 "close":平, "both"：单向持仓  
 lever_rate | true | int | 杠杆倍数 |  
 price | true | decimal | 委托价格 |  
 created_at | true | long | 创建时间 |  
@@ -42781,6 +43361,7 @@ contract_type | true | string | 合约类型 |
 swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 pair | true | string | 交易对 | 如：“BTC-USDT”  
 business_type | true | string | 业务类型 | futures：交割、swap：永续  
+reduce_only | true | int | 是否为只减仓订单 | 0:表示为非只减仓订单，1:表示为只减仓订单  
 <trade> | true | object array |  |  
 id | true | string | 全局唯一的交易标识 |  
 trade_id | true | long | 与linear-swap-
@@ -42941,7 +43522,7 @@ symbol | true | string | 品种代码 | "BTC","ETH"...
 contract_code | true | string | 合约代码 | 永续：“BTC-USDT”... , 交割：“BTC-
 USDT-210625”...  
 direction | true | string | 仓位方向 | "buy":买 "sell":卖  
-offset | true | string | 开平方向 | "open":开 "close":平  
+offset | true | string | 开平方向 | "open":开 "close":平, "both"：单向持仓  
 volume | true | decimal | 强平数量（张） |  
 amount | true | decimal | 强平数量（币） |  
 trade_turnover | true | decimal | 强平金额（计价币种） |  
@@ -43551,7 +44132,8 @@ contract_code支持大小写; |
                 "margin_mode": "isolated",
                 "margin_account": "BTC-USDT",
                 "fail_code":null,
-                "fail_reason":null
+                "fail_reason":null,
+                "reduce_only": 0
             }
         ]
     }
@@ -43574,7 +44156,7 @@ trigger_type | true | string | 触发类型 | ge大于等于；le小于等于
 volume | true | decimal | 委托数量 |  
 order_type | true | int | 订单类型 | 1、报单  
 direction | true | string | 买卖方向 | 买："buy",卖："sell"  
-offset | true | string | 开平方向 | 开："open",平："close"  
+offset | true | string | 开平方向 | 开："open",平："close" ,"both"：单向持仓  
 lever_rate | true | int | 杠杆倍数 |  
 order_id | true | decimal | 计划委托单订单ID |  
 order_id_str | true | string | 字符串类型的订单ID |  
@@ -43595,6 +44177,7 @@ margin_account | true | string | 保证金账户 | 比如“BTC-USDT”
 margin_mode | true | string | 保证金模式 | isolated：逐仓模式  
 fail_code | true | int | 被触发时下order单失败错误码 |  
 fail_reason | true | string | 被触发时下order单失败原因（英文） |  
+reduce_only | true | int | 是否为只减仓订单 | 0:表示为非只减仓订单，1:表示为只减仓订单  
 </data> |  |  |  |  
   
 #### **说明** ：
@@ -43739,7 +44322,8 @@ contract_code | true | string | 合约代码，支持大小写 | 全部：*（�
                 "fail_code":null,
                 "fail_reason":null,
                 "margin_mode":"cross",
-                "margin_account":"USDT"
+                "margin_account":"USDT",
+                "reduce_only": 0
             }
         ]
     }
@@ -43765,7 +44349,7 @@ trigger_type | true | string | 触发类型 | ge大于等于；le小于等于
 volume | true | decimal | 委托数量 |  
 order_type | true | int | 订单类型 | 1、报单  
 direction | true | string | 买卖方向 | 买："buy",卖："sell"  
-offset | true | string | 开平方向 | 开："open",平："close"  
+offset | true | string | 开平方向 | 开："open",平："close", "both":单向持仓  
 lever_rate | true | int | 杠杆倍数 |  
 order_id | true | decimal | 计划委托单订单ID |  
 order_id_str | true | string | 字符串类型的订单ID |  
@@ -43788,6 +44372,7 @@ contract_type | true | string | 合约类型 |
 swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
 pair | true | string | 交易对 | 如：“BTC-USDT”  
 business_type | true | string | 业务类型 | futures：交割、swap：永续  
+reduce_only | true | int | 是否为只减仓订单 | 0:表示为非只减仓订单，1:表示为只减仓订单  
 </data> |  |  |  |  
   
 #### **说明** ：
