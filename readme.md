@@ -22463,7 +22463,7 @@ trade_turnover | true | string | 成交额, 数值为0 |  |
 op | string | 必填；操作名称，订阅固定值为sub  
 cid | string | 选填;Client 请求唯一 ID  
 topic | string | 必填；订阅主题名称:orders.$contract_code，订阅、取消订阅某个合约下的成交订单信息；
-$contract_code为合约代码（BTC-USDT、ETH-USDT...），如果值为 * 时代表订阅所有合约;  
+$contract_code为合约代码（BTC-USD、ETH-USD...），如果值为 * 时代表订阅所有合约;  
   
   * 备注：postOnly的报单收到的WS推送要么是报单成功，状态为3，要么是7，已撤单。
 
@@ -22612,7 +22612,7 @@ role | string | taker或maker
 op | string | 必填;操作名称，订阅固定值为 unsub;  
 cid | string | 选填;Client 请求唯一 ID  
 topic | string | 必填;待取消订阅主题名称:orders.$contract_code，订阅、取消订阅某个合约下的成交订单信息；
-$contract_code为合约代码（BTC-USDT、ETH-USDT...），如果值为 * 时代表订阅所有合约;  
+$contract_code为合约代码（BTC-USD、ETH-USD...），如果值为 * 时代表订阅所有合约;  
   
 ### 订阅与取消订阅规则说明
 
