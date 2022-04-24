@@ -12000,6 +12000,7 @@ shell
     * 风险机制说明
     * 撮合机制说明
   * 更新日志
+    * 1.2.1 2022年04月24日 【新增批量获取聚合行情（V2）接口】
     * 1.2.0 2021年5月17日 【修改：母子账户划转（新增选填入参：client_order_id）】
     * 1.1.9 2021年05月12日 【新增：跟踪委托订单接口】
     * 1.1.8 2021年04月29日 【修改撤销订单接口（将原来的 client_order_id 有效时间从24小时改为8小时。超过8小时的订单根据client_order_id将查询不到。）、修改获取合约订单信息接口（将原来的 client_order_id 有效时间从24小时改为8小时。超过8小时的订单根据client_order_id将查询不到。将原来只能查询最近4小时内的撤单信息改为只可以查询最近2小时内的撤单信息。）】
@@ -12051,6 +12052,7 @@ shell
     * 获取标记价格的K线数据
     * 获取聚合行情
     * 批量获取聚合行情
+    * 批量获取聚合行情（V2）
     * 获取市场最近成交记录
     * 批量获取最近的交易记录
     * 查询合约风险准备金余额和预估分摊比例
@@ -12258,6 +12260,14 @@ cn/detail/900000089903) 来了解。
 6、卖出申报价格低于即时揭示的最高买入申报价格时，以即时揭示的最高买入申报价格为成交价
 
 # 更新日志
+
+## 1.2.1 2022年04月24日 【新增批量获取聚合行情（V2）接口】
+
+### 1、新增批量获取聚合行情（V2）接口
+
+  * 接口名称：批量获取聚合行情（V2）
+  * 接口类型：共公接口
+  * 接口URL：/v2/swap-ex/market/detail/batch_merged
 
 ## 1.2.0 2021年5月17日 【修改：母子账户划转（新增选填入参：client_order_id）】
 
@@ -13204,6 +13214,7 @@ IOC下单），lightning_fok（闪电平仓-FOK下单），lightning(闪电平�
 线数据 | 否  
 读取 | 市场行情接口 | /swap-ex/market/detail/merged | GET | 获取聚合行情 | 否  
 读取 | 市场行情接口 | /swap-ex/market/detail/batch_merged | GET | 批量获取聚合行情 | 否  
+读取 | 市场行情接口 | /v2/swap-ex/market/detail/batch_merged | GET | 批量获取聚合行情(V2) | 否  
 读取 | 市场行情接口 | /swap-ex/market/trade | GET | 获取市场最近成交记录 | 否  
 读取 | 市场行情接口 | /swap-api/v1/swap_risk_info | GET | 查询合约风险准备金余额和预估分摊比例 | 否  
 读取 | 市场行情接口 | /swap-api/v1/swap_insurance_fund | GET | 查询合约风险准备金余额历史数据 | 否  
@@ -15249,6 +15260,74 @@ count | true | decimal | 成交笔数 （最近24（当前时间-24小时）小�
 high | true | string | 最高价 |  
 low | true | string | 最低价 |  
 vol | true | string | 成交量（张）（最近24（当前时间-24小时）小时成交量张）。 值是买卖双边之和 |  
+ts | true | long | 时间戳 |  
+</ticks> |  |  |  |  
+ts | true | long | 响应生成时间点，单位：毫秒 |  
+  
+## 批量获取聚合行情（V2）
+
+  * GET `/v2/swap-ex/market/detail/batch_merged`
+
+### 请求参数
+
+参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
+---|---|---|---|---  
+contract_code | false | string | 合约代码，不填返回全部合约的聚合行情 | "BTC-USD" ...  
+  
+#### 备注
+
+  * 该接口更新频率为50ms
+
+> Response:
+    
+    
+    {
+        "status": "ok",
+        "ticks": [
+            {
+                "id": 1650792412,
+                "ts": 1650792412926,
+                "ask": [
+                    39730.5,
+                    243
+                ],
+                "bid": [
+                    39730.4,
+                    1869
+                ],
+                "contract_code": "BTC-USD",
+                "open": "39792.4",
+                "close": "39735.2",
+                "low": "39325.6",
+                "high": "39980",
+                "amount": "3021.6948445812255950219437567245117510294",
+                "count": 13571,
+                "vol": "119937400",
+                "number_of": "1199374"
+            }
+        ],
+        "ts": 1650792412926
+    }
+    
+
+### 返回参数
+
+参数名称 | 是否必须 | 数据类型 | 描述 | 取值范围  
+---|---|---|---|---  
+status | true | string | 请求处理结果 | "ok" , "error"  
+<ticks> | true | object array |  |  
+contract_code | true | string | 合约代码 | "BTC-USD" ...  
+id | true | long | K线id |  
+amount | true | string | 成交量(币) （最近24（当前时间-24小时）小时成交量币）。 值是买卖双边之和 |  
+ask | true | array | [卖1价,卖1量(张)] |  
+bid | true | array | [买1价,买1量(张)] |  
+open | true | string | 开盘价 |  
+close | true | string | 收盘价,当K线为最晚的一根时，是最新成交价 |  
+count | true | decimal | 成交笔数 （最近24（当前时间-24小时）小时成交笔数）。 值是买卖双边之和 |  
+high | true | string | 最高价 |  
+low | true | string | 最低价 |  
+vol | true | string | 成交额（最近24（当前时间-24小时）小时成交额）。 值是买卖双边之和 |  
+number_of | true | string | 成交量（张）（最近24（当前时间-24小时）小时成交量张）。 值是买卖双边之和 |  
 ts | true | long | 时间戳 |  
 </ticks> |  |  |  |  
 ts | true | long | 响应生成时间点，单位：毫秒 |  
