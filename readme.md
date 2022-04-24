@@ -23958,6 +23958,7 @@ shell
     * 风险机制说明
     * 撮合机制说明
   * 更新日志
+    * 1.1.6 2022年04月24日 【新增批量获取聚合行情（V2）接口】
     * 1.1.5 2022年02月25日 【新增单向持仓接口的相关内容】
     * 1.1.4 2021年12月22日 【新增USDT交割合约接口内容】
     * 1.1.3 2021年5月17日 【修改：母子账户划转（新增选填入参：client_order_id）。同账号不同保证金账户的划转（新增选填入参：client_order_id）】
@@ -24006,6 +24007,7 @@ shell
     * 【通用】获取标记价格的K线数据
     * 【通用】获取聚合行情
     * 【通用】批量获取聚合行情
+    * 【通用】批量获取聚合行情（V2）
     * 【通用】获取市场最近成交记录
     * 【通用】批量获取最近的交易记录
     * 【通用】查询合约风险准备金余额和预估分摊比例
@@ -24272,6 +24274,14 @@ cn/detail/900001326606) 来了解。
 6、卖出申报价格低于即时揭示的最高买入申报价格时，以即时揭示的最高买入申报价格为成交价
 
 # 更新日志
+
+## 1.1.6 2022年04月24日 【新增批量获取聚合行情（V2）接口】
+
+### 1、新增批量获取聚合行情（V2）接口
+
+  * 接口名称：【通用】批量获取聚合行情（V2）
+  * 接口类型：共公接口
+  * 接口URL：/v2/linear-swap-ex/market/detail/batch_merged
 
 ## 1.1.5 2022年02月25日 【新增单向持仓接口的相关内容】
 
@@ -26550,6 +26560,8 @@ trades 下新增每笔成交收益字段：profit（平仓盈亏））
 读取 | 市场行情接口 | 通用 | /linear-swap-ex/market/detail/merged | GET | 【通用】获取聚合行情 | 否  
 读取 | 市场行情接口 | 通用 | /linear-swap-ex/market/detail/batch_merged | GET |
 【通用】批量获取聚合行情 | 否  
+读取 | 市场行情接口 | 通用 | /v2/linear-swap-ex/market/detail/batch_merged | GET |
+【通用】批量获取聚合行情(V2) | 否  
 读取 | 市场行情接口 | 通用 | /index/market/history/linear_swap_basis | GET | 【通用】获取基差数据
 | 否  
 读取 | 市场行情接口 | 通用 | /index/market/history/linear_swap_premium_index_kline | GET
@@ -29015,6 +29027,85 @@ high | true | string | 最高价 |
 low | true | string | 最低价 |  
 vol | true | string | 成交量（张）（最近24（当前时间-24小时）小时成交量张）。 值是买卖双边之和 |  
 trade_turnover | true | string | 成交额 （当前时间-24小时）小时成交额）。 值是买卖双边之和 |  
+ts | true | long | 时间戳 |  
+</ticks> |  |  |  |  
+ts | true | long | 响应生成时间点，单位：毫秒 |  
+  
+## 【通用】批量获取聚合行情（V2）
+
+  * GET `/v2/linear-swap-ex/market/detail/batch_merged`
+
+#### 备注
+
+  * 该接口支持全仓模式和逐仓模式。
+  * 该接口更新频率为50ms
+  * 请求参数contract_code支持交割合约代码，格式为BTC-USDT-210625；同时支持合约标识，格式为 BTC-USDT（永续）、BTC-USDT-CW（当周）、BTC-USDT-NW（次周）、BTC-USDT-CQ（当季）、BTC-USDT-NQ（次季）。
+  * business_type 在查询交割合约数据时为必填参数。且参数值要传：futures 或 all 。
+
+### 请求参数
+
+参数名称 | 是否必须 | 类型 | 描述 | 取值范围  
+---|---|---|---|---  
+contract_code | false | string | 合约代码 或 合约标识 | 永续："BTC-USDT" ... ，交割：“BTC-
+USDT-210625”... 或 BTC-USDT-CW（当周合约标识）、BTC-USDT-NW（次周合约标识）、BTC-USDT-
+CQ（当季合约标识）、BTC-USDT-NQ（次季合约标识）  
+business_type | false（请看备注） | string | 业务类型，不填默认永续 | futures：交割、swap：永续、all：全部  
+  
+> Response:
+    
+    
+    {
+        "status": "ok",
+        "ticks": [
+            {
+                "id": 1650792083,
+                "ts": 1650792083179,
+                "ask": [
+                    39736.6,
+                    1285
+                ],
+                "bid": [
+                    39736.5,
+                    6070
+                ],
+                "trade_partition": "USDT",
+                "business_type": "swap",
+                "contract_code": "BTC-USDT",
+                "open": "39760",
+                "close": "39736.6",
+                "low": "39316.3",
+                "high": "39971.2",
+                "amount": "6891.566",
+                "count": 48262,
+                "vol": "273472535.834",
+                "number_of": "6891566"
+            }
+        ],
+        "ts": 1650792083179
+    }
+    
+
+### 返回参数
+
+参数名称 | 是否必须 | 数据类型 | 描述 | 取值范围  
+---|---|---|---|---  
+status | true | string | 请求处理结果 | "ok" , "error"  
+<ticks> | true | object array |  |  
+contract_code | true | string | 合约代码 或 合约标识 | 永续："BTC-USDT" ... ，交割：“BTC-
+USDT-210625”... 或 BTC-USDT-CW（当周合约标识）、BTC-USDT-NW（次周合约标识）、BTC-USDT-
+CQ（当季合约标识）、BTC-USDT-NQ（次季合约标识）  
+business_type | true | string | 业务类型 | futures：交割、swap：永续  
+id | true | long | K线id |  
+amount | true | string | 成交量(币) （最近24（当前时间-24小时）小时成交量币）。 值是买卖双边之和 |  
+ask | true | array | [卖1价,卖1量(张)] |  
+bid | true | array | [买1价,买1量(张)] |  
+open | true | string | 开盘价 |  
+close | true | string | 收盘价,当K线为最晚的一根时，是最新成交价 |  
+count | true | decimal | 成交笔数（当前时间-24小时）小时成交笔数）。 值是买卖双边之和 |  
+high | true | string | 最高价 |  
+low | true | string | 最低价 |  
+vol | true | string | 成交额（最近24（当前时间-24小时）小时成交量张）。 值是买卖双边之和 |  
+number_of | true | string | 成交量（张）（当前时间-24小时）小时成交额）。 值是买卖双边之和 |  
 ts | true | long | 时间戳 |  
 </ticks> |  |  |  |  
 ts | true | long | 响应生成时间点，单位：毫秒 |  
