@@ -24302,29 +24302,29 @@ cn/detail/900001326606) 来了解。
   * 接口类型：私有接口
   * 接口URL：/linear-swap-api/v1/swap_cross_trigger_order
 
-### 5、修改切换杠杆接口【全仓】（请求参数lever_rate字段解除主帐号高倍杠杆协议限制）
-
-  * 接口名称：【全仓】切换杠杆
-  * 接口类型：私有接口
-  * 接口URL：/linear-swap-api/v1/swap_cross_switch_lever_rate
-
-### 6、修改切换杠杆接口【全仓】（请求参数lever_rate字段解除主帐号高倍杠杆协议限制）
-
-  * 接口名称：【全仓】切换杠杆
-  * 接口类型：私有接口
-  * 接口URL：/linear-swap-api/v1/swap_cross_switch_lever_rate
-
-### 7、修改合约下单接口【逐仓】（请求参数lever_rate字段解除主帐号高倍杠杆协议限制）
+### 5、修改合约下单接口【逐仓】（请求参数lever_rate字段解除主帐号高倍杠杆协议限制）
 
   * 接口名称: 【逐仓】合约下单
   * 接口类型: 私有接口
   * 接口URL: /linear-swap-api/v1/swap_order
 
-### 8、修改合约下单接口【全仓】（请求参数lever_rate字段解除主帐号高倍杠杆协议限制）
+### 6、修改合约下单接口【全仓】（请求参数lever_rate字段解除主帐号高倍杠杆协议限制）
 
   * 接口名称: 【全仓】合约下单
   * 接口类型: 私有接口
   * 接口URL: /linear-swap-api/v1/swap_cross_order
+
+### 7、修改切换杠杆接口【全仓】（请求参数lever_rate字段解除主帐号高倍杠杆协议限制）
+
+  * 接口名称：【全仓】切换杠杆
+  * 接口类型：私有接口
+  * 接口URL：/linear-swap-api/v1/swap_cross_switch_lever_rate
+
+### 8、修改切换杠杆接口【逐仓】（请求参数lever_rate字段解除主帐号高倍杠杆协议限制）
+
+  * 接口名称：【全仓】切换杠杆
+  * 接口类型：私有接口
+  * 接口URL：/linear-swap-api/v1/swap_switch_lever_rate
 
 ## 1.1.6 2022年04月24日 【新增批量获取聚合行情（V2）接口】
 
