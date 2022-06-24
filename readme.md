@@ -24314,6 +24314,18 @@ cn/detail/900001326606) 来了解。
   * 接口类型：私有接口
   * 接口URL：/linear-swap-api/v1/swap_cross_switch_lever_rate
 
+### 7、修改合约下单接口【逐仓】（请求参数lever_rate字段解除主帐号高倍杠杆协议限制）
+
+  * 接口名称: 【逐仓】合约下单
+  * 接口类型: 私有接口
+  * 接口URL: /linear-swap-api/v1/swap_order
+
+### 8、修改合约下单接口【全仓】（请求参数lever_rate字段解除主帐号高倍杠杆协议限制）
+
+  * 接口名称: 【全仓】合约下单
+  * 接口类型: 私有接口
+  * 接口URL: /linear-swap-api/v1/swap_cross_order
+
 ## 1.1.6 2022年04月24日 【新增批量获取聚合行情（V2）接口】
 
 ### 1、新增批量获取聚合行情（V2）接口
@@ -34121,9 +34133,7 @@ price | decimal | false | 价格 |
 volume | long | true | 委托数量(张) |  
 direction | string | true | 仓位方向 | "buy":买 "sell":卖  
 offset | string | false(请看备注) | 开平方向 | "open":开 "close":平 “both”:单向持仓  
-lever_rate | int | true |
-杠杆倍数[“开仓”若有10倍多单，就不能再下20倍多单;首次使用高倍杠杆(>20倍)，请使用主账号登录web端同意高倍杠杆协议后，才能使用接口下高倍杠杆(>20倍)]
-|  
+lever_rate | int | true | 杠杆倍数[“开仓”若有10倍多单，就不能再下20倍多单;高倍杠杆风险系数较大，请谨慎使用。 |  
 order_price_type | string | true | 订单报价类型 | "limit":限价，"opponent":对手价
 ，"post_only":只做maker单,post
 only下单只受用户持仓数量限制,"optimal_5"：最优5档，"optimal_10"：最优10档，"optimal_20"：最优20档，"ioc":IOC订单，"fok"：FOK订单,
@@ -34238,9 +34248,7 @@ price | false | decimal | 价格 |
 volume | true | long | 委托数量(张) |  
 direction | true | string | 仓位方向 | "buy":买 "sell":卖  
 offset | false（请看备注） | string | 开平方向 | "open":开 "close":平 “both”:单向持仓  
-lever_rate | true | int |
-杠杆倍数,“开仓”若有10倍多单，就不能再下20倍多单;首次使用高倍杠杆(>20倍)，请使用主账号登录web端同意高倍杠杆协议后，才能使用接口下高倍杠杆(>20倍)]
-|  
+lever_rate | true | int | 杠杆倍数,“开仓”若有10倍多单，就不能再下20倍多单;高倍杠杆风险系数较大，请谨慎使用。 |  
 order_price_type | true | string | 订单报价类型 | "limit":限价，"opponent":对手价
 ，"post_only":只做maker单,post
 only下单只受用户持仓数量限制,"optimal_5"：最优5档，"optimal_10"：最优10档，"optimal_20"：最优20档，"ioc":IOC订单，"fok"：FOK订单,
