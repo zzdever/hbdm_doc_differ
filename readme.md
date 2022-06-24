@@ -23958,6 +23958,7 @@ shell
     * 风险机制说明
     * 撮合机制说明
   * 更新日志
+    * 1.6.7 2022年06月24日 【修改使用杠杆的接口限制内容】
     * 1.1.6 2022年04月24日 【新增批量获取聚合行情（V2）接口】
     * 1.1.5 2022年02月25日 【新增单向持仓接口的相关内容】
     * 1.1.4 2021年12月22日 【新增USDT交割合约接口内容】
@@ -24274,6 +24275,44 @@ cn/detail/900001326606) 来了解。
 6、卖出申报价格低于即时揭示的最高买入申报价格时，以即时揭示的最高买入申报价格为成交价
 
 # 更新日志
+
+## 1.6.7 2022年06月24日 【修改使用杠杆的接口限制内容】
+
+### 1、修改合约批量下单接口【逐仓】（请求参数lever_rate字段解除主帐号高倍杠杆协议限制）
+
+  * 接口名称：【逐仓】合约批量下单
+  * 接口类型：私有接口
+  * 接口URL：/linear-swap-api/v1/swap_batchorder
+
+### 2、修改合约批量下单接口【全仓】（请求参数lever_rate字段解除主帐号高倍杠杆协议限制）
+
+  * 接口名称：【全仓】合约批量下单
+  * 接口类型：私有接口
+  * 接口URL：/linear-swap-api/v1/swap_cross_batchorder
+
+### 3、修改合约计划委托下单接口【逐仓】（请求参数lever_rate字段解除主帐号高倍杠杆协议限制）
+
+  * 接口名称：【逐仓】合约计划委托下单
+  * 接口类型：私有接口
+  * 接口URL：/linear-swap-api/v1/swap_trigger_order
+
+### 4、修改合约计划委托下单接口【全仓】（请求参数lever_rate字段解除主帐号高倍杠杆协议限制）
+
+  * 接口名称：【全仓】合约计划委托下单
+  * 接口类型：私有接口
+  * 接口URL：/linear-swap-api/v1/swap_cross_trigger_order
+
+### 5、修改切换杠杆接口【全仓】（请求参数lever_rate字段解除主帐号高倍杠杆协议限制）
+
+  * 接口名称：【全仓】切换杠杆
+  * 接口类型：私有接口
+  * 接口URL：/linear-swap-api/v1/swap_cross_switch_lever_rate
+
+### 6、修改切换杠杆接口【全仓】（请求参数lever_rate字段解除主帐号高倍杠杆协议限制）
+
+  * 接口名称：【全仓】切换杠杆
+  * 接口类型：私有接口
+  * 接口URL：/linear-swap-api/v1/swap_cross_switch_lever_rate
 
 ## 1.1.6 2022年04月24日 【新增批量获取聚合行情（V2）接口】
 
@@ -34337,9 +34376,7 @@ price | false | decimal | 价格 |
 volume | true | long | 委托数量(张) |  
 direction | true | string | 仓位方向 | "buy":买 "sell":卖  
 offset | false(请看备注) | string | 开平方向 | "open":开 "close":平 “both”:单向持仓  
-lever_rate | true | int |
-杠杆倍数[“开仓”若有10倍多单，就不能再下20倍多单;首次使用高倍杠杆(>20倍)，请使用主账号登录web端同意高倍杠杆协议后，才能使用接口下高倍杠杆(>20倍)]
-|  
+lever_rate | true | int | 杠杆倍数[“开仓”若有10倍多单，就不能再下20倍多单;高倍杠杆风险系数较大，请谨慎使用。 |  
 order_price_type | true | string | 订单报价类型 | "limit":限价，"opponent":对手价
 ，"post_only":只做maker单,post
 only下单只受用户持仓数量限制,"optimal_5"：最优5档，"optimal_10"：最优10档，"optimal_20"：最优20档，"ioc":IOC订单，"fok"：FOK订单,
@@ -34486,9 +34523,7 @@ price | false | decimal | 价格 |
 volume | true | long | 委托数量(张) |  
 direction | true | string | 仓位方向 | "buy":买 "sell":卖  
 offset | false（请看备注） | string | 开平方向 | "open":开 "close":平 “both”:单向持仓  
-lever_rate | true | int |
-杠杆倍数,“开仓”若有10倍多单，就不能再下20倍多单;首次使用高倍杠杆(>20倍)，请使用主账号登录web端同意高倍杠杆协议后，才能使用接口下高倍杠杆(>20倍)]
-|  
+lever_rate | true | int | 杠杆倍数,“开仓”若有10倍多单，就不能再下20倍多单;高倍杠杆风险系数较大，请谨慎使用。 |  
 order_price_type | true | string | 订单报价类型 | "limit":限价，"opponent":对手价
 ，"post_only":只做maker单,post
 only下单只受用户持仓数量限制,"optimal_5"：最优5档，"optimal_10"：最优10档，"optimal_20"：最优20档，"ioc":IOC订单，"fok"：FOK订单,"opponent_ioc":
@@ -34818,8 +34853,7 @@ ts | true | long | 响应生成时间点，单位：毫秒 |
 **参数名称** | **是否必须** | **类型** | **描述** | **取值范围**  
 ---|---|---|---|---  
 contract_code | true | string | 合约代码 | 比如“BTC-USDT”  
-lever_rate | true | int |
-要切换的杠杆倍数;首次使用高倍杠杆(>20倍)，请使用主账号登录web端同意高倍杠杆协议后，才能使用接口下高倍杠杆(>20倍) |  
+lever_rate | true | int | 要切换的杠杆倍数；高倍杠杆风险系数较大，请谨慎使用。 |  
   
 > 响应示例
     
@@ -34882,8 +34916,7 @@ USDT-210625"...
 pair | false(请看备注) | string | 交易对 | BTC-USDT  
 contract_type | false(请看备注) | string | 合约类型 |
 swap（永续）、this_week（当周）、next_week（次周）、quarter（当季）、next_quarter（次季）  
-lever_rate | true | int |
-要切换的杠杆倍数；首次使用高倍杠杆(>20倍)，请使用主账号登录web端同意高倍杠杆协议后，才能使用接口下高倍杠杆(>20倍) |  
+lever_rate | true | int | 要切换的杠杆倍数；高倍杠杆风险系数较大，请谨慎使用。 |  
   
 > Response
     
@@ -37070,8 +37103,7 @@ volume | true | long | 委托数量(张) |
 direction | true | string | 买卖方向 | buy:买 sell:卖  
 offset | false(请看备注) | string | 开平方向 | open:开 close:平 both:单向持仓  
 lever_rate | false | int |
-开仓必须填写，平仓可以不填。杠杆倍数[开仓若有10倍多单，就不能再下20倍多单;首次使用高倍杠杆(>20倍)，请使用主账号登录web端同意高倍杠杆协议后，才能使用接口下高倍杠杆(>20倍)]
-|  
+开仓必须填写，平仓可以不填。杠杆倍数[开仓若有10倍多单，就不能再下20倍多单;高倍杠杆风险系数较大，请谨慎使用。 |  
   
 #### 备注：
 
@@ -37153,8 +37185,7 @@ volume | true | long | 委托数量(张) |
 direction | true | string | 买卖方向 | buy:买 sell:卖  
 offset | false(请看备注) | string | 开平方向 | open:开, close:平, both:单向持仓  
 lever_rate | false | int |
-开仓必须填写，平仓可以不填。杠杆倍数[开仓若有10倍多单，就不能再下20倍多单;首次使用高倍杠杆(>20倍)，请使用主账号登录web端同意高倍杠杆协议后，才能使用接口下高倍杠杆(>20倍)]
-|  
+开仓必须填写，平仓可以不填。杠杆倍数[开仓若有10倍多单，就不能再下20倍多单;高倍杠杆风险系数较大，请谨慎使用。 |  
   
 > Response
     
